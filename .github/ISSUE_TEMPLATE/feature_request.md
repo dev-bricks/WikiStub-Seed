@@ -8,17 +8,17 @@ assignees: ''
 
 ## Beschreibung / Description
 
-Eine klare Beschreibung der gewuenschten Funktion.
+Eine klare Beschreibung der gewünschten Funktion.
 A clear description of the desired feature.
 
 ## Motivation
 
-Warum wird diese Funktion benoetigt?
+Warum wird diese Funktion benötigt?
 Why is this feature needed?
 
-## Vorgeschlagene Loesung / Proposed Solution
+## Vorgeschlagene Lösung / Proposed Solution
 
-Wie koennte die Loesung aussehen?
+Wie könnte die Lösung aussehen?
 What could the solution look like?
 
 ## Alternativen / Alternatives

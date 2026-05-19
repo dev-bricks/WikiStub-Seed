@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-metawiki_cli.py - CLI-Tool fuer MetaWiki Stub-Management
+metawiki_cli.py - CLI-Tool für MetaWiki Stub-Management
 =========================================================
 
-Einfaches Kommandozeilen-Interface fuer die wichtigsten Operationen:
+Einfaches Kommandozeilen-Interface für die wichtigsten Operationen:
 - list:     Stubs auflisten (mit Filtern)
 - search:   Stubs nach Titel/Inhalt suchen
-- add:      Neuen Stub hinzufuegen
+- add:      Neuen Stub hinzufügen
 - remove:   Stub entfernen
 - stats:    Statistiken anzeigen
 - export:   JSON nach Markdown exportieren
 - import:   Markdown nach JSON importieren
-- check:    Konsistenzpruefung
+- check:    Konsistenzprüfung
 
 Nutzung:
     python metawiki_cli.py list
@@ -52,7 +52,7 @@ CATEGORY_FOLDERS = [
 # ==================== HILFSFUNKTIONEN ====================
 
 def load_json():
-    """Laedt metawiki.json."""
+    """Lädt metawiki.json."""
     if not JSON_PATH.exists():
         return {"MetaWiki": {cat: {} for cat in CATEGORY_FOLDERS}}
     with open(JSON_PATH, "r", encoding="utf-8") as f:
@@ -72,7 +72,7 @@ def save_json(data):
 
 
 def get_all_stubs(data):
-    """Gibt alle Stubs als flache Liste zurueck."""
+    """Gibt alle Stubs als flache Liste zurück."""
     stubs = []
     for cat, subcats in data.get("MetaWiki", {}).items():
         if not isinstance(subcats, dict):
@@ -182,7 +182,7 @@ def cmd_add(args):
     if cat not in data.get("MetaWiki", {}):
         if cat not in CATEGORY_FOLDERS:
             print(f"\n  FEHLER: Kategorie '{cat}' unbekannt.")
-            print(f"  Verfuegbar: {', '.join(CATEGORY_FOLDERS)}")
+            print(f"  Verfügbar: {', '.join(CATEGORY_FOLDERS)}")
             return
 
     root = data["MetaWiki"]
@@ -213,7 +213,7 @@ def cmd_add(args):
 
     root[cat][subcat].append(stub)
     save_json(data)
-    print(f"\n  Hinzugefuegt: '{args.title}' -> {cat}/{subcat}")
+    print(f"\n  Hinzugefügt: '{args.title}' -> {cat}/{subcat}")
 
 
 def cmd_remove(args):
@@ -237,7 +237,7 @@ def cmd_remove(args):
         return
 
     if len(found) > 1:
-        print(f"\n  Mehrere Treffer fuer '{args.title}':")
+        print(f"\n  Mehrere Treffer für '{args.title}':")
         for idx, (cat, subcat, _, title) in enumerate(found):
             print(f"    {idx+1}. {title} in {cat}/{subcat}")
         print("\n  Bitte genauer spezifizieren.")
@@ -340,7 +340,7 @@ def cmd_import_md(args):
 
 
 def cmd_check(args):
-    """Konsistenzpruefung."""
+    """Konsistenzprüfung."""
     # Delegiere an check_duplicates.py
     import subprocess
     cmd = [sys.executable, str(BASE_PATH / "check_duplicates.py")]
@@ -367,11 +367,11 @@ Beispiele:
   metawiki_cli.py stats -v                                # Detaillierte Statistiken
   metawiki_cli.py export                                  # JSON -> Markdown
   metawiki_cli.py import                                  # Markdown -> JSON
-  metawiki_cli.py check --similar                         # Konsistenzpruefung
+  metawiki_cli.py check --similar                         # Konsistenzprüfung
         """
     )
 
-    subparsers = parser.add_subparsers(dest="command", help="Verfuegbare Befehle")
+    subparsers = parser.add_subparsers(dest="command", help="Verfügbare Befehle")
 
     # list
     p_list = subparsers.add_parser("list", help="Stubs auflisten")
@@ -414,8 +414,8 @@ Beispiele:
     p_import.set_defaults(func=cmd_import_md)
 
     # check
-    p_check = subparsers.add_parser("check", help="Konsistenzpruefung")
-    p_check.add_argument("--similar", action="store_true", help="Aehnliche Titel finden")
+    p_check = subparsers.add_parser("check", help="Konsistenzprüfung")
+    p_check.add_argument("--similar", action="store_true", help="Ähnliche Titel finden")
     p_check.set_defaults(func=cmd_check)
 
     args = parser.parse_args()

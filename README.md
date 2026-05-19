@@ -15,15 +15,15 @@
   <br>
 </h1>
 
-<h4 align="center">Ein universelles, modulares Wissensgeruest fuer KI-gestuetzte Wissensarbeit</h4>
+<h4 align="center">Ein universelles, modulares Wissensgerüst für KI-gestützte Wissensarbeit</h4>
 
 ---
 
 ## Vision
 
-> **Ein einziges, vollstaendiges Wissensskelett – wiederverwendbar fuer jedes Projekt.**
+> **Ein einziges, vollständiges Wissensskelett – wiederverwendbar für jedes Projekt.**
 
-Das MetaWiki ist ein universelles, modular aufgebautes Wissensgeruest aus ca. **630+ kompakten Wissens-Stubs** in 12 Wissenschaftsbereichen. Jeder Stub beschreibt ein Thema in 1–3 Saetzen, neutral, praezise und projektagnostisch – auf **Deutsch und Englisch**.
+Das MetaWiki ist ein universelles, modular aufgebautes Wissensgerüst aus ca. **630+ kompakten Wissens-Stubs** in 12 Wissenschaftsbereichen. Jeder Stub beschreibt ein Thema in 1–3 Sätzen, neutral, präzise und projektagnostisch – auf **Deutsch und Englisch**.
 
 <table>
 <tr>
@@ -31,8 +31,8 @@ Das MetaWiki ist ein universelles, modular aufgebautes Wissensgeruest aus ca. **
 
 ### Die Idee
 
-- Ein einziges, vollstaendiges Wissensskelett
-- Wiederverwendbar fuer jedes Projekt
+- Ein einziges, vollständiges Wissensskelett
+- Wiederverwendbar für jedes Projekt
 - Erweiterbar nur dort, wo es gebraucht wird
 - Automatisiert transformierbar
 
@@ -41,7 +41,7 @@ Das MetaWiki ist ein universelles, modular aufgebautes Wissensgeruest aus ca. **
 
 ### Einsatzgebiete
 
-- KI-gestuetzte Wissensarbeit
+- KI-gestützte Wissensarbeit
 - Dokumentation & Recherche
 - Ontologien & Lernsysteme
 - Softwareprojekte
@@ -61,7 +61,7 @@ Alle Stubs werden in einer **einheitlichen JSON-Struktur** gespeichert.
 | Maschinenlesbar | Einfache Verarbeitung |
 | Versionierbar | Git-freundlich |
 | Python-kompatibel | Automatisierung |
-| Uebersetzbar | Mehrsprachigkeit |
+| Übersetzbar | Mehrsprachigkeit |
 | KI-freundlich | LLM-Integration |
 
 ### Moegliche Outputs
@@ -82,7 +82,7 @@ Alle Stubs werden in einer **einheitlichen JSON-Struktur** gespeichert.
         │                    │                    │
         ▼                    ▼                    ▼
 ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│  API-Daten    │   │  Embeddings   │   │ Uebersetzung  │
+│  API-Daten    │   │  Embeddings   │   │ Übersetzung   │
 │   (REST)      │   │   (Vektor)    │   │   (EN/...)    │
 └───────────────┘   └───────────────┘   └───────────────┘
 ```
@@ -115,9 +115,9 @@ Alle Stubs werden in einer **einheitlichen JSON-Struktur** gespeichert.
 |---|---|
 | `title` | Name des Konzepts |
 | `definition_de` | Deutsche Definition (1–3 Saetze) |
-| `definition_en` | Englische Uebersetzung |
+| `definition_en` | Englische Übersetzung |
 | `relevance` | Warum ist das wichtig? |
-| `tags` | Kategorisierung fuer Suche/Filter |
+| `tags` | Kategorisierung für Suche/Filter |
 
 ## Automatisierung
 
@@ -138,20 +138,20 @@ for category, subcats in data["MetaWiki"].items():
             print(stub["definition_de"])  # Deutsch
             print(stub["definition_en"])  # English
 
-# Neue Stubs nach dem Hinzufuegen uebersetzen
+# Neue Stubs nach dem Hinzufügen übersetzen
 # python metawiki_pipeline.py translate
 ```
 
-## KI-Uebersetzung (Phase 4)
+## KI-Übersetzung (Phase 4)
 
-Alle 630 Stubs sind bereits vollstaendig **zweisprachig (DE + EN)**. Fuer neue Stubs, die spaeter hinzugefuegt werden:
+Alle 630 Stubs sind bereits vollständig **zweisprachig (DE + EN)**. Für neue Stubs, die später hinzugefügt werden:
 
 ```bash
 # API-Key setzen und optionales Paket installieren
 export ANTHROPIC_API_KEY="<your-anthropic-api-key>"
 pip install anthropic
 
-# Alle Stubs uebersetzen (fehlende definition_en)
+# Alle Stubs übersetzen (fehlende definition_en)
 python metawiki_pipeline.py translate
 
 # Mit Limit (z.B. nur 50 Stubs)
@@ -171,7 +171,7 @@ print(english)
 # → "A limit describes the value that a function approaches."
 ```
 
-Ohne gesetzten `ANTHROPIC_API_KEY` oder ohne `pip install anthropic` wird die Uebersetzung lautlos uebersprungen.
+Ohne gesetzten `ANTHROPIC_API_KEY` oder ohne `pip install anthropic` wird die Übersetzung lautlos übersprungen.
 
 ## Nutzung / Usage
 
@@ -189,13 +189,13 @@ python metawiki_cli.py check
 python metawiki_pipeline.py export --output --english
 ```
 
-Unter Windows steht zusaetzlich `start.bat` als einfacher Einstieg fuer die CLI bereit. Exportierte Dateien landen in `output/`; dieser Ordner bleibt lokal und wird nicht versioniert.
+Unter Windows steht zusätzlich `start.bat` als einfacher Einstieg für die CLI bereit. Exportierte Dateien landen in `output/`; dieser Ordner bleibt lokal und wird nicht versioniert.
 
 ## Datenschutz / Privacy
 
-MetaWiki arbeitet standardmaessig lokal mit `metawiki.json` und den Markdown-Exporten in diesem Repository. Es gibt keine Telemetrie und keine automatische Netzwerkkommunikation.
+MetaWiki arbeitet standardmäßig lokal mit `metawiki.json` und den Markdown-Exporten in diesem Repository. Es gibt keine Telemetrie und keine automatische Netzwerkkommunikation.
 
-Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe API-Aufrufe ausloesen, wenn `ANTHROPIC_API_KEY` gesetzt ist und das optionale Paket `anthropic` installiert wurde.
+Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe API-Aufrufe auslösen, wenn `ANTHROPIC_API_KEY` gesetzt ist und das optionale Paket `anthropic` installiert wurde.
 
 ## Roadmap
 
@@ -213,15 +213,15 @@ Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe AP
 
 ### Phase 3 - Automatisierung `[ABGESCHLOSSEN]`
 
-- [x] Python-Pipeline fuer Markdown-Export (metawiki_pipeline.py)
+- [x] Python-Pipeline für Markdown-Export (metawiki_pipeline.py)
 - [x] Markdown-Generator
 - [x] Ordnerstruktur-Generator
-- [x] CLI-Tool fuer Stub-Management (metawiki_cli.py)
+- [x] CLI-Tool für Stub-Management (metawiki_cli.py)
 
 ### Phase 4 - Mehrsprachigkeit `[ABGESCHLOSSEN]`
 
-- [x] Automatische Uebersetzung in Englisch via Claude API (translate.py)
-- [x] Optionale Uebersetzungen in weitere Sprachen (EN/FR/ES/IT/PT)
+- [x] Automatische Übersetzung in Englisch via Claude API (translate.py)
+- [x] Optionale Übersetzungen in weitere Sprachen (EN/FR/ES/IT/PT)
 - [x] translate-Befehl in metawiki_pipeline.py
 
 ### Phase 5 - Erweiterungen `[GEPLANT]`
@@ -230,10 +230,10 @@ Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe AP
 - [ ] Einheitliches Tag-System
 - [ ] Export nach Obsidian / GitHub Pages
 - [ ] Sprachspezifische Markdown-Exports (DE/EN getrennt)
-- [ ] Embeddings-Generierung fuer Vektor-Suche
+- [ ] Embeddings-Generierung für Vektor-Suche
 - [ ] Such-API (REST)
 - [ ] Web-Interface (FastAPI + HTML)
-- [ ] KI-gestuetzte Stub-Erweiterung
+- [ ] KI-gestützte Stub-Erweiterung
 
 ## Ziel
 
@@ -241,7 +241,7 @@ Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe AP
    ╔══════════════════════════════════════════════════╗
    ║                                                  ║
    ║   Ein Wissenssystem, das du einmal erzeugst      ║
-   ║   und fuer immer wiederverwenden kannst.          ║
+   ║   und für immer wiederverwenden kannst.           ║
    ║                                                  ║
    ╚══════════════════════════════════════════════════╝
 ```
@@ -252,11 +252,11 @@ Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe AP
 |---|---|
 | In JSON gespeichert | Maschinenlesbar & versionierbar |
 | In Markdown exportierbar | Menschenlesbar & dokumentierbar |
-| Zweisprachig (DE/EN) | Vollstaendig uebersetzt |
-| In jede Sprache uebersetzbar | Global einsetzbar |
+| Zweisprachig (DE/EN) | Vollständig übersetzt |
+| In jede Sprache übersetzbar | Global einsetzbar |
 | Modular erweiterbar | Waechst mit deinen Anforderungen |
-| KI-freundlich | Optimiert fuer LLM-Integration |
-| Projektagnostisch | Fuer jeden Anwendungsfall |
+| KI-freundlich | Optimiert für LLM-Integration |
+| Projektagnostisch | Für jeden Anwendungsfall |
 
 <p align="center">
   <sub>Built with brain and AI &nbsp;|&nbsp; Maintained at <a href="https://github.com/file-bricks/MetaWiki">file-bricks/MetaWiki</a></sub>

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-translate.py - Optionale KI-Uebersetzung fuer MetaWiki
+translate.py - Optionale KI-Übersetzung für MetaWiki
 =======================================================
 
-Uebersetzt deutsche Wissens-Stubs ins Englische via Claude API.
+Übersetzt deutsche Wissens-Stubs ins Englische via Claude API.
 
 Voraussetzungen:
     pip install anthropic
@@ -14,7 +14,7 @@ Nutzung als Modul:
     from translate import translate_text
     english = translate_text("Kurzdefinition auf Deutsch")
 
-Ohne API-Key oder ohne installiertes Paket wird "" zurueckgegeben (kein Fehler).
+Ohne API-Key oder ohne installiertes Paket wird "" zurückgegeben (kein Fehler).
 """
 
 import os
@@ -25,14 +25,14 @@ MODEL_ID = "claude-haiku-4-5-20251001"
 
 def translate_text(text: str, target_lang: str = "en") -> str:
     """
-    Uebersetzt Text via Claude API.
+    Übersetzt Text via Claude API.
 
     Args:
-        text:        Zu uebersetzender Text (Deutsch)
+        text:        Zu übersetzender Text (Deutsch)
         target_lang: Zielsprache als ISO-Code (default: "en")
 
     Returns:
-        Uebersetzter Text oder "" falls API nicht verfuegbar.
+        Übersetzter Text oder "" falls API nicht verfügbar.
     """
     if not text or not text.strip():
         return ""
@@ -75,7 +75,7 @@ def translate_text(text: str, target_lang: str = "en") -> str:
 
 
 def is_available() -> bool:
-    """Prueft ob die Translation-API verfuegbar ist."""
+    """Prüft ob die Translation-API verfügbar ist."""
     try:
         import anthropic  # noqa: F401
     except ImportError:
@@ -85,7 +85,7 @@ def is_available() -> bool:
 
 def translate_batch(texts: list, target_lang: str = "en", delay: float = 0.3) -> list:
     """
-    Uebersetzt eine Liste von Texten mit optionalem Delay zwischen Anfragen.
+    Übersetzt eine Liste von Texten mit optionalem Delay zwischen Anfragen.
 
     Args:
         texts:       Liste von Texten
@@ -93,7 +93,7 @@ def translate_batch(texts: list, target_lang: str = "en", delay: float = 0.3) ->
         delay:       Wartezeit in Sekunden zwischen API-Anfragen (Rate-Limit)
 
     Returns:
-        Liste von uebersetzten Texten (gleiche Laenge wie Input)
+        Liste von übersetzten Texten (gleiche Länge wie Input)
     """
     results = []
     for i, text in enumerate(texts):
@@ -108,17 +108,17 @@ if __name__ == "__main__":
     import sys
     import argparse
 
-    parser = argparse.ArgumentParser(description="MetaWiki: Text-Uebersetzung")
-    parser.add_argument("text", nargs="?", help="Zu uebersetzender Text")
+    parser = argparse.ArgumentParser(description="MetaWiki: Text-Übersetzung")
+    parser.add_argument("text", nargs="?", help="Zu übersetzender Text")
     parser.add_argument("--lang", default="en", help="Zielsprache (default: en)")
-    parser.add_argument("--check", action="store_true", help="API-Verfuegbarkeit pruefen")
+    parser.add_argument("--check", action="store_true", help="API-Verfügbarkeit prüfen")
     args = parser.parse_args()
 
     if args.check:
         if is_available():
-            print("  Uebersetzung verfuegbar (ANTHROPIC_API_KEY gesetzt)")
+            print("  Übersetzung verfügbar (ANTHROPIC_API_KEY gesetzt)")
         else:
-            print("  Uebersetzung nicht verfuegbar.")
+            print("  Übersetzung nicht verfügbar.")
             print("  Bitte setze ANTHROPIC_API_KEY und installiere: pip install anthropic")
         sys.exit(0)
 
@@ -134,5 +134,5 @@ if __name__ == "__main__":
     if result:
         print(result)
     else:
-        print("FEHLER: Uebersetzung fehlgeschlagen.")
+        print("FEHLER: Übersetzung fehlgeschlagen.")
         sys.exit(1)

@@ -687,8 +687,8 @@ def cmd_sync(args):
 
 
 def cmd_translate(args):
-    """Uebersetzt alle Stubs mit fehlender definition_en via Claude API."""
-    print("\n🌐 UEBERSETZUNG")
+    """Übersetzt alle Stubs mit fehlender definition_en via Claude API."""
+    print("\n🌐 ÜBERSETZUNG")
     print("=" * 50)
 
     try:
@@ -698,7 +698,7 @@ def cmd_translate(args):
         return
 
     if not is_available():
-        print("  ✗ Uebersetzung nicht verfuegbar.")
+        print("  ✗ Übersetzung nicht verfügbar.")
         print("  Bitte setze ANTHROPIC_API_KEY und installiere: pip install anthropic")
         return
 
@@ -716,8 +716,8 @@ def cmd_translate(args):
     if args.limit and args.limit < total:
         to_translate = to_translate[:args.limit]
 
-    print(f"  Gesamt ohne Uebersetzung: {total}")
-    print(f"  Zu uebersetzen: {len(to_translate)}")
+    print(f"  Gesamt ohne Übersetzung: {total}")
+    print(f"  Zu übersetzen: {len(to_translate)}")
 
     translated = 0
     errors = 0
@@ -739,12 +739,12 @@ def cmd_translate(args):
 
     if translated > 0:
         if not json_handler.save():
-            print("  ✗ Speichern fehlgeschlagen! Uebersetzungen gehen verloren.")
+            print("  ✗ Speichern fehlgeschlagen! Übersetzungen gehen verloren.")
         else:
             print(f"  ✓ Gespeichert")
 
     print(f"\n{'=' * 50}")
-    print(f"✓ {translated} uebersetzt, {errors} Fehler")
+    print(f"✓ {translated} übersetzt, {errors} Fehler")
 
 
 def cmd_clean(args):
@@ -794,8 +794,8 @@ Beispiele:
   python metawiki_pipeline.py stats -v        # Statistiken (detailliert)
   python metawiki_pipeline.py sync            # Bidirektionale Sync
   python metawiki_pipeline.py clean           # Daten bereinigen
-  python metawiki_pipeline.py translate       # Englische Uebersetzungen ergaenzen
-  python metawiki_pipeline.py translate -l 50 # Maximal 50 Stubs uebersetzen
+  python metawiki_pipeline.py translate       # Englische Übersetzungen ergänzen
+  python metawiki_pipeline.py translate -l 50 # Maximal 50 Stubs übersetzen
         """
     )
 
@@ -831,8 +831,8 @@ Beispiele:
     p_clean.set_defaults(func=cmd_clean)
 
     # Translate
-    p_translate = subparsers.add_parser("translate", help="Uebersetze Stubs via Claude API")
-    p_translate.add_argument("--limit", "-l", type=int, help="Maximale Anzahl zu uebersetzender Stubs")
+    p_translate = subparsers.add_parser("translate", help="Übersetze Stubs via Claude API")
+    p_translate.add_argument("--limit", "-l", type=int, help="Maximale Anzahl zu übersetzender Stubs")
     p_translate.set_defaults(func=cmd_translate)
 
     args = parser.parse_args()

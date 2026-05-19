@@ -19,10 +19,10 @@ A clear description of the bug.
 
 ## Erwartetes Verhalten / Expected Behavior
 
-Was haetten Sie erwartet?
+Was hätten Sie erwartet?
 What did you expect to happen?
 
-## Tatsaechliches Verhalten / Actual Behavior
+## Tatsächliches Verhalten / Actual Behavior
 
 Was ist stattdessen passiert?
 What actually happened?

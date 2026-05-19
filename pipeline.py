@@ -12,7 +12,7 @@ def translate(text, target_lang="en"):
     """
     Uebersetzt Text via Claude API (translate.py).
     Erfordert: pip install anthropic && ANTHROPIC_API_KEY gesetzt.
-    Gibt leeren String zurueck falls API nicht verfuegbar.
+    Gibt leeren String zurück falls API nicht verfügbar.
     """
     if not text:
         return ""
@@ -53,7 +53,7 @@ def main():
                 title = stub.get("title", "Unbenannt")
                 print(f"  - Generiere Stub: {title}")
                 
-                # Auto-Uebersetzung (Simulation)
+                # Auto-Übersetzung (Simulation)
                 if not stub.get("definition_en"):
                     stub["definition_en"] = translate(stub.get("definition_de", ""))
 

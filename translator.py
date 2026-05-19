@@ -1,5 +1,5 @@
 """
-TranslationSystem - Multi-Language Support fuer Anwendungen
+TranslationSystem - Multi-Language Support für Anwendungen
 ============================================================
 Version: 1.0.0 (isoliert aus _LANG)
 Quelle: ARC_EntwicklungsschleifeAdvanced/TranslationSystem.py v2.4

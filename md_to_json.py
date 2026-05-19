@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-md_to_json.py - Markdown zu JSON Konverter fuer MetaWiki
+md_to_json.py - Markdown zu JSON Konverter für MetaWiki
 =========================================================
 
 Parst alle vorhandenen MD-Dateien aus den Kategorieordnern
-und erstellt/aktualisiert JSON-Eintraege in metawiki.json.
+und erstellt/aktualisiert JSON-Einträge in metawiki.json.
 
 Nutzung:
     python md_to_json.py                  # Alle MD-Dateien konvertieren
@@ -48,7 +48,7 @@ def clean_text(text):
 
 
 def parse_md_file(filepath):
-    """Parst eine einzelne Markdown-Datei und gibt ein Stub-Dict zurueck."""
+    """Parst eine einzelne Markdown-Datei und gibt ein Stub-Dict zurück."""
     try:
         content = filepath.read_text(encoding="utf-8")
     except Exception as e:
@@ -184,7 +184,7 @@ def load_json():
 def save_json(data, dry_run=False):
     """Speichert metawiki.json mit Backup."""
     if dry_run:
-        print("\n[DRY-RUN] Keine Aenderungen gespeichert.")
+        print("\n[DRY-RUN] Keine Änderungen gespeichert.")
         return
 
     # Backup
@@ -285,7 +285,7 @@ def main():
 
     print(f"\n{'=' * 60}")
     print(f"  Ergebnis:")
-    print(f"    Neu hinzugefuegt: {total_added}")
+    print(f"    Neu hinzugefügt: {total_added}")
     print(f"    Aktualisiert:     {total_updated}")
     print(f"    Fehler:           {total_errors}")
     print(f"    Gesamt:           {total_added + total_updated}")
