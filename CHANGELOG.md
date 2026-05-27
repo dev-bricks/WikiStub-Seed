@@ -6,6 +6,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ## [Unreleased]
 
 ### Hinzugefügt / Added
+- `PORTIERUNGSPLAN.md`, `EXPORTFORMAT.md` und `web_publisher/README.md` zur Web/PWA-basierten Plattformstrategie ergänzt.
 - `.gitattributes` zur einheitlichen UTF-8-/Zeilenenden-Behandlung.
 - Lokales MetaWiki-Icon, README-Einstieg für CLI-Nutzung und Windows-Startskript.
 - GitHub-Actions-Smoke-Test für CLI, Pipeline-Validierung und Python-Compile-Checks.
