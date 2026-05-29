@@ -1,523 +1,126 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Stubs-630+-blue?style=for-the-badge" alt="Stubs">
-  <img src="https://img.shields.io/badge/Sprachen-DE_%7C_EN-orange?style=for-the-badge" alt="Sprachen">
-  <img src="https://img.shields.io/badge/Format-JSON-green?style=for-the-badge" alt="Format">
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge" alt="Python">
-</p>
+# MetaWiki
 
-<h1 align="center">
-  <br>
-  <img src="assets/metawiki_icon.png" alt="MetaWiki" width="120">
-  <br>
-  MetaWiki Framework
-  <br>
-</h1>
+**MetaWiki is a bilingual JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships a curated `metawiki.json` dataset with 630 compact German/English knowledge stubs across 12 scientific and cultural domains, plus Python tools for validation, export and translation.
 
-<h4 align="center">Ein universelles, modulares Wissensgerüst für KI-gestützte Wissensarbeit</h4>
+MetaWiki is not Wikimedia Meta-Wiki. It is a local-first, repository-based knowledge skeleton: a small ontology-style seed library that can be reused in software projects, research notes, documentation systems, Obsidian exports, static websites or retrieval-augmented generation pipelines.
 
----
+[![MetaWiki smoke tests](https://github.com/file-bricks/MetaWiki/actions/workflows/tests.yml/badge.svg)](https://github.com/file-bricks/MetaWiki/actions/workflows/tests.yml)
+![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
+![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN-orange)
+![Format](https://img.shields.io/badge/format-JSON-green)
+![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Vision
+## What It Contains
 
-> **Ein einziges, vollständiges Wissensskelett – wiederverwendbar für jedes Projekt.**
+- 630 bilingual knowledge stubs in `metawiki.json`
+- 12 top-level domains, including mathematics, physics, chemistry, biology, medicine, psychology, AI, engineering, society, economics, history and culture
+- 85 subcategories with short, neutral definitions and relevance notes
+- Python CLI tooling for statistics, validation, consistency checks and Markdown export
+- A documented `metawiki-data-v1` export direction for future static Web/PWA use
+- No required external dependencies for core import, export, validation or CLI use
 
-Das MetaWiki ist ein universelles, modular aufgebautes Wissensgerüst aus ca. **630+ kompakten Wissens-Stubs** in 12 Wissenschaftsbereichen. Jeder Stub beschreibt ein Thema in 1–3 Sätzen, neutral, präzise und projektagnostisch – auf **Deutsch und Englisch**.
+## Use Cases
 
-<table>
-<tr>
-<td width="50%">
+- Seed a local knowledge base for AI-assisted writing or research
+- Build documentation glossaries, learning maps or concept catalogs
+- Export structured Markdown for Obsidian, GitHub Pages or static sites
+- Feed retrieval, embeddings or LLM context pipelines with compact domain stubs
+- Translate and extend a domain-neutral knowledge skeleton in a controlled JSON format
 
-### Die Idee
+## Data Shape
 
-- Ein einziges, vollständiges Wissensskelett
-- Wiederverwendbar für jedes Projekt
-- Erweiterbar nur dort, wo es gebraucht wird
-- Automatisiert transformierbar
-
-</td>
-<td width="50%">
-
-### Einsatzgebiete
-
-- KI-gestützte Wissensarbeit
-- Dokumentation & Recherche
-- Ontologien & Lernsysteme
-- Softwareprojekte
-
-</td>
-</tr>
-</table>
-
-## Grundidee
-
-Alle Stubs werden in einer **einheitlichen JSON-Struktur** gespeichert.
-
-### Warum JSON?
-
-| Eigenschaft | Vorteil |
-|-------------|---------|
-| Maschinenlesbar | Einfache Verarbeitung |
-| Versionierbar | Git-freundlich |
-| Python-kompatibel | Automatisierung |
-| Übersetzbar | Mehrsprachigkeit |
-| KI-freundlich | LLM-Integration |
-
-### Moegliche Outputs
-
-```
-                    ┌─────────────────┐
-                    │   JSON Master   │
-                    │    (Source)     │
-                    └────────┬────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│   Markdown    │   │   Obsidian    │   │   Webseiten   │
-│    Files      │   │    Vault      │   │   (HTML)      │
-└───────────────┘   └───────────────┘   └───────────────┘
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│  API-Daten    │   │  Embeddings   │   │ Übersetzung   │
-│   (REST)      │   │   (Vektor)    │   │   (EN/...)    │
-└───────────────┘   └───────────────┘   └───────────────┘
-```
-
-## JSON-Struktur
-
-### Beispiel eines Stubs
+Each stub is intentionally small and machine-readable:
 
 ```json
 {
-  "MetaWiki": {
-    "07_Informatik_KI": {
-      "Software_Engineering": [
-        {
-          "title": "Domain-Driven Design",
-          "definition_de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomaene in den Mittelpunkt stellt.",
-          "definition_en": "An approach to modeling complex software that places the business domain at the center of development.",
-          "relevance": "Hilft, komplexe Systeme verstaendlich und wartbar zu gestalten.",
-          "tags": ["Informatik", "Software Engineering"]
-        }
-      ]
-    }
-  }
+  "title": "Domain-Driven Design",
+  "definition_de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomäne in den Mittelpunkt stellt.",
+  "definition_en": "An approach to modeling complex software that places the business domain at the center of development.",
+  "relevance": "Hilft, komplexe Systeme verständlich und wartbar zu gestalten.",
+  "tags": ["Informatik", "Software Engineering"]
 }
 ```
 
-### Felderklaerung
+The current authoritative source is `metawiki.json`. `EXPORTFORMAT.md` documents the planned stable wrapper format `metawiki-data-v1` for future Web/PWA, API and LLM exports.
 
-| Feld | Beschreibung |
-|---|---|
-| `title` | Name des Konzepts |
-| `definition_de` | Deutsche Definition (1–3 Saetze) |
-| `definition_en` | Englische Übersetzung |
-| `relevance` | Warum ist das wichtig? |
-| `tags` | Kategorisierung für Suche/Filter |
-
-## Automatisierung
-
-### Python-Pipeline
-
-```python
-import json
-
-# JSON laden
-with open("metawiki.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-# Alle Stubs abrufen (bilingual)
-for category, subcats in data["MetaWiki"].items():
-    for subcat, stubs in subcats.items():
-        for stub in stubs:
-            print(stub["title"])
-            print(stub["definition_de"])  # Deutsch
-            print(stub["definition_en"])  # English
-
-# Neue Stubs nach dem Hinzufügen übersetzen
-# python metawiki_pipeline.py translate
-```
-
-## KI-Übersetzung (Phase 4)
-
-Alle 630 Stubs sind bereits vollständig **zweisprachig (DE + EN)**. Für neue Stubs, die später hinzugefügt werden:
+## Quick Start
 
 ```bash
-# API-Key setzen und optionales Paket installieren
-export ANTHROPIC_API_KEY="<your-anthropic-api-key>"
-pip install anthropic
+git clone https://github.com/file-bricks/MetaWiki.git
+cd MetaWiki
 
-# Alle Stubs übersetzen (fehlende definition_en)
-python metawiki_pipeline.py translate
-
-# Mit Limit (z.B. nur 50 Stubs)
-python metawiki_pipeline.py translate --limit 50
-
-# Verfuegbarkeit pruefen
-python translate.py --check
-```
-
-Als Python-Modul:
-
-```python
-from translate import translate_text
-
-english = translate_text("Ein Grenzwert beschreibt den Wert, dem sich eine Funktion annaeht.")
-print(english)
-# → "A limit describes the value that a function approaches."
-```
-
-Ohne gesetzten `ANTHROPIC_API_KEY` oder ohne `pip install anthropic` wird die Übersetzung lautlos übersprungen.
-
-## Nutzung / Usage
-
-```bash
-# CLI-Hilfe
 python metawiki_cli.py --help
-
-# Statistiken anzeigen
 python metawiki_cli.py stats
-
-# Konsistenz pruefen
 python metawiki_cli.py check
-
-# JSON nach Markdown exportieren
+python metawiki_pipeline.py validate
 python metawiki_pipeline.py export --output --english
 ```
 
-Unter Windows steht zusätzlich `start.bat` als einfacher Einstieg für die CLI bereit. Exportierte Dateien landen in `output/`; dieser Ordner bleibt lokal und wird nicht versioniert.
+On Windows, `start.bat` opens the CLI entry point. Exported files are written to `output/`; that folder is local and not versioned.
 
-## Datenschutz / Privacy
+## Core Commands
 
-MetaWiki arbeitet standardmäßig lokal mit `metawiki.json` und den Markdown-Exporten in diesem Repository. Es gibt keine Telemetrie und keine automatische Netzwerkkommunikation.
+| Command | Purpose |
+|---|---|
+| `python metawiki_cli.py stats` | Print stub, category and tag statistics |
+| `python metawiki_cli.py check` | Run consistency checks over the JSON dataset |
+| `python metawiki_pipeline.py validate` | Validate the pipeline input data |
+| `python metawiki_pipeline.py export --output --english` | Export the JSON dataset to Markdown |
+| `python metawiki_pipeline.py translate` | Optionally translate missing English definitions when configured |
 
-Nur der optionale Befehl `python metawiki_pipeline.py translate` kann externe API-Aufrufe auslösen, wenn `ANTHROPIC_API_KEY` gesetzt ist und das optionale Paket `anthropic` installiert wurde.
+## Repository Map
+
+| Path | Purpose |
+|---|---|
+| `metawiki.json` | Authoritative bilingual knowledge dataset |
+| `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Domain-oriented Markdown source/export structure |
+| `metawiki_cli.py` | CLI for stats and checks |
+| `metawiki_pipeline.py` | Import, export, validation and optional translation pipeline |
+| `md_to_json.py` | Markdown-to-JSON import helper |
+| `check_duplicates.py` | Duplicate/consistency helper |
+| `EXPORTFORMAT.md` | Stable exchange-format plan |
+| `web_publisher/README.md` | Static Web/PWA publisher plan |
+
+## Privacy
+
+MetaWiki is local-first. Core usage reads and writes local JSON/Markdown files only. There is no telemetry and no automatic network communication.
+
+The optional translation command can call an external API only when `ANTHROPIC_API_KEY` is set and the optional `anthropic` package is installed.
 
 ## Roadmap
 
-### Phase 1 - Strukturaufbau `[ABGESCHLOSSEN]`
+Completed:
 
-- [x] Definition der 12 Oberthemen
-- [x] Definition von 80-120 Hauptbereichen
-- [x] 630+ Stubs erstellt und in JSON importiert
-- [x] Konsistenzpruefung (check_duplicates.py)
+- 12 top-level domains and 85 subcategories
+- 630 bilingual stubs in a single JSON master file
+- Markdown export and JSON synchronization tooling
+- CLI smoke tests in GitHub Actions
 
-### Phase 2 - JSON-Masterdatei `[ABGESCHLOSSEN]`
+Planned:
 
-- [x] Alle Stubs in metawiki.json zusammengefuehrt (md_to_json.py)
-- [x] Bidirektionale Synchronisation JSON <-> Markdown (metawiki_pipeline.py)
+- `metawiki-data-v1` schema wrapper and validation
+- Unified tag cleanup
+- Static Web/PWA publisher with search and offline cache
+- Obsidian/GitHub Pages export paths
+- Optional embeddings and search API
 
-### Phase 3 - Automatisierung `[ABGESCHLOSSEN]`
+## Deutsch
 
-- [x] Python-Pipeline für Markdown-Export (metawiki_pipeline.py)
-- [x] Markdown-Generator
-- [x] Ordnerstruktur-Generator
-- [x] CLI-Tool für Stub-Management (metawiki_cli.py)
+**MetaWiki ist ein zweisprachiges JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs auf Deutsch und Englisch, verteilt auf 12 Wissenschafts- und Kulturbereiche. Die Stubs sind kurz, neutral, versionierbar und für Automatisierung, Dokumentation, Lernsysteme und LLM-Kontexte geeignet.
 
-### Phase 4 - Mehrsprachigkeit `[ABGESCHLOSSEN]`
+MetaWiki arbeitet standardmäßig lokal mit `metawiki.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
 
-- [x] Automatische Übersetzung in Englisch via Claude API (translate.py)
-- [x] Optionale Übersetzungen in weitere Sprachen (EN/FR/ES/IT/PT)
-- [x] translate-Befehl in metawiki_pipeline.py
+Wichtige Einstiegspunkte:
 
-### Phase 5 - Erweiterungen `[GEPLANT]`
+- `python metawiki_cli.py stats` zeigt Statistik und Kategorien.
+- `python metawiki_cli.py check` prüft den Datenbestand.
+- `python metawiki_pipeline.py export --output --english` exportiert Markdown.
+- `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
+- `web_publisher/README.md` beschreibt den geplanten statischen Web/PWA-Pfad.
 
-- [ ] JSON-Schema-Validierung
-- [ ] Einheitliches Tag-System
-- [ ] Export nach Obsidian / GitHub Pages
-- [ ] Sprachspezifische Markdown-Exports (DE/EN getrennt)
-- [ ] Embeddings-Generierung für Vektor-Suche
-- [ ] Such-API (REST)
-- [ ] Web-Interface (FastAPI + HTML)
-- [ ] KI-gestützte Stub-Erweiterung
+## License
 
-## Ziel
+MIT License. See `LICENSE`.
 
-```
-   ╔══════════════════════════════════════════════════╗
-   ║                                                  ║
-   ║   Ein Wissenssystem, das du einmal erzeugst      ║
-   ║   und für immer wiederverwenden kannst.           ║
-   ║                                                  ║
-   ╚══════════════════════════════════════════════════╝
-```
-
-### Das MetaWiki ist...
-
-| Eigenschaft | Beschreibung |
-|---|---|
-| In JSON gespeichert | Maschinenlesbar & versionierbar |
-| In Markdown exportierbar | Menschenlesbar & dokumentierbar |
-| Zweisprachig (DE/EN) | Vollständig übersetzt |
-| In jede Sprache übersetzbar | Global einsetzbar |
-| Modular erweiterbar | Waechst mit deinen Anforderungen |
-| KI-freundlich | Optimiert für LLM-Integration |
-| Projektagnostisch | Für jeden Anwendungsfall |
-
-<p align="center">
-  <sub>Built with brain and AI &nbsp;|&nbsp; Maintained at <a href="https://github.com/file-bricks/MetaWiki">file-bricks/MetaWiki</a></sub>
-</p>
-
----
-
-## English
-
-**A universal, modular knowledge framework for AI-assisted knowledge work**
-
-### Vision
-
-> **A single, complete knowledge skeleton – reusable for any project.**
-
-MetaWiki is a universal, modular knowledge framework of **630+ compact knowledge stubs** across 12 scientific domains. Each stub describes a topic in 1–3 sentences, neutral, precise and project-agnostic – in **German and English**.
-
-<table>
-<tr>
-<td width="50%">
-
-#### The Idea
-
-- A single, complete knowledge skeleton
-- Reusable for any project
-- Extendable only where needed
-- Automatically transformable
-
-</td>
-<td width="50%">
-
-#### Use Cases
-
-- AI-assisted knowledge work
-- Documentation & Research
-- Ontologies & Learning Systems
-- Software Projects
-
-</td>
-</tr>
-</table>
-
-### Concept
-
-All stubs are stored in a **unified JSON structure**.
-
-#### Why JSON?
-
-| Property | Benefit |
-|----------|---------|
-| Machine-readable | Easy processing |
-| Version-controlled | Git-friendly |
-| Python-compatible | Automation |
-| Translatable | Multilingual |
-| AI-friendly | LLM integration |
-
-#### Possible Outputs
-
-```
-                    ┌─────────────────┐
-                    │   JSON Master   │
-                    │    (Source)     │
-                    └────────┬────────┘
-                             │
-        ┌────────────────────┼────────────────────┐
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│   Markdown    │   │   Obsidian    │   │   Websites    │
-│    Files      │   │    Vault      │   │   (HTML)      │
-└───────────────┘   └───────────────┘   └───────────────┘
-        │                    │                    │
-        ▼                    ▼                    ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│  API Data     │   │  Embeddings   │   │ Translation   │
-│   (REST)      │   │   (Vector)    │   │   (EN/...)    │
-└───────────────┘   └───────────────┘   └───────────────┘
-```
-
-### JSON Structure
-
-#### Example Stub
-
-```json
-{
-  "MetaWiki": {
-    "07_Informatik_KI": {
-      "Software_Engineering": [
-        {
-          "title": "Domain-Driven Design",
-          "definition_de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomaene in den Mittelpunkt stellt.",
-          "definition_en": "An approach to modeling complex software that places the business domain at the center of development.",
-          "relevance": "Hilft, komplexe Systeme verstaendlich und wartbar zu gestalten.",
-          "tags": ["Informatik", "Software Engineering"]
-        }
-      ]
-    }
-  }
-}
-```
-
-#### Field Description
-
-| Field | Description |
-|---|---|
-| `title` | Concept name |
-| `definition_de` | German definition (1–3 sentences) |
-| `definition_en` | English translation |
-| `relevance` | Why does it matter? |
-| `tags` | Categorization for search/filter |
-
-### Automation
-
-#### Python Pipeline
-
-```python
-import json
-
-# Load JSON
-with open("metawiki.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-# Retrieve all stubs (bilingual)
-for category, subcats in data["MetaWiki"].items():
-    for subcat, stubs in subcats.items():
-        for stub in stubs:
-            print(stub["title"])
-            print(stub["definition_de"])  # German
-            print(stub["definition_en"])  # English
-
-# Translate new stubs after adding them
-# python metawiki_pipeline.py translate
-```
-
-### AI Translation (Phase 4)
-
-All 630 stubs are already fully **bilingual (DE + EN)**. For new stubs added later:
-
-```bash
-# Set API key and install optional package
-export ANTHROPIC_API_KEY="<your-anthropic-api-key>"
-pip install anthropic
-
-# Translate all stubs (missing definition_en)
-python metawiki_pipeline.py translate
-
-# With limit (e.g., only 50 stubs)
-python metawiki_pipeline.py translate --limit 50
-
-# Check availability
-python translate.py --check
-```
-
-As a Python module:
-
-```python
-from translate import translate_text
-
-english = translate_text("Ein Grenzwert beschreibt den Wert, dem sich eine Funktion annaeht.")
-print(english)
-# → "A limit describes the value that a function approaches."
-```
-
-Without a set `ANTHROPIC_API_KEY` or without `pip install anthropic`, translation is silently skipped.
-
-### Usage
-
-```bash
-# CLI help
-python metawiki_cli.py --help
-
-# Show statistics
-python metawiki_cli.py stats
-
-# Check consistency
-python metawiki_cli.py check
-
-# Export JSON to Markdown
-python metawiki_pipeline.py export --output --english
-```
-
-On Windows, `start.bat` provides a simple CLI entry point. Exported files are written to `output/`; that folder stays local and is not versioned.
-
-### Privacy
-
-MetaWiki works locally by default with `metawiki.json` and the Markdown exports in this repository. It has no telemetry and no automatic network communication.
-
-Only the optional `python metawiki_pipeline.py translate` command can make external API calls when `ANTHROPIC_API_KEY` is set and the optional `anthropic` package is installed.
-
-### Roadmap
-
-#### Phase 1 - Structure Setup `[COMPLETED]`
-
-- [x] Definition of 12 top-level topics
-- [x] Definition of 80-120 main areas
-- [x] 630+ stubs created and imported into JSON
-- [x] Consistency check (check_duplicates.py)
-
-#### Phase 2 - JSON Master File `[COMPLETED]`
-
-- [x] All stubs merged into metawiki.json (md_to_json.py)
-- [x] Bidirectional synchronization JSON <-> Markdown (metawiki_pipeline.py)
-
-#### Phase 3 - Automation `[COMPLETED]`
-
-- [x] Python pipeline for Markdown export (metawiki_pipeline.py)
-- [x] Markdown generator
-- [x] Folder structure generator
-- [x] CLI tool for stub management (metawiki_cli.py)
-
-#### Phase 4 - Multilingual Support `[COMPLETED]`
-
-- [x] Automatic translation to English via Claude API (translate.py)
-- [x] Optional translations into additional languages (EN/FR/ES/IT/PT)
-- [x] translate command in metawiki_pipeline.py
-
-#### Phase 5 - Extensions `[PLANNED]`
-
-- [ ] JSON schema validation
-- [ ] Unified tag system
-- [ ] Export to Obsidian / GitHub Pages
-- [ ] Language-specific Markdown exports (DE/EN separate)
-- [ ] Embeddings generation for vector search
-- [ ] Search API (REST)
-- [ ] Web interface (FastAPI + HTML)
-- [ ] AI-assisted stub expansion
-
-### Goal
-
-```
-   ╔══════════════════════════════════════════════════╗
-   ║                                                  ║
-   ║   A knowledge system you build once              ║
-   ║   and reuse forever.                             ║
-   ║                                                  ║
-   ╚══════════════════════════════════════════════════╝
-```
-
-#### MetaWiki is...
-
-| Property | Description |
-|---|---|
-| Stored in JSON | Machine-readable & version-controlled |
-| Exportable to Markdown | Human-readable & documentable |
-| Bilingual (DE/EN) | Fully translated |
-| Translatable to any language | Globally deployable |
-| Modularly extensible | Grows with your requirements |
-| AI-friendly | Optimized for LLM integration |
-| Project-agnostic | For any use case |
-
-<p align="center">
-  <sub>Built with brain and AI &nbsp;|&nbsp; Maintained at <a href="https://github.com/file-bricks/MetaWiki">file-bricks/MetaWiki</a></sub>
-</p>
-
----
-
-## Haftung / Liability
-
-Dieses Projekt ist eine **unentgeltliche Open-Source-Schenkung** im Sinne der §§ 516 ff. BGB. Die Haftung des Urhebers ist gemäß **§ 521 BGB** auf **Vorsatz und grobe Fahrlässigkeit** beschränkt. Ergänzend gelten die Haftungsausschlüsse der MIT-Lizenz.
-
-Nutzung auf eigenes Risiko. Keine Wartungszusage, keine Verfügbarkeitsgarantie, keine Gewähr für Fehlerfreiheit oder Eignung für einen bestimmten Zweck.
-
-This project is an unpaid open-source donation. Liability is limited to intent and gross negligence (§ 521 German Civil Code), with the MIT License disclaimers applying as well. Use at your own risk. No warranty, no maintenance guarantee, no fitness-for-purpose assumed.
-
+This project is an unpaid open-source donation. Liability is limited to intent and gross negligence under Section 521 of the German Civil Code, with the MIT License disclaimers applying as well. Use at your own risk.

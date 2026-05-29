@@ -1,6 +1,6 @@
 # MetaWiki Framework - Dependencies
 # Kernfunktionen: Nur Python Standard Library erforderlich (Python 3.10+)
-# Keine externen Pakete für Import, Export, CLI, Validierung benötigt.
+# Keine externen Pakete für Import, Export, CLI oder Validierung benötigt.
 
 # --- Optionale Abhängigkeiten ---
 

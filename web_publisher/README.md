@@ -1,6 +1,6 @@
 # MetaWiki Web/PWA Publisher
 
-Stand: 2026-05-27
+Stand: 2026-05-29
 
 Dieser Ordner dokumentiert den geplanten plattformübergreifenden Pfad für MetaWiki. Die Umsetzung soll einen statischen Web-Build aus `metawiki.json` erzeugen, der auf GitHub Pages oder einem anderen statischen Host laufen kann.
 
