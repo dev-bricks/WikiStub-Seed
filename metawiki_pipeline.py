@@ -51,6 +51,9 @@ CATEGORY_FOLDERS = [
 MAX_DEFINITION_LENGTH = 500
 MIN_DEFINITION_LENGTH = 20
 MAX_RELEVANCE_LENGTH = 300
+EXCHANGE_SCHEMA = "metawiki-data-v1"
+EXCHANGE_LANGUAGES = ["de", "en"]
+EXCHANGE_DEFAULT_PATH = OUTPUT_PATH / f"{EXCHANGE_SCHEMA}.json"
 
 
 # ==================== DATENKLASSEN ====================
@@ -249,8 +252,8 @@ class MarkdownParser:
 class JsonHandler:
     """Verwaltet die MetaWiki JSON-Datei."""
 
-    def __init__(self, json_path: Path = JSON_PATH):
-        self.json_path = json_path
+    def __init__(self, json_path: Optional[Path] = None):
+        self.json_path = json_path or JSON_PATH
         self.data: Dict = {"MetaWiki": {}}
 
     def load(self) -> bool:
@@ -503,13 +506,99 @@ class Validator:
 
 # ==================== PIPELINE COMMANDS ====================
 
+def count_wrapped_stubs(data: Dict) -> int:
+    """Zählt Stubs innerhalb der MetaWiki-Wurzelstruktur."""
+    total = 0
+
+    root = data.get("MetaWiki")
+    if not isinstance(root, dict):
+        return total
+
+    for subcategories in root.values():
+        if not isinstance(subcategories, dict):
+            continue
+        for items in subcategories.values():
+            if isinstance(items, list):
+                total += len(items)
+
+    return total
+
+
+def build_exchange_payload(data: Dict, source: str = "metawiki.json") -> Dict:
+    """Erzeugt die stabile Austauschhülle für MetaWiki-Daten."""
+    return {
+        "schema": EXCHANGE_SCHEMA,
+        "generated_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "source": source,
+        "languages": EXCHANGE_LANGUAGES,
+        "stub_count": count_wrapped_stubs(data),
+        "data": data,
+    }
+
+
+def validate_exchange_payload(payload: object) -> ValidationResult:
+    """Validiert die Exporthülle `metawiki-data-v1`."""
+    errors: List[str] = []
+    warnings: List[str] = []
+
+    if not isinstance(payload, dict):
+        return ValidationResult(False, ["Top-Level muss ein JSON-Objekt sein."], warnings)
+
+    schema = payload.get("schema")
+    if schema != EXCHANGE_SCHEMA:
+        errors.append(f"schema muss '{EXCHANGE_SCHEMA}' sein.")
+
+    generated_at = payload.get("generated_at")
+    if not isinstance(generated_at, str):
+        errors.append("generated_at fehlt oder ist kein String.")
+    else:
+        try:
+            datetime.fromisoformat(generated_at.replace("Z", "+00:00"))
+        except ValueError:
+            errors.append("generated_at ist kein gültiger ISO-8601-Zeitstempel.")
+
+    source = payload.get("source")
+    if not isinstance(source, str) or not source.strip():
+        errors.append("source fehlt oder ist leer.")
+    elif Path(source).is_absolute():
+        warnings.append("source sollte kein absoluter Pfad sein.")
+
+    languages = payload.get("languages")
+    if not isinstance(languages, list) or not all(isinstance(lang, str) for lang in languages):
+        errors.append("languages muss eine String-Liste sein.")
+    elif set(languages) != set(EXCHANGE_LANGUAGES):
+        warnings.append("languages weicht vom erwarteten Sprachpaar ['de', 'en'] ab.")
+
+    data = payload.get("data")
+    actual_stub_count = None
+    if not isinstance(data, dict):
+        errors.append("data fehlt oder ist kein Objekt.")
+    else:
+        root = data.get("MetaWiki")
+        if not isinstance(root, dict):
+            errors.append("data.MetaWiki fehlt oder ist kein Objekt.")
+        else:
+            actual_stub_count = count_wrapped_stubs(data)
+
+    stub_count = payload.get("stub_count")
+    if not isinstance(stub_count, int) or stub_count < 0:
+        errors.append("stub_count fehlt oder ist keine nichtnegative Zahl.")
+    elif actual_stub_count is not None and stub_count != actual_stub_count:
+        errors.append(
+            f"stub_count stimmt nicht mit den tatsächlichen Daten überein ({stub_count} != {actual_stub_count})."
+        )
+
+    return ValidationResult(len(errors) == 0, errors, warnings)
+
 def cmd_import(args):
     """Importiert Markdown-Dateien in JSON."""
     print("\n📥 IMPORT: Markdown → JSON")
     print("=" * 50)
 
     json_handler = JsonHandler()
-    json_handler.load()
+    if not json_handler.load():
+        print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
+        return
 
     imported = 0
     errors = 0
@@ -569,8 +658,66 @@ def cmd_export(args):
     print(f"\n✓ {exported} Dateien exportiert nach {output_dir}")
 
 
+def cmd_export_data(args):
+    """Exportiert die stabile `metawiki-data-v1`-Hülle als JSON."""
+    print("\n📦 EXPORT: metawiki-data-v1")
+    print("=" * 50)
+
+    output_path = Path(args.path).expanduser() if args.path else EXCHANGE_DEFAULT_PATH
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    json_handler = JsonHandler()
+    if not json_handler.load():
+        print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
+        return 1
+
+    payload = build_exchange_payload(json_handler.data, source=JSON_PATH.name)
+    output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    print(f"  ✓ Schema: {payload['schema']}")
+    print(f"  ✓ Stubs: {payload['stub_count']}")
+    print(f"  ✓ Datei: {output_path}")
+    return 0
+
+
 def cmd_validate(args):
     """Validiert alle Einträge."""
+    if getattr(args, "exchange", None):
+        exchange_path = Path(args.exchange).expanduser()
+
+        print("\n🔍 VALIDIERUNG: metawiki-data-v1")
+        print("=" * 50)
+
+        if not exchange_path.exists():
+            print(f"  ✗ Datei nicht gefunden: {exchange_path}")
+            return 1
+
+        try:
+            payload = json.loads(exchange_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"  ✗ Exportdatei konnte nicht gelesen werden: {exc}")
+            return 1
+
+        result = validate_exchange_payload(payload)
+
+        if result.is_valid:
+            print(f"  ✓ Gültige Exporthülle: {exchange_path}")
+            print(f"  ✓ Schema: {payload.get('schema')}")
+            print(f"  ✓ Stubs: {payload.get('stub_count')}")
+        else:
+            print(f"  ✗ Ungültige Exporthülle: {exchange_path}")
+
+        for err in result.errors:
+            print(f"    ERROR: {err}")
+
+        if args.verbose:
+            for warn in result.warnings:
+                print(f"    WARN: {warn}")
+        elif result.warnings:
+            print(f"  ⚠ {len(result.warnings)} Warnung(en) vorhanden. Mit -v anzeigen.")
+
+        return 0 if result.is_valid else 1
+
     print("\n🔍 VALIDIERUNG")
     print("=" * 50)
 
@@ -790,7 +937,9 @@ def main():
 Beispiele:
   python metawiki_pipeline.py import          # Markdown → JSON
   python metawiki_pipeline.py export          # JSON → Markdown
+  python metawiki_pipeline.py export-data     # JSON → metawiki-data-v1
   python metawiki_pipeline.py validate -v     # Validierung (verbose)
+  python metawiki_pipeline.py validate --exchange output/metawiki-data-v1.json
   python metawiki_pipeline.py stats -v        # Statistiken (detailliert)
   python metawiki_pipeline.py sync            # Bidirektionale Sync
   python metawiki_pipeline.py clean           # Daten bereinigen
@@ -811,8 +960,14 @@ Beispiele:
     p_export.add_argument("--english", "-e", action="store_true", help="Englische Übersetzung inkludieren")
     p_export.set_defaults(func=cmd_export)
 
+    # Export data
+    p_export_data = subparsers.add_parser("export-data", help="Exportiere JSON → metawiki-data-v1")
+    p_export_data.add_argument("--path", help="Zielpfad für die Exporthülle")
+    p_export_data.set_defaults(func=cmd_export_data)
+
     # Validate
     p_validate = subparsers.add_parser("validate", help="Validiere Einträge")
+    p_validate.add_argument("--exchange", help="Pfad zu einer metawiki-data-v1-Datei")
     p_validate.add_argument("--verbose", "-v", action="store_true", help="Zeige auch Warnungen")
     p_validate.set_defaults(func=cmd_validate)
 
@@ -846,11 +1001,14 @@ Beispiele:
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*60}")
 
-    args.func(args)
+    exit_code = args.func(args)
 
     print(f"\n{'='*60}")
     print("  Fertig!")
     print(f"{'='*60}\n")
+
+    if isinstance(exit_code, int) and exit_code != 0:
+        sys.exit(exit_code)
 
 
 if __name__ == "__main__":
