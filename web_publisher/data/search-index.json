@@ -9,7 +9,7 @@
       "Software Engineering",
       "Architektur"
     ],
-    "relevance": "Hilft, komplexe Systeme verstaendlich und wartbar zu gestalten."
+    "relevance": "Hilft, komplexe Systeme verständlich und wartbar zu gestalten."
   },
   {
     "id": 1,
@@ -245,77 +245,77 @@
   {
     "id": 22,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Computer Vision",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Schlüsseltechnologie für autonomes Fahren, medizinische Bildgebung und Überwachungssysteme."
   },
   {
     "id": 23,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Deep Learning",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Verantwortlich für die jüngsten Durchbrüche in Bilderkennung, Sprachsynthese und Spielen (AlphaGo)."
   },
   {
     "id": 24,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Ethik der KI",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Essentiell, um sicherzustellen, dass KI dem Menschen dient und keine Diskriminierung oder Schaden verursacht (\"AI Alignment\")."
   },
   {
     "id": 25,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Machine Learning",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Treibt Anwendungen wie Empfehlungssysteme, Spam-Filter und medizinische Diagnostik an."
   },
   {
     "id": 26,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Natural Language Processing (NLP)",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Basis für Chatbots, Übersetzungsdienste (DeepL) und Sprachassistenten (Siri, Alexa)."
   },
   {
     "id": 27,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Robotik & KI",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Revolutioniert Fertigung (Industrie 4.0), Pflege und Logistik, wirft aber auch Fragen zur Sicherheit und Arbeitsplatzverlust auf."
   },
   {
     "id": 28,
     "cat": "07_Informatik_KI",
-    "sub": "Kuenstliche_Intelligenz",
+    "sub": "Künstliche_Intelligenz",
     "title": "Wissensrepräsentation & Reasoning",
     "tags": [
       "Informatik KI",
-      "Kuenstliche Intelligenz"
+      "Künstliche Intelligenz"
     ],
     "relevance": "Kernbestandteil des Semantic Web und von Expertensystemen, die menschliches Expertenwissen emulieren."
   },
@@ -1258,7 +1258,7 @@
     "id": 114,
     "cat": "01_Mathematik",
     "sub": "Logik_Mengenlehre",
-    "title": "Zermelo-Fraenkel-Mengenlehre",
+    "title": "Zermelo-Fränkel-Mengenlehre",
     "tags": [
       "Mathematik",
       "Logik Mengenlehre"
@@ -1708,110 +1708,110 @@
   {
     "id": 155,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Bändermodell",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Es erklärt physikalisch fundiert den Unterschied zwischen Metallen, Halbleitern und Isolatoren und ist essenziell für die Entwicklung optoelektronischer Bauelemente."
   },
   {
     "id": 156,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Dotierung",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Ohne Dotierung gäbe es keine p-n-Übergänge und damit keine Dioden oder Transistoren, die die Basis der modernen Digitaltechnik bilden."
   },
   {
     "id": 157,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Ferromagnetismus",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Er ist die Grundlage für Permanentmagnete, Elektromotoren und magnetische Datenspeichertechnologien (Audio/Video-Bänder, Festplatten)."
   },
   {
     "id": 158,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Gitterfehler (Kristalldefekte)",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Fehler im Gitter bestimmen maßgeblich die mechanische Festigkeit (Härte) von Metallen sowie die Diffusions- und Leitfähigkeitseigenschaften von Festkörpern."
   },
   {
     "id": 159,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Härte (Materialwissenschaft)",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Sie ist eine der wichtigsten Materialkennwerte im Bauwesen und Maschinenbau zur Beurteilung von Verschleißfestigkeit und Eignung für Werkzeuge."
   },
   {
     "id": 160,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Halbleiter",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Sie sind das Herzstück der modernen Elektronik; ohne Halbleiter gäbe es keine Transistoren, Solarzellen, LEDs oder Computerchips."
   },
   {
     "id": 161,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Hall-Effekt",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Er wird zur Messung von Magnetfeldern (Hall-Sensoren) und zur Bestimmung der Art und Dichte der Ladungsträger in Halbleitern (n- oder p-Leitung) eingesetzt."
   },
   {
     "id": 162,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Kristallstruktur",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Sie bestimmt die mechanischen, optischen und elektrischen Eigenschaften von Materialien und ist die Grundlage für die moderne Halbleitertechnik und Metallurgie."
   },
   {
     "id": 163,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Phonon",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Phononen sind die Hauptträger für den Wärmetransport und spielen eine entscheidende Rolle für die spezifische Wärme von Festkörpern sowie für die Wechselwirkung von Elektronen (z. B. bei der Supraleitung)."
   },
   {
     "id": 164,
     "cat": "02_Physik_Astronomie",
-    "sub": "Festkoerperphysik",
+    "sub": "Festkörperphysik",
     "title": "Supraleitung",
     "tags": [
       "Physik Astronomie",
-      "Festkoerperphysik"
+      "Festkörperphysik"
     ],
     "relevance": "Sie ermöglicht verlustfreien Stromtransport und die Erzeugung extrem starker Magnetfelder für MRT-Geräte und Teilchenbeschleuniger wie den LHC."
   },
@@ -2038,110 +2038,110 @@
   {
     "id": 185,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Äquivalenzprinzip",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Es war Einsteins entscheidender gedanklicher Durchbruch zur Entwicklung der Allgemeinen Relativitätstheorie und erklärt, warum im freien Fall Schwerelosigkeit herrscht."
   },
   {
     "id": 186,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Allgemeine Relativitätstheorie",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Sie ist unser bestes Modell für das Verständnis des Universums auf großen Skalen, von der Umlaufbahn des Merkur bis hin zur Existenz Schwarzer Löcher und der Expansion des Kosmos."
   },
   {
     "id": 187,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Ereignishorizont",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Er ist die fundamentale Grenze unseres Wissens über das Innere Schwarzer Löcher und ein zentrales Untersuchungsgebiet für die Verknüpfung von Quantenmechanik und Gravitation."
   },
   {
     "id": 188,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Geodäte",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Sie erklären die Umlaufbahnen von Himmelskörpern ohne die Annahme einer Fernkraft; Gravitation wird somit rein durch die Geometrie der Raumzeit beschrieben."
   },
   {
     "id": 189,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Gravitationswellen",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Ihre Entdeckung im Jahr 2015 eröffnete ein völlig neues Fenster zur Erforschung des Universums (Gravitationswellen-Astronomie), das weit über die Möglichkeiten optischer Teleskope hinausgeht."
   },
   {
     "id": 190,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Längenkontraktion",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Zusammen mit der Zeitdilatation stellt sie sicher, dass die Lichtgeschwindigkeit für alle Beobachter konstant bleibt, was die Newtonsche Vorstellung von absolutem Raum widerlegt."
   },
   {
     "id": 191,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Raumzeit",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Dieses Konzept ist notwendig, um die physikalische Realität gemäß der Relativitätstheorie korrekt abzubilden, da Raum und Zeit nicht mehr unabhängig voneinander betrachtet werden können."
   },
   {
     "id": 192,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Schwarzes Loch",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Schwarze Löcher sind Endstadien massereicher Sterne und spielen eine zentrale Rolle in der Entwicklung von Galaxien sowie bei der Erforschung der Grenzen physikalischer Gesetze (Singularität)."
   },
   {
     "id": 193,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Spezielle Relativitätstheorie",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Sie ersetzte das Newtonsche Konzept der absoluten Zeit durch eine relative Raumzeit und ist die Grundlage für die berühmte Äquivalenz von Masse und Energie (E = mc²)."
   },
   {
     "id": 194,
     "cat": "02_Physik_Astronomie",
-    "sub": "Relativitaetstheorie",
+    "sub": "Relativitätstheorie",
     "title": "Zeitdilatation",
     "tags": [
       "Physik Astronomie",
-      "Relativitaetstheorie"
+      "Relativitätstheorie"
     ],
     "relevance": "Sie ist experimentell durch Atomuhren in Flugzeugen und Satelliten bestätigt und muss bei der präzisen Ortung durch GPS-Systeme zwingend korrigiert werden."
   },
@@ -5338,220 +5338,220 @@
   {
     "id": 485,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Bildungssoziologie",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Zeigt strukturelle Barrieren auf und fordert Bildungsgerechtigkeit."
   },
   {
     "id": 486,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Hochbegabung",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Unterfordert zu werden kann für Hochbegabte ebenso belastend sein wie Überforderung; individuelle Förderung (Enrichment, Akzeleration) ist notwendig."
   },
   {
     "id": 487,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Klassenführung",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Effektive Klassenführung ist eine der wichtigsten Voraussetzungen für Unterrichtsqualität und Lehrergesundheit."
   },
   {
     "id": 488,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Lebenslanges Lernen",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "In einer sich schnell wandelnden Wissensgesellschaft ist die Fähigkeit zum selbstregulierten, lebenslangen Lernen eine Kernkompetenz."
   },
   {
     "id": 489,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Lehren & Lernen",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Bildet die wissenschaftliche Basis für Didaktik und die Gestaltung wirksamer Lernumgebungen."
   },
   {
     "id": 490,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Lernmotivation",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Ein Schlüsselfaktor für Lernerfolg; wichtig für Lehrer, um Schüler nachhaltig für Themen zu begeistern."
   },
   {
     "id": 491,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Lernstörungen",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Frühe Diagnose und Nachteilsausgleich sind entscheidend, um Sekundärprobleme wie Schulangst und geringen Selbstwert zu verhindern."
   },
   {
     "id": 492,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Medien in der Bildung",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "In einer digitalisierten Welt ist die Frage, wie Medien Lernen unterstützen oder behindern können, von zentraler Bedeutung."
   },
   {
     "id": 493,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Schulleistung & Bewertung",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Diskussionen um Notengerechtigkeit, Selektion und Chancengleichheit basieren auf Erkenntnissen dieses Feldes."
   },
   {
     "id": 494,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Paedagogische_Psychologie",
+    "sub": "Pädagogische_Psychologie",
     "title": "Selbstwirksamkeit",
     "tags": [
       "Psychologie Kognition",
-      "Paedagogische Psychologie"
+      "Pädagogische Psychologie"
     ],
     "relevance": "Hohe Selbstwirksamkeit fördert Ausdauer beim Lernen, Stressresistenz und Leistungen."
   },
   {
     "id": 495,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Big Five (Fünf-Faktoren-Modell)",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Es bietet einen universellen Rahmen zur Beschreibung von Persönlichkeit und sagt Lebenserfolg, Gesundheit und Beziehungsverhalten vorher."
   },
   {
     "id": 496,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Eignungsdiagnostik",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Fehlbesetzungen verursachen hohe Kosten; valide Diagnostik steigert Produktivität und Arbeitszufriedenheit."
   },
   {
     "id": 497,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Individuelle Unterschiede",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Wichtig, um Menschen nicht als homogene Masse zu behandeln, sondern individuelle Förderung und Passung in Beruf und Therapie zu ermöglichen."
   },
   {
     "id": 498,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Intelligenz & IQ",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Intelligenz ist einer der stabilsten Prädiktoren für schulischen und beruflichen Erfolg. Diskussionen um Anlage vs. Umwelt sind hier besonders prominent."
   },
   {
     "id": 499,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Persönlichkeitsstörungen",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Sie stellen eine Schnittstelle zur Klinischen Psychologie dar und sind oft schwer zu behandeln, da sie das \"Ich\" der Person betreffen."
   },
   {
     "id": 500,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Projektive Verfahren",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Trotz Kontroversen um ihre Gütekriterien sind sie in der tiefenpsychologischen Diagnostik weiterhin verbreitet, um schwer zugängliche Persönlichkeitsschichten zu explorieren."
   },
   {
     "id": 501,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Psychologische Diagnostik",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Sie sichert die Qualität und Objektivität von psychologischen Urteilen in Kliniken, Schulen und Unternehmen."
   },
   {
     "id": 502,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Selbstregulation",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Ein Mangel an Selbstregulation wird mit vielen Problemen wie Sucht, Kriminalität und schlechten schulischen Leistungen in Verbindung gebracht."
   },
   {
     "id": 503,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Temperament",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Verständnis des Temperaments hilft Eltern und Erziehern, passgenau auf die Bedürfnisse von Kindern einzugehen (\"Goodness of Fit\")."
   },
   {
     "id": 504,
     "cat": "06_Psychologie_Kognition",
-    "sub": "Persoenlichkeitspsychologie_Diagnostik",
+    "sub": "Persönlichkeitspsychologie_Diagnostik",
     "title": "Testtheorie & Fragebogenkonstruktion",
     "tags": [
       "Psychologie Kognition",
-      "Persoenlichkeitspsychologie Diagnostik"
+      "Persönlichkeitspsychologie Diagnostik"
     ],
     "relevance": "Ohne fundierte Testtheorie sind Messergebnisse (wie IQ-Werte) wertlos und anfällig für Fehlinterpretationen."
   },
@@ -6613,77 +6613,77 @@
   },
   {
     "id": 601,
-    "cat": "11_Geschichte_Archaeologie",
+    "cat": "11_Geschichte_Archäologie",
     "sub": "Antike",
     "title": "Antike",
     "tags": [
-      "Geschichte Archaeologie",
+      "Geschichte Archäologie",
       "Antike"
     ],
     "relevance": "Die kulturelle Wiege Europas; Konzepte wie Republik, Bürgerrecht und klassische Kunst stammen von hier."
   },
   {
     "id": 602,
-    "cat": "11_Geschichte_Archaeologie",
-    "sub": "Archaeologie",
+    "cat": "11_Geschichte_Archäologie",
+    "sub": "Archäologie",
     "title": "Archäologische Methoden",
     "tags": [
-      "Geschichte Archaeologie",
-      "Archaeologie"
+      "Geschichte Archäologie",
+      "Archäologie"
     ],
     "relevance": "Macht Geschichte sichtbar, wo schriftliche Quellen schweigen oder lügen."
   },
   {
     "id": 603,
-    "cat": "11_Geschichte_Archaeologie",
+    "cat": "11_Geschichte_Archäologie",
     "sub": "Geschichte",
     "title": "Historische Hilfswissenschaften",
     "tags": [
-      "Geschichte Archaeologie",
+      "Geschichte Archäologie",
       "Geschichte"
     ],
     "relevance": "Ohne sie wären alte Dokumente unlesbar und Fälschungen kaum erkennbar."
   },
   {
     "id": 604,
-    "cat": "11_Geschichte_Archaeologie",
+    "cat": "11_Geschichte_Archäologie",
     "sub": "Mittelalter",
     "title": "Mittelalter",
     "tags": [
-      "Geschichte Archaeologie",
+      "Geschichte Archäologie",
       "Mittelalter"
     ],
     "relevance": "Lange als \"finster\" unterschätzt, war es eine Zeit technischer Innovationen (Windmühlen) und der Entstehung europäischer Staaten und Universitäten."
   },
   {
     "id": 605,
-    "cat": "11_Geschichte_Archaeologie",
+    "cat": "11_Geschichte_Archäologie",
     "sub": "Neuzeit",
     "title": "Neuzeit",
     "tags": [
-      "Geschichte Archaeologie",
+      "Geschichte Archäologie",
       "Neuzeit"
     ],
     "relevance": "Hier entstehen das wissenschaftliche Weltbild, der Nationalstaat und die Menschenrechte."
   },
   {
     "id": 606,
-    "cat": "11_Geschichte_Archaeologie",
-    "sub": "Ur_Fruehgeschichte",
+    "cat": "11_Geschichte_Archäologie",
+    "sub": "Ur_Frühgeschichte",
     "title": "Ur- & Frühgeschichte",
     "tags": [
-      "Geschichte Archaeologie",
-      "Ur Fruehgeschichte"
+      "Geschichte Archäologie",
+      "Ur Frühgeschichte"
     ],
     "relevance": "Hier entstanden Sprache, Kunst, Religion und Sesshaftigkeit die Fundamente des Menschseins."
   },
   {
     "id": 607,
-    "cat": "11_Geschichte_Archaeologie",
+    "cat": "11_Geschichte_Archäologie",
     "sub": "Zeitgeschichte",
     "title": "Zeitgeschichte",
     "tags": [
-      "Geschichte Archaeologie",
+      "Geschichte Archäologie",
       "Zeitgeschichte"
     ],
     "relevance": "Unmittelbare Vorgeschichte unserer Gegenwart; erklärt heutige Konflikte und Allianzen."

@@ -4,9 +4,9 @@
       "Software_Engineering": [
         {
           "title": "Domain-Driven Design",
-          "definition_de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomaene in den Mittelpunkt stellt.",
+          "definition_de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomäne in den Mittelpunkt stellt.",
           "definition_en": "An approach to modelling complex software that places the domain of expertise at the centre.",
-          "relevance": "Hilft, komplexe Systeme verstaendlich und wartbar zu gestalten.",
+          "relevance": "Hilft, komplexe Systeme verständlich und wartbar zu gestalten.",
           "tags": [
             "Informatik",
             "Software Engineering",
@@ -228,7 +228,7 @@
           ]
         }
       ],
-      "Kuenstliche_Intelligenz": [
+      "Künstliche_Intelligenz": [
         {
           "title": "Computer Vision",
           "definition_de": "Lehrt Computer, digitalen Bildern und Videos Bedeutung zu entnehmen (\"Maschinelles Sehen\"), z.B. Objekterkennung, Gesichtserkennung oder Szenenanalyse.",
@@ -236,7 +236,7 @@
           "relevance": "Schlüsseltechnologie für autonomes Fahren, medizinische Bildgebung und Überwachungssysteme.",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         },
         {
@@ -246,7 +246,7 @@
           "relevance": "Verantwortlich für die jüngsten Durchbrüche in Bilderkennung, Sprachsynthese und Spielen (AlphaGo).",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         },
         {
@@ -256,7 +256,7 @@
           "relevance": "Essentiell, um sicherzustellen, dass KI dem Menschen dient und keine Diskriminierung oder Schaden verursacht (\"AI Alignment\").",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         },
         {
@@ -266,7 +266,7 @@
           "relevance": "Treibt Anwendungen wie Empfehlungssysteme, Spam-Filter und medizinische Diagnostik an.",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         },
         {
@@ -276,7 +276,7 @@
           "relevance": "Basis für Chatbots, Übersetzungsdienste (DeepL) und Sprachassistenten (Siri, Alexa).",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         },
         {
@@ -286,7 +286,7 @@
           "relevance": "Revolutioniert Fertigung (Industrie 4.0), Pflege und Logistik, wirft aber auch Fragen zur Sicherheit und Arbeitsplatzverlust auf.",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         },
         {
@@ -296,7 +296,7 @@
           "relevance": "Kernbestandteil des Semantic Web und von Expertensystemen, die menschliches Expertenwissen emulieren.",
           "tags": [
             "Informatik KI",
-            "Kuenstliche Intelligenz"
+            "Künstliche Intelligenz"
           ]
         }
       ],
@@ -1170,9 +1170,9 @@
           ]
         },
         {
-          "title": "Zermelo-Fraenkel-Mengenlehre",
-          "definition_de": "Die Zermelo-Fraenkel-Mengenlehre (ZF) ist ein axiomatisches System, das zur Vermeidung logischer Paradoxien in der naiven Mengenlehre entwickelt wurde. Zusammen mit dem Auswahlaxiom (ZFC) bildet sie den heute allgemein anerkannten Standardrahmen für mathematische Beweise.",
-          "definition_en": "Zermelo-Fraenkel set theory (ZF) is an axiomatic system developed to avoid logical paradoxes arising in naive set theory. Together with the axiom of choice (ZFC), it forms the generally accepted standard framework for mathematical proofs.",
+          "title": "Zermelo-Fränkel-Mengenlehre",
+          "definition_de": "Die Zermelo-Fränkel-Mengenlehre (ZF) ist ein axiomatisches System, das zur Vermeidung logischer Paradoxien in der naiven Mengenlehre entwickelt wurde. Zusammen mit dem Auswahlaxiom (ZFC) bildet sie den heute allgemein anerkannten Standardrahmen für mathematische Beweise.",
+          "definition_en": "Zermelo-Fränkel set theory (ZF) is an axiomatic system developed to avoid logical paradoxes arising in naive set theory. Together with the axiom of choice (ZFC), it forms the generally accepted standard framework for mathematical proofs.",
           "relevance": "Sie stellt sicher, dass mathematisches Schließen auf einer widerspruchsfreien Basis erfolgt, und erlaubt die präzise Behandlung unendlicher Mengen ohne interne Inkonsistenzen.",
           "tags": [
             "Mathematik",
@@ -1590,7 +1590,7 @@
           ]
         }
       ],
-      "Festkoerperphysik": [
+      "Festkörperphysik": [
         {
           "title": "Bändermodell",
           "definition_de": "Das Bändermodell beschreibt die erlaubten Energiebereiche (Bänder) für Elektronen in einem Festkörper. Es unterscheidet zwischen dem vollbesetzten Valenzband und dem leeren oder teilbesetzten Leitungsband, getrennt durch die Energielücke (Bandlücke).",
@@ -1598,7 +1598,7 @@
           "relevance": "Es erklärt physikalisch fundiert den Unterschied zwischen Metallen, Halbleitern und Isolatoren und ist essenziell für die Entwicklung optoelektronischer Bauelemente.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1608,7 +1608,7 @@
           "relevance": "Ohne Dotierung gäbe es keine p-n-Übergänge und damit keine Dioden oder Transistoren, die die Basis der modernen Digitaltechnik bilden.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1618,7 +1618,7 @@
           "relevance": "Er ist die Grundlage für Permanentmagnete, Elektromotoren und magnetische Datenspeichertechnologien (Audio/Video-Bänder, Festplatten).",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1628,7 +1628,7 @@
           "relevance": "Fehler im Gitter bestimmen maßgeblich die mechanische Festigkeit (Härte) von Metallen sowie die Diffusions- und Leitfähigkeitseigenschaften von Festkörpern.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1638,7 +1638,7 @@
           "relevance": "Sie ist eine der wichtigsten Materialkennwerte im Bauwesen und Maschinenbau zur Beurteilung von Verschleißfestigkeit und Eignung für Werkzeuge.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1648,7 +1648,7 @@
           "relevance": "Sie sind das Herzstück der modernen Elektronik; ohne Halbleiter gäbe es keine Transistoren, Solarzellen, LEDs oder Computerchips.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1658,7 +1658,7 @@
           "relevance": "Er wird zur Messung von Magnetfeldern (Hall-Sensoren) und zur Bestimmung der Art und Dichte der Ladungsträger in Halbleitern (n- oder p-Leitung) eingesetzt.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1668,7 +1668,7 @@
           "relevance": "Sie bestimmt die mechanischen, optischen und elektrischen Eigenschaften von Materialien und ist die Grundlage für die moderne Halbleitertechnik und Metallurgie.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1678,7 +1678,7 @@
           "relevance": "Phononen sind die Hauptträger für den Wärmetransport und spielen eine entscheidende Rolle für die spezifische Wärme von Festkörpern sowie für die Wechselwirkung von Elektronen (z. B. bei der Supraleitung).",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         },
         {
@@ -1688,7 +1688,7 @@
           "relevance": "Sie ermöglicht verlustfreien Stromtransport und die Erzeugung extrem starker Magnetfelder für MRT-Geräte und Teilchenbeschleuniger wie den LHC.",
           "tags": [
             "Physik Astronomie",
-            "Festkoerperphysik"
+            "Festkörperphysik"
           ]
         }
       ],
@@ -1896,7 +1896,7 @@
           ]
         }
       ],
-      "Relativitaetstheorie": [
+      "Relativitätstheorie": [
         {
           "title": "Äquivalenzprinzip",
           "definition_de": "Das Äquivalenzprinzip besagt, dass schwere Masse (Träger der Gravitation) und träge Masse (Widerstand gegen Beschleunigung) identisch sind. Lokal lässt sich die Wirkung eines Gravitationsfeldes nicht von der Wirkung einer Beschleunigung unterscheiden.",
@@ -1904,7 +1904,7 @@
           "relevance": "Es war Einsteins entscheidender gedanklicher Durchbruch zur Entwicklung der Allgemeinen Relativitätstheorie und erklärt, warum im freien Fall Schwerelosigkeit herrscht.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1914,7 +1914,7 @@
           "relevance": "Sie ist unser bestes Modell für das Verständnis des Universums auf großen Skalen, von der Umlaufbahn des Merkur bis hin zur Existenz Schwarzer Löcher und der Expansion des Kosmos.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1924,7 +1924,7 @@
           "relevance": "Er ist die fundamentale Grenze unseres Wissens über das Innere Schwarzer Löcher und ein zentrales Untersuchungsgebiet für die Verknüpfung von Quantenmechanik und Gravitation.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1934,7 +1934,7 @@
           "relevance": "Sie erklären die Umlaufbahnen von Himmelskörpern ohne die Annahme einer Fernkraft; Gravitation wird somit rein durch die Geometrie der Raumzeit beschrieben.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1944,7 +1944,7 @@
           "relevance": "Ihre Entdeckung im Jahr 2015 eröffnete ein völlig neues Fenster zur Erforschung des Universums (Gravitationswellen-Astronomie), das weit über die Möglichkeiten optischer Teleskope hinausgeht.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1954,7 +1954,7 @@
           "relevance": "Zusammen mit der Zeitdilatation stellt sie sicher, dass die Lichtgeschwindigkeit für alle Beobachter konstant bleibt, was die Newtonsche Vorstellung von absolutem Raum widerlegt.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1964,7 +1964,7 @@
           "relevance": "Dieses Konzept ist notwendig, um die physikalische Realität gemäß der Relativitätstheorie korrekt abzubilden, da Raum und Zeit nicht mehr unabhängig voneinander betrachtet werden können.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1974,7 +1974,7 @@
           "relevance": "Schwarze Löcher sind Endstadien massereicher Sterne und spielen eine zentrale Rolle in der Entwicklung von Galaxien sowie bei der Erforschung der Grenzen physikalischer Gesetze (Singularität).",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1984,7 +1984,7 @@
           "relevance": "Sie ersetzte das Newtonsche Konzept der absoluten Zeit durch eine relative Raumzeit und ist die Grundlage für die berühmte Äquivalenz von Masse und Energie (E = mc²).",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         },
         {
@@ -1994,7 +1994,7 @@
           "relevance": "Sie ist experimentell durch Atomuhren in Flugzeugen und Satelliten bestätigt und muss bei der präzisen Ortung durch GPS-Systeme zwingend korrigiert werden.",
           "tags": [
             "Physik Astronomie",
-            "Relativitaetstheorie"
+            "Relativitätstheorie"
           ]
         }
       ],
@@ -4966,7 +4966,7 @@
           ]
         }
       ],
-      "Paedagogische_Psychologie": [
+      "Pädagogische_Psychologie": [
         {
           "title": "Bildungssoziologie",
           "definition_de": "Analysiert soziale Ungleichheiten im Bildungssystem, den Einfluss der familiären Herkunft auf den Bildungserfolg und die Rolle von Bildung für die soziale Mobilität.",
@@ -4974,7 +4974,7 @@
           "relevance": "Zeigt strukturelle Barrieren auf und fordert Bildungsgerechtigkeit.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -4984,7 +4984,7 @@
           "relevance": "Unterfordert zu werden kann für Hochbegabte ebenso belastend sein wie Überforderung; individuelle Förderung (Enrichment, Akzeleration) ist notwendig.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -4994,7 +4994,7 @@
           "relevance": "Effektive Klassenführung ist eine der wichtigsten Voraussetzungen für Unterrichtsqualität und Lehrergesundheit.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5004,7 +5004,7 @@
           "relevance": "In einer sich schnell wandelnden Wissensgesellschaft ist die Fähigkeit zum selbstregulierten, lebenslangen Lernen eine Kernkompetenz.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5014,7 +5014,7 @@
           "relevance": "Bildet die wissenschaftliche Basis für Didaktik und die Gestaltung wirksamer Lernumgebungen.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5024,7 +5024,7 @@
           "relevance": "Ein Schlüsselfaktor für Lernerfolg; wichtig für Lehrer, um Schüler nachhaltig für Themen zu begeistern.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5034,7 +5034,7 @@
           "relevance": "Frühe Diagnose und Nachteilsausgleich sind entscheidend, um Sekundärprobleme wie Schulangst und geringen Selbstwert zu verhindern.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5044,7 +5044,7 @@
           "relevance": "In einer digitalisierten Welt ist die Frage, wie Medien Lernen unterstützen oder behindern können, von zentraler Bedeutung.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5054,7 +5054,7 @@
           "relevance": "Diskussionen um Notengerechtigkeit, Selektion und Chancengleichheit basieren auf Erkenntnissen dieses Feldes.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         },
         {
@@ -5064,11 +5064,11 @@
           "relevance": "Hohe Selbstwirksamkeit fördert Ausdauer beim Lernen, Stressresistenz und Leistungen.",
           "tags": [
             "Psychologie Kognition",
-            "Paedagogische Psychologie"
+            "Pädagogische Psychologie"
           ]
         }
       ],
-      "Persoenlichkeitspsychologie_Diagnostik": [
+      "Persönlichkeitspsychologie_Diagnostik": [
         {
           "title": "Big Five (Fünf-Faktoren-Modell)",
           "definition_de": "Das Big-Five-Modell ist das dominierende Paradigma der Persönlichkeitspsychologie, das Charakterzüge in fünf Dimensionen clustert: Offenheit, Gewissenhaftigkeit, Extraversion, Verträglichkeit und Neurotizismus (OCEAN).",
@@ -5076,7 +5076,7 @@
           "relevance": "Es bietet einen universellen Rahmen zur Beschreibung von Persönlichkeit und sagt Lebenserfolg, Gesundheit und Beziehungsverhalten vorher.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5086,7 +5086,7 @@
           "relevance": "Fehlbesetzungen verursachen hohe Kosten; valide Diagnostik steigert Produktivität und Arbeitszufriedenheit.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5096,7 +5096,7 @@
           "relevance": "Wichtig, um Menschen nicht als homogene Masse zu behandeln, sondern individuelle Förderung und Passung in Beruf und Therapie zu ermöglichen.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5106,7 +5106,7 @@
           "relevance": "Intelligenz ist einer der stabilsten Prädiktoren für schulischen und beruflichen Erfolg. Diskussionen um Anlage vs. Umwelt sind hier besonders prominent.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5116,7 +5116,7 @@
           "relevance": "Sie stellen eine Schnittstelle zur Klinischen Psychologie dar und sind oft schwer zu behandeln, da sie das \"Ich\" der Person betreffen.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5126,7 +5126,7 @@
           "relevance": "Trotz Kontroversen um ihre Gütekriterien sind sie in der tiefenpsychologischen Diagnostik weiterhin verbreitet, um schwer zugängliche Persönlichkeitsschichten zu explorieren.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5136,7 +5136,7 @@
           "relevance": "Sie sichert die Qualität und Objektivität von psychologischen Urteilen in Kliniken, Schulen und Unternehmen.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5146,7 +5146,7 @@
           "relevance": "Ein Mangel an Selbstregulation wird mit vielen Problemen wie Sucht, Kriminalität und schlechten schulischen Leistungen in Verbindung gebracht.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5156,7 +5156,7 @@
           "relevance": "Verständnis des Temperaments hilft Eltern und Erziehern, passgenau auf die Bedürfnisse von Kindern einzugehen (\"Goodness of Fit\").",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         },
         {
@@ -5166,7 +5166,7 @@
           "relevance": "Ohne fundierte Testtheorie sind Messergebnisse (wie IQ-Werte) wertlos und anfällig für Fehlinterpretationen.",
           "tags": [
             "Psychologie Kognition",
-            "Persoenlichkeitspsychologie Diagnostik"
+            "Persönlichkeitspsychologie Diagnostik"
           ]
         }
       ],
@@ -6171,7 +6171,7 @@
         }
       ]
     },
-    "11_Geschichte_Archaeologie": {
+    "11_Geschichte_Archäologie": {
       "Antike": [
         {
           "title": "Antike",
@@ -6179,20 +6179,20 @@
           "definition_en": "Epoch of the Mediterranean world (Greece, Rome) from approximately 800 BCE to 600 CE. Characterised by city-states, democracy, philosophy, and the Roman Empire.",
           "relevance": "Die kulturelle Wiege Europas; Konzepte wie Republik, Bürgerrecht und klassische Kunst stammen von hier.",
           "tags": [
-            "Geschichte Archaeologie",
+            "Geschichte Archäologie",
             "Antike"
           ]
         }
       ],
-      "Archaeologie": [
+      "Archäologie": [
         {
           "title": "Archäologische Methoden",
           "definition_de": "Verfahren zur Ausgrabung, Datierung (C14-Methode, Dendrochronologie) und Konservierung von Bodenfunden, um vergangene Kulturen zu rekonstruieren.",
           "definition_en": "Methods for excavating, dating (radiocarbon dating, dendrochronology), and conserving artefacts from the ground, in order to reconstruct past cultures.",
           "relevance": "Macht Geschichte sichtbar, wo schriftliche Quellen schweigen oder lügen.",
           "tags": [
-            "Geschichte Archaeologie",
-            "Archaeologie"
+            "Geschichte Archäologie",
+            "Archäologie"
           ]
         }
       ],
@@ -6203,7 +6203,7 @@
           "definition_en": "Specialist disciplines such as palaeography (the study of historical writing), numismatics (the study of coins), and heraldry (the study of coats of arms), which assist historians in correctly reading and contextualising sources.",
           "relevance": "Ohne sie wären alte Dokumente unlesbar und Fälschungen kaum erkennbar.",
           "tags": [
-            "Geschichte Archaeologie",
+            "Geschichte Archäologie",
             "Geschichte"
           ]
         }
@@ -6215,7 +6215,7 @@
           "definition_en": "The epoch between Antiquity and the Early Modern period (c. 500 to 1500 CE). Characterised by feudalism, the dominance of the Church, and chivalry.",
           "relevance": "Lange als \"finster\" unterschätzt, war es eine Zeit technischer Innovationen (Windmühlen) und der Entstehung europäischer Staaten und Universitäten.",
           "tags": [
-            "Geschichte Archaeologie",
+            "Geschichte Archäologie",
             "Mittelalter"
           ]
         }
@@ -6227,20 +6227,20 @@
           "definition_en": "Begins around 1500 with the invention of printing, the Reformation, and the discovery of the Americas. Leads through absolutism and the Enlightenment into the Modern era.",
           "relevance": "Hier entstehen das wissenschaftliche Weltbild, der Nationalstaat und die Menschenrechte.",
           "tags": [
-            "Geschichte Archaeologie",
+            "Geschichte Archäologie",
             "Neuzeit"
           ]
         }
       ],
-      "Ur_Fruehgeschichte": [
+      "Ur_Frühgeschichte": [
         {
           "title": "Ur- & Frühgeschichte",
           "definition_de": "Die längste Phase der Menschheitsgeschichte, von den ersten Steinwerkzeugen bis zur Erfindung der Schrift. Erforscht durch Archäologie statt Schriftquellen.",
           "definition_en": "The longest phase of human history, from the first stone tools to the invention of writing. Studied through archaeology rather than written sources.",
           "relevance": "Hier entstanden Sprache, Kunst, Religion und Sesshaftigkeit die Fundamente des Menschseins.",
           "tags": [
-            "Geschichte Archaeologie",
-            "Ur Fruehgeschichte"
+            "Geschichte Archäologie",
+            "Ur Frühgeschichte"
           ]
         }
       ],
@@ -6251,7 +6251,7 @@
           "definition_en": "The epoch still within living memory (generally from 1917/1945 onwards). Core topics: the World Wars, the Cold War, European integration, and the digital revolution.",
           "relevance": "Unmittelbare Vorgeschichte unserer Gegenwart; erklärt heutige Konflikte und Allianzen.",
           "tags": [
-            "Geschichte Archaeologie",
+            "Geschichte Archäologie",
             "Zeitgeschichte"
           ]
         }
