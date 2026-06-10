@@ -80,7 +80,7 @@ On Windows, `start.bat` opens the CLI entry point. Exported files are written to
 | `md_to_json.py` | Markdown-to-JSON import helper |
 | `check_duplicates.py` | Duplicate/consistency helper |
 | `EXPORTFORMAT.md` | Stable exchange-format plan |
-| `web_publisher/README.md` | Static Web/PWA publisher plan |
+| `web_publisher/` | Static Web/PWA publisher (PWA, offline cache, search, DE/EN toggle) |
 
 ## Privacy
 
@@ -96,12 +96,12 @@ Completed:
 - 630 bilingual stubs in a single JSON master file
 - Markdown export and JSON synchronization tooling
 - CLI smoke tests in GitHub Actions
+- Static Web/PWA publisher with search and offline cache (`web_publisher/`)
 
 Planned:
 
 - `metawiki-data-v1` schema wrapper and validation
 - Unified tag cleanup
-- Static Web/PWA publisher with search and offline cache
 - Obsidian/GitHub Pages export paths
 - Optional embeddings and search API
 
@@ -117,7 +117,7 @@ Wichtige Einstiegspunkte:
 - `python metawiki_cli.py check` prüft den Datenbestand.
 - `python metawiki_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/README.md` beschreibt den geplanten statischen Web/PWA-Pfad.
+- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und DE/EN-Toggle.
 
 ## License
 

@@ -1,6 +1,7 @@
 # MetaWiki
 
 Canonical repository: https://github.com/file-bricks/MetaWiki
+Last-checked: 2026-06-10
 
 MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. It is unrelated to Wikimedia Meta-Wiki.
 
@@ -20,7 +21,8 @@ MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted re
 - `metawiki_cli.py`: CLI for statistics and consistency checks
 - `metawiki_pipeline.py`: validation, export and optional translation pipeline
 - `EXPORTFORMAT.md`: planned stable `metawiki-data-v1` exchange format
-- `web_publisher/README.md`: planned static Web/PWA publisher path
+- `web_publisher/`: static PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (25 Node.js tests)
+- `web_publisher/README.md`: Web/PWA publisher documentation
 - `AUFGABEN.txt`: current development tasks
 - `CHANGELOG.md`: project changes
 

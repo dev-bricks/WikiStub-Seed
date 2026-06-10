@@ -26,11 +26,14 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - Deutsche öffentliche Repo-Texte auf echte Umlaute bereinigt.
 - Privacy-/Security-Hinweise ohne persönliche Kontaktadresse geschärft.
 
+### Behoben / Fixed (2026-06-08)
+- `translator.py` `_is_german()`: Umlaut-Erkennung auf echte Unicode-Zeichen (ä, ö, ü, Ä, Ö, Ü, ß) korrigiert; `web_publisher/data/metawiki.json` und `search-index.json` mit korrekten Umlaut-Werten synchronisiert.
+
 ### Behoben / Fixed
 - Veraltete Clone- und Security-Links aus der früheren persönlichen Ablage ersetzt.
 - `cmd_import()` bricht jetzt bei defekter oder unlesbarer `metawiki.json` sauber ab, statt den Import mit unbekanntem Zustand fortzusetzen; Regressionstest für den Load-Fehlerpfad ergänzt.
 
-## [1.0.0] - YYYY-MM-DD
+## [1.0.0] - 2026-02-18
 
 ### Hinzugefügt / Added
 - Erstveröffentlichung / Initial release
