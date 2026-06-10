@@ -5,6 +5,13 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt / Added (2026-06-10) — iOS PWA-Installierbarkeit
+- `web_publisher/icons/apple-touch-icon-180.png` — 180×180 px Icon für iOS-Homescreen (via Pillow LANCZOS aus Icon-192.png)
+- `web_publisher/index.html`: `viewport-fit=cover`, `apple-mobile-web-app-title`, `apple-mobile-web-app-status-bar-style`, `<link rel="apple-touch-icon">`, `env(safe-area-inset-*)` CSS auf `body`, 44 px Touch-Targets auf `#search` und `#lang-toggle`
+- `web_publisher/sw.js`: `CACHE_NAME` auf `metawiki-v3` gebumpt, `apple-touch-icon-180.png` in ASSETS, `{ignoreSearch: true}` in `caches.match()` für Offline-Stabilität
+- `web_publisher/tests/publisher.test.mjs`: 9 neue iOS-Tests (Suite 8) — 34/34 Tests grün
+- Manuelles iOS-Smoke-Runbook in `AUFGABEN.txt` (Safari/Chrome → "Zum Home-Bildschirm", Offline, Notch-Viewport, Touch-Targets, Status-Bar)
+
 ### Hinzugefügt / Added (2026-06-06)
 - `web_publisher/` — vollständiger statischer PWA-Publisher: `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`
 - `web_publisher/_build.py` — Build-Schritt: kopiert `metawiki.json` nach `data/` (In-SW-Scope) und erzeugt flachen `search-index.json` (630 Einträge)

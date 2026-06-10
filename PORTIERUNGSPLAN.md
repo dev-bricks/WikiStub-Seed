@@ -45,7 +45,7 @@ Native Android-, iOS-, Windows-Store-, macOS- und Linux-Apps sind erst sinnvoll,
 | GitHub/CLI | Vorhanden | CLI-Smoke in CI beibehalten und bei Release dokumentieren. |
 | Datenformat | Geplant und dokumentiert | `EXPORTFORMAT.md` als stabile Referenz nutzen und später JSON-Schema ergänzen. |
 | Web/PWA | Geplant | Statischen Publisher mit Suchindex und Offline-Manifest entwerfen. |
-| Android/iOS | Abgeleitet über PWA | Erst nach Web/PWA-Smoke auf echten mobilen Viewports bewerten. |
+| Android/iOS | PWA — iOS-Installierbarkeit umgesetzt (2026-06-10) | apple-touch-icon-180.png, viewport-fit=cover, safe-area-inset, 44px Touch-Targets, SW v3. Manueller Geräte-Smoke als nächster Schritt. |
 | Windows Store | Kein aktiver Kanal | Nur neu prüfen, wenn eine GUI oder lokale Webviewer-Hülle entsteht. |
 | macOS/Linux | Source-Smoke | Python-CLI auf macOS/Linux prüfen, bevor Pakete geplant werden. |
 

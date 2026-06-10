@@ -176,3 +176,45 @@ describe("app.js", () => {
     assert.ok(js.includes("sw.js"),         "sw.js-Pfad fehlt in serviceWorker.register");
   });
 });
+
+// ── 8: iOS PWA-Installierbarkeit ─────────────────────────────────────────────
+describe("iOS PWA-Installierbarkeit", () => {
+  it("index.html hat viewport-fit=cover", () => {
+    const html = readText("index.html");
+    assert.ok(html.includes("viewport-fit=cover"), "viewport-fit=cover fehlt");
+  });
+  it("index.html hat apple-touch-icon Link auf 180px Icon", () => {
+    const html = readText("index.html");
+    assert.ok(
+      html.includes("apple-touch-icon") && html.includes("apple-touch-icon-180.png"),
+      "apple-touch-icon Link fehlt oder zeigt nicht auf 180px Datei"
+    );
+  });
+  it("index.html hat apple-mobile-web-app-title Meta-Tag", () => {
+    const html = readText("index.html");
+    assert.ok(html.includes("apple-mobile-web-app-title"), "apple-mobile-web-app-title fehlt");
+  });
+  it("index.html hat apple-mobile-web-app-status-bar-style Meta-Tag", () => {
+    const html = readText("index.html");
+    assert.ok(html.includes("apple-mobile-web-app-status-bar-style"), "apple-mobile-web-app-status-bar-style fehlt");
+  });
+  it("index.html body nutzt safe-area-inset CSS", () => {
+    const html = readText("index.html");
+    assert.ok(html.includes("safe-area-inset"), "env(safe-area-inset-*) fehlt in CSS");
+  });
+  it("apple-touch-icon-180.png existiert physisch", () => {
+    assert.ok(fileExists("icons/apple-touch-icon-180.png"), "icons/apple-touch-icon-180.png fehlt");
+  });
+  it("sw.js CACHE_NAME ist metawiki-v3 (gebumpt für iOS Cache-Refresh)", () => {
+    const sw = readText("sw.js");
+    assert.ok(sw.includes('"metawiki-v3"'), 'CACHE_NAME muss "metawiki-v3" sein');
+  });
+  it("sw.js enthält apple-touch-icon-180.png in ASSETS", () => {
+    const sw = readText("sw.js");
+    assert.ok(sw.includes("apple-touch-icon-180.png"), "apple-touch-icon-180.png fehlt in SW ASSETS");
+  });
+  it("manifest display ist standalone (moderne iOS-Installierbarkeit)", () => {
+    const m = readJson("manifest.webmanifest");
+    assert.strictEqual(m.display, "standalone", "manifest display muss standalone sein");
+  });
+});

@@ -25,4 +25,9 @@ for size in (192, 512):
     canvas.save(OUT / f"Icon-maskable-{size}.png", "PNG")
     print(f"[icons] Icon-{size}.png + Icon-maskable-{size}.png")
 
+# apple-touch-icon-180.png für iOS-Homescreen (180×180, Apple HIG)
+img180 = best.resize((180, 180), Image.LANCZOS)
+img180.save(OUT / "apple-touch-icon-180.png", "PNG")
+print("[icons] apple-touch-icon-180.png")
+
 print("[icons] OK")
