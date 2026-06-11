@@ -5,6 +5,10 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Geändert / Changed (2026-06-11)
+- `llms.txt`: `## Last-checked: 2026-06-11`-Header ergänzt; `## Audience`-Abschnitt (5 Zielgruppen) hinzugefügt; `## Search Phrases` als Fenced-Block formatiert; Test-Anzahl von web_publisher auf 34 korrigiert (war 25, nach iOS-PWA-Commit).
+- `PORTIERUNGSPLAN.md` aus dem Git-Tracking entfernt (`git rm --cached`); Datei war trotz `.gitignore`-Eintrag noch getrackt.
+
 ### Hinzugefügt / Added (2026-06-10) — iOS PWA-Installierbarkeit
 - `web_publisher/icons/apple-touch-icon-180.png` — 180×180 px Icon für iOS-Homescreen (via Pillow LANCZOS aus Icon-192.png)
 - `web_publisher/index.html`: `viewport-fit=cover`, `apple-mobile-web-app-title`, `apple-mobile-web-app-status-bar-style`, `<link rel="apple-touch-icon">`, `env(safe-area-inset-*)` CSS auf `body`, 44 px Touch-Targets auf `#search` und `#lang-toggle`

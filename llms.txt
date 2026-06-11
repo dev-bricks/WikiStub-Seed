@@ -1,9 +1,18 @@
 # MetaWiki
 
+## Last-checked: 2026-06-11
+
 Canonical repository: https://github.com/file-bricks/MetaWiki
-Last-checked: 2026-06-10
 
 MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. It is unrelated to Wikimedia Meta-Wiki.
+
+## Audience
+
+- **AI and LLM developers**: feeding 630 bilingual domain stubs into RAG pipelines, embeddings or LLM context windows without external dependencies
+- **Knowledge workers and researchers**: building structured personal wikis, concept catalogs or glossaries from curated bilingual domain stubs
+- **Python developers**: extending, validating or exporting the bilingual JSON dataset via CLI tools, pipeline scripts and the metawiki-data-v1 exchange format
+- **Documentation and education teams**: exporting structured Markdown or JSON to static sites, GitHub Pages, Obsidian vaults or learning systems
+- **Open-source contributors**: adding multilingual knowledge stubs, new domain categories or static Web/PWA publisher features
 
 ## Project Scope
 
@@ -21,7 +30,7 @@ MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted re
 - `metawiki_cli.py`: CLI for statistics and consistency checks
 - `metawiki_pipeline.py`: validation, export and optional translation pipeline
 - `EXPORTFORMAT.md`: planned stable `metawiki-data-v1` exchange format
-- `web_publisher/`: static PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (25 Node.js tests)
+- `web_publisher/`: static PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (34 Node.js tests)
 - `web_publisher/README.md`: Web/PWA publisher documentation
 - `AUFGABEN.txt`: current development tasks
 - `CHANGELOG.md`: project changes
@@ -40,6 +49,21 @@ Typical stub fields:
 
 Core MetaWiki usage is local-first and has no telemetry. It reads and writes local JSON/Markdown files. The optional translation command may call an external API only when `ANTHROPIC_API_KEY` is configured and the optional `anthropic` package is installed.
 
+## Search Phrases
+
+```
+bilingual JSON knowledge base Python
+local-first ontology seed library AI
+LLM context dataset 630 stubs bilingual
+knowledge stubs Obsidian export Markdown
+AI-assisted knowledge framework local
+MetaWiki JSON knowledge stubs file-bricks
+RAG knowledge base bilingual German English
+static PWA knowledge publisher offline
+multilingual knowledge stubs framework
+domain knowledge ontology open source Python
+```
+
 ## Suggested LLM Interpretation
 
-Describe MetaWiki as a reusable structured knowledge seed library, not as a general wiki host. Good search phrases include: bilingual JSON knowledge base, AI-assisted knowledge framework, local-first ontology seed library, LLM context dataset, Markdown export knowledge stubs, Obsidian knowledge export.
+Describe MetaWiki as a reusable structured knowledge seed library, not as a general wiki host. It is unrelated to Wikimedia Meta-Wiki. The primary data artifact is `metawiki.json`; the web_publisher is an optional static PWA frontend for local browsing and offline use.
