@@ -29,6 +29,8 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 
+from language_model import get_definition, get_relevance, normalize_entry
+
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "metawiki.json"
 BACKUP_PATH = BASE_PATH / "backups"
@@ -140,10 +142,10 @@ def cmd_search(args):
         if query in stub.get("title", "").lower():
             score = 3
         # Definition-Match
-        elif query in stub.get("definition_de", "").lower():
+        elif query in get_definition(stub, "de").lower() or query in get_definition(stub, "en").lower():
             score = 2
         # Relevanz-Match
-        elif query in stub.get("relevance", "").lower():
+        elif query in get_relevance(stub, "de").lower():
             score = 1
         # Tag-Match
         elif any(query in tag.lower() for tag in stub.get("tags", [])):
@@ -163,9 +165,10 @@ def cmd_search(args):
 
         print(f"  [{match_type}] {stub['title']}")
         print(f"          {cat_display} > {sub_display}")
-        if stub.get("definition_de"):
-            defn = stub["definition_de"][:100]
-            if len(stub["definition_de"]) > 100:
+        definition = get_definition(stub, "de")
+        if definition:
+            defn = definition[:100]
+            if len(definition) > 100:
                 defn += "..."
             print(f"          {defn}")
         print()
@@ -203,13 +206,13 @@ def cmd_add(args):
     tags.append(tag_name)
     tags.append(subcat.replace("_", " "))
 
-    stub = {
+    stub = normalize_entry({
         "title": args.title,
         "definition_de": args.definition,
         "definition_en": "",
         "relevance": args.relevance or "",
         "tags": tags
-    }
+    })
 
     root[cat][subcat].append(stub)
     save_json(data)
@@ -265,9 +268,9 @@ def cmd_stats(args):
         sub_counts[stub["_category"]][stub["_subcategory"]] += 1
         for tag in stub.get("tags", []):
             tag_counts[tag] += 1
-        if not stub.get("definition_de", "").strip():
+        if not get_definition(stub, "de").strip():
             empty_def += 1
-        if not stub.get("relevance", "").strip():
+        if not get_relevance(stub, "de").strip():
             empty_rel += 1
 
     print(f"\n  {'='*50}")
@@ -315,11 +318,12 @@ def cmd_export(args):
         sub_display = subcat.replace("_", " ")
 
         content = f"# {stub['title']}\n\n"
-        content += f"**Kurzdefinition:**\n{stub.get('definition_de', '')}\n\n"
+        content += f"**Kurzdefinition:**\n{get_definition(stub, 'de')}\n\n"
         content += f"**Kategorie:**\n{cat_display} > {sub_display}\n\n"
-        content += f"**Relevanz:**\n{stub.get('relevance', '')}\n\n"
-        if stub.get("definition_en"):
-            content += f"**Definition (EN):**\n{stub['definition_en']}\n\n"
+        content += f"**Relevanz:**\n{get_relevance(stub, 'de')}\n\n"
+        definition_en = get_definition(stub, "en")
+        if definition_en:
+            content += f"**Definition (EN):**\n{definition_en}\n\n"
         if stub.get("tags"):
             content += f"**Tags:**\n{', '.join(stub['tags'])}\n"
 

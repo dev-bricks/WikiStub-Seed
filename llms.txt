@@ -40,9 +40,9 @@ MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted re
 Typical stub fields:
 
 - `title`: concept name
-- `definition_de`: German definition
-- `definition_en`: English definition
-- `relevance`: short reason why the concept matters
+- `definitions.{lang}`: canonical definition map for de, en, es, zh, ja, ru
+- `relevance_i18n.{lang}`: canonical relevance map for de, en, es, zh, ja, ru
+- `definition_de`, `definition_en`, `relevance`: legacy compatibility fields kept in sync with the canonical maps
 - `tags`: topic tags for filtering and export
 
 ## Privacy and Network Behavior

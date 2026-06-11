@@ -218,3 +218,40 @@ describe("iOS PWA-Installierbarkeit", () => {
     assert.strictEqual(m.display, "standalone", "manifest display muss standalone sein");
   });
 });
+
+describe("Mehrsprachige Datenmaps", () => {
+  it("jeder Stub hat normalisierte Sprachmaps für Definition und Relevanz", () => {
+    const wiki = readJson("data/metawiki.json").MetaWiki;
+    const expected = ["de", "en", "es", "zh", "ja", "ru"];
+    let checked = 0;
+    for (const subs of Object.values(wiki)) {
+      for (const entries of Object.values(subs)) {
+        for (const e of entries) {
+          assert.ok(e.definitions && typeof e.definitions === "object", `definitions fehlt bei "${e.title}"`);
+          assert.ok(e.relevance_i18n && typeof e.relevance_i18n === "object", `relevance_i18n fehlt bei "${e.title}"`);
+          for (const lang of expected) {
+            assert.ok(Object.hasOwn(e.definitions, lang), `definitions.${lang} fehlt bei "${e.title}"`);
+            assert.ok(Object.hasOwn(e.relevance_i18n, lang), `relevance_i18n.${lang} fehlt bei "${e.title}"`);
+          }
+          checked++;
+        }
+      }
+    }
+    assert.ok(checked >= 10, `Nur ${checked} Stubs geprüft`);
+  });
+
+  it("search-index enthält Sprachfelder für Browser-Fallbacks", () => {
+    const first = readJson("data/search-index.json")[0];
+    assert.ok(first.definitions && typeof first.definitions === "object");
+    assert.ok(first.relevance_i18n && typeof first.relevance_i18n === "object");
+    assert.ok(Object.hasOwn(first.definitions, "de"));
+    assert.ok(Object.hasOwn(first.definitions, "en"));
+  });
+
+  it("app.js nutzt Sprach-Fallbackfunktionen", () => {
+    const js = readText("app.js");
+    assert.ok(js.includes("function localizedText"), "localizedText fehlt");
+    assert.ok(js.includes("function definitionText"), "definitionText fehlt");
+    assert.ok(js.includes("function relevanceText"), "relevanceText fehlt");
+  });
+});

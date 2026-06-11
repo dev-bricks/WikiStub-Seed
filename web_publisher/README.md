@@ -20,6 +20,8 @@ Dieser Ordner dokumentiert den geplanten plattformübergreifenden Pfad für Meta
 
 ## Erste Umsetzungsschritte
 
+Stand 2026-06-11: Der Build normalisiert `definitions.{lang}` und `relevance_i18n.{lang}` für `de`, `en`, `es`, `zh`, `ja` und `ru`. Der sichtbare Web-Reader nutzt weiter DE/EN, liest aber bereits über Sprach-Fallbacks.
+
 1. Datenhülle `metawiki-data-v1` aus `metawiki.json` erzeugen.
 2. Statischen Suchindex für Titel, Kategorien, Definitionen und Tags bauen.
 3. Minimalen Reader mit Kategoriebaum, Suche und Stub-Detailansicht erstellen.

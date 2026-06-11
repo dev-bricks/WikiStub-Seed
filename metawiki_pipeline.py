@@ -24,6 +24,19 @@ from typing import Dict, List, Optional, Set, Tuple
 from datetime import datetime
 import argparse
 
+from language_model import (
+    DEFAULT_LANGUAGE,
+    LOCALIZED_RELEVANCE_FIELD,
+    REQUIRED_LANGUAGES,
+    SUPPORTED_LANGUAGES,
+    get_definition,
+    get_relevance,
+    language_model_metadata,
+    normalize_entry,
+    normalize_localized_map,
+    normalize_metawiki_data,
+)
+
 # ==================== KONFIGURATION ====================
 
 BASE_PATH = Path(__file__).parent.resolve()
@@ -52,7 +65,7 @@ MAX_DEFINITION_LENGTH = 500
 MIN_DEFINITION_LENGTH = 20
 MAX_RELEVANCE_LENGTH = 300
 EXCHANGE_SCHEMA = "metawiki-data-v1"
-EXCHANGE_LANGUAGES = ["de", "en"]
+EXCHANGE_LANGUAGES = SUPPORTED_LANGUAGES
 EXCHANGE_DEFAULT_PATH = OUTPUT_PATH / f"{EXCHANGE_SCHEMA}.json"
 
 
@@ -65,23 +78,62 @@ class WikiStub:
     definition_de: str
     definition_en: str = ""
     relevance: str = ""
+    definitions: Dict[str, str] = field(default_factory=dict)
+    relevance_i18n: Dict[str, str] = field(default_factory=dict)
     tags: List[str] = field(default_factory=list)
     category: str = ""
     subcategory: str = ""
     source_file: str = ""
     content_hash: str = ""
 
+    def __post_init__(self) -> None:
+        self.definitions = normalize_localized_map(
+            self.definitions,
+            {"de": self.definition_de, "en": self.definition_en},
+        )
+        self.relevance_i18n = normalize_localized_map(
+            self.relevance_i18n,
+            {DEFAULT_LANGUAGE: self.relevance},
+        )
+        self.definition_de = self.definitions["de"]
+        self.definition_en = self.definitions["en"]
+        self.relevance = self.relevance_i18n[DEFAULT_LANGUAGE]
+
     def compute_hash(self) -> str:
         """Berechnet einen Hash über den Inhalt."""
-        content = f"{self.title}|{self.definition_de}|{self.relevance}"
+        content = f"{self.title}|{self.get_definition('de')}|{self.get_relevance('de')}"
         return hashlib.md5(content.encode()).hexdigest()[:8]
 
+    def to_language_dict(self) -> dict:
+        definitions = normalize_localized_map(
+            self.definitions,
+            {"de": self.definition_de, "en": self.definition_en},
+            overwrite_legacy=True,
+        )
+        relevance_i18n = normalize_localized_map(
+            self.relevance_i18n,
+            {DEFAULT_LANGUAGE: self.relevance},
+            overwrite_legacy=True,
+        )
+        return {
+            "definitions": definitions,
+            "definition_de": definitions["de"],
+            "definition_en": definitions["en"],
+            LOCALIZED_RELEVANCE_FIELD: relevance_i18n,
+            "relevance": relevance_i18n[DEFAULT_LANGUAGE],
+        }
+
+    def get_definition(self, lang: str = DEFAULT_LANGUAGE) -> str:
+        return get_definition(self.to_language_dict(), lang)
+
+    def get_relevance(self, lang: str = DEFAULT_LANGUAGE) -> str:
+        return get_relevance(self.to_language_dict(), lang)
+
     def to_dict(self) -> dict:
+        language_fields = self.to_language_dict()
         return {
             "title": self.title,
-            "definition_de": self.definition_de,
-            "definition_en": self.definition_en,
-            "relevance": self.relevance,
+            **language_fields,
             "tags": self.tags,
             "category": self.category,
             "subcategory": self.subcategory,
@@ -90,12 +142,15 @@ class WikiStub:
 
     @classmethod
     def from_dict(cls, data: dict, category: str = "", subcategory: str = "") -> 'WikiStub':
+        normalized = normalize_entry(data)
         return cls(
-            title=data.get("title", ""),
-            definition_de=data.get("definition_de", ""),
-            definition_en=data.get("definition_en", ""),
-            relevance=data.get("relevance", ""),
-            tags=data.get("tags", []),
+            title=str(normalized.get("title", "")),
+            definition_de=str(normalized.get("definition_de", "")),
+            definition_en=str(normalized.get("definition_en", "")),
+            relevance=str(normalized.get("relevance", "")),
+            definitions=normalized.get("definitions", {}),
+            relevance_i18n=normalized.get(LOCALIZED_RELEVANCE_FIELD, {}),
+            tags=normalized.get("tags", []) if isinstance(normalized.get("tags"), list) else [],
             category=category,
             subcategory=subcategory
         )
@@ -386,20 +441,21 @@ class MarkdownGenerator:
             f"# {stub.title}",
             "",
             "**Kurzdefinition:**",
-            stub.definition_de,
+            stub.get_definition("de"),
             "",
             "**Kategorie:**",
             f"{cat_display} → {subcat_display}",
             "",
             "**Relevanz:**",
-            stub.relevance,
+            stub.get_relevance("de"),
             ""
         ]
 
-        if include_english and stub.definition_en:
+        english_definition = stub.get_definition("en")
+        if include_english and english_definition:
             lines.extend([
                 "**Definition (EN):**",
-                stub.definition_en,
+                english_definition,
                 ""
             ])
 
@@ -454,18 +510,25 @@ class Validator:
             warnings.append(f"Titel zu lang ({len(stub.title)} Zeichen)")
 
         # Definition
-        if not stub.definition_de:
+        definition_de = stub.get_definition("de")
+        definition_en = stub.get_definition("en")
+        relevance_de = stub.get_relevance("de")
+
+        if not definition_de:
             errors.append("Definition fehlt")
-        elif len(stub.definition_de) < MIN_DEFINITION_LENGTH:
-            warnings.append(f"Definition zu kurz ({len(stub.definition_de)} < {MIN_DEFINITION_LENGTH})")
-        elif len(stub.definition_de) > MAX_DEFINITION_LENGTH:
-            warnings.append(f"Definition zu lang ({len(stub.definition_de)} > {MAX_DEFINITION_LENGTH})")
+        elif len(definition_de) < MIN_DEFINITION_LENGTH:
+            warnings.append(f"Definition zu kurz ({len(definition_de)} < {MIN_DEFINITION_LENGTH})")
+        elif len(definition_de) > MAX_DEFINITION_LENGTH:
+            warnings.append(f"Definition zu lang ({len(definition_de)} > {MAX_DEFINITION_LENGTH})")
+
+        if not definition_en:
+            warnings.append("Englische Definition fehlt")
 
         # Relevanz
-        if not stub.relevance:
+        if not relevance_de:
             warnings.append("Relevanz fehlt")
-        elif len(stub.relevance) > MAX_RELEVANCE_LENGTH:
-            warnings.append(f"Relevanz zu lang ({len(stub.relevance)} > {MAX_RELEVANCE_LENGTH})")
+        elif len(relevance_de) > MAX_RELEVANCE_LENGTH:
+            warnings.append(f"Relevanz zu lang ({len(relevance_de)} > {MAX_RELEVANCE_LENGTH})")
 
         # Kategorie
         if not stub.category:
@@ -476,9 +539,9 @@ class Validator:
             warnings.append("Keine Tags")
 
         # Sonderzeichen prüfen
-        if re.search(r'[^\x00-\x7F]', stub.definition_de[-10:] if len(stub.definition_de) > 10 else stub.definition_de):
+        if re.search(r'[^\x00-\x7F]', definition_de[-10:] if len(definition_de) > 10 else definition_de):
             # Erlaube Umlaute, aber warnt bei anderen Zeichen
-            non_latin = re.findall(r'[^\x00-\xFF]', stub.definition_de)
+            non_latin = re.findall(r'[^\x00-\xFF]', definition_de)
             if non_latin:
                 warnings.append(f"Unerwartete Zeichen: {non_latin}")
 
@@ -526,14 +589,49 @@ def count_wrapped_stubs(data: Dict) -> int:
 
 def build_exchange_payload(data: Dict, source: str = "metawiki.json") -> Dict:
     """Erzeugt die stabile Austauschhülle für MetaWiki-Daten."""
+    normalized_data = normalize_metawiki_data(data)
     return {
         "schema": EXCHANGE_SCHEMA,
         "generated_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
         "source": source,
         "languages": EXCHANGE_LANGUAGES,
-        "stub_count": count_wrapped_stubs(data),
-        "data": data,
+        "language_model": language_model_metadata(),
+        "stub_count": count_wrapped_stubs(normalized_data),
+        "data": normalized_data,
     }
+
+
+def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
+    """Validiert Pflichttexte und optionale Sprachmaps in MetaWiki-Daten."""
+    errors: List[str] = []
+    warnings: List[str] = []
+    root = data.get("MetaWiki")
+    if not isinstance(root, dict):
+        return errors, warnings
+
+    for category, subcategories in root.items():
+        if not isinstance(subcategories, dict):
+            continue
+        for subcategory, entries in subcategories.items():
+            if not isinstance(entries, list):
+                continue
+            for index, entry in enumerate(entries):
+                if not isinstance(entry, dict):
+                    errors.append(f"{category}/{subcategory}[{index}] ist kein Objekt.")
+                    continue
+                label = f"{category}/{subcategory}/{entry.get('title', index)}"
+                if "definitions" in entry and not isinstance(entry["definitions"], dict):
+                    errors.append(f"{label}: definitions muss ein Objekt sein.")
+                if LOCALIZED_RELEVANCE_FIELD in entry and not isinstance(entry[LOCALIZED_RELEVANCE_FIELD], dict):
+                    errors.append(f"{label}: {LOCALIZED_RELEVANCE_FIELD} muss ein Objekt sein.")
+
+                normalized = normalize_entry(entry)
+                if not get_definition(normalized, "de"):
+                    errors.append(f"{label}: Definition für de fehlt.")
+                if not get_definition(normalized, "en"):
+                    warnings.append(f"{label}: Definition für en fehlt.")
+
+    return errors, warnings
 
 
 def validate_exchange_payload(payload: object) -> ValidationResult:
@@ -566,8 +664,30 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
     languages = payload.get("languages")
     if not isinstance(languages, list) or not all(isinstance(lang, str) for lang in languages):
         errors.append("languages muss eine String-Liste sein.")
-    elif set(languages) != set(EXCHANGE_LANGUAGES):
-        warnings.append("languages weicht vom erwarteten Sprachpaar ['de', 'en'] ab.")
+    else:
+        language_set = set(languages)
+        missing_required = [lang for lang in REQUIRED_LANGUAGES if lang not in language_set]
+        unknown = sorted(language_set - set(EXCHANGE_LANGUAGES))
+        missing_supported = [lang for lang in EXCHANGE_LANGUAGES if lang not in language_set]
+        if missing_required:
+            errors.append(f"languages fehlen Pflichtsprachen: {', '.join(missing_required)}.")
+        if unknown:
+            warnings.append(f"languages enthält unbekannte Sprachcodes: {', '.join(unknown)}.")
+        if missing_supported:
+            warnings.append(
+                "languages enthält noch nicht alle vorbereiteten Sprachslots "
+                f"({', '.join(missing_supported)} fehlen)."
+            )
+
+    language_model = payload.get("language_model")
+    if language_model is None:
+        warnings.append("language_model fehlt; Legacy-Exporte bleiben lesbar, aber nicht vollständig mehrsprachenfähig.")
+    elif not isinstance(language_model, dict):
+        errors.append("language_model muss ein Objekt sein.")
+    else:
+        model_languages = language_model.get("languages")
+        if model_languages != EXCHANGE_LANGUAGES:
+            warnings.append("language_model.languages weicht vom erwarteten MetaWiki-Sprachmodell ab.")
 
     data = payload.get("data")
     actual_stub_count = None
@@ -579,6 +699,9 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
             errors.append("data.MetaWiki fehlt oder ist kein Objekt.")
         else:
             actual_stub_count = count_wrapped_stubs(data)
+            language_errors, language_warnings = validate_localized_data(data)
+            errors.extend(language_errors)
+            warnings.extend(language_warnings)
 
     stub_count = payload.get("stub_count")
     if not isinstance(stub_count, int) or stub_count < 0:
@@ -834,7 +957,7 @@ def cmd_sync(args):
 
 
 def cmd_translate(args):
-    """Übersetzt alle Stubs mit fehlender definition_en via Claude API."""
+    """Übersetzt alle Stubs mit fehlender englischer Definition via Claude API."""
     print("\n🌐 ÜBERSETZUNG")
     print("=" * 50)
 
@@ -857,7 +980,7 @@ def cmd_translate(args):
         return
     stubs = json_handler.get_all_stubs()
 
-    to_translate = [s for s in stubs if not s.definition_en]
+    to_translate = [s for s in stubs if not s.get_definition("en")]
     total = len(to_translate)
 
     if args.limit and args.limit < total:
@@ -871,9 +994,10 @@ def cmd_translate(args):
     delay = getattr(args, 'delay', 0.3)  # Konfigurierbare Verzögerung (Standard: 0.3s)
 
     for i, stub in enumerate(to_translate):
-        result = translate_text(stub.definition_de)
+        result = translate_text(stub.get_definition("de"))
         if result:
             stub.definition_en = result
+            stub.definitions["en"] = result
             json_handler.add_stub(stub)
             translated += 1
             print(f"  ✓ {stub.title}")
@@ -908,14 +1032,15 @@ def cmd_clean(args):
     cleaned = 0
 
     for stub in stubs:
-        original_def = stub.definition_de
-        original_rel = stub.relevance
+        original_dict = stub.to_dict()
 
         # Bereinige
-        stub.definition_de = MarkdownParser._clean_text(stub.definition_de)
-        stub.relevance = MarkdownParser._clean_text(stub.relevance)
+        stub.definition_de = MarkdownParser._clean_text(stub.get_definition("de"))
+        stub.relevance = MarkdownParser._clean_text(stub.get_relevance("de"))
+        stub.definitions["de"] = stub.definition_de
+        stub.relevance_i18n[DEFAULT_LANGUAGE] = stub.relevance
 
-        if stub.definition_de != original_def or stub.relevance != original_rel:
+        if stub.to_dict() != original_dict:
             cleaned += 1
             print(f"  🧹 {stub.title}")
             json_handler.add_stub(stub)

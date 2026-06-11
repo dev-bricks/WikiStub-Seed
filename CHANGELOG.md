@@ -5,6 +5,15 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt / Added (2026-06-11) — Mehrsprachiger Datenkern
+- `language_model.py`: gemeinsames Sprachmodell für `de`, `en`, `es`, `zh`, `ja` und `ru` mit Fallback-Kette und Legacy-Kompatibilität.
+- `metawiki.json`, `web_publisher/data/metawiki.json` und `web_publisher/data/search-index.json`: alle 630 Stubs enthalten jetzt `definitions.{lang}` und `relevance_i18n.{lang}`.
+- `EXPORTFORMAT.md`: stabiler `metawiki-data-v1`-Vertrag mit Sprachmodell, Pflichtsprachen und Legacy-Feldern dokumentiert.
+
+### Geändert / Changed (2026-06-11) — Mehrsprachiger Datenkern
+- Pipeline, CLI, Markdown-Importer, Konsistenzcheck und Web-Publisher lesen Definitionen/Relevanz jetzt über gemeinsame Sprach-Fallbacks.
+- `export-data` schreibt `language_model` und normalisierte Stub-Daten; `validate --exchange` prüft Pflichtsprachen und Sprachmap-Typen.
+
 ### Geändert / Changed (2026-06-11)
 - `llms.txt`: `## Last-checked: 2026-06-11`-Header ergänzt; `## Audience`-Abschnitt (5 Zielgruppen) hinzugefügt; `## Search Phrases` als Fenced-Block formatiert; Test-Anzahl von web_publisher auf 34 korrigiert (war 25, nach iOS-PWA-Commit).
 - `PORTIERUNGSPLAN.md` aus dem Git-Tracking entfernt (`git rm --cached`); Datei war trotz `.gitignore`-Eintrag noch getrackt.

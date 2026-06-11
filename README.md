@@ -1,21 +1,22 @@
 # MetaWiki
 
-**MetaWiki is a bilingual JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships a curated `metawiki.json` dataset with 630 compact German/English knowledge stubs across 12 scientific and cultural domains, plus Python tools for validation, export and translation.
+**MetaWiki is a multilingual-ready JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships a curated `metawiki.json` dataset with 630 compact German/English knowledge stubs across 12 scientific and cultural domains, prepared ES/ZH/JA/RU language slots, plus Python tools for validation, export and translation.
 
 MetaWiki is not Wikimedia Meta-Wiki. It is a local-first, repository-based knowledge skeleton: a small ontology-style seed library that can be reused in software projects, research notes, documentation systems, Obsidian exports, static websites or retrieval-augmented generation pipelines.
 
 [![MetaWiki smoke tests](https://github.com/file-bricks/MetaWiki/actions/workflows/tests.yml/badge.svg)](https://github.com/file-bricks/MetaWiki/actions/workflows/tests.yml)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
-![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN-orange)
+![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## What It Contains
 
-- 630 bilingual knowledge stubs in `metawiki.json`
+- 630 knowledge stubs in `metawiki.json` with DE/EN content and prepared ES/ZH/JA/RU language slots
 - 12 top-level domains, including mathematics, physics, chemistry, biology, medicine, psychology, AI, engineering, society, economics, history and culture
 - 85 subcategories with short, neutral definitions and relevance notes
+- Canonical `definitions.{lang}` and `relevance_i18n.{lang}` maps while retaining legacy `definition_de`, `definition_en` and `relevance`
 - Python CLI tooling for statistics, validation, consistency checks and Markdown export
 - A documented `metawiki-data-v1` export direction for future static Web/PWA use
 - No required external dependencies for core import, export, validation or CLI use
@@ -38,11 +39,27 @@ Each stub is intentionally small and machine-readable:
   "definition_de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomäne in den Mittelpunkt stellt.",
   "definition_en": "An approach to modeling complex software that places the business domain at the center of development.",
   "relevance": "Hilft, komplexe Systeme verständlich und wartbar zu gestalten.",
+  "definitions": {
+    "de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomäne in den Mittelpunkt stellt.",
+    "en": "An approach to modeling complex software that places the business domain at the center of development.",
+    "es": "",
+    "zh": "",
+    "ja": "",
+    "ru": ""
+  },
+  "relevance_i18n": {
+    "de": "Hilft, komplexe Systeme verständlich und wartbar zu gestalten.",
+    "en": "",
+    "es": "",
+    "zh": "",
+    "ja": "",
+    "ru": ""
+  },
   "tags": ["Informatik", "Software Engineering"]
 }
 ```
 
-The current authoritative source is `metawiki.json`. `EXPORTFORMAT.md` documents the planned stable wrapper format `metawiki-data-v1` for future Web/PWA, API and LLM exports.
+The current authoritative source is `metawiki.json`. `EXPORTFORMAT.md` documents the stable wrapper format `metawiki-data-v1` for Web/PWA, API and LLM exports.
 
 ## Quick Start
 
@@ -97,17 +114,17 @@ Completed:
 - Markdown export and JSON synchronization tooling
 - CLI smoke tests in GitHub Actions
 - Static Web/PWA publisher with search and offline cache (`web_publisher/`)
+- `metawiki-data-v1` schema wrapper with prepared DE/EN/ES/ZH/JA/RU language slots
 
 Planned:
 
-- `metawiki-data-v1` schema wrapper and validation
 - Unified tag cleanup
 - Obsidian/GitHub Pages export paths
 - Optional embeddings and search API
 
 ## Deutsch
 
-**MetaWiki ist ein zweisprachiges JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs auf Deutsch und Englisch, verteilt auf 12 Wissenschafts- und Kulturbereiche. Die Stubs sind kurz, neutral, versionierbar und für Automatisierung, Dokumentation, Lernsysteme und LLM-Kontexte geeignet.
+**MetaWiki ist ein mehrsprachig vorbereitetes JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs mit Deutsch/Englisch-Inhalten und vorbereiteten Sprachslots für Spanisch, Chinesisch, Japanisch und Russisch, verteilt auf 12 Wissenschafts- und Kulturbereiche. Die Stubs sind kurz, neutral, versionierbar und für Automatisierung, Dokumentation, Lernsysteme und LLM-Kontexte geeignet.
 
 MetaWiki arbeitet standardmäßig lokal mit `metawiki.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
 

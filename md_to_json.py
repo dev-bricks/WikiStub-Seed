@@ -20,6 +20,8 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
+from language_model import normalize_entry
+
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "metawiki.json"
 BACKUP_PATH = BASE_PATH / "backups"
@@ -153,7 +155,7 @@ def parse_md_file(filepath):
     if subcat:
         tags.append(subcat.replace("_", " "))
 
-    return {
+    return normalize_entry({
         "title": title,
         "definition_de": definition,
         "definition_en": "",
@@ -161,7 +163,7 @@ def parse_md_file(filepath):
         "tags": tags,
         "_category": cat,
         "_subcategory": subcat
-    }
+    })
 
 
 def load_json():

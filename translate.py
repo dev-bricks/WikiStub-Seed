@@ -52,6 +52,9 @@ def translate_text(text: str, target_lang: str = "en") -> str:
         "es": "Spanish",
         "it": "Italian",
         "pt": "Portuguese",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
     }
     target_name = lang_names.get(target_lang, target_lang)
 

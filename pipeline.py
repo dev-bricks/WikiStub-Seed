@@ -1,6 +1,8 @@
 import json
 import os
 
+from language_model import get_definition, get_relevance, normalize_entry
+
 try:
     from translate import translate_text as _translate_api
     _API_AVAILABLE = True
@@ -54,8 +56,11 @@ def main():
                 print(f"  - Generiere Stub: {title}")
                 
                 # Auto-Übersetzung (Simulation)
-                if not stub.get("definition_en"):
-                    stub["definition_en"] = translate(stub.get("definition_de", ""))
+                stub.update(normalize_entry(stub))
+                if not get_definition(stub, "en"):
+                    translated = translate(get_definition(stub, "de"))
+                    stub["definition_en"] = translated
+                    stub.setdefault("definitions", {})["en"] = translated
 
                 # Tags verarbeiten
                 tags_list = stub.get("tags", [])
@@ -74,9 +79,9 @@ def main():
                 try:
                     with open(filename, "w", encoding="utf-8") as md:
                         md.write(f"# {title}\n\n")
-                        md.write(f"**Definition (DE):** {stub.get('definition_de', '')}\n\n")
-                        md.write(f"**Definition (EN):** {stub.get('definition_en', '')}\n\n")
-                        md.write(f"**Relevanz:** {stub.get('relevance', '')}\n\n")
+                        md.write(f"**Definition (DE):** {get_definition(stub, 'de')}\n\n")
+                        md.write(f"**Definition (EN):** {get_definition(stub, 'en')}\n\n")
+                        md.write(f"**Relevanz:** {get_relevance(stub, 'de')}\n\n")
                         md.write(f"**Tags:** {tags_str}\n")
                     
                     count_processed += 1

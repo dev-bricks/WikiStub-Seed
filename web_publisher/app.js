@@ -13,6 +13,29 @@ const searchInput = document.getElementById("search");
 const langToggle  = document.getElementById("lang-toggle");
 const loadingMsg  = document.getElementById("loading");
 
+function localizedText(map, selectedLang, legacy = {}) {
+  const source = map && typeof map === "object" ? map : {};
+  const fallback = { ...legacy, ...source };
+  for (const candidate of [selectedLang, "de", "en"]) {
+    if (fallback[candidate]) return fallback[candidate];
+  }
+  return Object.values(fallback).find(Boolean) || "";
+}
+
+function definitionText(entry, selectedLang = lang) {
+  return localizedText(entry.definitions, selectedLang, {
+    de: entry.definition_de || "",
+    en: entry.definition_en || "",
+  });
+}
+
+function relevanceText(entry, selectedLang = lang) {
+  const relevanceMap = entry.relevance_i18n || (typeof entry.relevance === "object" ? entry.relevance : null);
+  return localizedText(relevanceMap, selectedLang, {
+    de: typeof entry.relevance === "string" ? entry.relevance : "",
+  });
+}
+
 // ── Boot ─────────────────────────────────────────────────────────────────────
 async function boot() {
   updateLangUI();
@@ -111,7 +134,8 @@ function showDetail(id) {
   if (!entry) return;
   window.location.hash = `#${encodeURIComponent(entry.title)}`;
 
-  const def  = lang === "de" ? entry.definition_de : entry.definition_en;
+  const def  = definitionText(entry, lang);
+  const relevance = relevanceText(entry, lang);
   const defLabel = lang === "de" ? "Definition" : "Definition";
   const relLabel = lang === "de" ? "Relevanz" : "Relevance";
   const tagsLabel = lang === "de" ? "Tags" : "Tags";
@@ -123,7 +147,7 @@ function showDetail(id) {
     <h3>${defLabel}</h3>
     <p>${def}</p>
     <h3>${relLabel}</h3>
-    <p>${entry.relevance}</p>
+    <p>${relevance}</p>
     <p class="tags"><strong>${tagsLabel}:</strong> ${(entry.tags || []).map((t) => `<span class="tag">${t}</span>`).join(" ")}</p>
   `;
 }
@@ -136,7 +160,8 @@ function initSearch() {
     const hits = index.filter((e) =>
       e.title.toLowerCase().includes(q) ||
       (e.tags || []).some((t) => t.toLowerCase().includes(q)) ||
-      (e.relevance || "").toLowerCase().includes(q)
+      definitionText(e, lang).toLowerCase().includes(q) ||
+      relevanceText(e, lang).toLowerCase().includes(q)
     );
     renderList(hits);
     clearHash();

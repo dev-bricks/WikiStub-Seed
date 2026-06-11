@@ -64,9 +64,42 @@ class PipelineCommandTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(written["schema"], "metawiki-data-v1")
         self.assertEqual(written["source"], "metawiki.json")
-        self.assertEqual(written["languages"], ["de", "en"])
+        self.assertEqual(written["languages"], ["de", "en", "es", "zh", "ja", "ru"])
+        self.assertEqual(written["language_model"]["required_languages"], ["de", "en"])
+        self.assertEqual(written["language_model"]["canonical_fields"]["definitions"], "definitions.{lang}")
         self.assertEqual(written["stub_count"], 1)
-        self.assertEqual(written["data"], payload_data)
+        entry = written["data"]["MetaWiki"]["07_Informatik_KI"]["Software_Engineering"][0]
+        self.assertEqual(entry["definition_de"], payload_data["MetaWiki"]["07_Informatik_KI"]["Software_Engineering"][0]["definition_de"])
+        self.assertEqual(entry["definitions"]["de"], entry["definition_de"])
+        self.assertEqual(entry["definitions"]["en"], entry["definition_en"])
+        self.assertEqual(entry["definitions"]["es"], "")
+        self.assertEqual(entry["relevance_i18n"]["de"], entry["relevance"])
+
+    def test_wikistub_accepts_canonical_language_maps(self):
+        stub = metawiki_pipeline.WikiStub.from_dict(
+            {
+                "title": "Mehrsprachiger Stub",
+                "definitions": {
+                    "de": "Eine tragfähige deutsche Definition für den modernen Datenpfad.",
+                    "en": "A robust English definition for the modern data path.",
+                    "es": "Una definición española.",
+                },
+                "relevance_i18n": {
+                    "de": "Hilft beim Testen der Sprachmaps.",
+                    "en": "Helps test language maps.",
+                },
+                "tags": ["Test"],
+            },
+            "01_Mathematik",
+            "Algebra",
+        )
+
+        serialized = stub.to_dict()
+
+        self.assertEqual(stub.get_definition("es"), "Una definición española.")
+        self.assertEqual(stub.get_definition("ja"), stub.get_definition("de"))
+        self.assertEqual(serialized["definition_de"], serialized["definitions"]["de"])
+        self.assertEqual(serialized["relevance"], serialized["relevance_i18n"]["de"])
 
     def test_cmd_import_aborts_when_json_load_fails(self):
         handler_events = []
@@ -125,7 +158,8 @@ class PipelineCommandTests(unittest.TestCase):
             "schema": "metawiki-data-v1",
             "generated_at": "2026-06-01T10:11:12Z",
             "source": "metawiki.json",
-            "languages": ["de", "en"],
+            "languages": ["de", "en", "es", "zh", "ja", "ru"],
+            "language_model": metawiki_pipeline.language_model_metadata(),
             "stub_count": 1,
             "data": {
                 "MetaWiki": {

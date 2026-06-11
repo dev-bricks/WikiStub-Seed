@@ -22,6 +22,8 @@ from pathlib import Path
 from collections import defaultdict
 from datetime import datetime
 
+from language_model import get_definition, get_relevance
+
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "metawiki.json"
 BACKUP_PATH = BASE_PATH / "backups"
@@ -49,8 +51,8 @@ def get_all_stubs(data):
             for item in items:
                 stubs.append({
                     "title": item.get("title", ""),
-                    "definition_de": item.get("definition_de", ""),
-                    "relevance": item.get("relevance", ""),
+                    "definition_de": get_definition(item, "de"),
+                    "relevance": get_relevance(item, "de"),
                     "tags": item.get("tags", []),
                     "category": cat,
                     "subcategory": subcat
