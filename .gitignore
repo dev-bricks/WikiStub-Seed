@@ -86,3 +86,7 @@ DECISIONS.md
 PORTIERUNGSPLAN.md
 TODO.md
 DONE.md
+
+# ---- Übersetzungs-Artefakte (lokale Pfade, nicht für public Repo) ----
+_translate/
+TRANSLATION-PROGRESS.md
