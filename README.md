@@ -1,3 +1,5 @@
+![WikiStub-Seed](assets/banner.svg)
+
 # WikiStub-Seed
 
 **EN** | [DE](README_de.md) | [ES](README_es.md) | [JA](README_ja.md) | [RU](README_ru.md) | [ZH](README_zh-Hans.md)
@@ -6,7 +8,7 @@
 
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
-[![WikiStub-Seed smoke tests](https://github.com/file-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/file-bricks/WikiStub-Seed/actions/workflows/tests.yml)
+[![WikiStub-Seed smoke tests](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
@@ -66,7 +68,7 @@ The current authoritative source is `wikistub_seed.json`. `EXPORTFORMAT.md` docu
 ## Quick Start
 
 ```bash
-git clone https://github.com/file-bricks/WikiStub-Seed.git
+git clone https://github.com/dev-bricks/WikiStub-Seed.git
 cd WikiStub-Seed
 
 python wikistub_seed_cli.py --help
