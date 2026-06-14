@@ -28,11 +28,11 @@ Vielen Dank für Ihr Interesse, zu diesem Projekt beizutragen!
 ### Erste Schritte
 
 ```bash
-git clone https://github.com/file-bricks/MetaWiki.git
-cd MetaWiki
+git clone https://github.com/file-bricks/WikiStub-Seed.git
+cd WikiStub-Seed
 python -m pip install -r requirements.txt
-python metawiki_cli.py stats
-python metawiki_pipeline.py validate
+python wikistub_seed_cli.py stats
+python wikistub_seed_pipeline.py validate
 ```
 
 ---
@@ -65,9 +65,9 @@ Thank you for your interest in contributing to this project!
 ### Getting Started
 
 ```bash
-git clone https://github.com/file-bricks/MetaWiki.git
-cd MetaWiki
+git clone https://github.com/file-bricks/WikiStub-Seed.git
+cd WikiStub-Seed
 python -m pip install -r requirements.txt
-python metawiki_cli.py stats
-python metawiki_pipeline.py validate
+python wikistub_seed_cli.py stats
+python wikistub_seed_pipeline.py validate
 ```

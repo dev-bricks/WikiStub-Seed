@@ -1,9 +1,9 @@
-# MetaWiki Framework - Dependencies
+# WikiStub-Seed Framework - Dependencies
 # Kernfunktionen: Nur Python Standard Library erforderlich (Python 3.10+)
 # Keine externen Pakete für Import, Export, CLI oder Validierung benötigt.
 
 # --- Optionale Abhängigkeiten ---
 
-# KI-Übersetzung via Claude API (translate.py, metawiki_pipeline.py translate)
+# KI-Übersetzung via Claude API (translate.py, wikistub_seed_pipeline.py translate)
 # Voraussetzung: ANTHROPIC_API_KEY Umgebungsvariable setzen
 # anthropic>=0.40.0

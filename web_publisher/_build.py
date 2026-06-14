@@ -1,4 +1,4 @@
-"""Build-Schritt: Kopiert metawiki.json in web_publisher/data/ und erzeugt search-index.json."""
+"""Build-Schritt: Kopiert wikistub_seed.json in web_publisher/data/ und erzeugt search-index.json."""
 import json
 import sys
 from pathlib import Path
@@ -9,9 +9,9 @@ if str(ROOT) not in sys.path:
 
 from language_model import get_definition, get_relevance, normalize_metawiki_data
 
-SRC = ROOT / "metawiki.json"
+SRC = ROOT / "wikistub_seed.json"
 OUT_DIR = Path(__file__).parent / "data"
-OUT_DATA = OUT_DIR / "metawiki.json"
+OUT_DATA = OUT_DIR / "wikistub_seed.json"
 OUT_INDEX = OUT_DIR / "search-index.json"
 
 
@@ -20,7 +20,7 @@ def build():
     data = json.loads(SRC.read_text(encoding="utf-8"))
     normalized_data = normalize_metawiki_data(data)
 
-    # data/metawiki.json bleibt aus metawiki.json abgeleitet, enthält aber normalisierte Sprachmaps.
+    # data/wikistub_seed.json bleibt aus wikistub_seed.json abgeleitet, enthält aber normalisierte Sprachmaps.
     OUT_DATA.write_text(
         json.dumps(normalized_data, ensure_ascii=False, indent=2),
         encoding="utf-8",

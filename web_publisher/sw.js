@@ -1,10 +1,10 @@
-const CACHE_NAME = "metawiki-v3";
+const CACHE_NAME = "wikistub-seed-v1";
 
 const ASSETS = [
   "./index.html",
   "./app.js",
   "./manifest.webmanifest",
-  "./data/metawiki.json",
+  "./data/wikistub_seed.json",
   "./data/search-index.json",
   "./icons/Icon-192.png",
   "./icons/Icon-512.png",

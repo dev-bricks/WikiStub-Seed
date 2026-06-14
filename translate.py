@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-translate.py - Optionale KI-Übersetzung für MetaWiki
+translate.py - Optionale KI-Übersetzung für WikiStub-Seed
 =======================================================
 
 Übersetzt deutsche Wissens-Stubs ins Englische via Claude API.
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     import sys
     import argparse
 
-    parser = argparse.ArgumentParser(description="MetaWiki: Text-Übersetzung")
+    parser = argparse.ArgumentParser(description="WikiStub-Seed: Text-Übersetzung")
     parser.add_argument("text", nargs="?", help="Zu übersetzender Text")
     parser.add_argument("--lang", default="en", help="Zielsprache (default: en)")
     parser.add_argument("--check", action="store_true", help="API-Verfügbarkeit prüfen")

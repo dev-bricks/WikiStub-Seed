@@ -5,6 +5,17 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Geändert / Changed (2026-06-14) — Renamed from MetaWiki to WikiStub-Seed
+- Projekt umbenannt von `MetaWiki` (GitHub: `file-bricks/MetaWiki`) zu `WikiStub-Seed` (GitHub: `file-bricks/WikiStub-Seed`).
+- Ordner verschoben von `.TOPICS/.SOFTWARE/LLM/REL-PUB_MetaWiki_SOCIAL` nach `.TOPICS/.AI/.MODULES/WikiStub-Seed`.
+- Dateien umbenannt: `metawiki.json` → `wikistub_seed.json`, `metawiki_cli.py` → `wikistub_seed_cli.py`, `metawiki_pipeline.py` → `wikistub_seed_pipeline.py`, `MetaWiki.ico` → `wikistub_seed.ico`.
+- Alle internen Referenzen, Badge-URLs und Schema-Bezeichner (`metawiki-data-v1` → `wikistub-seed-data-v1`) aktualisiert.
+- Disclaimer umformuliert: WikiStub-Seed is a knowledge-stub seed library, not a wiki.
+
+### Hinzugefügt / Added (2026-06-13) — macOS/Linux-Source-Smokes
+- `tests/source_platform_smoke.py`: echter Source-Smoke für `python metawiki_cli.py check` und `python metawiki_pipeline.py validate` mit UTF-8-Umgebung und klaren Rückgabecode-/Ausgabe-Assertions.
+- `.github/workflows/source-platform-smoke.yml`: GitHub-Actions-Matrix für `ubuntu-latest` und `macos-latest`, damit die beiden Kernpfade plattformübergreifend im Source-Modus geprüft werden.
+
 ### Hinzugefügt / Added (2026-06-11) — Mehrsprachiger Datenkern
 - `language_model.py`: gemeinsames Sprachmodell für `de`, `en`, `es`, `zh`, `ja` und `ru` mit Fallback-Kette und Legacy-Kompatibilität.
 - `metawiki.json`, `web_publisher/data/metawiki.json` und `web_publisher/data/search-index.json`: alle 630 Stubs enthalten jetzt `definitions.{lang}` und `relevance_i18n.{lang}`.

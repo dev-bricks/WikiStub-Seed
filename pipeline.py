@@ -23,10 +23,10 @@ def translate(text, target_lang="en"):
     return ""
 
 def main():
-    print("Starte MetaWiki Pipeline...")
+    print("Starte WikiStub-Seed Pipeline...")
     
     base_path = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(base_path, "metawiki.json")
+    json_path = os.path.join(base_path, "wikistub_seed.json")
     
     if not os.path.exists(json_path):
         print(f"FEHLER: {json_path} nicht gefunden.")

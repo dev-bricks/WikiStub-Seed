@@ -11,12 +11,12 @@ from unittest import mock
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
-    "metawiki_pipeline_under_test",
-    PROJECT_ROOT / "metawiki_pipeline.py",
+    "wikistub_seed_pipeline_under_test",
+    PROJECT_ROOT / "wikistub_seed_pipeline.py",
 )
-metawiki_pipeline = importlib.util.module_from_spec(SPEC)
+wikistub_seed_pipeline = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
-SPEC.loader.exec_module(metawiki_pipeline)
+SPEC.loader.exec_module(wikistub_seed_pipeline)
 
 
 class PipelineCommandTests(unittest.TestCase):
@@ -45,25 +45,25 @@ class PipelineCommandTests(unittest.TestCase):
                 return True
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            export_path = Path(tmp_dir) / "metawiki-data-v1.json"
+            export_path = Path(tmp_dir) / "wikistub-seed-data-v1.json"
             stdout = io.StringIO()
             with (
                 mock.patch.object(
-                    metawiki_pipeline,
+                    wikistub_seed_pipeline,
                     "JsonHandler",
                     side_effect=lambda: StaticJsonHandler(),
                 ),
                 contextlib.redirect_stdout(stdout),
             ):
-                exit_code = metawiki_pipeline.cmd_export_data(
+                exit_code = wikistub_seed_pipeline.cmd_export_data(
                     SimpleNamespace(path=str(export_path))
                 )
 
             written = json.loads(export_path.read_text(encoding="utf-8"))
 
         self.assertEqual(exit_code, 0)
-        self.assertEqual(written["schema"], "metawiki-data-v1")
-        self.assertEqual(written["source"], "metawiki.json")
+        self.assertEqual(written["schema"], "wikistub-seed-data-v1")
+        self.assertEqual(written["source"], "wikistub_seed.json")
         self.assertEqual(written["languages"], ["de", "en", "es", "zh", "ja", "ru"])
         self.assertEqual(written["language_model"]["required_languages"], ["de", "en"])
         self.assertEqual(written["language_model"]["canonical_fields"]["definitions"], "definitions.{lang}")
@@ -76,7 +76,7 @@ class PipelineCommandTests(unittest.TestCase):
         self.assertEqual(entry["relevance_i18n"]["de"], entry["relevance"])
 
     def test_wikistub_accepts_canonical_language_maps(self):
-        stub = metawiki_pipeline.WikiStub.from_dict(
+        stub = wikistub_seed_pipeline.WikiStub.from_dict(
             {
                 "title": "Mehrsprachiger Stub",
                 "definitions": {
@@ -115,7 +115,7 @@ class PipelineCommandTests(unittest.TestCase):
             def save(self):
                 raise AssertionError("cmd_import must not save after a failed load")
 
-        stub = metawiki_pipeline.WikiStub(
+        stub = wikistub_seed_pipeline.WikiStub(
             title="Teststub",
             definition_de="Eine ausreichend lange Testdefinition fuer den Importpfad.",
             definition_en="",
@@ -134,20 +134,20 @@ class PipelineCommandTests(unittest.TestCase):
             stdout = io.StringIO()
             with (
                 mock.patch.object(
-                    metawiki_pipeline,
+                    wikistub_seed_pipeline,
                     "JsonHandler",
                     side_effect=lambda: FailingJsonHandler(),
                 ),
-                mock.patch.object(metawiki_pipeline, "BASE_PATH", base_path),
-                mock.patch.object(metawiki_pipeline, "CATEGORY_FOLDERS", ["01_Mathematik"]),
+                mock.patch.object(wikistub_seed_pipeline, "BASE_PATH", base_path),
+                mock.patch.object(wikistub_seed_pipeline, "CATEGORY_FOLDERS", ["01_Mathematik"]),
                 mock.patch.object(
-                    metawiki_pipeline.MarkdownParser,
+                    wikistub_seed_pipeline.MarkdownParser,
                     "parse_file",
                     return_value=stub,
                 ),
                 contextlib.redirect_stdout(stdout),
             ):
-                metawiki_pipeline.cmd_import(SimpleNamespace())
+                wikistub_seed_pipeline.cmd_import(SimpleNamespace())
 
         output = stdout.getvalue()
         self.assertEqual(handler_events, ["load"])
@@ -155,11 +155,11 @@ class PipelineCommandTests(unittest.TestCase):
 
     def test_cmd_validate_accepts_valid_exchange_payload(self):
         payload = {
-            "schema": "metawiki-data-v1",
+            "schema": "wikistub-seed-data-v1",
             "generated_at": "2026-06-01T10:11:12Z",
-            "source": "metawiki.json",
+            "source": "wikistub_seed.json",
             "languages": ["de", "en", "es", "zh", "ja", "ru"],
-            "language_model": metawiki_pipeline.language_model_metadata(),
+            "language_model": wikistub_seed_pipeline.language_model_metadata(),
             "stub_count": 1,
             "data": {
                 "MetaWiki": {
@@ -179,19 +179,19 @@ class PipelineCommandTests(unittest.TestCase):
         }
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            payload_path = Path(tmp_dir) / "metawiki-data-v1.json"
+            payload_path = Path(tmp_dir) / "wikistub-seed-data-v1.json"
             payload_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
             stdout = io.StringIO()
             with contextlib.redirect_stdout(stdout):
-                exit_code = metawiki_pipeline.cmd_validate(
+                exit_code = wikistub_seed_pipeline.cmd_validate(
                     SimpleNamespace(exchange=str(payload_path), verbose=True)
                 )
 
         output = stdout.getvalue()
         self.assertEqual(exit_code, 0)
         self.assertIn("Gültige Exporthülle", output)
-        self.assertIn("Schema: metawiki-data-v1", output)
+        self.assertIn("Schema: wikistub-seed-data-v1", output)
 
     def test_cmd_validate_rejects_invalid_exchange_payload(self):
         invalid_payload = {
@@ -209,14 +209,14 @@ class PipelineCommandTests(unittest.TestCase):
 
             stdout = io.StringIO()
             with contextlib.redirect_stdout(stdout):
-                exit_code = metawiki_pipeline.cmd_validate(
+                exit_code = wikistub_seed_pipeline.cmd_validate(
                     SimpleNamespace(exchange=str(payload_path), verbose=False)
                 )
 
         output = stdout.getvalue()
         self.assertEqual(exit_code, 1)
         self.assertIn("Ungültige Exporthülle", output)
-        self.assertIn("schema muss 'metawiki-data-v1' sein.", output)
+        self.assertIn("schema muss 'wikistub-seed-data-v1' sein.", output)
 
 
 if __name__ == "__main__":

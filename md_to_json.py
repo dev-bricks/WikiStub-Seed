@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-md_to_json.py - Markdown zu JSON Konverter für MetaWiki
+md_to_json.py - Markdown zu JSON Konverter für WikiStub-Seed
 =========================================================
 
 Parst alle vorhandenen MD-Dateien aus den Kategorieordnern
-und erstellt/aktualisiert JSON-Einträge in metawiki.json.
+und erstellt/aktualisiert JSON-Einträge in wikistub_seed.json.
 
 Nutzung:
     python md_to_json.py                  # Alle MD-Dateien konvertieren
@@ -23,7 +23,7 @@ from datetime import datetime
 from language_model import normalize_entry
 
 BASE_PATH = Path(__file__).parent.resolve()
-JSON_PATH = BASE_PATH / "metawiki.json"
+JSON_PATH = BASE_PATH / "wikistub_seed.json"
 BACKUP_PATH = BASE_PATH / "backups"
 
 CATEGORY_FOLDERS = [
@@ -167,7 +167,7 @@ def parse_md_file(filepath):
 
 
 def load_json():
-    """Laedt die bestehende metawiki.json oder erstellt Grundstruktur."""
+    """Laedt die bestehende wikistub_seed.json oder erstellt Grundstruktur."""
     if JSON_PATH.exists():
         try:
             with open(JSON_PATH, "r", encoding="utf-8") as f:
@@ -184,7 +184,7 @@ def load_json():
 
 
 def save_json(data, dry_run=False):
-    """Speichert metawiki.json mit Backup."""
+    """Speichert wikistub_seed.json mit Backup."""
     if dry_run:
         print("\n[DRY-RUN] Keine Änderungen gespeichert.")
         return
@@ -192,7 +192,7 @@ def save_json(data, dry_run=False):
     # Backup
     if JSON_PATH.exists():
         BACKUP_PATH.mkdir(exist_ok=True)
-        backup_name = f"metawiki_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         import shutil
         shutil.copy(JSON_PATH, BACKUP_PATH / backup_name)
 
@@ -229,13 +229,13 @@ def add_stub_to_data(data, stub_dict):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="MetaWiki: Markdown zu JSON Konverter")
+    parser = argparse.ArgumentParser(description="WikiStub-Seed: Markdown zu JSON Konverter")
     parser.add_argument("--dry-run", action="store_true", help="Nur anzeigen, nicht speichern")
     parser.add_argument("--category", type=str, help="Nur bestimmte Kategorie (z.B. '07')")
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  MetaWiki: Markdown -> JSON Konverter")
+    print("  WikiStub-Seed: Markdown -> JSON Konverter")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-metawiki_cli.py - CLI-Tool für MetaWiki Stub-Management
+wikistub_seed_cli.py - CLI-Tool für WikiStub-Seed Stub-Management
 =========================================================
 
 Einfaches Kommandozeilen-Interface für die wichtigsten Operationen:
@@ -15,10 +15,10 @@ Einfaches Kommandozeilen-Interface für die wichtigsten Operationen:
 - check:    Konsistenzprüfung
 
 Nutzung:
-    python metawiki_cli.py list
-    python metawiki_cli.py search "Matrix"
-    python metawiki_cli.py add --title "Neues Thema" --def "Kurze Beschreibung" --cat 07_Informatik_KI --sub Software_Engineering
-    python metawiki_cli.py stats
+    python wikistub_seed_cli.py list
+    python wikistub_seed_cli.py search "Matrix"
+    python wikistub_seed_cli.py add --title "Neues Thema" --def "Kurze Beschreibung" --cat 07_Informatik_KI --sub Software_Engineering
+    python wikistub_seed_cli.py stats
 """
 
 import json
@@ -32,7 +32,7 @@ from collections import defaultdict
 from language_model import get_definition, get_relevance, normalize_entry
 
 BASE_PATH = Path(__file__).parent.resolve()
-JSON_PATH = BASE_PATH / "metawiki.json"
+JSON_PATH = BASE_PATH / "wikistub_seed.json"
 BACKUP_PATH = BASE_PATH / "backups"
 
 CATEGORY_FOLDERS = [
@@ -54,7 +54,7 @@ CATEGORY_FOLDERS = [
 # ==================== HILFSFUNKTIONEN ====================
 
 def load_json():
-    """Lädt metawiki.json."""
+    """Lädt wikistub_seed.json."""
     if not JSON_PATH.exists():
         return {"MetaWiki": {cat: {} for cat in CATEGORY_FOLDERS}}
     with open(JSON_PATH, "r", encoding="utf-8") as f:
@@ -62,10 +62,10 @@ def load_json():
 
 
 def save_json(data):
-    """Speichert metawiki.json mit Backup."""
+    """Speichert wikistub_seed.json mit Backup."""
     if JSON_PATH.exists():
         BACKUP_PATH.mkdir(exist_ok=True)
-        backup_name = f"metawiki_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         import shutil
         shutil.copy(JSON_PATH, BACKUP_PATH / backup_name)
 
@@ -274,7 +274,7 @@ def cmd_stats(args):
             empty_rel += 1
 
     print(f"\n  {'='*50}")
-    print(f"  MetaWiki Statistiken")
+    print(f"  WikiStub-Seed Statistiken")
     print(f"  {'='*50}")
     print(f"\n  Gesamt: {len(stubs)} Stubs")
     print(f"  Kategorien: {len(cat_counts)}")
@@ -357,21 +357,21 @@ def cmd_check(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="MetaWiki CLI - Stub-Management",
+        description="WikiStub-Seed CLI - Stub-Management",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Beispiele:
-  metawiki_cli.py list                                    # Alle Stubs auflisten
-  metawiki_cli.py list --category 07 --limit 20           # Informatik, max 20
-  metawiki_cli.py search "Matrix"                         # Suche nach "Matrix"
-  metawiki_cli.py add -t "Neues Thema" -d "Definition"    # Stub hinzufuegen
+  wikistub_seed_cli.py list                                    # Alle Stubs auflisten
+  wikistub_seed_cli.py list --category 07 --limit 20           # Informatik, max 20
+  wikistub_seed_cli.py search "Matrix"                         # Suche nach "Matrix"
+  wikistub_seed_cli.py add -t "Neues Thema" -d "Definition"    # Stub hinzufuegen
                   -c 07_Informatik_KI -s Software_Engineering
-  metawiki_cli.py remove -t "Altes Thema"                 # Stub entfernen
-  metawiki_cli.py stats                                   # Statistiken
-  metawiki_cli.py stats -v                                # Detaillierte Statistiken
-  metawiki_cli.py export                                  # JSON -> Markdown
-  metawiki_cli.py import                                  # Markdown -> JSON
-  metawiki_cli.py check --similar                         # Konsistenzprüfung
+  wikistub_seed_cli.py remove -t "Altes Thema"                 # Stub entfernen
+  wikistub_seed_cli.py stats                                   # Statistiken
+  wikistub_seed_cli.py stats -v                                # Detaillierte Statistiken
+  wikistub_seed_cli.py export                                  # JSON -> Markdown
+  wikistub_seed_cli.py import                                  # Markdown -> JSON
+  wikistub_seed_cli.py check --similar                         # Konsistenzprüfung
         """
     )
 

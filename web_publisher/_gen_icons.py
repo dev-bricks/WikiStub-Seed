@@ -1,8 +1,8 @@
-"""Generiert PWA-Icons aus MetaWiki.ico via Pillow."""
+"""Generiert PWA-Icons aus wikistub_seed.ico via Pillow."""
 from pathlib import Path
 from PIL import Image
 
-ICO = Path(__file__).parent.parent / "MetaWiki.ico"
+ICO = Path(__file__).parent.parent / "wikistub_seed.ico"
 OUT = Path(__file__).parent / "icons"
 OUT.mkdir(exist_ok=True)
 

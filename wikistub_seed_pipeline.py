@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-MetaWiki Pipeline - Vollständiges Wissensdatenbank-Management
+WikiStub-Seed Pipeline - Vollständiges Wissensdatenbank-Management
 =============================================================
 
 Features:
@@ -40,7 +40,7 @@ from language_model import (
 # ==================== KONFIGURATION ====================
 
 BASE_PATH = Path(__file__).parent.resolve()
-JSON_PATH = BASE_PATH / "metawiki.json"
+JSON_PATH = BASE_PATH / "wikistub_seed.json"
 OUTPUT_PATH = BASE_PATH / "output"
 BACKUP_PATH = BASE_PATH / "backups"
 
@@ -64,7 +64,7 @@ CATEGORY_FOLDERS = [
 MAX_DEFINITION_LENGTH = 500
 MIN_DEFINITION_LENGTH = 20
 MAX_RELEVANCE_LENGTH = 300
-EXCHANGE_SCHEMA = "metawiki-data-v1"
+EXCHANGE_SCHEMA = "wikistub-seed-data-v1"
 EXCHANGE_LANGUAGES = SUPPORTED_LANGUAGES
 EXCHANGE_DEFAULT_PATH = OUTPUT_PATH / f"{EXCHANGE_SCHEMA}.json"
 
@@ -305,7 +305,7 @@ class MarkdownParser:
 # ==================== JSON HANDLER ====================
 
 class JsonHandler:
-    """Verwaltet die MetaWiki JSON-Datei."""
+    """Verwaltet die WikiStub-Seed JSON-Datei."""
 
     def __init__(self, json_path: Optional[Path] = None):
         self.json_path = json_path or JSON_PATH
@@ -331,14 +331,14 @@ class JsonHandler:
             # Backup erstellen
             if self.json_path.exists():
                 BACKUP_PATH.mkdir(exist_ok=True)
-                backup_name = f"metawiki_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+                backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
                 backup_file = BACKUP_PATH / backup_name
 
                 import shutil
                 shutil.copy(self.json_path, backup_file)
 
                 # Cleanup: keep only last 10 backups
-                backups = sorted(BACKUP_PATH.glob("metawiki_*.json"))
+                backups = sorted(BACKUP_PATH.glob("wikistub_seed_*.json"))
                 for old in backups[:-10]:
                     old.unlink(missing_ok=True)
 
@@ -587,8 +587,8 @@ def count_wrapped_stubs(data: Dict) -> int:
     return total
 
 
-def build_exchange_payload(data: Dict, source: str = "metawiki.json") -> Dict:
-    """Erzeugt die stabile Austauschhülle für MetaWiki-Daten."""
+def build_exchange_payload(data: Dict, source: str = "wikistub_seed.json") -> Dict:
+    """Erzeugt die stabile Austauschhülle für WikiStub-Seed-Daten."""
     normalized_data = normalize_metawiki_data(data)
     return {
         "schema": EXCHANGE_SCHEMA,
@@ -602,7 +602,7 @@ def build_exchange_payload(data: Dict, source: str = "metawiki.json") -> Dict:
 
 
 def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
-    """Validiert Pflichttexte und optionale Sprachmaps in MetaWiki-Daten."""
+    """Validiert Pflichttexte und optionale Sprachmaps in WikiStub-Seed-Daten."""
     errors: List[str] = []
     warnings: List[str] = []
     root = data.get("MetaWiki")
@@ -635,7 +635,7 @@ def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
 
 
 def validate_exchange_payload(payload: object) -> ValidationResult:
-    """Validiert die Exporthülle `metawiki-data-v1`."""
+    """Validiert die Exporthülle `wikistub-seed-data-v1`."""
     errors: List[str] = []
     warnings: List[str] = []
 
@@ -644,7 +644,7 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
 
     schema = payload.get("schema")
     if schema != EXCHANGE_SCHEMA:
-        errors.append(f"schema muss '{EXCHANGE_SCHEMA}' sein.")
+        errors.append(f"schema muss '{EXCHANGE_SCHEMA}' sein.")  # wikistub-seed-data-v1
 
     generated_at = payload.get("generated_at")
     if not isinstance(generated_at, str):
@@ -687,7 +687,7 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
     else:
         model_languages = language_model.get("languages")
         if model_languages != EXCHANGE_LANGUAGES:
-            warnings.append("language_model.languages weicht vom erwarteten MetaWiki-Sprachmodell ab.")
+            warnings.append("language_model.languages weicht vom erwarteten WikiStub-Seed-Sprachmodell ab.")
 
     data = payload.get("data")
     actual_stub_count = None
@@ -782,8 +782,8 @@ def cmd_export(args):
 
 
 def cmd_export_data(args):
-    """Exportiert die stabile `metawiki-data-v1`-Hülle als JSON."""
-    print("\n📦 EXPORT: metawiki-data-v1")
+    """Exportiert die stabile `wikistub-seed-data-v1`-Hülle als JSON."""
+    print("\n📦 EXPORT: wikistub-seed-data-v1")
     print("=" * 50)
 
     output_path = Path(args.path).expanduser() if args.path else EXCHANGE_DEFAULT_PATH
@@ -808,7 +808,7 @@ def cmd_validate(args):
     if getattr(args, "exchange", None):
         exchange_path = Path(args.exchange).expanduser()
 
-        print("\n🔍 VALIDIERUNG: metawiki-data-v1")
+        print("\n🔍 VALIDIERUNG: wikistub-seed-data-v1")
         print("=" * 50)
 
         if not exchange_path.exists():
@@ -1056,20 +1056,20 @@ def cmd_clean(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="MetaWiki Pipeline - Wissensdatenbank-Management",
+        description="WikiStub-Seed Pipeline - Wissensdatenbank-Management",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Beispiele:
-  python metawiki_pipeline.py import          # Markdown → JSON
-  python metawiki_pipeline.py export          # JSON → Markdown
-  python metawiki_pipeline.py export-data     # JSON → metawiki-data-v1
-  python metawiki_pipeline.py validate -v     # Validierung (verbose)
-  python metawiki_pipeline.py validate --exchange output/metawiki-data-v1.json
-  python metawiki_pipeline.py stats -v        # Statistiken (detailliert)
-  python metawiki_pipeline.py sync            # Bidirektionale Sync
-  python metawiki_pipeline.py clean           # Daten bereinigen
-  python metawiki_pipeline.py translate       # Englische Übersetzungen ergänzen
-  python metawiki_pipeline.py translate -l 50 # Maximal 50 Stubs übersetzen
+  python wikistub_seed_pipeline.py import          # Markdown → JSON
+  python wikistub_seed_pipeline.py export          # JSON → Markdown
+  python wikistub_seed_pipeline.py export-data     # JSON → wikistub-seed-data-v1
+  python wikistub_seed_pipeline.py validate -v     # Validierung (verbose)
+  python wikistub_seed_pipeline.py validate --exchange output/wikistub-seed-data-v1.json
+  python wikistub_seed_pipeline.py stats -v        # Statistiken (detailliert)
+  python wikistub_seed_pipeline.py sync            # Bidirektionale Sync
+  python wikistub_seed_pipeline.py clean           # Daten bereinigen
+  python wikistub_seed_pipeline.py translate       # Englische Übersetzungen ergänzen
+  python wikistub_seed_pipeline.py translate -l 50 # Maximal 50 Stubs übersetzen
         """
     )
 
@@ -1086,13 +1086,13 @@ Beispiele:
     p_export.set_defaults(func=cmd_export)
 
     # Export data
-    p_export_data = subparsers.add_parser("export-data", help="Exportiere JSON → metawiki-data-v1")
+    p_export_data = subparsers.add_parser("export-data", help="Exportiere JSON → wikistub-seed-data-v1")
     p_export_data.add_argument("--path", help="Zielpfad für die Exporthülle")
     p_export_data.set_defaults(func=cmd_export_data)
 
     # Validate
     p_validate = subparsers.add_parser("validate", help="Validiere Einträge")
-    p_validate.add_argument("--exchange", help="Pfad zu einer metawiki-data-v1-Datei")
+    p_validate.add_argument("--exchange", help="Pfad zu einer wikistub-seed-data-v1-Datei")
     p_validate.add_argument("--verbose", "-v", action="store_true", help="Zeige auch Warnungen")
     p_validate.set_defaults(func=cmd_validate)
 
@@ -1122,7 +1122,7 @@ Beispiele:
         return
 
     print(f"\n{'='*60}")
-    print(f"  MetaWiki Pipeline v2.0")
+    print(f"  WikiStub-Seed Pipeline v2.0")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*60}")
 

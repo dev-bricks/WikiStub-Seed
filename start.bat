@@ -13,5 +13,5 @@ if errorlevel 1 (
         exit /b 1
     )
 )
-%PYTHON% metawiki_cli.py %*
+%PYTHON% wikistub_seed_cli.py %*
 if errorlevel 1 pause

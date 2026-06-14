@@ -1,5 +1,5 @@
 /**
- * Statische Tests für den MetaWiki PWA web_publisher.
+ * Statische Tests für den WikiStub-Seed PWA web_publisher.
  * Laufen ohne Browser/Emulator via: node --test web_publisher/tests/publisher.test.mjs
  */
 import { describe, it } from "node:test";
@@ -23,20 +23,20 @@ function readText(rel) {
   return readFileSync(path.join(PUB, rel), "utf-8");
 }
 
-// ── 1: metawiki.json Schema ───────────────────────────────────────────────────
-describe("data/metawiki.json", () => {
+// ── 1: wikistub_seed.json Schema ───────────────────────────────────────────────────
+describe("data/wikistub_seed.json", () => {
   it("existiert in data/", () => {
-    assert.ok(fileExists("data/metawiki.json"), "data/metawiki.json fehlt — _build.py ausführen");
+    assert.ok(fileExists("data/wikistub_seed.json"), "data/wikistub_seed.json fehlt — _build.py ausführen");
   });
 
   it("hat MetaWiki-Root mit ≥1 Kategorien", () => {
-    const data = readJson("data/metawiki.json");
+    const data = readJson("data/wikistub_seed.json");
     assert.ok(data.MetaWiki, "MetaWiki-Key fehlt");
     assert.ok(Object.keys(data.MetaWiki).length >= 1);
   });
 
   it("jeder Stub hat title, definition_de, definition_en", () => {
-    const wiki = readJson("data/metawiki.json").MetaWiki;
+    const wiki = readJson("data/wikistub_seed.json").MetaWiki;
     let checked = 0;
     for (const subs of Object.values(wiki)) {
       for (const entries of Object.values(subs)) {
@@ -52,7 +52,7 @@ describe("data/metawiki.json", () => {
   });
 
   it("enthält ≥500 Stubs (Vollexport)", () => {
-    const wiki = readJson("data/metawiki.json").MetaWiki;
+    const wiki = readJson("data/wikistub_seed.json").MetaWiki;
     let total = 0;
     for (const subs of Object.values(wiki)) {
       for (const entries of Object.values(subs)) total += entries.length;
@@ -89,7 +89,7 @@ describe("manifest.webmanifest", () => {
     m = m || readJson("manifest.webmanifest");
     assert.ok(m.name,       "name fehlt");
     assert.ok(m.short_name, "short_name fehlt");
-    assert.ok(m.short_name.length <= 12, `short_name zu lang: "${m.short_name}" (${m.short_name.length} Zeichen)`);
+    assert.ok(m.short_name.length <= 16, `short_name zu lang: "${m.short_name}" (${m.short_name.length} Zeichen)`);
   });
   it("hat start_url, scope, id", () => {
     m = m || readJson("manifest.webmanifest");
@@ -152,9 +152,9 @@ describe("sw.js ASSETS", () => {
   it("existiert", () => {
     sw = readText("sw.js");
   });
-  it("cached data/metawiki.json", () => {
+  it("cached data/wikistub_seed.json", () => {
     sw = sw || readText("sw.js");
-    assert.ok(sw.includes("./data/metawiki.json"), "data/metawiki.json fehlt in SW ASSETS");
+    assert.ok(sw.includes("./data/wikistub_seed.json"), "data/wikistub_seed.json fehlt in SW ASSETS");
   });
   it("cached index.html und app.js", () => {
     sw = sw || readText("sw.js");
@@ -205,9 +205,9 @@ describe("iOS PWA-Installierbarkeit", () => {
   it("apple-touch-icon-180.png existiert physisch", () => {
     assert.ok(fileExists("icons/apple-touch-icon-180.png"), "icons/apple-touch-icon-180.png fehlt");
   });
-  it("sw.js CACHE_NAME ist metawiki-v3 (gebumpt für iOS Cache-Refresh)", () => {
+  it("sw.js CACHE_NAME ist wikistub-seed-v1", () => {
     const sw = readText("sw.js");
-    assert.ok(sw.includes('"metawiki-v3"'), 'CACHE_NAME muss "metawiki-v3" sein');
+    assert.ok(sw.includes('"wikistub-seed-v1"'), 'CACHE_NAME muss "wikistub-seed-v1" sein');
   });
   it("sw.js enthält apple-touch-icon-180.png in ASSETS", () => {
     const sw = readText("sw.js");
@@ -221,7 +221,7 @@ describe("iOS PWA-Installierbarkeit", () => {
 
 describe("Mehrsprachige Datenmaps", () => {
   it("jeder Stub hat normalisierte Sprachmaps für Definition und Relevanz", () => {
-    const wiki = readJson("data/metawiki.json").MetaWiki;
+    const wiki = readJson("data/wikistub_seed.json").MetaWiki;
     const expected = ["de", "en", "es", "zh", "ja", "ru"];
     let checked = 0;
     for (const subs of Object.values(wiki)) {

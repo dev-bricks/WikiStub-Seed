@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-check_duplicates.py - Konsistenzprüfung für MetaWiki
+check_duplicates.py - Konsistenzprüfung für WikiStub-Seed
 ======================================================
 
-Prueft metawiki.json auf:
+Prueft wikistub_seed.json auf:
 - Duplikate: Gleiche Titel in verschiedenen Kategorien/Subkategorien
 - Ähnliche Titel: Levenshtein-Distanz-basierte Erkennung
 - Leere Einträge: Stubs ohne Definition oder Relevanz
@@ -25,12 +25,12 @@ from datetime import datetime
 from language_model import get_definition, get_relevance
 
 BASE_PATH = Path(__file__).parent.resolve()
-JSON_PATH = BASE_PATH / "metawiki.json"
+JSON_PATH = BASE_PATH / "wikistub_seed.json"
 BACKUP_PATH = BASE_PATH / "backups"
 
 
 def load_json():
-    """Laedt metawiki.json."""
+    """Laedt wikistub_seed.json."""
     if not JSON_PATH.exists():
         print(f"FEHLER: {JSON_PATH} nicht gefunden.")
         sys.exit(1)
@@ -99,10 +99,10 @@ def _similarity(a, b):
 
 
 def save_json(data):
-    """Speichert metawiki.json mit Backup."""
+    """Speichert wikistub_seed.json mit Backup."""
     if JSON_PATH.exists():
         BACKUP_PATH.mkdir(exist_ok=True)
-        backup_name = f"metawiki_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         shutil.copy(JSON_PATH, BACKUP_PATH / backup_name)
 
     with open(JSON_PATH, "w", encoding="utf-8") as f:
@@ -186,14 +186,14 @@ def find_empty_entries(stubs):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="MetaWiki: Konsistenzprüfung")
+    parser = argparse.ArgumentParser(description="WikiStub-Seed: Konsistenzprüfung")
     parser.add_argument("--similar", action="store_true", help="Auch ähnliche Titel finden")
     parser.add_argument("--threshold", type=float, default=0.85, help="Ähnlichkeits-Schwellwert (0-1)")
     parser.add_argument("--fix", action="store_true", help="Exakte Duplikate interaktiv bereinigen")
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  MetaWiki: Konsistenzprüfung")
+    print("  WikiStub-Seed: Konsistenzprüfung")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 

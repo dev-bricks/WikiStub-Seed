@@ -1,22 +1,22 @@
-# MetaWiki
+# WikiStub-Seed
 
-## Last-checked: 2026-06-11
+## Last-checked: 2026-06-14
 
-Canonical repository: https://github.com/file-bricks/MetaWiki
+Canonical repository: https://github.com/file-bricks/WikiStub-Seed
 
-MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. It is unrelated to Wikimedia Meta-Wiki.
+WikiStub-Seed is a local-first, bilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
 ## Audience
 
 - **AI and LLM developers**: feeding 630 bilingual domain stubs into RAG pipelines, embeddings or LLM context windows without external dependencies
 - **Knowledge workers and researchers**: building structured personal wikis, concept catalogs or glossaries from curated bilingual domain stubs
-- **Python developers**: extending, validating or exporting the bilingual JSON dataset via CLI tools, pipeline scripts and the metawiki-data-v1 exchange format
+- **Python developers**: extending, validating or exporting the bilingual JSON dataset via CLI tools, pipeline scripts and the wikistub-seed-data-v1 exchange format
 - **Documentation and education teams**: exporting structured Markdown or JSON to static sites, GitHub Pages, Obsidian vaults or learning systems
 - **Open-source contributors**: adding multilingual knowledge stubs, new domain categories or static Web/PWA publisher features
 
 ## Project Scope
 
-- Authoritative dataset: `metawiki.json`
+- Authoritative dataset: `wikistub_seed.json`
 - Dataset size: 630 compact knowledge stubs
 - Languages: German and English
 - Domains: 12 top-level scientific and cultural areas, 85 subcategories
@@ -26,10 +26,10 @@ MetaWiki is a local-first, bilingual JSON knowledge framework for AI-assisted re
 ## Main Files
 
 - `README.md`: public overview, usage and project positioning
-- `metawiki.json`: authoritative bilingual knowledge dataset
-- `metawiki_cli.py`: CLI for statistics and consistency checks
-- `metawiki_pipeline.py`: validation, export and optional translation pipeline
-- `EXPORTFORMAT.md`: planned stable `metawiki-data-v1` exchange format
+- `wikistub_seed.json`: authoritative bilingual knowledge dataset
+- `wikistub_seed_cli.py`: CLI for statistics and consistency checks
+- `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline
+- `EXPORTFORMAT.md`: planned stable `wikistub-seed-data-v1` exchange format
 - `web_publisher/`: static PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (34 Node.js tests)
 - `web_publisher/README.md`: Web/PWA publisher documentation
 - `AUFGABEN.txt`: current development tasks
@@ -47,7 +47,7 @@ Typical stub fields:
 
 ## Privacy and Network Behavior
 
-Core MetaWiki usage is local-first and has no telemetry. It reads and writes local JSON/Markdown files. The optional translation command may call an external API only when `ANTHROPIC_API_KEY` is configured and the optional `anthropic` package is installed.
+Core WikiStub-Seed usage is local-first and has no telemetry. It reads and writes local JSON/Markdown files. The optional translation command may call an external API only when `ANTHROPIC_API_KEY` is configured and the optional `anthropic` package is installed.
 
 ## Search Phrases
 
@@ -57,7 +57,7 @@ local-first ontology seed library AI
 LLM context dataset 630 stubs bilingual
 knowledge stubs Obsidian export Markdown
 AI-assisted knowledge framework local
-MetaWiki JSON knowledge stubs file-bricks
+WikiStub-Seed JSON knowledge stubs file-bricks
 RAG knowledge base bilingual German English
 static PWA knowledge publisher offline
 multilingual knowledge stubs framework
@@ -66,4 +66,4 @@ domain knowledge ontology open source Python
 
 ## Suggested LLM Interpretation
 
-Describe MetaWiki as a reusable structured knowledge seed library, not as a general wiki host. It is unrelated to Wikimedia Meta-Wiki. The primary data artifact is `metawiki.json`; the web_publisher is an optional static PWA frontend for local browsing and offline use.
+Describe WikiStub-Seed as a reusable structured knowledge seed library. It is unrelated to Wikimedia Meta-Wiki or any other wiki platform. The primary data artifact is `wikistub_seed.json`; the web_publisher is an optional static PWA frontend for local browsing and offline use.

@@ -1,10 +1,10 @@
-# MetaWiki
+# WikiStub-Seed
 
-**MetaWiki is a multilingual-ready JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships a curated `metawiki.json` dataset with 630 compact German/English knowledge stubs across 12 scientific and cultural domains, prepared ES/ZH/JA/RU language slots, plus Python tools for validation, export and translation.
+**WikiStub-Seed is a multilingual-ready JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships a curated `wikistub_seed.json` dataset with 630 compact German/English knowledge stubs across 12 scientific and cultural domains, prepared ES/ZH/JA/RU language slots, plus Python tools for validation, export and translation.
 
-MetaWiki is not Wikimedia Meta-Wiki. It is a local-first, repository-based knowledge skeleton: a small ontology-style seed library that can be reused in software projects, research notes, documentation systems, Obsidian exports, static websites or retrieval-augmented generation pipelines.
+WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
-[![MetaWiki smoke tests](https://github.com/file-bricks/MetaWiki/actions/workflows/tests.yml/badge.svg)](https://github.com/file-bricks/MetaWiki/actions/workflows/tests.yml)
+[![WikiStub-Seed smoke tests](https://github.com/file-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/file-bricks/WikiStub-Seed/actions/workflows/tests.yml)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
@@ -13,12 +13,12 @@ MetaWiki is not Wikimedia Meta-Wiki. It is a local-first, repository-based knowl
 
 ## What It Contains
 
-- 630 knowledge stubs in `metawiki.json` with DE/EN content and prepared ES/ZH/JA/RU language slots
+- 630 knowledge stubs in `wikistub_seed.json` with DE/EN content and prepared ES/ZH/JA/RU language slots
 - 12 top-level domains, including mathematics, physics, chemistry, biology, medicine, psychology, AI, engineering, society, economics, history and culture
 - 85 subcategories with short, neutral definitions and relevance notes
 - Canonical `definitions.{lang}` and `relevance_i18n.{lang}` maps while retaining legacy `definition_de`, `definition_en` and `relevance`
 - Python CLI tooling for statistics, validation, consistency checks and Markdown export
-- A documented `metawiki-data-v1` export direction for future static Web/PWA use
+- A documented `wikistub-seed-data-v1` export direction for future static Web/PWA use
 - No required external dependencies for core import, export, validation or CLI use
 
 ## Use Cases
@@ -59,19 +59,19 @@ Each stub is intentionally small and machine-readable:
 }
 ```
 
-The current authoritative source is `metawiki.json`. `EXPORTFORMAT.md` documents the stable wrapper format `metawiki-data-v1` for Web/PWA, API and LLM exports.
+The current authoritative source is `wikistub_seed.json`. `EXPORTFORMAT.md` documents the stable wrapper format `wikistub-seed-data-v1` for Web/PWA, API and LLM exports.
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/file-bricks/MetaWiki.git
-cd MetaWiki
+git clone https://github.com/file-bricks/WikiStub-Seed.git
+cd WikiStub-Seed
 
-python metawiki_cli.py --help
-python metawiki_cli.py stats
-python metawiki_cli.py check
-python metawiki_pipeline.py validate
-python metawiki_pipeline.py export --output --english
+python wikistub_seed_cli.py --help
+python wikistub_seed_cli.py stats
+python wikistub_seed_cli.py check
+python wikistub_seed_pipeline.py validate
+python wikistub_seed_pipeline.py export --output --english
 ```
 
 On Windows, `start.bat` opens the CLI entry point. Exported files are written to `output/`; that folder is local and not versioned.
@@ -80,20 +80,20 @@ On Windows, `start.bat` opens the CLI entry point. Exported files are written to
 
 | Command | Purpose |
 |---|---|
-| `python metawiki_cli.py stats` | Print stub, category and tag statistics |
-| `python metawiki_cli.py check` | Run consistency checks over the JSON dataset |
-| `python metawiki_pipeline.py validate` | Validate the pipeline input data |
-| `python metawiki_pipeline.py export --output --english` | Export the JSON dataset to Markdown |
-| `python metawiki_pipeline.py translate` | Optionally translate missing English definitions when configured |
+| `python wikistub_seed_cli.py stats` | Print stub, category and tag statistics |
+| `python wikistub_seed_cli.py check` | Run consistency checks over the JSON dataset |
+| `python wikistub_seed_pipeline.py validate` | Validate the pipeline input data |
+| `python wikistub_seed_pipeline.py export --output --english` | Export the JSON dataset to Markdown |
+| `python wikistub_seed_pipeline.py translate` | Optionally translate missing English definitions when configured |
 
 ## Repository Map
 
 | Path | Purpose |
 |---|---|
-| `metawiki.json` | Authoritative bilingual knowledge dataset |
+| `wikistub_seed.json` | Authoritative bilingual knowledge dataset |
 | `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Domain-oriented Markdown source/export structure |
-| `metawiki_cli.py` | CLI for stats and checks |
-| `metawiki_pipeline.py` | Import, export, validation and optional translation pipeline |
+| `wikistub_seed_cli.py` | CLI for stats and checks |
+| `wikistub_seed_pipeline.py` | Import, export, validation and optional translation pipeline |
 | `md_to_json.py` | Markdown-to-JSON import helper |
 | `check_duplicates.py` | Duplicate/consistency helper |
 | `EXPORTFORMAT.md` | Stable exchange-format plan |
@@ -101,7 +101,7 @@ On Windows, `start.bat` opens the CLI entry point. Exported files are written to
 
 ## Privacy
 
-MetaWiki is local-first. Core usage reads and writes local JSON/Markdown files only. There is no telemetry and no automatic network communication.
+WikiStub-Seed is local-first. Core usage reads and writes local JSON/Markdown files only. There is no telemetry and no automatic network communication.
 
 The optional translation command can call an external API only when `ANTHROPIC_API_KEY` is set and the optional `anthropic` package is installed.
 
@@ -112,9 +112,9 @@ Completed:
 - 12 top-level domains and 85 subcategories
 - 630 bilingual stubs in a single JSON master file
 - Markdown export and JSON synchronization tooling
-- CLI smoke tests in GitHub Actions
+- CLI smoke tests in GitHub Actions, plus dedicated macOS/Linux source smokes for `wikistub_seed_cli.py check` and `wikistub_seed_pipeline.py validate`
 - Static Web/PWA publisher with search and offline cache (`web_publisher/`)
-- `metawiki-data-v1` schema wrapper with prepared DE/EN/ES/ZH/JA/RU language slots
+- `wikistub-seed-data-v1` schema wrapper with prepared DE/EN/ES/ZH/JA/RU language slots
 
 Planned:
 
@@ -124,15 +124,15 @@ Planned:
 
 ## Deutsch
 
-**MetaWiki ist ein mehrsprachig vorbereitetes JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs mit Deutsch/Englisch-Inhalten und vorbereiteten Sprachslots für Spanisch, Chinesisch, Japanisch und Russisch, verteilt auf 12 Wissenschafts- und Kulturbereiche. Die Stubs sind kurz, neutral, versionierbar und für Automatisierung, Dokumentation, Lernsysteme und LLM-Kontexte geeignet.
+**WikiStub-Seed ist ein mehrsprachig vorbereitetes JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs mit Deutsch/Englisch-Inhalten und vorbereiteten Sprachslots für Spanisch, Chinesisch, Japanisch und Russisch, verteilt auf 12 Wissenschafts- und Kulturbereiche. Die Stubs sind kurz, neutral, versionierbar und für Automatisierung, Dokumentation, Lernsysteme und LLM-Kontexte geeignet.
 
-MetaWiki arbeitet standardmäßig lokal mit `metawiki.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
+WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
 
 Wichtige Einstiegspunkte:
 
-- `python metawiki_cli.py stats` zeigt Statistik und Kategorien.
-- `python metawiki_cli.py check` prüft den Datenbestand.
-- `python metawiki_pipeline.py export --output --english` exportiert Markdown.
+- `python wikistub_seed_cli.py stats` zeigt Statistik und Kategorien.
+- `python wikistub_seed_cli.py check` prüft den Datenbestand.
+- `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
 - `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und DE/EN-Toggle.
 

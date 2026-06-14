@@ -1,4 +1,4 @@
-"""Shared language model helpers for MetaWiki data."""
+"""Shared language model helpers for WikiStub-Seed data."""
 
 from __future__ import annotations
 

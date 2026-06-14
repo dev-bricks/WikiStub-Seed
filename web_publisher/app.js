@@ -1,7 +1,7 @@
 "use strict";
 
 const LANG_KEY = "mw-lang";
-let wiki = null;      // raw MetaWiki object
+let wiki = null;      // raw WikiStub-Seed object
 let index = null;     // flat search-index array
 let lang = localStorage.getItem(LANG_KEY) || "de";
 
@@ -41,7 +41,7 @@ async function boot() {
   updateLangUI();
   try {
     const [wikiRes, idxRes] = await Promise.all([
-      fetch("./data/metawiki.json"),
+      fetch("./data/wikistub_seed.json"),
       fetch("./data/search-index.json"),
     ]);
     wiki  = (await wikiRes.json()).MetaWiki;

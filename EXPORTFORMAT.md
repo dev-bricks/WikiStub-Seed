@@ -1,16 +1,16 @@
-# MetaWiki Export Format
+# WikiStub-Seed Export Format
 
-Stand: 2026-06-11
+Stand: 2026-06-14
 
 ## Schema
 
-`metawiki-data-v1` ist die stabile Austauschhülle für MetaWiki-Daten. Die Hülle bleibt abwärtskompatibel zu den bisherigen Feldern `definition_de`, `definition_en` und `relevance`, enthält aber zusätzlich ein explizites Sprachmodell.
+`wikistub-seed-data-v1` ist die stabile Austauschhülle für WikiStub-Seed-Daten. Die Hülle bleibt abwärtskompatibel zu den bisherigen Feldern `definition_de`, `definition_en` und `relevance`, enthält aber zusätzlich ein explizites Sprachmodell.
 
 ```json
 {
-  "schema": "metawiki-data-v1",
-  "generated_at": "2026-06-11T12:00:00Z",
-  "source": "metawiki.json",
+  "schema": "wikistub-seed-data-v1",
+  "generated_at": "2026-06-14T12:00:00Z",
+  "source": "wikistub_seed.json",
   "languages": ["de", "en", "es", "zh", "ja", "ru"],
   "language_model": {
     "version": 1,
@@ -67,7 +67,7 @@ Jeder Stub führt die alten Felder weiter und hat zusätzlich kanonische Sprachm
 ## Befehle
 
 ```bash
-python metawiki_pipeline.py export-data
-python metawiki_pipeline.py validate --exchange output/metawiki-data-v1.json -v
+python wikistub_seed_pipeline.py export-data
+python wikistub_seed_pipeline.py validate --exchange output/wikistub-seed-data-v1.json -v
 python web_publisher/_build.py
 ```
