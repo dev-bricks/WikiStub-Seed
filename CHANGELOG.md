@@ -5,64 +5,23 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
-### Geändert / Changed (2026-06-14) — Renamed from MetaWiki to WikiStub-Seed
-- Projekt umbenannt von `MetaWiki` (GitHub: `file-bricks/MetaWiki`) zu `WikiStub-Seed` (GitHub: `file-bricks/WikiStub-Seed`).
-- Ordner verschoben von `.TOPICS/.SOFTWARE/LLM/REL-PUB_MetaWiki_SOCIAL` nach `.TOPICS/.AI/.MODULES/WikiStub-Seed`.
+## [1.1.0] - 2026-06-14
+
+### Hinzugefügt / Added
+- Vollständige Übersetzungen für alle 630 Stubs in 4 Sprachen (es, zh, ja, ru) — 5040 Übersetzungsslots gefüllt.
+- 6-sprachige READMEs (DE, EN, ES, ZH, JA, RU) für maximale internationale Auffindbarkeit.
+- README-Banner als SVG.
+- `web_publisher/data/search-index.json` und `web_publisher/data/wikistub_seed.json` aus dem vollständig übersetzten Masterdatensatz neu gebaut.
+
+### Geändert / Changed
+- Projekt umbenannt von `MetaWiki` (GitHub: `file-bricks/MetaWiki`) zu `WikiStub-Seed` (GitHub: `dev-bricks/WikiStub-Seed`).
+- Repository-Org von `file-bricks` nach `dev-bricks` umgezogen.
+- Lokaler Ordner verschoben von `.TOPICS/.SOFTWARE/LLM/REL-PUB_MetaWiki_SOCIAL` nach `.TOPICS/.AI/.MODULES/WikiStub-Seed`.
 - Dateien umbenannt: `metawiki.json` → `wikistub_seed.json`, `metawiki_cli.py` → `wikistub_seed_cli.py`, `metawiki_pipeline.py` → `wikistub_seed_pipeline.py`, `MetaWiki.ico` → `wikistub_seed.ico`.
 - Alle internen Referenzen, Badge-URLs und Schema-Bezeichner (`metawiki-data-v1` → `wikistub-seed-data-v1`) aktualisiert.
 - Disclaimer umformuliert: WikiStub-Seed is a knowledge-stub seed library, not a wiki.
-
-### Hinzugefügt / Added (2026-06-13) — macOS/Linux-Source-Smokes
-- `tests/source_platform_smoke.py`: echter Source-Smoke für `python metawiki_cli.py check` und `python metawiki_pipeline.py validate` mit UTF-8-Umgebung und klaren Rückgabecode-/Ausgabe-Assertions.
-- `.github/workflows/source-platform-smoke.yml`: GitHub-Actions-Matrix für `ubuntu-latest` und `macos-latest`, damit die beiden Kernpfade plattformübergreifend im Source-Modus geprüft werden.
-
-### Hinzugefügt / Added (2026-06-11) — Mehrsprachiger Datenkern
-- `language_model.py`: gemeinsames Sprachmodell für `de`, `en`, `es`, `zh`, `ja` und `ru` mit Fallback-Kette und Legacy-Kompatibilität.
-- `metawiki.json`, `web_publisher/data/metawiki.json` und `web_publisher/data/search-index.json`: alle 630 Stubs enthalten jetzt `definitions.{lang}` und `relevance_i18n.{lang}`.
-- `EXPORTFORMAT.md`: stabiler `metawiki-data-v1`-Vertrag mit Sprachmodell, Pflichtsprachen und Legacy-Feldern dokumentiert.
-
-### Geändert / Changed (2026-06-11) — Mehrsprachiger Datenkern
-- Pipeline, CLI, Markdown-Importer, Konsistenzcheck und Web-Publisher lesen Definitionen/Relevanz jetzt über gemeinsame Sprach-Fallbacks.
-- `export-data` schreibt `language_model` und normalisierte Stub-Daten; `validate --exchange` prüft Pflichtsprachen und Sprachmap-Typen.
-
-### Geändert / Changed (2026-06-11)
-- `llms.txt`: `## Last-checked: 2026-06-11`-Header ergänzt; `## Audience`-Abschnitt (5 Zielgruppen) hinzugefügt; `## Search Phrases` als Fenced-Block formatiert; Test-Anzahl von web_publisher auf 34 korrigiert (war 25, nach iOS-PWA-Commit).
-- `PORTIERUNGSPLAN.md` aus dem Git-Tracking entfernt (`git rm --cached`); Datei war trotz `.gitignore`-Eintrag noch getrackt.
-
-### Hinzugefügt / Added (2026-06-10) — iOS PWA-Installierbarkeit
-- `web_publisher/icons/apple-touch-icon-180.png` — 180×180 px Icon für iOS-Homescreen (via Pillow LANCZOS aus Icon-192.png)
-- `web_publisher/index.html`: `viewport-fit=cover`, `apple-mobile-web-app-title`, `apple-mobile-web-app-status-bar-style`, `<link rel="apple-touch-icon">`, `env(safe-area-inset-*)` CSS auf `body`, 44 px Touch-Targets auf `#search` und `#lang-toggle`
-- `web_publisher/sw.js`: `CACHE_NAME` auf `metawiki-v3` gebumpt, `apple-touch-icon-180.png` in ASSETS, `{ignoreSearch: true}` in `caches.match()` für Offline-Stabilität
-- `web_publisher/tests/publisher.test.mjs`: 9 neue iOS-Tests (Suite 8) — 34/34 Tests grün
-- Manuelles iOS-Smoke-Runbook in `AUFGABEN.txt` (Safari/Chrome → "Zum Home-Bildschirm", Offline, Notch-Viewport, Touch-Targets, Status-Bar)
-
-### Hinzugefügt / Added (2026-06-06)
-- `web_publisher/` — vollständiger statischer PWA-Publisher: `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`
-- `web_publisher/_build.py` — Build-Schritt: kopiert `metawiki.json` nach `data/` (In-SW-Scope) und erzeugt flachen `search-index.json` (630 Einträge)
-- `web_publisher/icons/` — 4 PWA-Icons (192/512px, any + maskable) aus `MetaWiki.ico` via Pillow
-- `web_publisher/tests/publisher.test.mjs` — 25 statische Node.js-Tests (Schema, Manifest, SW-Assets, Icons, HTML-Integration); 25/25 grün
-- Responsive 3-Spalten-Layout (Kategoriebaum + Stub-Liste + Detail), mobile Breakpoints, DE/EN-Toggle mit LocalStorage, Hash-Routing
-
-### Hinzugefügt / Added
-- `llms.txt` als maschinenlesbare Kurzbeschreibung mit kanonischen Links, Datenmodell und Privacy-Grenzen ergänzt.
-- `PORTIERUNGSPLAN.md`, `EXPORTFORMAT.md` und `web_publisher/README.md` zur Web/PWA-basierten Plattformstrategie ergänzt.
-- `.gitattributes` zur einheitlichen UTF-8-/Zeilenenden-Behandlung.
-- Lokales MetaWiki-Icon, README-Einstieg für CLI-Nutzung und Windows-Startskript.
-- GitHub-Actions-Smoke-Test für CLI, Pipeline-Validierung und Python-Compile-Checks.
-
-### Geändert / Changed
-- README auf English-first Discoverability, klare Abgrenzung zu Wikimedia Meta-Wiki und kompaktere GitHub-Nutzung umgestellt.
-- Web/PWA-Publisher-Doku und Requirements-Hinweise auf echte Umlaute bereinigt.
-- Repository-Metadaten auf `file-bricks/MetaWiki` aktualisiert.
-- Deutsche öffentliche Repo-Texte auf echte Umlaute bereinigt.
-- Privacy-/Security-Hinweise ohne persönliche Kontaktadresse geschärft.
-
-### Behoben / Fixed (2026-06-08)
-- `translator.py` `_is_german()`: Umlaut-Erkennung auf echte Unicode-Zeichen (ä, ö, ü, Ä, Ö, Ü, ß) korrigiert; `web_publisher/data/metawiki.json` und `search-index.json` mit korrekten Umlaut-Werten synchronisiert.
-
-### Behoben / Fixed
-- Veraltete Clone- und Security-Links aus der früheren persönlichen Ablage ersetzt.
-- `cmd_import()` bricht jetzt bei defekter oder unlesbarer `metawiki.json` sauber ab, statt den Import mit unbekanntem Zustand fortzusetzen; Regressionstest für den Load-Fehlerpfad ergänzt.
+- macOS/Linux-Source-Smokes ergänzt (`tests/source_platform_smoke.py`, `.github/workflows/source-platform-smoke.yml`).
+- iOS PWA-Installierbarkeit: Apple-Touch-Icon, Viewport-Fit, Touch-Targets, SW-Cache-Bump.
 
 ## [1.0.0] - 2026-02-18
 
