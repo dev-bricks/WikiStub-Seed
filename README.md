@@ -1,5 +1,7 @@
 # WikiStub-Seed
 
+**EN** | [DE](README_de.md) | [ES](README_es.md) | [JA](README_ja.md) | [RU](README_ru.md) | [ZH](README_zh-Hans.md)
+
 **WikiStub-Seed is a multilingual-ready JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships a curated `wikistub_seed.json` dataset with 630 compact German/English knowledge stubs across 12 scientific and cultural domains, prepared ES/ZH/JA/RU language slots, plus Python tools for validation, export and translation.
 
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
