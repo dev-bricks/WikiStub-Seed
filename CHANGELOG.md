@@ -5,6 +5,10 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Geändert / Changed
+- README.md und README_de.md um Startführung und Discovery-Kontext für das kanonische Repo `dev-bricks/WikiStub-Seed` ergänzt.
+- `llms.txt`, `CONTRIBUTING.md` und `SECURITY.md` von alten `file-bricks`-Links auf die aktuelle `dev-bricks`-Repo-URL synchronisiert.
+
 ## [1.1.0] - 2026-06-14
 
 ### Hinzugefügt / Added

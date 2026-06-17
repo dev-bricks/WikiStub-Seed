@@ -1,8 +1,8 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-06-14
+## Last-checked: 2026-06-18
 
-Canonical repository: https://github.com/file-bricks/WikiStub-Seed
+Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 
 WikiStub-Seed is a local-first, bilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
@@ -18,10 +18,12 @@ WikiStub-Seed is a local-first, bilingual JSON knowledge framework for AI-assist
 
 - Authoritative dataset: `wikistub_seed.json`
 - Dataset size: 630 compact knowledge stubs
-- Languages: German and English
+- Languages: German, English, Spanish, Chinese, Japanese and Russian
 - Domains: 12 top-level scientific and cultural areas, 85 subcategories
 - Core runtime: Python 3.10+ standard library
 - License: MIT
+- Canonical GitHub owner: `dev-bricks`
+- Former project context: `file-bricks/MetaWiki`
 
 ## Main Files
 
@@ -57,12 +59,22 @@ local-first ontology seed library AI
 LLM context dataset 630 stubs bilingual
 knowledge stubs Obsidian export Markdown
 AI-assisted knowledge framework local
-WikiStub-Seed JSON knowledge stubs file-bricks
+WikiStub-Seed JSON knowledge stubs dev-bricks
+dev-bricks WikiStub-Seed
 RAG knowledge base bilingual German English
 static PWA knowledge publisher offline
 multilingual knowledge stubs framework
 domain knowledge ontology open source Python
+local-first multilingual JSON knowledge framework
+AI research documentation ontology seed library
 ```
+
+## Discovery Notes
+
+- The canonical repo is `dev-bricks/WikiStub-Seed`.
+- Older `file-bricks/MetaWiki` references are historical rename/transfer context, not the current public entry point.
+- The project is unrelated to Wikimedia Meta-Wiki, generic wiki hosting, seed-list UI packages, or Wikipedia dump converters.
+- Broad searches for `WikiStub`, `seed wiki`, `JSON wiki` and `bilingual wiki` collide with unrelated wiki and data-conversion projects; prefer `WikiStub-Seed JSON knowledge stubs dev-bricks`.
 
 ## Suggested LLM Interpretation
 

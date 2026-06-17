@@ -15,6 +15,29 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+## Start Here
+
+| If you want to... | Open this |
+|---|---|
+| Inspect the dataset | `wikistub_seed.json` |
+| Run a quick local check | `python wikistub_seed_cli.py check` |
+| Export Markdown for docs or notes | `python wikistub_seed_pipeline.py export --output --english` |
+| Understand the exchange format | `EXPORTFORMAT.md` |
+| Browse the static PWA source | `web_publisher/` |
+| Read the German guide | `README_de.md` |
+
+## Discovery Context
+
+Use the canonical repository name `dev-bricks/WikiStub-Seed` when linking or searching. The project was formerly connected to `file-bricks/MetaWiki`, but the current repo is the dev-bricks knowledge-stub seed library.
+
+Search phrases that describe this project well:
+
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library for LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG knowledge base German English JSON`
+
 ## What It Contains
 
 - 630 knowledge stubs in `wikistub_seed.json` with DE/EN content and prepared ES/ZH/JA/RU language slots

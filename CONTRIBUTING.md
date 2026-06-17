@@ -28,7 +28,7 @@ Vielen Dank für Ihr Interesse, zu diesem Projekt beizutragen!
 ### Erste Schritte
 
 ```bash
-git clone https://github.com/file-bricks/WikiStub-Seed.git
+git clone https://github.com/dev-bricks/WikiStub-Seed.git
 cd WikiStub-Seed
 python -m pip install -r requirements.txt
 python wikistub_seed_cli.py stats
@@ -65,7 +65,7 @@ Thank you for your interest in contributing to this project!
 ### Getting Started
 
 ```bash
-git clone https://github.com/file-bricks/WikiStub-Seed.git
+git clone https://github.com/dev-bricks/WikiStub-Seed.git
 cd WikiStub-Seed
 python -m pip install -r requirements.txt
 python wikistub_seed_cli.py stats
