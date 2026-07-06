@@ -1,6 +1,6 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-06-18
+## Last-checked: 2026-07-06
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 

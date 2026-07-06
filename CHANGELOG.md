@@ -5,7 +5,11 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-07-06
+
 ### Geändert / Changed
+- Lokale Git-Remote-Konfiguration auf das kanonische Repository `dev-bricks/WikiStub-Seed` aktualisiert.
+- `llms.txt` auf `Last-checked: 2026-07-06` aktualisiert.
 - README.md und README_de.md um Startführung und Discovery-Kontext für das kanonische Repo `dev-bricks/WikiStub-Seed` ergänzt.
 - `llms.txt`, `CONTRIBUTING.md` und `SECURITY.md` von alten `file-bricks`-Links auf die aktuelle `dev-bricks`-Repo-URL synchronisiert.
 
