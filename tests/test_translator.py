@@ -1,7 +1,7 @@
 import unittest
 import tempfile
-import json
 from pathlib import Path
+from language_model import SUPPORTED_LANGUAGES
 from translator import TranslationSystem
 
 
@@ -35,6 +35,25 @@ class TestTranslationSystem(unittest.TestCase):
         self.assertFalse(ts._is_german("value"))
         self.assertFalse(ts._is_german("open"))
         self.assertFalse(ts._is_german("file"))
+
+    def test_corrupt_translation_file_is_not_silently_overwritten(self):
+        locales = self.app_dir / "locales"
+        locales.mkdir()
+        translations = locales / "translations.json"
+        translations.write_text("{broken", encoding="utf-8")
+
+        with self.assertRaises(RuntimeError):
+            TranslationSystem(default_lang="de", app_dir=self.app_dir)
+
+        self.assertEqual(translations.read_text(encoding="utf-8"), "{broken")
+
+    def test_new_keys_have_all_supported_language_slots(self):
+        ts = TranslationSystem(default_lang="de", app_dir=self.app_dir)
+        self.assertEqual(ts.t("Datei speichern"), "Datei speichern")
+        self.assertEqual(
+            list(ts.translations["Datei speichern"]),
+            SUPPORTED_LANGUAGES,
+        )
 
 
 if __name__ == '__main__':

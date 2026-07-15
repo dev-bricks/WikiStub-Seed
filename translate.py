@@ -8,7 +8,7 @@ translate.py - Optionale KI-Übersetzung für WikiStub-Seed
 
 Voraussetzungen:
     pip install anthropic
-    export ANTHROPIC_API_KEY="<your-anthropic-api-key>"
+    Configure the ANTHROPIC_API_KEY environment variable before an API run.
 
 Nutzung als Modul:
     from translate import translate_text
@@ -18,7 +18,11 @@ Ohne API-Key oder ohne installiertes Paket wird "" zurückgegeben (kein Fehler).
 """
 
 import os
+import math
+import sys
 import time
+
+from language_model import SUPPORTED_LANGUAGES, normalize_language_code
 
 MODEL_ID = "claude-haiku-4-5-20251001"
 MAX_OUTPUT_TOKENS = 500
@@ -39,7 +43,13 @@ def _translation_prompt(text: str, target_lang: str) -> str:
         "ja": "Japanese",
         "ru": "Russian",
     }
-    target_name = lang_names.get(target_lang, target_lang)
+    target_lang = normalize_language_code(target_lang)
+    if target_lang not in SUPPORTED_LANGUAGES or target_lang == "de":
+        raise ValueError(
+            "target_lang must be one of: "
+            + ", ".join(lang for lang in SUPPORTED_LANGUAGES if lang != "de")
+        )
+    target_name = lang_names[target_lang]
     return (
         f"Translate the following German academic definition to {target_name}. "
         f"Return only the translation, no explanations or additional text.\n\n"
@@ -54,6 +64,8 @@ def estimate_max_request_cost_usd(text: str, target_lang: str = "en") -> float:
     2026-07-15. UTF-8 byte length plus protocol overhead bounds input tokens;
     output is bounded by ``MAX_OUTPUT_TOKENS``.
     """
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
     prompt = _translation_prompt(text, target_lang)
     max_input_tokens = len(prompt.encode("utf-8")) + _MESSAGE_OVERHEAD_TOKENS
     return (
@@ -77,7 +89,11 @@ def translate_text(text: str, target_lang: str = "en") -> str:
     Returns:
         Übersetzter Text oder "" falls API nicht verfügbar.
     """
-    if not text or not text.strip():
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
+    target_lang = normalize_language_code(target_lang)
+    _translation_prompt(text, target_lang)
+    if not text.strip():
         return ""
 
     try:
@@ -99,8 +115,8 @@ def translate_text(text: str, target_lang: str = "en") -> str:
             messages=[{"role": "user", "content": prompt}]
         )
         return message.content[0].text.strip()
-    except Exception as e:
-        print(f"Translation error: {e}")
+    except Exception as exc:
+        print(f"Translation error ({type(exc).__name__}).", file=sys.stderr)
         return ""
 
 
@@ -132,8 +148,21 @@ def translate_batch(
         Liste von übersetzten Texten (gleiche Länge wie Input)
     """
     projected_cost = estimate_batch_max_cost_usd(texts, target_lang)
-    if max_budget_usd is None or max_budget_usd <= 0:
+    if (
+        max_budget_usd is None
+        or not isinstance(max_budget_usd, (int, float))
+        or isinstance(max_budget_usd, bool)
+        or not math.isfinite(max_budget_usd)
+        or max_budget_usd <= 0
+    ):
         raise ValueError("max_budget_usd must be a positive explicit cost ceiling")
+    if (
+        not isinstance(delay, (int, float))
+        or isinstance(delay, bool)
+        or not math.isfinite(delay)
+        or delay < 0
+    ):
+        raise ValueError("delay must be a finite non-negative number")
     if projected_cost > max_budget_usd:
         raise ValueError(
             f"projected maximum cost ${projected_cost:.6f} exceeds "
@@ -144,7 +173,7 @@ def translate_batch(
     for i, text in enumerate(texts):
         result = translate_text(text, target_lang)
         results.append(result)
-        if delay > 0 and i < len(texts) - 1:
+        if result and delay > 0 and i < len(texts) - 1:
             time.sleep(delay)
     return results
 
@@ -155,7 +184,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="WikiStub-Seed: Text-Übersetzung")
     parser.add_argument("text", nargs="?", help="Zu übersetzender Text")
-    parser.add_argument("--lang", default="en", help="Zielsprache (default: en)")
+    parser.add_argument(
+        "--lang",
+        default="en",
+        choices=[lang for lang in SUPPORTED_LANGUAGES if lang != "de"],
+        help="Zielsprache (default: en)",
+    )
     parser.add_argument("--check", action="store_true", help="API-Verfügbarkeit prüfen")
     parser.add_argument("--max-budget-usd", type=float, help="Explizite Kostenobergrenze in USD")
     parser.add_argument("--confirm-api-cost", action="store_true", help="Mögliche API-Kosten bestätigen")
@@ -174,7 +208,12 @@ if __name__ == "__main__":
         sys.exit(1)
 
     projected_cost = estimate_max_request_cost_usd(args.text, args.lang)
-    if not args.confirm_api_cost or not args.max_budget_usd or args.max_budget_usd <= 0:
+    if (
+        not args.confirm_api_cost
+        or args.max_budget_usd is None
+        or not math.isfinite(args.max_budget_usd)
+        or args.max_budget_usd <= 0
+    ):
         print("FEHLER: --confirm-api-cost und --max-budget-usd > 0 sind erforderlich.")
         sys.exit(1)
     if projected_cost > args.max_budget_usd:

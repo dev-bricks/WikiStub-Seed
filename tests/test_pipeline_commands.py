@@ -240,6 +240,22 @@ class PipelineCommandTests(unittest.TestCase):
         )
 
         class InvalidJsonHandler:
+            data = {
+                "MetaWiki": {
+                    "01_Mathematik": {
+                        "Algebra": [
+                            {
+                                "title": "Gruppe",
+                                "definition_de": "Eine ausreichend lange Definition einer algebraischen Gruppe.",
+                                "definition_en": "A sufficiently long definition of an algebraic group.",
+                                "relevance": "Grundlage zahlreicher algebraischer Modelle.",
+                                "tags": ["Mathematik"],
+                            }
+                        ]
+                    }
+                }
+            }
+
             def load(self):
                 return True
 
@@ -348,6 +364,196 @@ class PipelineCommandTests(unittest.TestCase):
         subcategory_result = wikistub_seed_pipeline.validate_exchange_payload(base_payload)
         self.assertFalse(subcategory_result.is_valid)
         self.assertTrue(any("Algebra" in error for error in subcategory_result.errors))
+
+    def test_exchange_validation_rejects_ambiguous_metadata(self):
+        payload = {
+            "schema": "wikistub-seed-data-v1",
+            "generated_at": "2026-06-01T10:11:12",
+            "source": "wikistub_seed.json",
+            "languages": ["de", "en", "es", "zh", "ja", "ru", "ru"],
+            "language_model": wikistub_seed_pipeline.language_model_metadata(),
+            "stub_count": False,
+            "data": {"MetaWiki": {}},
+        }
+
+        result = wikistub_seed_pipeline.validate_exchange_payload(payload)
+
+        self.assertFalse(result.is_valid)
+        self.assertTrue(any("Zeitzone" in error for error in result.errors))
+        self.assertTrue(any("Duplikate" in error for error in result.errors))
+        self.assertTrue(any("stub_count" in error for error in result.errors))
+
+    def test_json_handler_missing_and_corrupt_master_fail_closed(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            path = Path(tmp_dir) / "wikistub_seed.json"
+            handler = wikistub_seed_pipeline.JsonHandler(path)
+            self.assertFalse(handler.load())
+
+            path.write_text("{broken", encoding="utf-8")
+            self.assertFalse(handler.load())
+
+    def test_json_handler_refuses_invalid_structure_on_save(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            path = Path(tmp_dir) / "wikistub_seed.json"
+            handler = wikistub_seed_pipeline.JsonHandler(path)
+            handler.data = {"MetaWiki": {"01_Mathematik": "broken"}}
+
+            self.assertFalse(handler.save(create_backup=False))
+            self.assertFalse(path.exists())
+
+    def test_import_discards_all_changes_when_any_markdown_fails(self):
+        valid_stub = wikistub_seed_pipeline.WikiStub(
+            title="Gruppe",
+            definition_de="Eine ausreichend lange algebraische Definition.",
+            relevance="Grundlage zahlreicher algebraischer Modelle.",
+            tags=["Mathematik"],
+            category="01_Mathematik",
+            subcategory="Algebra",
+        )
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            base = Path(tmp_dir)
+            folder = base / "01_Mathematik" / "Algebra"
+            folder.mkdir(parents=True)
+            good = folder / "good.md"
+            bad = folder / "bad.md"
+            good.write_text("good", encoding="utf-8")
+            bad.write_text("bad", encoding="utf-8")
+            data_path = base / "wikistub_seed.json"
+            data_path.write_text('{"MetaWiki": {}}', encoding="utf-8")
+
+            def parse(path):
+                return valid_stub if path.name == "good.md" else None
+
+            with (
+                mock.patch.object(wikistub_seed_pipeline, "BASE_PATH", base),
+                mock.patch.object(wikistub_seed_pipeline, "JSON_PATH", data_path),
+                mock.patch.object(
+                    wikistub_seed_pipeline,
+                    "CATEGORY_FOLDERS",
+                    ["01_Mathematik"],
+                ),
+                mock.patch.object(
+                    wikistub_seed_pipeline.MarkdownParser,
+                    "parse_file",
+                    side_effect=parse,
+                ),
+            ):
+                exit_code = wikistub_seed_pipeline.cmd_import(
+                    SimpleNamespace(allow_partial=False)
+                )
+
+            written = json.loads(data_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(written, {"MetaWiki": {}})
+
+    def test_translate_selects_empty_target_slot_without_fallback(self):
+        entry = {
+            "title": "Gruppe",
+            "definition_de": "Eine ausreichend lange algebraische Definition.",
+            "definition_en": "A sufficiently long algebraic definition.",
+            "definitions": {
+                "de": "Eine ausreichend lange algebraische Definition.",
+                "en": "A sufficiently long algebraic definition.",
+                "es": "",
+            },
+            "relevance": "Grundlage algebraischer Modelle.",
+            "tags": ["Mathematik"],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            data_path = root / "wikistub_seed.json"
+            backup_path = root / "backups"
+            data_path.write_text(
+                json.dumps(
+                    {"MetaWiki": {"01_Mathematik": {"Algebra": [entry]}}},
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            with (
+                mock.patch.object(wikistub_seed_pipeline, "JSON_PATH", data_path),
+                mock.patch.object(wikistub_seed_pipeline, "BACKUP_PATH", backup_path),
+                mock.patch("translate.is_available", return_value=True),
+                mock.patch(
+                    "translate.translate_text",
+                    return_value="Una definición algebraica suficientemente larga.",
+                ) as translate_text,
+            ):
+                exit_code = wikistub_seed_pipeline.cmd_translate(
+                    SimpleNamespace(
+                        limit=1,
+                        confirm_api_cost=True,
+                        max_budget_usd=1.0,
+                        lang="es",
+                        delay=0.0,
+                    )
+                )
+
+            written = json.loads(data_path.read_text(encoding="utf-8"))
+
+        translated = written["MetaWiki"]["01_Mathematik"]["Algebra"][0]
+        self.assertEqual(exit_code, 0)
+        translate_text.assert_called_once()
+        self.assertEqual(
+            translated["definitions"]["es"],
+            "Una definición algebraica suficientemente larga.",
+        )
+
+    def test_translate_can_repair_missing_required_english_slot(self):
+        entry = {
+            "title": "Gruppe",
+            "definition_de": "Eine ausreichend lange algebraische Definition.",
+            "definition_en": "",
+            "definitions": {
+                "de": "Eine ausreichend lange algebraische Definition.",
+                "en": "",
+            },
+            "relevance": "Grundlage algebraischer Modelle.",
+            "tags": ["Mathematik"],
+        }
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            data_path = root / "wikistub_seed.json"
+            data_path.write_text(
+                json.dumps(
+                    {"MetaWiki": {"01_Mathematik": {"Algebra": [entry]}}},
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            with (
+                mock.patch.object(wikistub_seed_pipeline, "JSON_PATH", data_path),
+                mock.patch.object(
+                    wikistub_seed_pipeline,
+                    "BACKUP_PATH",
+                    root / "backups",
+                ),
+                mock.patch("translate.is_available", return_value=True),
+                mock.patch(
+                    "translate.translate_text",
+                    return_value="A sufficiently long algebraic definition.",
+                ),
+            ):
+                exit_code = wikistub_seed_pipeline.cmd_translate(
+                    SimpleNamespace(
+                        limit=1,
+                        confirm_api_cost=True,
+                        max_budget_usd=1.0,
+                        lang="en",
+                        delay=0.0,
+                    )
+                )
+
+            written = json.loads(data_path.read_text(encoding="utf-8"))
+
+        translated = written["MetaWiki"]["01_Mathematik"]["Algebra"][0]
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            translated["definitions"]["en"],
+            "A sufficiently long algebraic definition.",
+        )
 
 
 if __name__ == "__main__":

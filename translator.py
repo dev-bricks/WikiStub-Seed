@@ -13,11 +13,12 @@ label.setText(translator.t('Datei oeffnen'))
 translator.set_language('en')
 """
 
-import json
 import re
 from pathlib import Path
 from typing import Dict, List, Set
-from safe_io import atomic_write_json
+
+from language_model import SUPPORTED_LANGUAGES, normalize_language_code
+from safe_io import JsonDataError, atomic_write_json, read_json_object
 
 
 class TranslationSystem:
@@ -31,7 +32,10 @@ class TranslationSystem:
             default_lang: Standard-Sprache ('de' oder 'en')
             app_dir: Verzeichnis der Anwendung (default: aktuelles Verzeichnis)
         """
-        self.current_lang = default_lang
+        normalized_default = normalize_language_code(default_lang)
+        if normalized_default not in SUPPORTED_LANGUAGES:
+            raise ValueError(f"Unsupported language: {default_lang}")
+        self.current_lang = normalized_default
 
         if app_dir is None:
             app_dir = Path.cwd()
@@ -62,10 +66,22 @@ class TranslationSystem:
     def _load_translations(self):
         if self.translations_file.exists():
             try:
-                with open(self.translations_file, 'r', encoding='utf-8') as f:
-                    self.translations = json.load(f)
-            except Exception:
-                self.translations = {}
+                payload = read_json_object(self.translations_file)
+            except JsonDataError as exc:
+                raise RuntimeError(str(exc)) from exc
+            for key, translations in payload.items():
+                if not isinstance(key, str) or not isinstance(translations, dict):
+                    raise RuntimeError(
+                        f"Invalid translation entry in {self.translations_file}: {key!r}"
+                    )
+                if not all(
+                    isinstance(lang, str) and isinstance(text, str)
+                    for lang, text in translations.items()
+                ):
+                    raise RuntimeError(
+                        f"Invalid translation values in {self.translations_file}: {key!r}"
+                    )
+            self.translations = payload
         else:
             self.translations = {}
 
@@ -83,23 +99,31 @@ class TranslationSystem:
             Uebersetzter Text oder Key als Fallback
         """
         if key in self.translations:
-            return self.translations[key].get(self.current_lang, key)
+            translated = self.translations[key].get(self.current_lang, "")
+            return translated or self.translations[key].get("de", "") or key
 
         if self._is_german(key):
-            self.translations[key] = {"de": key, "en": ""}
+            self.translations[key] = {
+                lang: key if lang == "de" else "" for lang in SUPPORTED_LANGUAGES
+            }
             self._save_translations()
 
         return key
 
     def set_language(self, lang: str):
-        if lang in ['de', 'en']:
-            self.current_lang = lang
+        normalized = normalize_language_code(lang)
+        if normalized not in SUPPORTED_LANGUAGES:
+            raise ValueError(f"Unsupported language: {lang}")
+        self.current_lang = normalized
 
     def get_language(self) -> str:
         return self.current_lang
 
     def add_translation(self, key: str, de: str, en: str):
-        self.translations[key] = {"de": de, "en": en}
+        self.translations[key] = {
+            lang: {"de": de, "en": en}.get(lang, "")
+            for lang in SUPPORTED_LANGUAGES
+        }
         self._save_translations()
 
     def scan_and_update(self, project_dir: Path = None) -> Dict:
@@ -112,7 +136,10 @@ class TranslationSystem:
         added = []
         for string in sorted(found_strings):
             if string not in self.translations:
-                self.translations[string] = {"de": string, "en": ""}
+                self.translations[string] = {
+                    lang: string if lang == "de" else ""
+                    for lang in SUPPORTED_LANGUAGES
+                }
                 added.append(string)
 
         if added:

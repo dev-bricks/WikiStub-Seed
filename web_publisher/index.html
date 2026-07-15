@@ -12,6 +12,17 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-180.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
     :root {
       --accent: #1a73e8;
@@ -60,7 +71,7 @@
       outline: none;
       min-height: 44px;
     }
-    #lang-toggle {
+    #lang-select {
       background: rgba(255,255,255,0.2);
       border: 1px solid rgba(255,255,255,0.5);
       color: #fff;
@@ -167,8 +178,16 @@
 <body>
   <header>
     <h1>WikiStub-Seed</h1>
-    <input id="search" type="search" placeholder="Suche…" autocomplete="off">
-    <button id="lang-toggle">EN</button>
+    <input id="search" type="search" placeholder="Suche…" autocomplete="off" aria-label="Stubs durchsuchen">
+    <label for="lang-select" class="sr-only">Sprache</label>
+    <select id="lang-select" aria-label="Sprache auswählen">
+      <option value="de">DE</option>
+      <option value="en">EN</option>
+      <option value="es">ES</option>
+      <option value="zh">ZH</option>
+      <option value="ja">JA</option>
+      <option value="ru">RU</option>
+    </select>
   </header>
   <div class="layout">
     <nav><ul id="cat-tree"></ul></nav>

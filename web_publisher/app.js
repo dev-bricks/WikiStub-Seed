@@ -1,17 +1,35 @@
 "use strict";
 
 const LANG_KEY = "mw-lang";
-let wiki = null;      // raw WikiStub-Seed object
-let index = null;     // flat search-index array
-let lang = localStorage.getItem(LANG_KEY) || "de";
+const LANGUAGES = ["de", "en", "es", "zh", "ja", "ru"];
 
-// ── DOM refs ──────────────────────────────────────────────────────────────────
-const catTree    = document.getElementById("cat-tree");
-const stubList   = document.getElementById("stub-list");
-const detail     = document.getElementById("detail");
+function readStoredLanguage() {
+  try {
+    const stored = localStorage.getItem(LANG_KEY);
+    return LANGUAGES.includes(stored) ? stored : "de";
+  } catch (error) {
+    return "de";
+  }
+}
+
+function storeLanguage(value) {
+  try {
+    localStorage.setItem(LANG_KEY, value);
+  } catch (error) {
+    // Storage policies and private browsing must not break the reader.
+  }
+}
+
+let wiki = null;
+let index = null;
+let lang = readStoredLanguage();
+
+const catTree = document.getElementById("cat-tree");
+const stubList = document.getElementById("stub-list");
+const detail = document.getElementById("detail");
 const searchInput = document.getElementById("search");
-const langToggle  = document.getElementById("lang-toggle");
-const loadingMsg  = document.getElementById("loading");
+const langSelect = document.getElementById("lang-select");
+const loadingMsg = document.getElementById("loading");
 
 function bindActivation(element, handler) {
   element.tabIndex = 0;
@@ -29,36 +47,55 @@ function localizedText(map, selectedLang, legacy = {}) {
   const source = map && typeof map === "object" ? map : {};
   const fallback = { ...legacy, ...source };
   for (const candidate of [selectedLang, "de", "en"]) {
-    if (fallback[candidate]) return fallback[candidate];
+    if (typeof fallback[candidate] === "string" && fallback[candidate]) {
+      return fallback[candidate];
+    }
   }
-  return Object.values(fallback).find(Boolean) || "";
+  return Object.values(fallback).find((value) => typeof value === "string" && value) || "";
 }
 
 function definitionText(entry, selectedLang = lang) {
   return localizedText(entry.definitions, selectedLang, {
-    de: entry.definition_de || "",
-    en: entry.definition_en || "",
+    de: typeof entry.definition_de === "string" ? entry.definition_de : "",
+    en: typeof entry.definition_en === "string" ? entry.definition_en : "",
   });
 }
 
 function relevanceText(entry, selectedLang = lang) {
-  const relevanceMap = entry.relevance_i18n || (typeof entry.relevance === "object" ? entry.relevance : null);
+  const relevanceMap = entry.relevance_i18n ||
+    (typeof entry.relevance === "object" ? entry.relevance : null);
   return localizedText(relevanceMap, selectedLang, {
     de: typeof entry.relevance === "string" ? entry.relevance : "",
   });
 }
 
-// ── Boot ─────────────────────────────────────────────────────────────────────
 async function boot() {
   updateLangUI();
   try {
-    const [wikiRes, idxRes] = await Promise.all([
+    const [wikiRes, indexRes] = await Promise.all([
       fetch("./data/wikistub_seed.json"),
       fetch("./data/search-index.json"),
     ]);
-    wiki  = (await wikiRes.json()).MetaWiki;
-    index = await idxRes.json();
-  } catch (e) {
+    if (!wikiRes.ok || !indexRes.ok) throw new Error("HTTP error");
+
+    const wikiPayload = await wikiRes.json();
+    const indexPayload = await indexRes.json();
+    if (
+      !wikiPayload ||
+      !wikiPayload.MetaWiki ||
+      typeof wikiPayload.MetaWiki !== "object" ||
+      Array.isArray(wikiPayload.MetaWiki)
+    ) {
+      throw new Error("Invalid WikiStub payload");
+    }
+    if (!Array.isArray(indexPayload) || indexPayload.some((entry) =>
+      !entry || typeof entry.id !== "string" || typeof entry.title !== "string"
+    )) {
+      throw new Error("Invalid search index");
+    }
+    wiki = wikiPayload.MetaWiki;
+    index = indexPayload;
+  } catch (error) {
     loadingMsg.textContent = "Daten konnten nicht geladen werden.";
     return;
   }
@@ -69,13 +106,16 @@ async function boot() {
   routeHash();
 }
 
-// ── Category tree ─────────────────────────────────────────────────────────────
 function buildTree() {
   catTree.replaceChildren();
   const all = document.createElement("li");
   all.className = "cat-all active";
   all.textContent = lang === "de" ? "Alle" : "All";
-  bindActivation(all, () => { renderList(index); setActive(all); clearHash(); });
+  bindActivation(all, () => {
+    renderList(index);
+    setActive(all);
+    clearHash();
+  });
   catTree.appendChild(all);
 
   for (const cat of Object.keys(wiki)) {
@@ -84,8 +124,7 @@ function buildTree() {
     li.dataset.cat = cat;
     li.textContent = cat.replace(/^\d+_/, "").replace(/_/g, " ");
     bindActivation(li, () => {
-      const filtered = index.filter((e) => e.cat === cat);
-      renderList(filtered);
+      renderList(index.filter((entry) => entry.cat === cat));
       setActive(li);
       clearHash();
     });
@@ -97,10 +136,9 @@ function buildTree() {
       subLi.dataset.cat = cat;
       subLi.dataset.sub = sub;
       subLi.textContent = sub.replace(/_/g, " ");
-      bindActivation(subLi, (ev) => {
-        ev.stopPropagation();
-        const filtered = index.filter((e) => e.cat === cat && e.sub === sub);
-        renderList(filtered);
+      bindActivation(subLi, (event) => {
+        event.stopPropagation();
+        renderList(index.filter((entry) => entry.cat === cat && entry.sub === sub));
         setActive(subLi);
         clearHash();
       });
@@ -111,12 +149,15 @@ function buildTree() {
   }
 }
 
-function setActive(el) {
-  catTree.querySelectorAll(".active").forEach((x) => x.classList.remove("active"));
-  el.classList.add("active");
+function setActive(element) {
+  catTree.querySelectorAll(".active").forEach((item) => {
+    item.classList.remove("active");
+    item.removeAttribute("aria-current");
+  });
+  element.classList.add("active");
+  element.setAttribute("aria-current", "true");
 }
 
-// ── Stub list ─────────────────────────────────────────────────────────────────
 function renderList(entries) {
   stubList.replaceChildren();
   detail.replaceChildren();
@@ -130,107 +171,114 @@ function renderList(entries) {
   for (const entry of entries) {
     const li = document.createElement("li");
     li.textContent = entry.title;
-    li.dataset.id  = entry.id;
-    bindActivation(li, () => { showDetail(entry.id); setStubActive(li); });
+    li.dataset.id = entry.id;
+    bindActivation(li, () => {
+      showDetail(entry.id);
+      setStubActive(li);
+    });
     stubList.appendChild(li);
   }
 }
 
-function setStubActive(el) {
-  stubList.querySelectorAll(".active").forEach((x) => x.classList.remove("active"));
-  el.classList.add("active");
+function setStubActive(element) {
+  stubList.querySelectorAll(".active").forEach((item) => {
+    item.classList.remove("active");
+    item.removeAttribute("aria-current");
+  });
+  element.classList.add("active");
+  element.setAttribute("aria-current", "true");
 }
 
-// ── Detail ────────────────────────────────────────────────────────────────────
 function showDetail(id, updateHash = true) {
-  const numericId = Number(id);
-  const meta = index.find((candidate) => candidate.id === numericId);
+  const stableId = String(id);
+  const meta = index.find((candidate) => candidate.id === stableId);
   if (!meta) return;
-  const entry = wiki[meta.cat]?.[meta.sub]?.find((e) => e.title === meta.title);
+  const entries = wiki[meta.cat]?.[meta.sub];
+  const entry = Array.isArray(entries)
+    ? entries.find((candidate) => candidate.title === meta.title)
+    : null;
   if (!entry) return;
   if (updateHash) {
-    const hash = new URLSearchParams({ stub: String(meta.id), title: entry.title });
+    const hash = new URLSearchParams({ stub: meta.id, title: entry.title });
     window.location.hash = hash.toString();
   }
 
-  const def  = definitionText(entry, lang);
-  const relevance = relevanceText(entry, lang);
-  const defLabel = lang === "de" ? "Definition" : "Definition";
-  const relLabel = lang === "de" ? "Relevanz" : "Relevance";
-  const tagsLabel = lang === "de" ? "Tags" : "Tags";
-  const catLabel = lang === "de" ? meta.cat.replace(/^\d+_/, "").replace(/_/g, " ") : meta.cat.replace(/^\d+_/, "").replace(/_/g, " ");
-
   const title = document.createElement("h2");
   title.textContent = entry.title;
-
   const breadcrumb = document.createElement("p");
   breadcrumb.className = "breadcrumb";
-  breadcrumb.textContent = `${catLabel} › ${meta.sub.replace(/_/g, " ")}`;
-
+  breadcrumb.textContent = `${meta.cat.replace(/^\d+_/, "").replace(/_/g, " ")} › ${meta.sub.replace(/_/g, " ")}`;
   const definitionHeading = document.createElement("h3");
-  definitionHeading.textContent = defLabel;
+  definitionHeading.textContent = "Definition";
   const definition = document.createElement("p");
-  definition.textContent = def;
-
+  definition.textContent = definitionText(entry, lang);
   const relevanceHeading = document.createElement("h3");
-  relevanceHeading.textContent = relLabel;
-  const relevanceParagraph = document.createElement("p");
-  relevanceParagraph.textContent = relevance;
-
+  relevanceHeading.textContent = lang === "de" ? "Relevanz" : "Relevance";
+  const relevance = document.createElement("p");
+  relevance.textContent = relevanceText(entry, lang);
   const tags = document.createElement("p");
   tags.className = "tags";
   const tagsHeading = document.createElement("strong");
-  tagsHeading.textContent = `${tagsLabel}: `;
+  tagsHeading.textContent = "Tags: ";
   tags.appendChild(tagsHeading);
-  for (const tag of entry.tags || []) {
+  for (const tag of Array.isArray(entry.tags) ? entry.tags : []) {
+    if (typeof tag !== "string") continue;
     const badge = document.createElement("span");
     badge.className = "tag";
     badge.textContent = tag;
     tags.appendChild(badge);
     tags.append(" ");
   }
-
   detail.replaceChildren(
     title,
     breadcrumb,
     definitionHeading,
     definition,
     relevanceHeading,
-    relevanceParagraph,
+    relevance,
     tags,
   );
 }
 
-// ── Search ────────────────────────────────────────────────────────────────────
+function searchResults() {
+  const query = searchInput.value.trim().toLocaleLowerCase(lang);
+  if (!query) return index;
+  return index.filter((entry) =>
+    entry.title.toLocaleLowerCase(lang).includes(query) ||
+    (Array.isArray(entry.tags) ? entry.tags : []).some((tag) =>
+      typeof tag === "string" && tag.toLocaleLowerCase(lang).includes(query)
+    ) ||
+    definitionText(entry, lang).toLocaleLowerCase(lang).includes(query) ||
+    relevanceText(entry, lang).toLocaleLowerCase(lang).includes(query)
+  );
+}
+
 function initSearch() {
   searchInput.addEventListener("input", () => {
-    const q = searchInput.value.trim().toLowerCase();
-    if (!q) { renderList(index); return; }
-    const hits = index.filter((e) =>
-      e.title.toLowerCase().includes(q) ||
-      (e.tags || []).some((t) => t.toLowerCase().includes(q)) ||
-      definitionText(e, lang).toLowerCase().includes(q) ||
-      relevanceText(e, lang).toLowerCase().includes(q)
-    );
-    renderList(hits);
+    renderList(searchResults());
     clearHash();
   });
 }
 
-// ── Language toggle ───────────────────────────────────────────────────────────
 function updateLangUI() {
-  langToggle.textContent = lang === "de" ? "EN" : "DE";
+  langSelect.value = lang;
+  searchInput.placeholder = lang === "de" ? "Suche…" : "Search…";
   document.documentElement.lang = lang;
 }
 
-langToggle.addEventListener("click", () => {
-  lang = lang === "de" ? "en" : "de";
-  localStorage.setItem(LANG_KEY, lang);
+langSelect.addEventListener("change", () => {
+  if (!LANGUAGES.includes(langSelect.value)) return;
+  const selectedId = new URLSearchParams(window.location.hash.slice(1)).get("stub");
+  lang = langSelect.value;
+  storeLanguage(lang);
   updateLangUI();
-  if (wiki) { buildTree(); renderList(index); }
+  if (wiki) {
+    buildTree();
+    renderList(searchResults());
+    if (selectedId) showDetail(selectedId, false);
+  }
 });
 
-// ── Hash routing ──────────────────────────────────────────────────────────────
 function routeHash() {
   const rawHash = window.location.hash.slice(1);
   if (!rawHash || !index) return;
@@ -238,9 +286,12 @@ function routeHash() {
   let entry = null;
   if (rawHash.startsWith("stub=")) {
     const params = new URLSearchParams(rawHash);
-    const id = Number(params.get("stub"));
-    if (Number.isSafeInteger(id)) {
+    const id = params.get("stub");
+    if (/^[a-f0-9]{20}$/.test(id || "")) {
       entry = index.find((candidate) => candidate.id === id) || null;
+    }
+    if (!entry && params.get("title")) {
+      entry = index.find((candidate) => candidate.title === params.get("title")) || null;
     }
   } else {
     try {
@@ -252,8 +303,11 @@ function routeHash() {
   }
   if (!entry) return;
   showDetail(entry.id, false);
-  const li = stubList.querySelector(`[data-id="${entry.id}"]`);
-  if (li) { setStubActive(li); li.scrollIntoView({ block: "nearest" }); }
+  const listItem = stubList.querySelector(`[data-id="${entry.id}"]`);
+  if (listItem) {
+    setStubActive(listItem);
+    listItem.scrollIntoView({ block: "nearest" });
+  }
 }
 
 function clearHash() {
@@ -262,7 +316,6 @@ function clearHash() {
 
 window.addEventListener("hashchange", routeHash);
 
-// ── Service Worker ────────────────────────────────────────────────────────────
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./sw.js").catch(() => {});
 }

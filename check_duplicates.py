@@ -15,15 +15,15 @@ Nutzung:
     python check_duplicates.py --fix          # Interaktiv bereinigen
 """
 
-import json
+import math
 import sys
 from pathlib import Path
 from collections import defaultdict
 from datetime import datetime
 
-from language_model import get_definition, get_relevance
+from language_model import get_definition, get_relevance, identifier_key
 from data_policy import duplicate_locations_are_allowed
-from safe_io import atomic_write_json, backup_file
+from safe_io import JsonDataError, atomic_write_json, backup_file, read_json_object
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -32,12 +32,27 @@ BACKUP_PATH = BASE_PATH / "backups"
 
 def load_json():
     """Laedt wikistub_seed.json."""
-    if not JSON_PATH.exists():
-        print(f"FEHLER: {JSON_PATH} nicht gefunden.")
-        sys.exit(1)
-
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        data = read_json_object(JSON_PATH)
+    except JsonDataError as exc:
+        print(f"FEHLER: {exc}")
+        return None
+    root = data.get("MetaWiki")
+    if not isinstance(root, dict):
+        print("FEHLER: MetaWiki muss ein Objekt sein.")
+        return None
+    for category, subcategories in root.items():
+        if not isinstance(category, str) or not isinstance(subcategories, dict):
+            print("FEHLER: Kategorien müssen benannte Objekte sein.")
+            return None
+        for subcategory, entries in subcategories.items():
+            if not isinstance(subcategory, str) or not isinstance(entries, list):
+                print(f"FEHLER: Ungültige Subkategorie in {category}.")
+                return None
+            if any(not isinstance(entry, dict) for entry in entries):
+                print(f"FEHLER: Ungültiger Stub in {category}/{subcategory}.")
+                return None
+    return data
 
 
 def get_all_stubs(data):
@@ -50,11 +65,13 @@ def get_all_stubs(data):
             if not isinstance(items, list):
                 continue
             for item in items:
+                if not isinstance(item, dict):
+                    continue
                 stubs.append({
-                    "title": item.get("title", ""),
+                    "title": item.get("title", "") if isinstance(item.get("title"), str) else "",
                     "definition_de": get_definition(item, "de"),
                     "relevance": get_relevance(item, "de"),
-                    "tags": item.get("tags", []),
+                    "tags": item.get("tags", []) if isinstance(item.get("tags"), list) else [],
                     "category": cat,
                     "subcategory": subcat
                 })
@@ -65,7 +82,7 @@ def find_exact_duplicates(stubs):
     """Findet exakte Titel-Duplikate (case-insensitive)."""
     title_map = defaultdict(list)
     for stub in stubs:
-        key = stub["title"].lower().strip()
+        key = identifier_key(stub["title"])
         title_map[key].append(stub)
 
     duplicates = {k: v for k, v in title_map.items() if len(v) > 1}
@@ -75,7 +92,7 @@ def find_exact_duplicates(stubs):
 def find_similar_titles(stubs, threshold=0.85):
     """Findet ähnliche Titel mittels einfacher Ähnlichkeitsmessung."""
     similar = []
-    titles = [(s["title"], s) for s in stubs]
+    titles = [(s["title"], s) for s in stubs if isinstance(s["title"], str)]
 
     for i in range(len(titles)):
         for j in range(i + 1, len(titles)):
@@ -114,7 +131,7 @@ def fix_duplicates_interactive(data, duplicates):
     """
     removed = 0
 
-    for title_lower, entries in sorted(duplicates.items()):
+    for title_key, entries in sorted(duplicates.items()):
         print(f"\n  Duplikat: '{entries[0]['title']}'")
         for i, e in enumerate(entries):
             print(f"    [{i + 1}] {e['category']}/{e['subcategory']}")
@@ -124,7 +141,7 @@ def fix_duplicates_interactive(data, duplicates):
                     preview += "..."
                 print(f"        {preview}")
 
-        print(f"    [s] Ueberspringen")
+        print("    [s] Ueberspringen")
 
         while True:
             try:
@@ -140,21 +157,23 @@ def fix_duplicates_interactive(data, duplicates):
                 idx = int(choice) - 1
                 if 0 <= idx < len(entries):
                     keep = entries[idx]
-                    to_remove = [e for i, e in enumerate(entries) if i != idx]
-
-                    for e in to_remove:
-                        cat = e["category"]
-                        subcat = e["subcategory"]
-                        items = data["MetaWiki"].get(cat, {}).get(subcat, [])
-                        original_len = len(items)
-                        data["MetaWiki"][cat][subcat] = [
-                            item for item in items
-                            if item.get("title", "").lower() != title_lower
-                            or (item.get("title", "").lower() == title_lower
-                                and e["category"] == keep["category"]
-                                and e["subcategory"] == keep["subcategory"])
-                        ]
-                        removed += original_len - len(data["MetaWiki"][cat][subcat])
+                    kept_selected = False
+                    for category, subcategories in data["MetaWiki"].items():
+                        for subcategory, items in subcategories.items():
+                            retained = []
+                            for item in items:
+                                if identifier_key(item.get("title", "")) != title_key:
+                                    retained.append(item)
+                                elif (
+                                    not kept_selected
+                                    and category == keep["category"]
+                                    and subcategory == keep["subcategory"]
+                                ):
+                                    retained.append(item)
+                                    kept_selected = True
+                                else:
+                                    removed += 1
+                            data["MetaWiki"][category][subcategory] = retained
 
                     print(f"  Behalten: {keep['category']}/{keep['subcategory']}")
                     break
@@ -182,13 +201,16 @@ def find_empty_entries(stubs):
     return empty
 
 
-def main():
+def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser(description="WikiStub-Seed: Konsistenzprüfung")
     parser.add_argument("--similar", action="store_true", help="Auch ähnliche Titel finden")
     parser.add_argument("--threshold", type=float, default=0.85, help="Ähnlichkeits-Schwellwert (0-1)")
     parser.add_argument("--fix", action="store_true", help="Exakte Duplikate interaktiv bereinigen")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    if not math.isfinite(args.threshold) or not 0 <= args.threshold <= 1:
+        parser.error("--threshold muss eine endliche Zahl zwischen 0 und 1 sein")
 
     print("=" * 60)
     print("  WikiStub-Seed: Konsistenzprüfung")
@@ -196,6 +218,8 @@ def main():
     print("=" * 60)
 
     data = load_json()
+    if data is None:
+        return 1
     stubs = get_all_stubs(data)
     print(f"\nGeprüft: {len(stubs)} Stubs")
 

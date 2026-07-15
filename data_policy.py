@@ -10,7 +10,10 @@ from language_model import identifier_key
 _ALLOWED_DUPLICATE_LOCATIONS = {
     identifier_key("Graphentheorie"): frozenset(
         {
-            (identifier_key("07_Informatik_KI"), identifier_key("Theoretische_Informatik")),
+            (
+                identifier_key("07_Informatik_KI"),
+                identifier_key("Theoretische_Informatik"),
+            ),
             (identifier_key("01_Mathematik"), identifier_key("Diskrete_Mathematik")),
         }
     ),

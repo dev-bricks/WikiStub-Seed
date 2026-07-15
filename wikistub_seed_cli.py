@@ -17,19 +17,30 @@ Einfaches Kommandozeilen-Interface für die wichtigsten Operationen:
 Nutzung:
     python wikistub_seed_cli.py list
     python wikistub_seed_cli.py search "Matrix"
-    python wikistub_seed_cli.py add --title "Neues Thema" --def "Kurze Beschreibung" --cat 07_Informatik_KI --sub Software_Engineering
+    python wikistub_seed_cli.py add --title "Neues Thema" --definition "Beschreibung" --definition-en "Description" --relevance "Nutzen" --category 07_Informatik_KI --subcategory Software_Engineering
     python wikistub_seed_cli.py stats
 """
 
-import json
 import sys
 import argparse
 from pathlib import Path
-from datetime import datetime
 from collections import defaultdict
 
-from language_model import get_definition, get_relevance, normalize_entry
-from safe_io import atomic_write_json, backup_file, safe_path_component
+from language_model import (
+    SUPPORTED_LANGUAGES,
+    get_definition,
+    get_relevance,
+    identifier_key,
+    normalize_entry,
+)
+from safe_io import (
+    JsonDataError,
+    atomic_write_json,
+    atomic_write_text,
+    backup_file,
+    read_json_object,
+    safe_path_component,
+)
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -55,10 +66,34 @@ CATEGORY_FOLDERS = [
 
 def load_json():
     """Lädt wikistub_seed.json."""
-    if not JSON_PATH.exists():
-        return {"MetaWiki": {cat: {} for cat in CATEGORY_FOLDERS}}
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    data = read_json_object(JSON_PATH)
+    root = data.get("MetaWiki")
+    if not isinstance(root, dict):
+        raise JsonDataError("wikistub_seed.json must contain an object at MetaWiki")
+    for category, subcategories in root.items():
+        if not isinstance(category, str) or not isinstance(subcategories, dict):
+            raise JsonDataError("categories must be named JSON objects")
+        for subcategory, entries in subcategories.items():
+            if not isinstance(subcategory, str) or not isinstance(entries, list):
+                raise JsonDataError(f"invalid subcategory structure at {category}")
+            for entry in entries:
+                if not isinstance(entry, dict) or not isinstance(entry.get("title"), str):
+                    raise JsonDataError(f"invalid stub structure at {category}/{subcategory}")
+                tags = entry.get("tags", [])
+                if not isinstance(tags, list) or not all(
+                    isinstance(tag, str) for tag in tags
+                ):
+                    raise JsonDataError(f"invalid tags at {category}/{subcategory}")
+    return data
+
+
+def load_json_or_report():
+    """Load the authoritative dataset and report concise CLI errors."""
+    try:
+        return load_json()
+    except JsonDataError as exc:
+        print(f"\n  FEHLER: {exc}", file=sys.stderr)
+        return None
 
 
 def save_json(data):
@@ -79,9 +114,12 @@ def get_all_stubs(data):
             if not isinstance(items, list):
                 continue
             for item in items:
-                item["_category"] = cat
-                item["_subcategory"] = subcat
-                stubs.append(item)
+                if not isinstance(item, dict):
+                    continue
+                annotated = dict(item)
+                annotated["_category"] = cat
+                annotated["_subcategory"] = subcat
+                stubs.append(annotated)
     return stubs
 
 
@@ -89,7 +127,9 @@ def get_all_stubs(data):
 
 def cmd_list(args):
     """Listet Stubs auf."""
-    data = load_json()
+    data = load_json_or_report()
+    if data is None:
+        return 1
     stubs = get_all_stubs(data)
 
     # Filter
@@ -99,11 +139,20 @@ def cmd_list(args):
         stubs = [s for s in stubs if args.subcategory.lower() in s["_subcategory"].lower()]
 
     # Sortieren
-    stubs.sort(key=lambda s: (s["_category"], s["_subcategory"], s["title"]))
+    stubs.sort(
+        key=lambda stub: (
+            str(stub["_category"]),
+            str(stub["_subcategory"]),
+            str(stub.get("title", "")),
+        )
+    )
 
     # Limit
     total = len(stubs)
-    if args.limit:
+    if args.limit is not None:
+        if args.limit < 0:
+            print("\n  FEHLER: --limit darf nicht negativ sein.", file=sys.stderr)
+            return 2
         stubs = stubs[:args.limit]
 
     print(f"\n  {total} Stubs gefunden" + (f" (zeige {len(stubs)})" if args.limit else "") + "\n")
@@ -122,11 +171,14 @@ def cmd_list(args):
             print(f"    {sub_display}:")
 
         print(f"      - {stub['title']}")
+    return 0
 
 
 def cmd_search(args):
     """Sucht in Stubs."""
-    data = load_json()
+    data = load_json_or_report()
+    if data is None:
+        return 1
     stubs = get_all_stubs(data)
 
     query = args.query.lower()
@@ -135,7 +187,8 @@ def cmd_search(args):
     for stub in stubs:
         score = 0
         # Titel-Match (hoechste Prioritaet)
-        if query in stub.get("title", "").lower():
+        title = stub.get("title", "") if isinstance(stub.get("title"), str) else ""
+        if query in title.lower():
             score = 3
         # Definition-Match
         elif query in get_definition(stub, "de").lower() or query in get_definition(stub, "en").lower():
@@ -144,7 +197,11 @@ def cmd_search(args):
         elif query in get_relevance(stub, "de").lower():
             score = 1
         # Tag-Match
-        elif any(query in tag.lower() for tag in stub.get("tags", [])):
+        elif any(
+            query in tag.lower()
+            for tag in stub.get("tags", [])
+            if isinstance(tag, str)
+        ):
             score = 1
 
         if score > 0:
@@ -168,11 +225,14 @@ def cmd_search(args):
                 defn += "..."
             print(f"          {defn}")
         print()
+    return 0
 
 
 def cmd_add(args):
     """Fuegt einen neuen Stub hinzu."""
-    data = load_json()
+    data = load_json_or_report()
+    if data is None:
+        return 1
 
     cat = args.category
     subcat = args.subcategory
@@ -182,19 +242,28 @@ def cmd_add(args):
         if cat not in CATEGORY_FOLDERS:
             print(f"\n  FEHLER: Kategorie '{cat}' unbekannt.")
             print(f"  Verfügbar: {', '.join(CATEGORY_FOLDERS)}")
-            return
+            return 2
 
     root = data["MetaWiki"]
     if cat not in root:
         root[cat] = {}
+    elif not isinstance(root[cat], dict):
+        print(f"\n  FEHLER: Kategorie '{cat}' hat eine ungültige Struktur.")
+        return 1
     if subcat not in root[cat]:
         root[cat][subcat] = []
+    elif not isinstance(root[cat][subcat], list):
+        print(f"\n  FEHLER: Subkategorie '{cat}/{subcat}' ist keine Liste.")
+        return 1
 
     # Duplikat pruefen
     for item in root[cat][subcat]:
-        if item.get("title", "").lower() == args.title.lower():
+        if not isinstance(item, dict):
+            print(f"\n  FEHLER: Ungültiger Eintrag in {cat}/{subcat}.")
+            return 1
+        if identifier_key(item.get("title", "")) == identifier_key(args.title):
             print(f"\n  WARNUNG: '{args.title}' existiert bereits in {cat}/{subcat}.")
-            return
+            return 2
 
     # Tags generieren
     tags = []
@@ -205,19 +274,22 @@ def cmd_add(args):
     stub = normalize_entry({
         "title": args.title,
         "definition_de": args.definition,
-        "definition_en": "",
-        "relevance": args.relevance or "",
+        "definition_en": args.definition_en,
+        "relevance": args.relevance,
         "tags": tags
     })
 
     root[cat][subcat].append(stub)
     save_json(data)
     print(f"\n  Hinzugefügt: '{args.title}' -> {cat}/{subcat}")
+    return 0
 
 
 def cmd_remove(args):
     """Entfernt einen Stub."""
-    data = load_json()
+    data = load_json_or_report()
+    if data is None:
+        return 1
     query = args.title.lower()
 
     found = []
@@ -228,29 +300,35 @@ def cmd_remove(args):
             if not isinstance(items, list):
                 continue
             for i, item in enumerate(items):
-                if item.get("title", "").lower() == query:
-                    found.append((cat, subcat, i, item["title"]))
+                if not isinstance(item, dict):
+                    continue
+                title_value = item.get("title", "")
+                if isinstance(title_value, str) and title_value.lower() == query:
+                    found.append((cat, subcat, i, str(item.get("title", ""))))
 
     if not found:
         print(f"\n  Kein Stub mit Titel '{args.title}' gefunden.")
-        return
+        return 2
 
     if len(found) > 1:
         print(f"\n  Mehrere Treffer für '{args.title}':")
         for idx, (cat, subcat, _, title) in enumerate(found):
             print(f"    {idx+1}. {title} in {cat}/{subcat}")
         print("\n  Bitte genauer spezifizieren.")
-        return
+        return 2
 
     cat, subcat, idx, title = found[0]
     del data["MetaWiki"][cat][subcat][idx]
     save_json(data)
     print(f"\n  Entfernt: '{title}' aus {cat}/{subcat}")
+    return 0
 
 
 def cmd_stats(args):
     """Zeigt Statistiken."""
-    data = load_json()
+    data = load_json_or_report()
+    if data is None:
+        return 1
     stubs = get_all_stubs(data)
 
     cat_counts = defaultdict(int)
@@ -263,14 +341,15 @@ def cmd_stats(args):
         cat_counts[stub["_category"]] += 1
         sub_counts[stub["_category"]][stub["_subcategory"]] += 1
         for tag in stub.get("tags", []):
-            tag_counts[tag] += 1
+            if isinstance(tag, str):
+                tag_counts[tag] += 1
         if not get_definition(stub, "de").strip():
             empty_def += 1
         if not get_relevance(stub, "de").strip():
             empty_rel += 1
 
     print(f"\n  {'='*50}")
-    print(f"  WikiStub-Seed Statistiken")
+    print("  WikiStub-Seed Statistiken")
     print(f"  {'='*50}")
     print(f"\n  Gesamt: {len(stubs)} Stubs")
     print(f"  Kategorien: {len(cat_counts)}")
@@ -278,7 +357,7 @@ def cmd_stats(args):
     print(f"  Ohne Definition: {empty_def}")
     print(f"  Ohne Relevanz: {empty_rel}")
 
-    print(f"\n  Verteilung:")
+    print("\n  Verteilung:")
     for cat in sorted(cat_counts.keys()):
         cat_display = cat.lstrip("0123456789_").replace("_", " ")
         bar = "#" * (cat_counts[cat] // 2)
@@ -289,17 +368,23 @@ def cmd_stats(args):
                 sub_display = subcat.replace("_", " ")
                 print(f"      {sub_display:33s} {sub_counts[cat][subcat]:4d}")
 
-    print(f"\n  Top 10 Tags:")
+    print("\n  Top 10 Tags:")
     for tag, count in sorted(tag_counts.items(), key=lambda x: -x[1])[:10]:
         print(f"    {tag:30s} {count:4d}")
+    return 0
 
 
 def cmd_export(args):
     """Exportiert JSON nach Markdown."""
-    data = load_json()
+    data = load_json_or_report()
+    if data is None:
+        return 1
     stubs = get_all_stubs(data)
     output_dir = BASE_PATH / "output"
     exported = 0
+    failures = 0
+    destinations = set()
+    language = getattr(args, "lang", "de")
 
     for stub in stubs:
         cat = stub["_category"]
@@ -309,24 +394,39 @@ def cmd_export(args):
 
         safe_title = safe_path_component(stub["title"].replace(" ", "_"))
         filepath = folder / f"{safe_title}.md"
+        resolved = filepath.resolve()
+        if resolved in destinations:
+            print(f"  FEHLER: Exportziel kollidiert: {filepath}", file=sys.stderr)
+            failures += 1
+            continue
+        destinations.add(resolved)
 
         cat_display = cat.lstrip("0123456789_").replace("_", " ")
         sub_display = subcat.replace("_", " ")
 
         content = f"# {stub['title']}\n\n"
-        content += f"**Kurzdefinition:**\n{get_definition(stub, 'de')}\n\n"
+        label = "Kurzdefinition" if language == "de" else f"Definition ({language.upper()})"
+        relevance_label = (
+            "Relevanz" if language == "de" else f"Relevanz ({language.upper()})"
+        )
+        content += f"**{label}:**\n{get_definition(stub, language)}\n\n"
         content += f"**Kategorie:**\n{cat_display} > {sub_display}\n\n"
-        content += f"**Relevanz:**\n{get_relevance(stub, 'de')}\n\n"
-        definition_en = get_definition(stub, "en")
-        if definition_en:
-            content += f"**Definition (EN):**\n{definition_en}\n\n"
+        content += f"**{relevance_label}:**\n{get_relevance(stub, language)}\n\n"
+        if language != "de":
+            content += f"**Definition (DE):**\n{get_definition(stub, 'de')}\n\n"
+            content += f"**Relevanz (DE):**\n{get_relevance(stub, 'de')}\n\n"
         if stub.get("tags"):
             content += f"**Tags:**\n{', '.join(stub['tags'])}\n"
 
-        filepath.write_text(content, encoding="utf-8")
-        exported += 1
+        try:
+            atomic_write_text(filepath, content)
+            exported += 1
+        except OSError as exc:
+            print(f"  FEHLER beim Schreiben von {filepath}: {exc}", file=sys.stderr)
+            failures += 1
 
     print(f"\n  {exported} Stubs exportiert nach {output_dir}")
+    return 1 if failures else 0
 
 
 def cmd_import_md(args):
@@ -336,7 +436,11 @@ def cmd_import_md(args):
     cmd = [sys.executable, str(BASE_PATH / "md_to_json.py")]
     if args.dry_run:
         cmd.append("--dry-run")
-    return subprocess.run(cmd).returncode
+    try:
+        return subprocess.run(cmd, timeout=180, check=False).returncode
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        print(f"FEHLER: Import-Unterprozess fehlgeschlagen: {exc}", file=sys.stderr)
+        return 1
 
 
 def cmd_check(args):
@@ -346,12 +450,16 @@ def cmd_check(args):
     cmd = [sys.executable, str(BASE_PATH / "check_duplicates.py")]
     if args.similar:
         cmd.append("--similar")
-    return subprocess.run(cmd).returncode
+    try:
+        return subprocess.run(cmd, timeout=180, check=False).returncode
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        print(f"FEHLER: Check-Unterprozess fehlgeschlagen: {exc}", file=sys.stderr)
+        return 1
 
 
 # ==================== MAIN ====================
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(
         description="WikiStub-Seed CLI - Stub-Management",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -360,8 +468,8 @@ Beispiele:
   wikistub_seed_cli.py list                                    # Alle Stubs auflisten
   wikistub_seed_cli.py list --category 07 --limit 20           # Informatik, max 20
   wikistub_seed_cli.py search "Matrix"                         # Suche nach "Matrix"
-  wikistub_seed_cli.py add -t "Neues Thema" -d "Definition"    # Stub hinzufuegen
-                  -c 07_Informatik_KI -s Software_Engineering
+  wikistub_seed_cli.py add -t "Neues Thema" -d "Definition" --definition-en "Definition"
+                  -r "Relevanz" -c 07_Informatik_KI -s Software_Engineering
   wikistub_seed_cli.py remove -t "Altes Thema"                 # Stub entfernen
   wikistub_seed_cli.py stats                                   # Statistiken
   wikistub_seed_cli.py stats -v                                # Detaillierte Statistiken
@@ -389,7 +497,12 @@ Beispiele:
     p_add = subparsers.add_parser("add", help="Stub hinzufuegen")
     p_add.add_argument("--title", "-t", required=True, help="Titel des Stubs")
     p_add.add_argument("--definition", "-d", required=True, help="Definition (DE)")
-    p_add.add_argument("--relevance", "-r", help="Relevanz")
+    p_add.add_argument(
+        "--definition-en",
+        required=True,
+        help="Definition (EN)",
+    )
+    p_add.add_argument("--relevance", "-r", required=True, help="Relevanz (DE)")
     p_add.add_argument("--category", "-c", required=True, help="Kategorie (z.B. 07_Informatik_KI)")
     p_add.add_argument("--subcategory", "-s", required=True, help="Subkategorie (z.B. Software_Engineering)")
     p_add.set_defaults(func=cmd_add)
@@ -406,6 +519,12 @@ Beispiele:
 
     # export
     p_export = subparsers.add_parser("export", help="JSON nach Markdown exportieren")
+    p_export.add_argument(
+        "--lang",
+        choices=SUPPORTED_LANGUAGES,
+        default="de",
+        help="Ausgabesprache mit Fallback (default: de)",
+    )
     p_export.set_defaults(func=cmd_export)
 
     # import
@@ -418,16 +537,15 @@ Beispiele:
     p_check.add_argument("--similar", action="store_true", help="Ähnliche Titel finden")
     p_check.set_defaults(func=cmd_check)
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if not args.command:
         parser.print_help()
-        return
+        return 0
 
     exit_code = args.func(args)
-    if isinstance(exit_code, int) and exit_code != 0:
-        sys.exit(exit_code)
+    return exit_code if isinstance(exit_code, int) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

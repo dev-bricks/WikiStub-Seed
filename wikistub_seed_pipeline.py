@@ -14,9 +14,11 @@ Features:
 """
 
 import json
+import math
 import re
 import sys
 import hashlib
+from copy import deepcopy
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
@@ -39,7 +41,14 @@ from language_model import (
     public_entry,
     identifier_key,
 )
-from safe_io import atomic_write_json, backup_file, safe_path_component
+from safe_io import (
+    JsonDataError,
+    atomic_write_json,
+    atomic_write_text,
+    backup_file,
+    read_json_object,
+    safe_path_component,
+)
 from data_policy import duplicate_locations_are_allowed
 
 # ==================== KONFIGURATION ====================
@@ -198,8 +207,10 @@ class MarkdownParser:
 
         title = ""
         definition = ""
-        category = ""
+        definition_en = ""
+        definitions = {}
         relevance = ""
+        relevance_i18n = {}
         tags = []
 
         current_section = None
@@ -220,10 +231,22 @@ class MarkdownParser:
                     text = ' '.join(section_content).strip()
                     if current_section == "kurzdefinition":
                         definition = text
-                    elif current_section == "kategorie":
-                        category = text
+                    elif current_section == "definition (de)":
+                        definition = text
+                    elif current_section == "definition (en)":
+                        definition_en = text
+                    elif current_section.startswith("definition (") and current_section.endswith(")"):
+                        language = current_section[12:-1]
+                        if language in SUPPORTED_LANGUAGES:
+                            definitions[language] = text
                     elif current_section == "relevanz":
                         relevance = text
+                    elif current_section.startswith("relevanz (") and current_section.endswith(")"):
+                        language = current_section[10:-1]
+                        if language in SUPPORTED_LANGUAGES:
+                            relevance_i18n[language] = text
+                    elif current_section == "tags":
+                        tags = [tag.strip() for tag in text.split(",") if tag.strip()]
 
                 # Neue Sektion
                 header = line[2:-3].lower()
@@ -240,10 +263,22 @@ class MarkdownParser:
             text = ' '.join(section_content).strip()
             if current_section == "kurzdefinition":
                 definition = text
-            elif current_section == "kategorie":
-                category = text
+            elif current_section == "definition (de)":
+                definition = text
+            elif current_section == "definition (en)":
+                definition_en = text
+            elif current_section.startswith("definition (") and current_section.endswith(")"):
+                language = current_section[12:-1]
+                if language in SUPPORTED_LANGUAGES:
+                    definitions[language] = text
             elif current_section == "relevanz":
                 relevance = text
+            elif current_section.startswith("relevanz (") and current_section.endswith(")"):
+                language = current_section[10:-1]
+                if language in SUPPORTED_LANGUAGES:
+                    relevance_i18n[language] = text
+            elif current_section == "tags":
+                tags = [tag.strip() for tag in text.split(",") if tag.strip()]
 
         if not title:
             return None
@@ -251,12 +286,20 @@ class MarkdownParser:
         # Bereinige unerwünschte Zeichen (z.B. 同期)
         definition = MarkdownParser._clean_text(definition)
         relevance = MarkdownParser._clean_text(relevance)
+        definitions = {
+            language: MarkdownParser._clean_text(text)
+            for language, text in definitions.items()
+        }
+        relevance_i18n = {
+            language: MarkdownParser._clean_text(text)
+            for language, text in relevance_i18n.items()
+        }
 
         # Extrahiere Kategorie/Subkategorie aus Pfad
         cat, subcat = MarkdownParser._extract_category_from_path(source_file)
 
         # Tags aus Kategorie generieren
-        if cat:
+        if cat and not tags:
             tags = [cat.replace("_", " ").lstrip("0123456789_")]
             if subcat:
                 tags.append(subcat.replace("_", " "))
@@ -264,7 +307,10 @@ class MarkdownParser:
         stub = WikiStub(
             title=title,
             definition_de=definition,
+            definition_en=definition_en,
             relevance=relevance,
+            definitions=definitions,
+            relevance_i18n=relevance_i18n,
             tags=tags,
             category=cat,
             subcategory=subcat,
@@ -310,23 +356,42 @@ class JsonHandler:
         self.json_path = json_path or JSON_PATH
         self.data: Dict = {"MetaWiki": {}}
 
-    def load(self) -> bool:
+    def load(self, *, allow_missing: bool = False) -> bool:
         """Lädt die JSON-Datei."""
         if not self.json_path.exists():
-            print(f"  ℹ JSON-Datei nicht gefunden, erstelle neue.")
-            return True
-
-        try:
-            with open(self.json_path, "r", encoding="utf-8") as f:
-                self.data = json.load(f)
-            return True
-        except Exception as e:
-            print(f"  ✗ Fehler beim Laden: {e}")
+            if allow_missing:
+                self.data = {"MetaWiki": {}}
+                return True
+            print(f"  ✗ Pflichtdatei nicht gefunden: {self.json_path}")
             return False
 
-    def save(self, *, create_backup: bool = True) -> bool:
+        try:
+            self.data = read_json_object(self.json_path)
+            if not isinstance(self.data.get("MetaWiki"), dict):
+                raise JsonDataError("MetaWiki muss ein Objekt sein")
+            return True
+        except JsonDataError as exc:
+            print(f"  ✗ Fehler beim Laden: {exc}")
+            return False
+
+    def save(
+        self,
+        *,
+        create_backup: bool = True,
+        allow_missing_definition: str | None = None,
+    ) -> bool:
         """Speichert die JSON-Datei."""
         try:
+            validation_errors, _ = validate_localized_data(
+                self.data,
+                allow_missing_definition=allow_missing_definition,
+            )
+            if validation_errors:
+                print(
+                    "  ✗ Speichern verweigert: "
+                    f"{len(validation_errors)} strukturelle Datenfehler."
+                )
+                return False
             # Backup erstellen
             if create_backup and self.json_path.exists():
                 backup_file(
@@ -345,8 +410,10 @@ class JsonHandler:
 
     def add_stub(self, stub: WikiStub) -> bool:
         """Fügt einen Stub hinzu."""
-        if "MetaWiki" not in self.data:
-            self.data["MetaWiki"] = {}
+        if not stub.title.strip() or not stub.category.strip() or not stub.subcategory.strip():
+            return False
+        if not isinstance(self.data.get("MetaWiki"), dict):
+            return False
 
         root = self.data["MetaWiki"]
 
@@ -354,11 +421,15 @@ class JsonHandler:
         category = existing_mapping_key(root, stub.category)
         if category not in root:
             root[category] = {}
+        elif not isinstance(root[category], dict):
+            return False
 
         # Subkategorie
         subcategory = existing_mapping_key(root[category], stub.subcategory)
         if subcategory not in root[category]:
             root[category][subcategory] = []
+        elif not isinstance(root[category][subcategory], list):
+            return False
 
         # Prüfe auf Duplikate
         existing = root[category][subcategory]
@@ -385,6 +456,8 @@ class JsonHandler:
                 if not isinstance(items, list):
                     continue
                 for item in items:
+                    if not isinstance(item, dict):
+                        continue
                     stub = WikiStub.from_dict(item, category, subcategory)
                     stubs.append(stub)
 
@@ -426,27 +499,47 @@ class MarkdownGenerator:
     """Generiert Markdown-Dateien aus Stubs."""
 
     @staticmethod
-    def generate(stub: WikiStub, include_english: bool = False) -> str:
+    def generate(
+        stub: WikiStub,
+        include_english: bool = False,
+        language: str = DEFAULT_LANGUAGE,
+    ) -> str:
         """Generiert Markdown-Content."""
         cat_display = stub.category.lstrip("0123456789_").replace("_", " ")
         subcat_display = stub.subcategory.replace("_", " ")
 
+        definition_label = (
+            "Kurzdefinition" if language == "de" else f"Definition ({language.upper()})"
+        )
+        relevance_label = (
+            "Relevanz" if language == "de" else f"Relevanz ({language.upper()})"
+        )
         lines = [
             f"# {stub.title}",
             "",
-            "**Kurzdefinition:**",
-            stub.get_definition("de"),
+            f"**{definition_label}:**",
+            stub.get_definition(language),
             "",
             "**Kategorie:**",
             f"{cat_display} → {subcat_display}",
             "",
-            "**Relevanz:**",
-            stub.get_relevance("de"),
+            f"**{relevance_label}:**",
+            stub.get_relevance(language),
             ""
         ]
 
+        if language != "de":
+            lines.extend([
+                "**Definition (DE):**",
+                stub.get_definition("de"),
+                "",
+                "**Relevanz (DE):**",
+                stub.get_relevance("de"),
+                "",
+            ])
+
         english_definition = stub.get_definition("en")
-        if include_english and english_definition:
+        if include_english and language != "en" and english_definition:
             lines.extend([
                 "**Definition (EN):**",
                 english_definition,
@@ -463,7 +556,12 @@ class MarkdownGenerator:
         return "\n".join(lines)
 
     @staticmethod
-    def write_file(stub: WikiStub, output_dir: Path, include_english: bool = False) -> bool:
+    def write_file(
+        stub: WikiStub,
+        output_dir: Path,
+        include_english: bool = False,
+        language: str = DEFAULT_LANGUAGE,
+    ) -> bool:
         """Schreibt eine Markdown-Datei."""
         try:
             # Ordnerstruktur
@@ -479,10 +577,10 @@ class MarkdownGenerator:
             filepath = folder / f"{safe_title}.md"
 
             # Inhalt generieren
-            content = MarkdownGenerator.generate(stub, include_english)
+            content = MarkdownGenerator.generate(stub, include_english, language)
 
             # Schreiben
-            filepath.write_text(content, encoding="utf-8")
+            atomic_write_text(filepath, content)
             return True
 
         except Exception as e:
@@ -599,20 +697,31 @@ def build_exchange_payload(data: Dict, source: str = "wikistub_seed.json") -> Di
     }
 
 
-def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
+def validate_localized_data(
+    data: Dict,
+    *,
+    allow_missing_definition: str | None = None,
+) -> Tuple[List[str], List[str]]:
     """Validiert Pflichttexte und optionale Sprachmaps in WikiStub-Seed-Daten."""
     errors: List[str] = []
     warnings: List[str] = []
     title_locations: Dict[str, List[Tuple[str, str, str]]] = {}
     root = data.get("MetaWiki")
     if not isinstance(root, dict):
+        errors.append("MetaWiki fehlt oder ist kein Objekt.")
         return errors, warnings
 
     for category, subcategories in root.items():
+        if not isinstance(category, str) or not category.strip():
+            errors.append("Kategorienamen müssen nichtleere Strings sein.")
+            continue
         if not isinstance(subcategories, dict):
             errors.append(f"{category}: Kategorieinhalt muss ein Objekt sein.")
             continue
         for subcategory, entries in subcategories.items():
+            if not isinstance(subcategory, str) or not subcategory.strip():
+                errors.append(f"{category}: Subkategorienamen müssen Strings sein.")
+                continue
             if not isinstance(entries, list):
                 errors.append(
                     f"{category}/{subcategory}: Subkategorieinhalt muss eine Liste sein."
@@ -634,12 +743,22 @@ def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
                     errors.append(f"{label}: definitions muss ein Objekt sein.")
                 if LOCALIZED_RELEVANCE_FIELD in entry and not isinstance(entry[LOCALIZED_RELEVANCE_FIELD], dict):
                     errors.append(f"{label}: {LOCALIZED_RELEVANCE_FIELD} muss ein Objekt sein.")
+                tags = entry.get("tags", [])
+                if not isinstance(tags, list) or not all(
+                    isinstance(tag, str) and tag.strip() for tag in tags
+                ):
+                    errors.append(f"{label}: tags muss eine Liste nichtleerer Strings sein.")
 
                 normalized = normalize_entry(entry)
-                if not get_definition(normalized, "de"):
-                    errors.append(f"{label}: Definition für de fehlt.")
-                if not get_definition(normalized, "en"):
-                    errors.append(f"{label}: Definition für en fehlt.")
+                definitions = normalized["definitions"]
+                for required_language in REQUIRED_LANGUAGES:
+                    if (
+                        required_language != allow_missing_definition
+                        and not definitions.get(required_language, "").strip()
+                    ):
+                        errors.append(
+                            f"{label}: Definition für {required_language} fehlt."
+                        )
 
     for locations in title_locations.values():
         if len(locations) <= 1:
@@ -670,7 +789,11 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
         errors.append("generated_at fehlt oder ist kein String.")
     else:
         try:
-            datetime.fromisoformat(generated_at.replace("Z", "+00:00"))
+            parsed_timestamp = datetime.fromisoformat(
+                generated_at.replace("Z", "+00:00")
+            )
+            if parsed_timestamp.tzinfo is None:
+                errors.append("generated_at muss eine Zeitzone enthalten.")
         except ValueError:
             errors.append("generated_at ist kein gültiger ISO-8601-Zeitstempel.")
 
@@ -685,6 +808,8 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
         errors.append("languages muss eine String-Liste sein.")
     else:
         language_set = set(languages)
+        if len(language_set) != len(languages):
+            errors.append("languages darf keine Duplikate enthalten.")
         missing_required = [lang for lang in REQUIRED_LANGUAGES if lang not in language_set]
         unknown = sorted(language_set - set(EXCHANGE_LANGUAGES))
         missing_supported = [lang for lang in EXCHANGE_LANGUAGES if lang not in language_set]
@@ -723,7 +848,11 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
             warnings.extend(language_warnings)
 
     stub_count = payload.get("stub_count")
-    if not isinstance(stub_count, int) or stub_count < 0:
+    if (
+        not isinstance(stub_count, int)
+        or isinstance(stub_count, bool)
+        or stub_count < 0
+    ):
         errors.append("stub_count fehlt oder ist keine nichtnegative Zahl.")
     elif actual_stub_count is not None and stub_count != actual_stub_count:
         errors.append(
@@ -731,6 +860,21 @@ def validate_exchange_payload(payload: object) -> ValidationResult:
         )
 
     return ValidationResult(len(errors) == 0, errors, warnings)
+
+
+def report_invalid_source(
+    data: Dict,
+    *,
+    allow_missing_definition: str | None = None,
+) -> bool:
+    """Print structural source errors and return whether the dataset is valid."""
+    errors, _ = validate_localized_data(
+        data,
+        allow_missing_definition=allow_missing_definition,
+    )
+    for error in errors:
+        print(f"  ✗ {error}")
+    return not errors
 
 def cmd_import(args):
     """Importiert Markdown-Dateien in JSON."""
@@ -741,7 +885,10 @@ def cmd_import(args):
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
         return 1
+    if not report_invalid_source(json_handler.data):
+        return 1
 
+    original_data = deepcopy(json_handler.data)
     imported = 0
     errors = 0
 
@@ -767,12 +914,22 @@ def cmd_import(args):
                         errors += 1
                         print(f"  ✗ {md_file.name}: {', '.join(validation.errors)}")
                         continue
-                    json_handler.add_stub(stub)
-                    imported += 1
-                    print(f"  ✓ {stub.title}")
+                    if json_handler.add_stub(stub):
+                        imported += 1
+                        print(f"  ✓ {stub.title}")
+                    else:
+                        errors += 1
+                        print(f"  ✗ {md_file.name}: Datenstruktur unvereinbar")
                 else:
                     errors += 1
                     print(f"  ✗ {md_file.name}")
+
+    if errors and not args.allow_partial:
+        json_handler.data = original_data
+        print("  ✗ Import wegen Fehlern verworfen; JSON bleibt unverändert.")
+        print(f"\n{'=' * 50}")
+        print(f"✗ 0 Stubs gespeichert, {errors} Fehler")
+        return 1
 
     # Speichern
     if imported > 0:
@@ -781,7 +938,7 @@ def cmd_import(args):
             return 1
 
     print(f"\n{'=' * 50}")
-    print(f"✓ {imported} Stubs importiert, {errors} Fehler")
+    print(f"✓ {imported} Stubs gespeichert, {errors} Fehler")
     return 1 if errors else 0
 
 
@@ -794,17 +951,28 @@ def cmd_export(args):
 
     json_handler = JsonHandler()
     if not json_handler.load():
-        return
+        return 1
+    if not report_invalid_source(json_handler.data):
+        return 1
 
     stubs = json_handler.get_all_stubs()
     print(f"  Gefunden: {len(stubs)} Stubs")
 
     exported = 0
+    failures = 0
     for stub in stubs:
-        if MarkdownGenerator.write_file(stub, output_dir, args.english):
+        if MarkdownGenerator.write_file(
+            stub,
+            output_dir,
+            args.english,
+            args.lang,
+        ):
             exported += 1
+        else:
+            failures += 1
 
     print(f"\n✓ {exported} Dateien exportiert nach {output_dir}")
+    return 1 if failures else 0
 
 
 def cmd_export_data(args):
@@ -819,9 +987,15 @@ def cmd_export_data(args):
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
         return 1
+    if not report_invalid_source(json_handler.data):
+        return 1
 
     payload = build_exchange_payload(json_handler.data, source=JSON_PATH.name)
-    atomic_write_json(output_path, payload)
+    try:
+        atomic_write_json(output_path, payload)
+    except (OSError, TypeError, ValueError) as exc:
+        print(f"  ✗ Export fehlgeschlagen: {exc}")
+        return 1
 
     print(f"  ✓ Schema: {payload['schema']}")
     print(f"  ✓ Stubs: {payload['stub_count']}")
@@ -874,6 +1048,14 @@ def cmd_validate(args):
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
         return 1
+    structure_errors, structure_warnings = validate_localized_data(json_handler.data)
+    if structure_errors:
+        for err in structure_errors:
+            print(f"    ERROR: {err}")
+        return 1
+    if args.verbose:
+        for warning in structure_warnings:
+            print(f"    WARN: {warning}")
     stubs = json_handler.get_all_stubs()
 
     valid = 0
@@ -936,24 +1118,29 @@ def cmd_stats(args):
     print("=" * 50)
 
     json_handler = JsonHandler()
-    json_handler.load()
+    if not json_handler.load():
+        print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
+        return 1
+    if not report_invalid_source(json_handler.data):
+        return 1
     stats = json_handler.get_statistics()
 
-    print(f"\n📈 Übersicht:")
+    print("\n📈 Übersicht:")
     print(f"   Gesamt-Stubs: {stats['total_stubs']}")
     print(f"   Kategorien: {stats['categories']}")
     print(f"   Eindeutige Tags: {stats['unique_tags']}")
 
-    print(f"\n📁 Kategorien:")
+    print("\n📁 Kategorien:")
     for cat, details in sorted(stats['category_details'].items()):
         print(f"   {cat}: {details['total']} Stubs")
         if args.verbose:
             for subcat, count in details['subcategories'].items():
                 print(f"      └─ {subcat}: {count}")
 
-    print(f"\n🏷 Top Tags:")
+    print("\n🏷 Top Tags:")
     for tag, count in list(stats['tag_frequency'].items())[:10]:
         print(f"   {tag}: {count}")
+    return 0
 
 
 def cmd_sync(args):
@@ -967,13 +1154,17 @@ def cmd_sync(args):
     json_handler = JsonHandler()
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
-        return
+        return 1
+    if not report_invalid_source(json_handler.data):
+        return 1
+    original_data = deepcopy(json_handler.data)
     existing_locations = {
         (identifier_key(s.category), identifier_key(s.subcategory), s.title.strip().casefold())
         for s in json_handler.get_all_stubs()
     }
 
     new_stubs = 0
+    errors = 0
 
     for category in CATEGORY_FOLDERS:
         cat_path = BASE_PATH / category
@@ -991,15 +1182,28 @@ def cmd_sync(args):
                     identifier_key(stub.subcategory) if stub else "",
                     stub.title.strip().casefold() if stub else "",
                 )
-                if stub and location not in existing_locations:
-                    json_handler.add_stub(stub)
-                    existing_locations.add(location)
-                    new_stubs += 1
-                    print(f"  + {stub.title}")
+                if not stub:
+                    errors += 1
+                    print(f"  ✗ {md_file.name}: nicht parsebar")
+                elif location not in existing_locations:
+                    validation = Validator.validate_stub(stub)
+                    if validation.is_valid and json_handler.add_stub(stub):
+                        existing_locations.add(location)
+                        new_stubs += 1
+                        print(f"  + {stub.title}")
+                    else:
+                        errors += 1
+                        print(f"  ✗ {md_file.name}: ungültiger Stub")
+
+    if errors:
+        json_handler.data = original_data
+        print("  ✗ Synchronisation wegen Fehlern verworfen.")
+        return 1
 
     if new_stubs > 0:
         if not json_handler.save():
             print("  ✗ Speichern fehlgeschlagen!")
+            return 1
 
     print(f"\n   ✓ {new_stubs} neue Stubs importiert")
 
@@ -1007,13 +1211,18 @@ def cmd_sync(args):
     if args.export:
         print("\n2️⃣ Exportiere nach Markdown...")
         stubs = json_handler.get_all_stubs()
-        for stub in stubs:
-            MarkdownGenerator.write_file(stub, OUTPUT_PATH)
-        print(f"   ✓ {len(stubs)} Dateien exportiert")
+        exported = sum(
+            MarkdownGenerator.write_file(stub, OUTPUT_PATH, language=args.lang)
+            for stub in stubs
+        )
+        print(f"   ✓ {exported} Dateien exportiert")
+        if exported != len(stubs):
+            return 1
+    return 0
 
 
 def cmd_translate(args):
-    """Übersetzt alle Stubs mit fehlender englischer Definition via Claude API."""
+    """Übersetzt fehlende Definitionen in eine unterstützte Zielsprache."""
     print("\n🌐 ÜBERSETZUNG")
     print("=" * 50)
 
@@ -1025,9 +1234,14 @@ def cmd_translate(args):
         print("  ✗ API-Kosten nicht bestätigt; nutze zusätzlich --confirm-api-cost.")
         return 1
     max_budget_usd = getattr(args, "max_budget_usd", None)
-    if not isinstance(max_budget_usd, (int, float)) or max_budget_usd <= 0:
+    if (
+        not isinstance(max_budget_usd, (int, float))
+        or not math.isfinite(max_budget_usd)
+        or max_budget_usd <= 0
+    ):
         print("  ✗ Eine positive --max-budget-usd-Kostengrenze ist erforderlich.")
         return 1
+    target_language = args.lang
 
     try:
         from translate import estimate_batch_max_cost_usd, translate_text, is_available
@@ -1046,16 +1260,26 @@ def cmd_translate(args):
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
         return 1
+    if not report_invalid_source(
+        json_handler.data,
+        allow_missing_definition=target_language,
+    ):
+        return 1
     stubs = json_handler.get_all_stubs()
 
-    to_translate = [s for s in stubs if not s.get_definition("en")]
+    to_translate = [
+        stub
+        for stub in stubs
+        if not stub.definitions.get(target_language, "").strip()
+    ]
     total = len(to_translate)
 
     if limit < total:
         to_translate = to_translate[:limit]
 
     projected_cost = estimate_batch_max_cost_usd(
-        [stub.get_definition("de") for stub in to_translate]
+        [stub.get_definition("de") for stub in to_translate],
+        target_language,
     )
     if projected_cost > max_budget_usd:
         print(
@@ -1071,15 +1295,22 @@ def cmd_translate(args):
     translated = 0
     errors = 0
     checkpoint_saved = False
-    delay = getattr(args, 'delay', 0.3)  # Konfigurierbare Verzögerung (Standard: 0.3s)
+    delay = args.delay
+    if not math.isfinite(delay) or delay < 0:
+        print("  ✗ --delay muss endlich und nichtnegativ sein.")
+        return 1
 
     for i, stub in enumerate(to_translate):
-        result = translate_text(stub.get_definition("de"))
+        result = translate_text(stub.get_definition("de"), target_language)
         if result:
-            stub.definition_en = result
-            stub.definitions["en"] = result
+            stub.definitions[target_language] = result
+            if target_language == "en":
+                stub.definition_en = result
             json_handler.add_stub(stub)
-            if not json_handler.save(create_backup=not checkpoint_saved):
+            if not json_handler.save(
+                create_backup=not checkpoint_saved,
+                allow_missing_definition=target_language,
+            ):
                 print("  ✗ Atomares Zwischenspeichern fehlgeschlagen; Lauf abgebrochen.")
                 return 1
             checkpoint_saved = True
@@ -1105,7 +1336,9 @@ def cmd_clean(args):
     json_handler = JsonHandler()
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
-        return
+        return 1
+    if not report_invalid_source(json_handler.data):
+        return 1
     stubs = json_handler.get_all_stubs()
 
     cleaned = 0
@@ -1127,13 +1360,23 @@ def cmd_clean(args):
     if cleaned > 0:
         if not json_handler.save():
             print("  ✗ Speichern fehlgeschlagen!")
+            return 1
 
     print(f"\n✓ {cleaned} Einträge bereinigt")
+    return 0
 
 
 # ==================== MAIN ====================
 
-def main():
+def configure_console_output() -> None:
+    """Prevent status glyphs from crashing redirected legacy Windows consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            reconfigure(errors="replace")
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser(
         description="WikiStub-Seed Pipeline - Wissensdatenbank-Management",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -1156,12 +1399,23 @@ Beispiele:
 
     # Import
     p_import = subparsers.add_parser("import", help="Importiere Markdown → JSON")
+    p_import.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help="Speichert valide Teilmengen trotz fehlerhafter Markdown-Dateien",
+    )
     p_import.set_defaults(func=cmd_import)
 
     # Export
     p_export = subparsers.add_parser("export", help="Exportiere JSON → Markdown")
     p_export.add_argument("--output", "-o", action="store_true", help="In output/ exportieren")
     p_export.add_argument("--english", "-e", action="store_true", help="Englische Übersetzung inkludieren")
+    p_export.add_argument(
+        "--lang",
+        choices=SUPPORTED_LANGUAGES,
+        default=DEFAULT_LANGUAGE,
+        help="Sprache des primären Exports",
+    )
     p_export.set_defaults(func=cmd_export)
 
     # Export data
@@ -1183,6 +1437,12 @@ Beispiele:
     # Sync
     p_sync = subparsers.add_parser("sync", help="Bidirektionale Synchronisation")
     p_sync.add_argument("--export", "-e", action="store_true", help="Auch nach Markdown exportieren")
+    p_sync.add_argument(
+        "--lang",
+        choices=SUPPORTED_LANGUAGES,
+        default=DEFAULT_LANGUAGE,
+        help="Sprache eines optionalen Exports",
+    )
     p_sync.set_defaults(func=cmd_sync)
 
     # Clean
@@ -1202,16 +1462,28 @@ Beispiele:
         type=float,
         help="Explizite konservative Kostenobergrenze in USD",
     )
+    p_translate.add_argument(
+        "--lang",
+        choices=[lang for lang in SUPPORTED_LANGUAGES if lang != DEFAULT_LANGUAGE],
+        default="en",
+        help="Zielsprache",
+    )
+    p_translate.add_argument(
+        "--delay",
+        type=float,
+        default=0.3,
+        help="Pause in Sekunden zwischen erfolgreichen API-Aufrufen",
+    )
     p_translate.set_defaults(func=cmd_translate)
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if not args.command:
         parser.print_help()
-        return
+        return 0
 
     print(f"\n{'='*60}")
-    print(f"  WikiStub-Seed Pipeline v2.0")
+    print("  WikiStub-Seed Pipeline v2.0")
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*60}")
 
@@ -1221,9 +1493,9 @@ Beispiele:
     print("  Fertig!")
     print(f"{'='*60}\n")
 
-    if isinstance(exit_code, int) and exit_code != 0:
-        sys.exit(exit_code)
+    return exit_code if isinstance(exit_code, int) else 0
 
 
 if __name__ == "__main__":
-    main()
+    configure_console_output()
+    sys.exit(main())

@@ -13,20 +13,22 @@ Nutzung:
     python md_to_json.py --category 07    # Nur eine Kategorie
 """
 
-import json
 import re
 import sys
+from copy import deepcopy
 from pathlib import Path
 from datetime import datetime
 
 from language_model import (
+    LOCALIZED_RELEVANCE_FIELD,
+    SUPPORTED_LANGUAGES,
     existing_mapping_key,
     identifier_key,
     merge_entry,
     normalize_entry,
     public_entry,
 )
-from safe_io import atomic_write_json, backup_file
+from safe_io import JsonDataError, atomic_write_json, backup_file, read_json_object
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -66,8 +68,11 @@ def parse_md_file(filepath):
 
     title = ""
     definition = ""
+    definition_en = ""
+    definitions = {}
     relevance = ""
-    category_text = ""
+    relevance_i18n = {}
+    tags = []
 
     current_section = None
     section_lines = []
@@ -87,10 +92,22 @@ def parse_md_file(filepath):
                 text = ' '.join(section_lines).strip()
                 if current_section == "kurzdefinition":
                     definition = text
-                elif current_section == "kategorie":
-                    category_text = text
+                elif current_section == "definition (de)":
+                    definition = text
+                elif current_section == "definition (en)":
+                    definition_en = text
+                elif current_section.startswith("definition (") and current_section.endswith(")"):
+                    language = current_section[12:-1]
+                    if language in SUPPORTED_LANGUAGES:
+                        definitions[language] = text
                 elif current_section == "relevanz":
                     relevance = text
+                elif current_section.startswith("relevanz (") and current_section.endswith(")"):
+                    language = current_section[10:-1]
+                    if language in SUPPORTED_LANGUAGES:
+                        relevance_i18n[language] = text
+                elif current_section == "tags":
+                    tags = [tag.strip() for tag in text.split(",") if tag.strip()]
 
             header = stripped[2:-3].lower()
             current_section = header
@@ -106,16 +123,32 @@ def parse_md_file(filepath):
                 definition = inline_text
                 current_section = None
                 continue
-            elif header == "kategorie" and inline_text:
-                category_text = inline_text
-                current_section = None
-                continue
             elif header == "relevanz" and inline_text:
                 relevance = inline_text
                 current_section = None
                 continue
             elif header.startswith("definition") and "(de)" in header and inline_text:
                 definition = inline_text
+                current_section = None
+                continue
+            elif header.startswith("definition") and "(en)" in header and inline_text:
+                definition_en = inline_text
+                current_section = None
+                continue
+            elif header.startswith("definition") and inline_text:
+                language = header.removeprefix("definition").strip(" ()")
+                if language in SUPPORTED_LANGUAGES:
+                    definitions[language] = inline_text
+                    current_section = None
+                    continue
+            elif header.startswith("relevanz") and inline_text:
+                language = header.removeprefix("relevanz").strip(" ()")
+                if language in SUPPORTED_LANGUAGES:
+                    relevance_i18n[language] = inline_text
+                    current_section = None
+                    continue
+            elif header == "tags" and inline_text:
+                tags = [tag.strip() for tag in inline_text.split(",") if tag.strip()]
                 current_section = None
                 continue
 
@@ -128,10 +161,22 @@ def parse_md_file(filepath):
         text = ' '.join(section_lines).strip()
         if current_section == "kurzdefinition":
             definition = text
-        elif current_section == "kategorie":
-            category_text = text
+        elif current_section == "definition (de)":
+            definition = text
+        elif current_section == "definition (en)":
+            definition_en = text
+        elif current_section.startswith("definition (") and current_section.endswith(")"):
+            language = current_section[12:-1]
+            if language in SUPPORTED_LANGUAGES:
+                definitions[language] = text
         elif current_section == "relevanz":
             relevance = text
+        elif current_section.startswith("relevanz (") and current_section.endswith(")"):
+            language = current_section[10:-1]
+            if language in SUPPORTED_LANGUAGES:
+                relevance_i18n[language] = text
+        elif current_section == "tags":
+            tags = [tag.strip() for tag in text.split(",") if tag.strip()]
 
     if not title:
         return None
@@ -153,18 +198,24 @@ def parse_md_file(filepath):
                 break
 
     # Tags generieren
-    tags = []
-    if cat:
+    if cat and not tags:
         tag_name = cat.lstrip("0123456789_").replace("_", " ")
         tags.append(tag_name)
-    if subcat:
-        tags.append(subcat.replace("_", " "))
+        if subcat:
+            tags.append(subcat.replace("_", " "))
 
     return normalize_entry({
         "title": title,
         "definition_de": definition,
-        "definition_en": "",
+        "definition_en": clean_text(definition_en),
+        "definitions": {
+            language: clean_text(text) for language, text in definitions.items()
+        },
         "relevance": relevance,
+        LOCALIZED_RELEVANCE_FIELD: {
+            language: clean_text(text)
+            for language, text in relevance_i18n.items()
+        },
         "tags": tags,
         "_category": cat,
         "_subcategory": subcat
@@ -172,19 +223,27 @@ def parse_md_file(filepath):
 
 
 def load_json():
-    """Laedt die bestehende wikistub_seed.json oder erstellt Grundstruktur."""
-    if JSON_PATH.exists():
-        try:
-            with open(JSON_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except json.JSONDecodeError as e:
-            print(f"FEHLER beim Lesen der JSON: {e}")
-            sys.exit(1)
-
-    # Grundstruktur erstellen
-    data = {"MetaWiki": {}}
-    for cat in CATEGORY_FOLDERS:
-        data["MetaWiki"][cat] = {}
+    """Lädt die bestehende Pflichtdatei fail-closed."""
+    try:
+        data = read_json_object(JSON_PATH)
+    except JsonDataError as exc:
+        print(f"FEHLER beim Lesen der JSON: {exc}")
+        return None
+    root = data.get("MetaWiki")
+    if not isinstance(root, dict):
+        print("FEHLER beim Lesen der JSON: MetaWiki muss ein Objekt sein.")
+        return None
+    for category, subcategories in root.items():
+        if not isinstance(category, str) or not isinstance(subcategories, dict):
+            print("FEHLER beim Lesen der JSON: Kategorien müssen Objekte sein.")
+            return None
+        for subcategory, entries in subcategories.items():
+            if not isinstance(subcategory, str) or not isinstance(entries, list):
+                print(f"FEHLER: Ungültige Subkategorie in {category}.")
+                return None
+            if any(not isinstance(entry, dict) for entry in entries):
+                print(f"FEHLER: Ungültiger Stub in {category}/{subcategory}.")
+                return None
     return data
 
 
@@ -212,13 +271,19 @@ def add_stub_to_data(data, stub_dict):
     if not subcat:
         subcat = "Allgemein"
 
-    root = data["MetaWiki"]
+    root = data.get("MetaWiki")
+    if not isinstance(root, dict):
+        raise ValueError("MetaWiki muss ein Objekt sein")
     category = existing_mapping_key(root, cat)
     if category not in root:
         root[category] = {}
+    elif not isinstance(root[category], dict):
+        raise ValueError(f"Kategorie {category} muss ein Objekt sein")
     subcategory = existing_mapping_key(root[category], subcat)
     if subcategory not in root[category]:
         root[category][subcategory] = []
+    elif not isinstance(root[category][subcategory], list):
+        raise ValueError(f"Subkategorie {category}/{subcategory} muss eine Liste sein")
 
     # Duplikat-Pruefung innerhalb der gleichen Subkategorie
     existing = root[category][subcategory]
@@ -231,12 +296,17 @@ def add_stub_to_data(data, stub_dict):
     return "added"
 
 
-def main():
+def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser(description="WikiStub-Seed: Markdown zu JSON Konverter")
     parser.add_argument("--dry-run", action="store_true", help="Nur anzeigen, nicht speichern")
     parser.add_argument("--category", type=str, help="Nur bestimmte Kategorie (z.B. '07')")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help="Speichert valide Teilmengen trotz fehlerhafter Markdown-Dateien",
+    )
+    args = parser.parse_args(argv)
 
     print("=" * 60)
     print("  WikiStub-Seed: Markdown -> JSON Konverter")
@@ -244,6 +314,9 @@ def main():
     print("=" * 60)
 
     data = load_json()
+    if data is None:
+        return 1
+    original_data = deepcopy(data)
 
     # Kategorien filtern
     categories = CATEGORY_FOLDERS
@@ -251,7 +324,7 @@ def main():
         categories = [c for c in categories if c.startswith(args.category)]
         if not categories:
             print(f"Keine Kategorie mit Prefix '{args.category}' gefunden.")
-            return
+            return 1
 
     total_added = 0
     total_updated = 0
@@ -275,7 +348,12 @@ def main():
             for md_file in sorted(md_files):
                 stub = parse_md_file(md_file)
                 if stub:
-                    result = add_stub_to_data(data, stub)
+                    try:
+                        result = add_stub_to_data(data, stub)
+                    except (KeyError, TypeError, ValueError) as exc:
+                        total_errors += 1
+                        print(f"  ! Fehler: {md_file.name}: {exc}")
+                        continue
                     if result == "added":
                         total_added += 1
                         print(f"  + {stub.get('title', '?')}")
@@ -287,18 +365,23 @@ def main():
                     print(f"  ! Fehler: {md_file.name}")
 
     # Speichern
-    save_json(data, dry_run=args.dry_run)
+    if total_errors and not args.allow_partial:
+        data = original_data
+        print("\nImport wegen Fehlern verworfen; JSON bleibt unverändert.")
+    else:
+        save_json(data, dry_run=args.dry_run)
 
     print(f"\n{'=' * 60}")
-    print(f"  Ergebnis:")
+    print("  Ergebnis:")
     print(f"    Neu hinzugefügt: {total_added}")
     print(f"    Aktualisiert:     {total_updated}")
     print(f"    Fehler:           {total_errors}")
     print(f"    Gesamt:           {total_added + total_updated}")
-    if not args.dry_run:
+    if not args.dry_run and (not total_errors or args.allow_partial):
         print(f"    Gespeichert in:   {JSON_PATH}")
     print("=" * 60)
+    return 1 if total_errors else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

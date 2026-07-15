@@ -67,12 +67,12 @@ describe("data/search-index.json", () => {
     assert.ok(fileExists("data/search-index.json"));
   });
 
-  it("ist Array mit id, cat, sub, title", () => {
+  it("ist Array mit stabiler ID, cat, sub, title", () => {
     const idx = readJson("data/search-index.json");
     assert.ok(Array.isArray(idx));
     assert.ok(idx.length >= 1);
     const first = idx[0];
-    assert.ok(typeof first.id === "number");
+    assert.match(first.id, /^[a-f0-9]{20}$/);
     assert.ok(typeof first.cat === "string");
     assert.ok(typeof first.sub === "string");
     assert.ok(typeof first.title === "string");
@@ -144,6 +144,13 @@ describe("index.html", () => {
     html = html || readText("index.html");
     assert.ok(html.includes("app.js"), "app.js-Script-Tag fehlt in index.html");
   });
+  it("bietet alle sechs Datensprachen an", () => {
+    html = html || readText("index.html");
+    for (const lang of ["de", "en", "es", "zh", "ja", "ru"]) {
+      assert.ok(html.includes(`value="${lang}"`), `Sprachoption ${lang} fehlt`);
+    }
+    assert.ok(html.includes('aria-label="Sprache auswählen"'));
+  });
 });
 
 // ── 6: sw.js ist in ASSETS vollständig ───────────────────────────────────────
@@ -166,6 +173,11 @@ describe("sw.js ASSETS", () => {
     assert.ok(sw.includes("skipWaiting"),    "skipWaiting fehlt in sw.js");
     assert.ok(sw.includes("clients.claim"), "clients.claim fehlt in sw.js");
   });
+  it("bindet Lebenszyklusaktionen an waitUntil-Promises", () => {
+    sw = sw || readText("sw.js");
+    assert.ok(sw.includes(".then(() => self.skipWaiting())"));
+    assert.ok(sw.includes(".then(() => self.clients.claim())"));
+  });
 });
 
 // ── 7: app.js registriert Service Worker ─────────────────────────────────────
@@ -186,6 +198,17 @@ describe("app.js", () => {
     const js = readText("app.js");
     assert.ok(js.includes("stub="), "Eindeutiger ID-basierter Deep-Link fehlt");
     assert.ok(js.includes("decodeURIComponent"), "Legacy-Titelhash-Unterstützung fehlt");
+    assert.ok(js.includes('params.get("title")'), "Numerische Legacy-Hashes verlieren ihren Titel-Fallback");
+  });
+
+  it("fängt blockierten localStorage und ungültige Fetch-Antworten ab", () => {
+    const js = readText("app.js");
+    assert.ok(js.includes("function readStoredLanguage"));
+    assert.ok(js.includes("function storeLanguage"));
+    assert.ok(js.includes("!wikiRes.ok || !indexRes.ok"));
+    assert.ok(js.includes('typeof entry.id !== "string"'));
+    assert.ok(js.includes("!wikiPayload.MetaWiki"), "MetaWiki=null wird nicht abgewiesen");
+    assert.ok(js.includes("Array.isArray(wikiPayload.MetaWiki)"), "MetaWiki-Arrays werden nicht abgewiesen");
   });
 
   it("macht klickbare Listen per Tastatur bedienbar", () => {
@@ -241,9 +264,9 @@ describe("iOS PWA-Installierbarkeit", () => {
   it("apple-touch-icon-180.png existiert physisch", () => {
     assert.ok(fileExists("icons/apple-touch-icon-180.png"), "icons/apple-touch-icon-180.png fehlt");
   });
-  it("sw.js CACHE_NAME ist wikistub-seed-v1", () => {
+  it("sw.js CACHE_NAME ist wikistub-seed-v2", () => {
     const sw = readText("sw.js");
-    assert.ok(sw.includes('"wikistub-seed-v1"'), 'CACHE_NAME muss "wikistub-seed-v1" sein');
+    assert.ok(sw.includes('"wikistub-seed-v2"'), 'CACHE_NAME muss "wikistub-seed-v2" sein');
   });
   it("sw.js enthält apple-touch-icon-180.png in ASSETS", () => {
     const sw = readText("sw.js");
@@ -268,6 +291,10 @@ describe("Mehrsprachige Datenmaps", () => {
           for (const lang of expected) {
             assert.ok(Object.hasOwn(e.definitions, lang), `definitions.${lang} fehlt bei "${e.title}"`);
             assert.ok(Object.hasOwn(e.relevance_i18n, lang), `relevance_i18n.${lang} fehlt bei "${e.title}"`);
+            assert.ok(e.definitions[lang], `definitions.${lang} ist leer bei "${e.title}"`);
+          }
+          for (const lang of ["de", "es", "zh", "ja", "ru"]) {
+            assert.ok(e.relevance_i18n[lang], `relevance_i18n.${lang} ist leer bei "${e.title}"`);
           }
           checked++;
         }
