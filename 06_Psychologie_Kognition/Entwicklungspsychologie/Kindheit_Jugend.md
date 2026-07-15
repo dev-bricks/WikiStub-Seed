@@ -7,4 +7,4 @@ Diese Phase umfasst die kritischen Entwicklungsabschnitte von der Geburt bis zur
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Hier werden die Weichen für die spätere Persönlichkeit gestellt; Risikofaktoren und Ressourcen in dieser Zeit haben oft lebenslange Auswirkungen.同期
+Hier werden die Weichen für die spätere Persönlichkeit gestellt; Risikofaktoren und Ressourcen in dieser Zeit haben oft lebenslange Auswirkungen.

@@ -7,4 +7,4 @@ Instinkt bezeichnet ererbte, artspezifische Verhaltensweisen, die bei bestimmten
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Instinktives Verhalten sichert das Überleben und die Fortpflanzung unmittelbar nach der Geburt oder dem Schlüpfen (z. B. Saugreflex oder Nestbau) und bildet die Basis für komplexere Verhaltensanpassungen.同期
+Instinktives Verhalten sichert das Überleben und die Fortpflanzung unmittelbar nach der Geburt oder dem Schlüpfen (z. B. Saugreflex oder Nestbau) und bildet die Basis für komplexere Verhaltensanpassungen.

@@ -7,4 +7,4 @@ Beschäftigt sich mit dem "Faktor Mensch": Personalbeschaffung, -entwicklung, -f
 Wirtschaft & Recht → Betriebswirtschaftslehre
 
 **Relevanz:**
-Qualifizierte und motivierte Mitarbeiter sind im Wissenszeitalter ("War for Talents") der wichtigste Wettbewerbsfaktor.同期
+Qualifizierte und motivierte Mitarbeiter sind im Wissenszeitalter ("War for Talents") der wichtigste Wettbewerbsfaktor.

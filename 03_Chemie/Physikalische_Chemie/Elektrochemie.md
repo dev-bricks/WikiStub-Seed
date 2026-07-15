@@ -7,4 +7,4 @@ Elektrochemie ist das Teilgebiet der Chemie, das den Zusammenhang zwischen chemi
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Sie ist die Grundlage für moderne Batterietechnologien, Brennstoffzellen und Korrosionsschutzverfahren, die für die Energiewende von zentraler Bedeutung sind.同期
+Sie ist die Grundlage für moderne Batterietechnologien, Brennstoffzellen und Korrosionsschutzverfahren, die für die Energiewende von zentraler Bedeutung sind.

@@ -7,4 +7,4 @@ Verschiedene Methoden und Schulen (z.B. Hermeneutik, Strukturalismus, Rezeptions
 Kultur, Kunst & Sprache → Literaturwissenschaft
 
 **Relevanz:**
-Hinterfragt, was Literatur überhaupt ist, wer den Sinn eines Textes bestimmt (Autor oder Leser?) und wie Literatur wirkt.同期
+Hinterfragt, was Literatur überhaupt ist, wer den Sinn eines Textes bestimmt (Autor oder Leser?) und wie Literatur wirkt.

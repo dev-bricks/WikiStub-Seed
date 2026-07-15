@@ -7,4 +7,4 @@ Die Schrödinger-Gleichung ist die fundamentale Bewegungsgleichung der Quantenme
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Sie ist das quantenphysikalische Analogon zum zweiten Newton’schen Gesetz und erlaubt die exakte Berechnung von Energieniveaus in Atomen und Molekülen.同期
+Sie ist das quantenphysikalische Analogon zum zweiten Newton’schen Gesetz und erlaubt die exakte Berechnung von Energieniveaus in Atomen und Molekülen.

@@ -7,4 +7,4 @@ Der Infektionsschutz umfasst alle rechtlichen und praktischen Maßnahmen zur Ver
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Er befugt Behörden zu weitreichenden Maßnahmen wie Quarantäne, Meldepflichten oder Tätigkeitsverboten, um die öffentliche Gesundheit vor Seuchengefahren zu schützen.同期
+Er befugt Behörden zu weitreichenden Maßnahmen wie Quarantäne, Meldepflichten oder Tätigkeitsverboten, um die öffentliche Gesundheit vor Seuchengefahren zu schützen.

@@ -7,4 +7,4 @@ Die Muskelkontraktion ist der Prozess der aktiven Verkürzung des Muskels durch 
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Sie ist die Grundlage jeder willkürlichen und unwillkürlichen Bewegung des Körpers, einschließlich des Herzschlags und der Darmperistaltik.同期
+Sie ist die Grundlage jeder willkürlichen und unwillkürlichen Bewegung des Körpers, einschließlich des Herzschlags und der Darmperistaltik.

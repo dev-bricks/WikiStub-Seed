@@ -7,4 +7,4 @@ Der Treibhauseffekt ist die Erwärmung der erdnahen Atmosphäre durch Treibhausg
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Während der natürliche Treibhauseffekt Leben auf der Erde erst ermöglicht, führt der anthropogene (menschengemachte) Effekt zur gegenwärtigen globalen Erwärmung und massiven Klimaveränderungen.同期
+Während der natürliche Treibhauseffekt Leben auf der Erde erst ermöglicht, führt der anthropogene (menschengemachte) Effekt zur gegenwärtigen globalen Erwärmung und massiven Klimaveränderungen.

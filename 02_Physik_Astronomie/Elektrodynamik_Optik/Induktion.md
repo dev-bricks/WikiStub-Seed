@@ -7,4 +7,4 @@ Elektromagnetische Induktion bezeichnet das Entstehen eines elektrischen Feldes 
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Induktion ist das fundamentale Prinzip der großtechnischen Stromerzeugung in Generatoren und ermöglicht die drahtlose Energieübertragung sowie die Funktion von Induktionsherden.同期
+Induktion ist das fundamentale Prinzip der großtechnischen Stromerzeugung in Generatoren und ermöglicht die drahtlose Energieübertragung sowie die Funktion von Induktionsherden.

@@ -7,4 +7,4 @@ Entwicklungsstörungen sind Beeinträchtigungen, die im Kindesalter auftreten un
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Früherkennung und Intervention sind entscheidend, um Betroffenen die bestmögliche Teilhabe und Entwicklungschancen zu ermöglichen.同期
+Früherkennung und Intervention sind entscheidend, um Betroffenen die bestmögliche Teilhabe und Entwicklungschancen zu ermöglichen.

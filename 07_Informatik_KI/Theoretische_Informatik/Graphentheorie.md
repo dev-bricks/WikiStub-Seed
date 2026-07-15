@@ -7,4 +7,4 @@ Untersucht Strukturen aus Knoten und Kanten, um Beziehungen und Vernetzungen mat
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Anwendungen reichen von Routenplanung (Google Maps) über soziale Netzwerkanalyse bis hin zum Chip-Design.同期
+Anwendungen reichen von Routenplanung (Google Maps) über soziale Netzwerkanalyse bis hin zum Chip-Design.

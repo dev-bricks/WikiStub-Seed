@@ -7,4 +7,4 @@ Analysiert den Aufbau einer Gesellschaft (Schichten, Klassen, Milieus) und die V
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-Zentral für die Diskussion über Gerechtigkeit, Armut und soziale Mobilität.同期
+Zentral für die Diskussion über Gerechtigkeit, Armut und soziale Mobilität.

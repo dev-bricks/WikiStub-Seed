@@ -7,4 +7,4 @@ Dotierung ist das gezielte Einbringen von geringen Mengen an Fremdatomen in ein 
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Ohne Dotierung gäbe es keine p-n-Übergänge und damit keine Dioden oder Transistoren, die die Basis der modernen Digitaltechnik bilden.同期
+Ohne Dotierung gäbe es keine p-n-Übergänge und damit keine Dioden oder Transistoren, die die Basis der modernen Digitaltechnik bilden.

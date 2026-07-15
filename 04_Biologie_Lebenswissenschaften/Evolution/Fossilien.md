@@ -7,4 +7,4 @@ Fossilien sind erhalten gebliebene Reste oder Spuren von Lebewesen aus vergangen
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Sie sind die direkten Zeitzeugen der Evolution und ermöglichen die zeitliche Einordnung und Rekonstruktion ausgestorbener Arten sowie die Untersuchung der Geschichte des Lebens.同期
+Sie sind die direkten Zeitzeugen der Evolution und ermöglichen die zeitliche Einordnung und Rekonstruktion ausgestorbener Arten sowie die Untersuchung der Geschichte des Lebens.

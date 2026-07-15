@@ -7,4 +7,4 @@ Beschreibt die Anatomie des Gehirns (Großhirnrinde, limbisches System, Hirnstam
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Bildgebende Verfahren haben revolutioniert, wie wir Zusammenhänge zwischen Hirnarealen und Verhalten (z.B. Sprache, Motorik) verstehen.同期
+Bildgebende Verfahren haben revolutioniert, wie wir Zusammenhänge zwischen Hirnarealen und Verhalten (z.B. Sprache, Motorik) verstehen.

@@ -7,4 +7,4 @@ Untersuchen die Lautseite der Sprache. Phonetik analysiert die physikalische Bil
 Kultur, Kunst & Sprache → Sprachwissenschaft
 
 **Relevanz:**
-Basis für Spracherkennungstechnologie, Logopädie und Fremdsprachenunterricht.同期
+Basis für Spracherkennungstechnologie, Logopädie und Fremdsprachenunterricht.

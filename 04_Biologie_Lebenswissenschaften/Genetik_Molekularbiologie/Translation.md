@@ -7,4 +7,4 @@ Translation ist die Synthese von Proteinen an den Ribosomen, bei der die Basense
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Durch die Translation wird die abstrakte genetische Information in funktionale Bausteine (Proteine) umgesetzt, die alle lebenswichtigen Aufgaben in der Zelle übernehmen.同期
+Durch die Translation wird die abstrakte genetische Information in funktionale Bausteine (Proteine) umgesetzt, die alle lebenswichtigen Aufgaben in der Zelle übernehmen.

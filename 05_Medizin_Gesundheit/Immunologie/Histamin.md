@@ -7,4 +7,4 @@ Entzündungsmediatoren sind körpereigene Stoffe, die eine Entzündungsreaktion 
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Sie sind verantwortlich für die typischen Schwellungen und Rötungen bei Verletzungen oder Allergien; die Wirkung kann durch Medikamente (z. B. Antihistaminika) blockiert werden.同期
+Sie sind verantwortlich für die typischen Schwellungen und Rötungen bei Verletzungen oder Allergien; die Wirkung kann durch Medikamente (z. B. Antihistaminika) blockiert werden.

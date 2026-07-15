@@ -7,4 +7,4 @@ Die Biozönose ist die Lebensgemeinschaft aller Organismen verschiedener Arten i
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Die Analyse der Biozönose ermöglicht Aussagen über die biologische Vielfalt, die Stabilität von Lebensgemeinschaften und die Auswirkungen invasiver Arten auf heimische Bestände.同期
+Die Analyse der Biozönose ermöglicht Aussagen über die biologische Vielfalt, die Stabilität von Lebensgemeinschaften und die Auswirkungen invasiver Arten auf heimische Bestände.

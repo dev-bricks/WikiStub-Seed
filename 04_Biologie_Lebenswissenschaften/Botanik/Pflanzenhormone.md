@@ -7,4 +7,4 @@ Pflanzenhormone (z. B. Auxine, Gibberelline, Ethylen) sind biochemische Signalst
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Sie koordinieren das komplexe Zusammenspiel der Organe einer Pflanze und werden in der Landwirtschaft gezielt zur Wachstumsregulation und Unkrautbekämpfung eingesetzt.同期
+Sie koordinieren das komplexe Zusammenspiel der Organe einer Pflanze und werden in der Landwirtschaft gezielt zur Wachstumsregulation und Unkrautbekämpfung eingesetzt.

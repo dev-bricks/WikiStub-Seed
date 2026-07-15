@@ -7,4 +7,4 @@ Theorie und Praxis von Bildung und Erziehung. Unterscheidet sich von der Pädago
 Gesellschaft & Politik → Erziehungswissenschaft
 
 **Relevanz:**
-Bildung ist die wichtigste Ressource moderner Gesellschaften; Pädagogik gestaltet die Zukunft durch die Förderung der nachwachsenden Generation.同期
+Bildung ist die wichtigste Ressource moderner Gesellschaften; Pädagogik gestaltet die Zukunft durch die Förderung der nachwachsenden Generation.

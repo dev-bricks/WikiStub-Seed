@@ -7,4 +7,4 @@ Führung ist der Prozess, durch den ein Individuum andere beeinflusst, um gemein
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Zentral für das Verständnis von Hierarchien, politischem Verhalten und effektivem Management in Organisationen.同期
+Zentral für das Verständnis von Hierarchien, politischem Verhalten und effektivem Management in Organisationen.

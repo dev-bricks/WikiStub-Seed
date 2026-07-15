@@ -7,4 +7,4 @@ Entzündung ist eine komplexe Abwehrreaktion des Körpers auf schädigende Reize
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Sie dient der Beseitigung des Schadreizes und der Einleitung von Heilungsprozessen, kann aber bei chronischem Verlauf selbst zu Gewebeschäden führen.同期
+Sie dient der Beseitigung des Schadreizes und der Einleitung von Heilungsprozessen, kann aber bei chronischem Verlauf selbst zu Gewebeschäden führen.

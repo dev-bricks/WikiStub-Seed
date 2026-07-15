@@ -7,4 +7,4 @@ In der Quantenmechanik besagt das Superpositionsprinzip, dass ein System gleichz
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Superposition ist die Grundlage für die parallele Informationsverarbeitung in Quantencomputern (Qubits) und führt zu paradoxen Gedankenexperimenten wie „Schrödingers Katze“.同期
+Superposition ist die Grundlage für die parallele Informationsverarbeitung in Quantencomputern (Qubits) und führt zu paradoxen Gedankenexperimenten wie „Schrödingers Katze“.

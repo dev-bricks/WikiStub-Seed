@@ -7,4 +7,4 @@ Metalle sind Elemente, die sich durch hohe elektrische Leitfähigkeit, Wärmelei
 Chemie → Anorganische Chemie
 
 **Relevanz:**
-Metalle machen etwa 80 % der Elemente aus und sind unverzichtbare Werkstoffe im Bauwesen, der Elektrotechnik und als Katalysatoren in der chemischen Industrie.同期
+Metalle machen etwa 80 % der Elemente aus und sind unverzichtbare Werkstoffe im Bauwesen, der Elektrotechnik und als Katalysatoren in der chemischen Industrie.

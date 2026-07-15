@@ -7,4 +7,4 @@ SQL ist die Standardsprache für relationale Datenbanken. NoSQL ("Not only SQL")
 Informatik & KI → Datenbanken & Informationssysteme
 
 **Relevanz:**
-Die Koexistenz beider Paradigmen ("Polyglot Persistence") erlaubt für jeden Anwendungsfall die optimale Speicherlösung.同期
+Die Koexistenz beider Paradigmen ("Polyglot Persistence") erlaubt für jeden Anwendungsfall die optimale Speicherlösung.

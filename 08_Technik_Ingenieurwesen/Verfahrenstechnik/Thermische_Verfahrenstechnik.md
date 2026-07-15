@@ -7,4 +7,4 @@ Nutzt Wärme- und Stoffaustauschprozesse zur Trennung von Stoffgemischen. Klassi
 Technik & Ingenieurwesen → Verfahrenstechnik
 
 **Relevanz:**
-Essentiell für die Erdölraffinerie, die Gewinnung von Reinstoffen und die Lebensmittelkonservierung.同期
+Essentiell für die Erdölraffinerie, die Gewinnung von Reinstoffen und die Lebensmittelkonservierung.

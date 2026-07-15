@@ -7,4 +7,4 @@ Unter sekundärem Dickenwachstum versteht man das Breitenwachstum von Sprossachs
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Es ermöglicht Pflanzen die Ausbildung massiver, langlebiger Stämme und Äste, was die Grundlage für die Biomasseproduktion in Wäldern darstellt.同期
+Es ermöglicht Pflanzen die Ausbildung massiver, langlebiger Stämme und Äste, was die Grundlage für die Biomasseproduktion in Wäldern darstellt.

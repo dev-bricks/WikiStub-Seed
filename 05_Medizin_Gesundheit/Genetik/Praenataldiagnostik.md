@@ -7,4 +7,4 @@ Pränataldiagnostik umfasst Untersuchungen des ungeborenen Kindes während der S
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-Sie ermöglicht die frühzeitige Erkennung von Gesundheitsproblemen des Ungeborenen, stellt Eltern jedoch oft vor schwierige ethische Entscheidungen.同期
+Sie ermöglicht die frühzeitige Erkennung von Gesundheitsproblemen des Ungeborenen, stellt Eltern jedoch oft vor schwierige ethische Entscheidungen.

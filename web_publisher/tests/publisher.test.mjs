@@ -175,6 +175,42 @@ describe("app.js", () => {
     assert.ok(js.includes("serviceWorker"), "serviceWorker.register fehlt in app.js");
     assert.ok(js.includes("sw.js"),         "sw.js-Pfad fehlt in serviceWorker.register");
   });
+
+  it("rendert Datensatzfelder ohne innerHTML-Injektion", () => {
+    const js = readText("app.js");
+    assert.ok(!js.includes("detail.innerHTML"), "Detailansicht rendert Datensatzwerte per innerHTML");
+    assert.ok(js.includes("textContent"), "Sicheres DOM-Rendering per textContent fehlt");
+  });
+
+  it("nutzt eindeutige ID-Hashes und toleriert Legacy-Hashes", () => {
+    const js = readText("app.js");
+    assert.ok(js.includes("stub="), "Eindeutiger ID-basierter Deep-Link fehlt");
+    assert.ok(js.includes("decodeURIComponent"), "Legacy-Titelhash-Unterstützung fehlt");
+  });
+
+  it("macht klickbare Listen per Tastatur bedienbar", () => {
+    const js = readText("app.js");
+    assert.ok(js.includes("function bindActivation"), "Gemeinsame Tastaturaktivierung fehlt");
+    assert.ok(js.includes('event.key === "Enter"'), "Enter-Aktivierung fehlt");
+    assert.ok(js.includes('event.key === " "'), "Leertasten-Aktivierung fehlt");
+    assert.ok(js.includes('setAttribute("role", "button")'), "Interaktive Semantik fehlt");
+  });
+});
+
+describe("PWA-Aktualität", () => {
+  it("lädt veränderliche Datendateien network-first mit Offline-Fallback", () => {
+    const sw = readText("sw.js");
+    assert.ok(sw.includes("networkFirst"), "Network-first-Strategie für Datendateien fehlt");
+    assert.ok(sw.includes("cache.put"), "Online-Daten werden nicht in den Offline-Cache aktualisiert");
+  });
+
+  it("hält die Ergebnisliste auf schmalen Mobilgeräten sichtbar", () => {
+    const html = readText("index.html");
+    const mobileRule = html.slice(html.indexOf("@media (max-width: 420px)"));
+    assert.ok(mobileRule.includes("#stub-panel"), "Mobile Stub-Liste wird nicht gestaltet");
+    assert.ok(!mobileRule.includes("#stub-panel { display: none; }"), "Mobile Stub-Liste wird ausgeblendet");
+    assert.ok(mobileRule.includes("width: 100%"), "Mobile Stub-Liste nutzt nicht die verfügbare Breite");
+  });
 });
 
 // ── 8: iOS PWA-Installierbarkeit ─────────────────────────────────────────────

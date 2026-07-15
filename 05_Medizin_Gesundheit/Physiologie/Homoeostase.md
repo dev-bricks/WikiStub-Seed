@@ -7,4 +7,4 @@ Homöostase bezeichnet die Aufrechterhaltung eines stabilen inneren Milieus im K
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Sie ist die Grundvoraussetzung für das Überleben und die optimale Funktion aller Zellen und Organe; Abweichungen von der Homöostase führen oft zu Krankheiten.同期
+Sie ist die Grundvoraussetzung für das Überleben und die optimale Funktion aller Zellen und Organe; Abweichungen von der Homöostase führen oft zu Krankheiten.

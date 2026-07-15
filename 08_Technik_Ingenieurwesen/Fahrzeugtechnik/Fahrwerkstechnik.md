@@ -7,4 +7,4 @@ Verbindung zwischen Fahrzeugaufbau und Fahrbahn (Räder, Reifen, Federung, Dämp
 Technik & Ingenieurwesen → Fahrzeugtechnik
 
 **Relevanz:**
-Entscheidend für Fahrdynamik und aktive Sicherheit (ESP, ABS): Es muss die Kräfte sicher übertragen.同期
+Entscheidend für Fahrdynamik und aktive Sicherheit (ESP, ABS): Es muss die Kräfte sicher übertragen.

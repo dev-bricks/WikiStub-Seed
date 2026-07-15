@@ -7,4 +7,4 @@ Dieses Feld, auch Ingenieurpsychologie genannt, passt Arbeitsmittel und -umgebun
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Ziel ist die Steigerung von Effizienz, Sicherheit und Komfort, z.B. bei der Gestaltung von Software-Oberflächen oder Cockpits.同期
+Ziel ist die Steigerung von Effizienz, Sicherheit und Komfort, z.B. bei der Gestaltung von Software-Oberflächen oder Cockpits.

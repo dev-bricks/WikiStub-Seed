@@ -7,4 +7,4 @@ Der Ereignishorizont ist eine Grenzfläche in der Raumzeit, hinter der Ereigniss
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Er ist die fundamentale Grenze unseres Wissens über das Innere Schwarzer Löcher und ein zentrales Untersuchungsgebiet für die Verknüpfung von Quantenmechanik und Gravitation.同期
+Er ist die fundamentale Grenze unseres Wissens über das Innere Schwarzer Löcher und ein zentrales Untersuchungsgebiet für die Verknüpfung von Quantenmechanik und Gravitation.

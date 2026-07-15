@@ -7,4 +7,4 @@ Einstellungen sind Bewertungen von Menschen, Objekten oder Ideen. Dieser Bereich
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Verständnis von Einstellungen ist zentral für Marketing, Politik und Gesundheitskampagnen, um Verhalten vorherzusagen und zu beeinflussen.同期
+Verständnis von Einstellungen ist zentral für Marketing, Politik und Gesundheitskampagnen, um Verhalten vorherzusagen und zu beeinflussen.

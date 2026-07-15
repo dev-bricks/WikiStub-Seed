@@ -7,4 +7,4 @@ Lehrt Computer, digitalen Bildern und Videos Bedeutung zu entnehmen ("Maschinell
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Schlüsseltechnologie für autonomes Fahren, medizinische Bildgebung und Überwachungssysteme.同期
+Schlüsseltechnologie für autonomes Fahren, medizinische Bildgebung und Überwachungssysteme.

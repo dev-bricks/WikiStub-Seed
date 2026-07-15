@@ -7,4 +7,4 @@ Beschreibt den Aufbau und die Organisation von Computersystemen, insbesondere de
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Verständnis ist nötig, um performante Software zu schreiben und Hardware-Entscheidungen zu treffen (z.B. RISC vs. CISC).同期
+Verständnis ist nötig, um performante Software zu schreiben und Hardware-Entscheidungen zu treffen (z.B. RISC vs. CISC).

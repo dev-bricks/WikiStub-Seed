@@ -7,4 +7,4 @@ Das Gesundheitssystem umfasst alle Personen, Organisationen und Einrichtungen, d
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Die Ausgestaltung (z. B. solidarisch finanziert vs. privatwirtschaftlich) bestimmt maßgeblich den Zugang der Bevölkerung zu medizinischen Leistungen und die Lebenserwartung.同期
+Die Ausgestaltung (z. B. solidarisch finanziert vs. privatwirtschaftlich) bestimmt maßgeblich den Zugang der Bevölkerung zu medizinischen Leistungen und die Lebenserwartung.

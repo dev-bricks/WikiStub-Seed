@@ -7,4 +7,4 @@ Ein System-on-Chip integriert alle Komponenten eines Computers (CPU, GPU, Speich
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Ermöglicht die Miniaturisierung und Energieeffizienz moderner Smartphones, Tablets und Wearables.同期
+Ermöglicht die Miniaturisierung und Energieeffizienz moderner Smartphones, Tablets und Wearables.

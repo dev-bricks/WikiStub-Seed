@@ -7,4 +7,4 @@ Die langfristige Planung und Ausrichtung des Unternehmens, um Wettbewerbsvorteil
 Wirtschaft & Recht → Betriebswirtschaftslehre
 
 **Relevanz:**
-Definiert die Vision und den Kurs in einem dynamischen Marktumfeld ("To be or not to be").同期
+Definiert die Vision und den Kurs in einem dynamischen Marktumfeld ("To be or not to be").

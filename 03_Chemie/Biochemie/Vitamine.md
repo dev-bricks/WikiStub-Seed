@@ -7,4 +7,4 @@ Vitamine sind organische Verbindungen, die ein Organismus nicht selbst in ausrei
 Chemie → Biochemie
 
 **Relevanz:**
-Sie sind essenziell für die Aufrechterhaltung der Gesundheit und steuern lebensnotwendige Reaktionen im Immunsystem, beim Knochenbau und im Energiestoffwechsel.同期
+Sie sind essenziell für die Aufrechterhaltung der Gesundheit und steuern lebensnotwendige Reaktionen im Immunsystem, beim Knochenbau und im Energiestoffwechsel.

@@ -7,4 +7,4 @@ Erbkrankheiten sind Erkrankungen, die durch Veränderungen (Mutationen) im Erbgu
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Das Verständnis ihrer genetischen Basis ist Voraussetzung für die Humangenetik, Pränataldiagnostik und die Entwicklung künftiger Gentherapien.同期
+Das Verständnis ihrer genetischen Basis ist Voraussetzung für die Humangenetik, Pränataldiagnostik und die Entwicklung künftiger Gentherapien.

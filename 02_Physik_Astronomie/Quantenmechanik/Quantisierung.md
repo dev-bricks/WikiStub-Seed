@@ -7,4 +7,4 @@ Quantisierung bezeichnet den Vorgang, physikalische Größen nicht als kontinuie
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Sie ist das namensgebende Merkmal der Quantenphysik und erklärt Phänomene wie diskrete Spektrallinien und die Stabilität von Materie auf atomarer Ebene.同期
+Sie ist das namensgebende Merkmal der Quantenphysik und erklärt Phänomene wie diskrete Spektrallinien und die Stabilität von Materie auf atomarer Ebene.

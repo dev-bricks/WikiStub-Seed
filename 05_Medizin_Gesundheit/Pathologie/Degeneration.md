@@ -7,4 +7,4 @@ Degeneration bezeichnet die alters- oder belastungsbedingte Rückbildung und Fun
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Degenerative Erkrankungen wie Arthrose (Gelenkverschleiß) oder Demenz nehmen in alternden Gesellschaften stark zu und stellen eine große Herausforderung für das Gesundheitssystem dar.同期
+Degenerative Erkrankungen wie Arthrose (Gelenkverschleiß) oder Demenz nehmen in alternden Gesellschaften stark zu und stellen eine große Herausforderung für das Gesundheitssystem dar.

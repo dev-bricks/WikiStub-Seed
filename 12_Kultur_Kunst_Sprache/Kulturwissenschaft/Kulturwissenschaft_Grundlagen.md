@@ -7,4 +7,4 @@ Interdisziplinäres Fach, das "Kultur" im weitesten Sinne (Alltagskultur, Popkul
 Kultur, Kunst & Sprache → Kulturwissenschaft
 
 **Relevanz:**
-Verbindet Methoden aus Soziologie, Ethnologie und Philologie, um das "Web of Meanings" zu verstehen, in dem wir leben.同期
+Verbindet Methoden aus Soziologie, Ethnologie und Philologie, um das "Web of Meanings" zu verstehen, in dem wir leben.

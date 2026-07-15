@@ -7,4 +7,4 @@ Motivation bezeichnet die Gesamtheit der Beweggründe, die zur Handlungsbereitsc
 Psychologie & Kognition → Allgemeine Psychologie
 
 **Relevanz:**
-Sie erklärt das „Warum“ menschlichen Handelns und ist zentral für Leistung in Schule und Beruf sowie für die persönliche Zielerreichung.同期
+Sie erklärt das „Warum“ menschlichen Handelns und ist zentral für Leistung in Schule und Beruf sowie für die persönliche Zielerreichung.

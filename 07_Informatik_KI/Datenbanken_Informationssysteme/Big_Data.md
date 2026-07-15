@@ -7,4 +7,4 @@ Bezeichnet Datenmengen, die zu groß, zu komplex, zu schnelllebig oder zu schwac
 Informatik & KI → Datenbanken & Informationssysteme
 
 **Relevanz:**
-Ermöglicht neue Erkenntnisse durch Data Mining und Predictive Analytics in fast allen Branchen.同期
+Ermöglicht neue Erkenntnisse durch Data Mining und Predictive Analytics in fast allen Branchen.

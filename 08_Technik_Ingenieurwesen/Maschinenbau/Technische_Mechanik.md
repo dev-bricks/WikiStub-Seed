@@ -7,4 +7,4 @@ Die physikalischen Grundlagen des Maschinenbaus: Statik (ruhende Körper), Festi
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Ohne sie können keine sicheren Brücken, Fahrzeuge oder Maschinen berechnet und konstruiert werden.同期
+Ohne sie können keine sicheren Brücken, Fahrzeuge oder Maschinen berechnet und konstruiert werden.

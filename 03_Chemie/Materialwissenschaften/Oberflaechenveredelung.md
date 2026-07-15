@@ -7,4 +7,4 @@ Oberflächenveredelung umfasst chemische und physikalische Verfahren (z. B. Galv
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Sie schützt Materialien vor Verschleiß und Korrosion, verbessert die optische Erscheinung (Design) und ermöglicht spezifische Funktionen wie verbesserte Biokompatibilität oder Gleitfähigkeit.同期
+Sie schützt Materialien vor Verschleiß und Korrosion, verbessert die optische Erscheinung (Design) und ermöglicht spezifische Funktionen wie verbesserte Biokompatibilität oder Gleitfähigkeit.

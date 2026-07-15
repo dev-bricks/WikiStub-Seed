@@ -7,4 +7,4 @@ Aggressionsverhalten umfasst Drohgebärden, Kämpfe (Komment- oder Beschädigung
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Es ist ein evolutionsbiologisch notwendiges Werkzeug zur Klärung von Rangordnungen und zum Schutz von Ressourcen, wobei ritualisierte Kämpfe das Verletzungsrisiko für beide Seiten minimieren.同期
+Es ist ein evolutionsbiologisch notwendiges Werkzeug zur Klärung von Rangordnungen und zum Schutz von Ressourcen, wobei ritualisierte Kämpfe das Verletzungsrisiko für beide Seiten minimieren.

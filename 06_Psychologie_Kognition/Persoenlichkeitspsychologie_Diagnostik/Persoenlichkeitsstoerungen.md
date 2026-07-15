@@ -7,4 +7,4 @@ Persönlichkeitsstörungen sind tief verwurzelte, unflexible und dauerhafte Verh
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Sie stellen eine Schnittstelle zur Klinischen Psychologie dar und sind oft schwer zu behandeln, da sie das "Ich" der Person betreffen.同期
+Sie stellen eine Schnittstelle zur Klinischen Psychologie dar und sind oft schwer zu behandeln, da sie das "Ich" der Person betreffen.

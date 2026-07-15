@@ -7,4 +7,4 @@ Software, deren Quellcode öffentlich zugänglich ist und von jedermann genutzt,
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Treibt Innovation (z.B. Linux, Python) und demokratisiert den Zugang zu Technologie; zentrales Modell moderner Kollaboration.同期
+Treibt Innovation (z.B. Linux, Python) und demokratisiert den Zugang zu Technologie; zentrales Modell moderner Kollaboration.

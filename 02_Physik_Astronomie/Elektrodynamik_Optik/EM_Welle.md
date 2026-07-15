@@ -7,4 +7,4 @@ Elektromagnetische Wellen sind fortschreitende Schwingungen des elektromagnetisc
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Sie dienen als universelles Medium für die kabellose Kommunikation, sind der Träger der Lichtenergie und ermöglichen die Fernerkundung des Universums.同期
+Sie dienen als universelles Medium für die kabellose Kommunikation, sind der Träger der Lichtenergie und ermöglichen die Fernerkundung des Universums.

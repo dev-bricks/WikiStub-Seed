@@ -7,4 +7,4 @@ Technologien zur kabellosen Datenübertragung, von WLAN (Wi-Fi) und Bluetooth im
 Informatik & KI → Netzwerke & Kommunikation
 
 **Relevanz:**
-Basis für die mobile Nutzung des Internets und die Vernetzung allgegenwärtiger Geräte (Ubiquitous Computing).同期
+Basis für die mobile Nutzung des Internets und die Vernetzung allgegenwärtiger Geräte (Ubiquitous Computing).

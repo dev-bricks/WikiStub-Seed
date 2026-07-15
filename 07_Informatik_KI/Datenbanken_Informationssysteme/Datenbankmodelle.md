@@ -7,4 +7,4 @@ Beschreiben die logische Struktur, wie Daten gespeichert und verknüpft werden. 
 Informatik & KI → Datenbanken & Informationssysteme
 
 **Relevanz:**
-Die Wahl des Modells bestimmt Flexibilität, Konsistenz und Performance der Datenhaltung.同期
+Die Wahl des Modells bestimmt Flexibilität, Konsistenz und Performance der Datenhaltung.

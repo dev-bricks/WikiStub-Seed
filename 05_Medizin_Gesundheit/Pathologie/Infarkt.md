@@ -7,4 +7,4 @@ Ein Infarkt ist das Absterben von Gewebe (Nekrose) infolge einer Minderdurchblut
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Herzinfarkte und Schlaganfälle zählen weltweit zu den häufigsten Todesursachen; eine schnelle Wiederherstellung der Durchblutung ist lebensentscheidend.同期
+Herzinfarkte und Schlaganfälle zählen weltweit zu den häufigsten Todesursachen; eine schnelle Wiederherstellung der Durchblutung ist lebensentscheidend.

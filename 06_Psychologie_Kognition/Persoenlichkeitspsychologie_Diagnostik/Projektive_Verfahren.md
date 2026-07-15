@@ -7,4 +7,4 @@ Projektive Tests (z.B. Rorschach-Test) konfrontieren Probanden mit mehrdeutigem 
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Trotz Kontroversen um ihre Gütekriterien sind sie in der tiefenpsychologischen Diagnostik weiterhin verbreitet, um schwer zugängliche Persönlichkeitsschichten zu explorieren.同期
+Trotz Kontroversen um ihre Gütekriterien sind sie in der tiefenpsychologischen Diagnostik weiterhin verbreitet, um schwer zugängliche Persönlichkeitsschichten zu explorieren.

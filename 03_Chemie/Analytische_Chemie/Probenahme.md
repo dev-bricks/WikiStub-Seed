@@ -7,4 +7,4 @@ Die Probenahme umfasst die repräsentative Entnahme einer Teilmenge aus einem Ge
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Fehler in diesem ersten Schritt können durch nachfolgende präzise Messungen nicht mehr korrigiert werden; sie ist daher entscheidend für die Aussagekraft jeder Analyse.同期
+Fehler in diesem ersten Schritt können durch nachfolgende präzise Messungen nicht mehr korrigiert werden; sie ist daher entscheidend für die Aussagekraft jeder Analyse.

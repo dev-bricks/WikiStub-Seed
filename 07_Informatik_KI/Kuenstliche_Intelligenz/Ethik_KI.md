@@ -7,4 +7,4 @@ Befasst sich mit den moralischen und gesellschaftlichen Implikationen von KI-Sys
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Essentiell, um sicherzustellen, dass KI dem Menschen dient und keine Diskriminierung oder Schaden verursacht ("AI Alignment").同期
+Essentiell, um sicherzustellen, dass KI dem Menschen dient und keine Diskriminierung oder Schaden verursacht ("AI Alignment").

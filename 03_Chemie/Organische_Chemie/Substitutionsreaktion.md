@@ -7,4 +7,4 @@ Eine Substitutionsreaktion ist eine chemische Reaktion, bei der ein Atom oder ei
 Chemie → Organische Chemie
 
 **Relevanz:**
-Sie ist eine der grundlegendsten Reaktionstypen zur Modifizierung organischer Moleküle und wird intensiv zur Herstellung von Halogenalkanen und aromatischen Verbindungen genutzt.同期
+Sie ist eine der grundlegendsten Reaktionstypen zur Modifizierung organischer Moleküle und wird intensiv zur Herstellung von Halogenalkanen und aromatischen Verbindungen genutzt.

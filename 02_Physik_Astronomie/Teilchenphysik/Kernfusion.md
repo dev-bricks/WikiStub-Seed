@@ -7,4 +7,4 @@ Kernfusion ist ein Prozess, bei dem zwei leichte Atomkerne zu einem schwereren K
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Sie ist die Energiequelle aller Sterne und gilt als potenzielle Zukunftsquelle für eine saubere und nahezu unerschöpfliche Energiegewinnung auf der Erde.同期
+Sie ist die Energiequelle aller Sterne und gilt als potenzielle Zukunftsquelle für eine saubere und nahezu unerschöpfliche Energiegewinnung auf der Erde.

@@ -7,4 +7,4 @@ Photochemie befasst sich mit chemischen Reaktionen, die durch die Absorption von
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Photochemische Prozesse ermöglichen die natürliche Photosynthese, technische Anwendungen wie die Photovoltaik und sind entscheidend für atmosphärische Reaktionen (Ozonbildung).同期
+Photochemische Prozesse ermöglichen die natürliche Photosynthese, technische Anwendungen wie die Photovoltaik und sind entscheidend für atmosphärische Reaktionen (Ozonbildung).

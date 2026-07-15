@@ -7,4 +7,4 @@ Untersucht die neuronalen Kreisläufe (z.B. Amygdala, präfrontaler Kortex) und 
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Erklärt, warum Emotionen manchmal schneller sind als der Verstand ("High Road" vs. "Low Road") und wie Angst konditioniert wird.同期
+Erklärt, warum Emotionen manchmal schneller sind als der Verstand ("High Road" vs. "Low Road") und wie Angst konditioniert wird.

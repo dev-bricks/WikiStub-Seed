@@ -7,4 +7,4 @@ Befasst sich mit der Planung, dem Entwurf und dem Betrieb von Verkehrssystemen (
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Mobilität ist eine Grundvoraussetzung für Wirtschaft und gesellschaftliche Teilhabe.同期
+Mobilität ist eine Grundvoraussetzung für Wirtschaft und gesellschaftliche Teilhabe.

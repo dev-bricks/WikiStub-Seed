@@ -7,4 +7,4 @@ Das Zytoplasma umfasst den gesamten Inhalt einer Zelle innerhalb der Zellmembran
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Es ist das Medium, in dem die meisten biochemischen Reaktionen stattfinden und dient dem intrazellulären Transport von Stoffen.同期
+Es ist das Medium, in dem die meisten biochemischen Reaktionen stattfinden und dient dem intrazellulären Transport von Stoffen.

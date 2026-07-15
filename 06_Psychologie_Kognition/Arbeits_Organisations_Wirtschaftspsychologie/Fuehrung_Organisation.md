@@ -7,4 +7,4 @@ Im organisationalen Kontext fokussiert Führung auf Stile (transaktional, transf
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Gute Führung gilt als Schlüsselfaktor für den Unternehmenserfolg und die Gesundheit der Belegschaft.同期
+Gute Führung gilt als Schlüsselfaktor für den Unternehmenserfolg und die Gesundheit der Belegschaft.

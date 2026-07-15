@@ -7,4 +7,4 @@ Untersucht die Familie als soziale Institution, ihre Formen (Kernfamilie, Patchw
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-Zeigt, wie sich gesellschaftliche Veränderungen (z.B. Erwerbstätigkeit von Frauen, Scheidungsraten) auf das Privatreben auswirken.同期
+Zeigt, wie sich gesellschaftliche Veränderungen (z.B. Erwerbstätigkeit von Frauen, Scheidungsraten) auf das Privatreben auswirken.

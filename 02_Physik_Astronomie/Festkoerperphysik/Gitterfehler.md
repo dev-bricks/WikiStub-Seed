@@ -7,4 +7,4 @@ Gitterfehler sind Abweichungen von der idealen periodischen Anordnung der Atome 
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Fehler im Gitter bestimmen maßgeblich die mechanische Festigkeit (Härte) von Metallen sowie die Diffusions- und Leitfähigkeitseigenschaften von Festkörpern.同期
+Fehler im Gitter bestimmen maßgeblich die mechanische Festigkeit (Härte) von Metallen sowie die Diffusions- und Leitfähigkeitseigenschaften von Festkörpern.

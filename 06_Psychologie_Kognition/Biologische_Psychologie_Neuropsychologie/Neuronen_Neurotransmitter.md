@@ -7,4 +7,4 @@ Neuronen sind die Bausteine des Nervensystems, die Informationen elektrisch und 
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Das Verständnis der neuronalen Kommunikation ist die Basis für alles Erleben und Verhalten sowie für die Wirkung von Psychopharmaka.同期
+Das Verständnis der neuronalen Kommunikation ist die Basis für alles Erleben und Verhalten sowie für die Wirkung von Psychopharmaka.

@@ -7,4 +7,4 @@ Carbonsäuren sind organische Verbindungen, die eine oder mehrere Carboxygruppen
 Chemie → Organische Chemie
 
 **Relevanz:**
-Sie kommen in der Natur häufig vor (z. B. Essigsäure, Zitronensäure, Fettsäuren) und sind wesentliche Bausteine für die Herstellung von Estern, Polyamiden und vielen Nahrungsmitteln.同期
+Sie kommen in der Natur häufig vor (z. B. Essigsäure, Zitronensäure, Fettsäuren) und sind wesentliche Bausteine für die Herstellung von Estern, Polyamiden und vielen Nahrungsmitteln.

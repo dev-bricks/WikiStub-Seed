@@ -7,4 +7,4 @@ Erforscht die zirkadianen Rhythmen (Licht-Dunkel-Zyklus) und die Schlafphasen (R
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Schlafstörungen sind weit verbreitet und Risikofaktor für viele physische und psychische Erkrankungen.同期
+Schlafstörungen sind weit verbreitet und Risikofaktor für viele physische und psychische Erkrankungen.

@@ -7,4 +7,4 @@ Insekten sind die artenreichste Klasse der Arthropoden. Ihr Körper ist in Kopf,
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Sie sind von unschätzbarem ökologischem Wert als Bestäuber von Nutzpflanzen, erfüllen aber auch Funktionen als Schädlinge, Krankheitsüberträger oder Nützlinge in der biologischen Schädlingsbekämpfung.同期
+Sie sind von unschätzbarem ökologischem Wert als Bestäuber von Nutzpflanzen, erfüllen aber auch Funktionen als Schädlinge, Krankheitsüberträger oder Nützlinge in der biologischen Schädlingsbekämpfung.

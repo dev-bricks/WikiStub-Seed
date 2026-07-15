@@ -7,4 +7,4 @@ Das Standardmodell ist die Theorie, die alle bekannten Elementarteilchen und dre
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Es gilt als eine der erfolgreichsten Theorien der Physik, da es eine Fülle experimenteller Daten mit extrem hoher Präzision erklärt, lässt jedoch Fragen zur dunklen Materie und Gravitation offen.同期
+Es gilt als eine der erfolgreichsten Theorien der Physik, da es eine Fülle experimenteller Daten mit extrem hoher Präzision erklärt, lässt jedoch Fragen zur dunklen Materie und Gravitation offen.

@@ -7,4 +7,4 @@ Die gezielte Beeinflussung dynamischer Systeme (Prozesse), um eine Größe (Rege
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Ohne Regelungstechnik gäbe es keine stabilen Flugzeuge, keine Klimaanlagen und keine präzise Industrieproduktion.同期
+Ohne Regelungstechnik gäbe es keine stabilen Flugzeuge, keine Klimaanlagen und keine präzise Industrieproduktion.

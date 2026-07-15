@@ -7,4 +7,4 @@ Beginnt um 1500 mit Buchdruck, Reformation und der Entdeckung Amerikas. Führt �
 Geschichte & Archäologie → Neuzeit
 
 **Relevanz:**
-Hier entstehen das wissenschaftliche Weltbild, der Nationalstaat und die Menschenrechte.同期
+Hier entstehen das wissenschaftliche Weltbild, der Nationalstaat und die Menschenrechte.

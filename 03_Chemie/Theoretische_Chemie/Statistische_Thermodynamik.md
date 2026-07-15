@@ -7,4 +7,4 @@ Dieses Fachgebiet verknüpft die quantenmechanischen Energiezustände einzelner 
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Sie liefert die theoretische Erklärung für die Gesetze der klassischen Thermodynamik aus der Perspektive der Molekülphysik und erlaubt die Berechnung von Gleichgewichtskonstanten.同期
+Sie liefert die theoretische Erklärung für die Gesetze der klassischen Thermodynamik aus der Perspektive der Molekülphysik und erlaubt die Berechnung von Gleichgewichtskonstanten.

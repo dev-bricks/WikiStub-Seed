@@ -7,4 +7,4 @@ Arthropoden sind der artenreichste Stamm im Tierreich. Ihre gemeinsamen Merkmale
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Aufgrund ihrer enormen Anpassungsfähigkeit haben sie fast alle Lebensräume der Erde besiedelt und spielen eine zentrale Rolle in der globalen Biomasse und Ökologie.同期
+Aufgrund ihrer enormen Anpassungsfähigkeit haben sie fast alle Lebensräume der Erde besiedelt und spielen eine zentrale Rolle in der globalen Biomasse und Ökologie.

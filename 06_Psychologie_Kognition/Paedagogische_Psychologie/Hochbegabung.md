@@ -7,4 +7,4 @@ Hochbegabung bezeichnet ein weit überdurchschnittliches intellektuelles Potenzi
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Unterfordert zu werden kann für Hochbegabte ebenso belastend sein wie Überforderung; individuelle Förderung (Enrichment, Akzeleration) ist notwendig.同期
+Unterfordert zu werden kann für Hochbegabte ebenso belastend sein wie Überforderung; individuelle Förderung (Enrichment, Akzeleration) ist notwendig.

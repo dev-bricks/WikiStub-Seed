@@ -7,4 +7,4 @@ Beschäftigt sich mit der Umformung elektrischer Energie mittels schaltender Bau
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Schlüsseltechnologie für Elektroautos, Photovoltaikanlagen und effiziente Netzteile.同期
+Schlüsseltechnologie für Elektroautos, Photovoltaikanlagen und effiziente Netzteile.

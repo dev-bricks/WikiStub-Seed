@@ -7,4 +7,4 @@ Säuren sind Stoffe, die Protonen (H⁺-Ionen) abgeben können (Protonendonatore
 Chemie → Anorganische Chemie
 
 **Relevanz:**
-Das Säure-Base-Gleichgewicht ist essenziell für chemische Synthesen, industrielle Reinigungsprozesse und die Aufrechterhaltung des pH-Werts in biologischen Systemen.同期
+Das Säure-Base-Gleichgewicht ist essenziell für chemische Synthesen, industrielle Reinigungsprozesse und die Aufrechterhaltung des pH-Werts in biologischen Systemen.

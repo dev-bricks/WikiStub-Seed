@@ -7,4 +7,4 @@ Aminosäuren sind die organischen Bausteine, die zu langen Ketten verknüpft Pro
 Chemie → Biochemie
 
 **Relevanz:**
-Sie dienen als Katalysatoren (Enzyme), Baustoffe (Kollagen), Transportmittel und Antikörper; ohne sie ist kein biologisches Leben möglich.同期
+Sie dienen als Katalysatoren (Enzyme), Baustoffe (Kollagen), Transportmittel und Antikörper; ohne sie ist kein biologisches Leben möglich.

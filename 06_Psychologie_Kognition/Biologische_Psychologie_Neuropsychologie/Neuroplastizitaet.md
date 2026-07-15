@@ -7,4 +7,4 @@ Neuroplastizität ist die Fähigkeit des Gehirns, sich strukturell und funktione
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Widerlegt das alte Dogma vom statischen Gehirn und ist die Hoffnungsträger-Theorie für Rehabilitation und lebenslanges Lernen.同期
+Widerlegt das alte Dogma vom statischen Gehirn und ist die Hoffnungsträger-Theorie für Rehabilitation und lebenslanges Lernen.

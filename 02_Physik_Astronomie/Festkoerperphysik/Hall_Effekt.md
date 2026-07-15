@@ -7,4 +7,4 @@ Der Hall-Effekt beschreibt das Auftreten einer elektrischen Spannung (Hall-Spann
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Er wird zur Messung von Magnetfeldern (Hall-Sensoren) und zur Bestimmung der Art und Dichte der Ladungsträger in Halbleitern (n- oder p-Leitung) eingesetzt.同期
+Er wird zur Messung von Magnetfeldern (Hall-Sensoren) und zur Bestimmung der Art und Dichte der Ladungsträger in Halbleitern (n- oder p-Leitung) eingesetzt.

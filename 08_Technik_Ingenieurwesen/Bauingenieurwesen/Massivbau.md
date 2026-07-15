@@ -7,4 +7,4 @@ Befasst sich mit Konstruktionen aus schweren Materialien wie Beton, Stahlbeton u
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Die dominierende Bauweise für Wohngebäude, Brücken und Fundamente weltweit.同期
+Die dominierende Bauweise für Wohngebäude, Brücken und Fundamente weltweit.

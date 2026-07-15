@@ -7,4 +7,4 @@ Viren sind infektiöse Partikel, die aus genetischem Material (DNA oder RNA) in 
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Sie sind die häufigsten biologischen Einheiten der Erde, spielen eine große Rolle beim horizontalen Gentransfer und sind Verursacher zahlreicher Infektionskrankheiten bei Menschen, Tieren und Pflanzen.同期
+Sie sind die häufigsten biologischen Einheiten der Erde, spielen eine große Rolle beim horizontalen Gentransfer und sind Verursacher zahlreicher Infektionskrankheiten bei Menschen, Tieren und Pflanzen.

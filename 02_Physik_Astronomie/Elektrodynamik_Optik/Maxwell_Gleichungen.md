@@ -7,4 +7,4 @@ Die vier Maxwell-Gleichungen beschreiben die Erzeugung von elektrischen und magn
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Sie sind die theoretische Basis für die gesamte moderne Nachrichtentechnik, Funkwellen, Lichttheorie und Elektrotechnik.同期
+Sie sind die theoretische Basis für die gesamte moderne Nachrichtentechnik, Funkwellen, Lichttheorie und Elektrotechnik.

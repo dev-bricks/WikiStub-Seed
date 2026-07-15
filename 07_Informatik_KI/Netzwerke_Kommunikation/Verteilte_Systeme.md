@@ -7,4 +7,4 @@ Ein verteiltes System besteht aus autonomen Computern, die über ein Netzwerk ve
 Informatik & KI → Netzwerke & Kommunikation
 
 **Relevanz:**
-Ermöglicht Skalierbarkeit, Fehlertoleranz und Ressourcen-Sharing, bringt aber komplexe Probleme wie Synchronisation und Konsistenz mit sich (CAP-Theorem).同期
+Ermöglicht Skalierbarkeit, Fehlertoleranz und Ressourcen-Sharing, bringt aber komplexe Probleme wie Synchronisation und Konsistenz mit sich (CAP-Theorem).

@@ -7,4 +7,4 @@ Eine spezielle Art des maschinellen Lernens, die künstliche neuronale Netze mit
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Verantwortlich für die jüngsten Durchbrüche in Bilderkennung, Sprachsynthese und Spielen (AlphaGo).同期
+Verantwortlich für die jüngsten Durchbrüche in Bilderkennung, Sprachsynthese und Spielen (AlphaGo).

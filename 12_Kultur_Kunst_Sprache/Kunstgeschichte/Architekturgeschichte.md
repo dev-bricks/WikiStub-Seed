@@ -7,4 +7,4 @@ Die Geschichte der Baukunst von den Pyramiden über gotische Kathedralen bis zum
 Kultur, Kunst & Sprache → Kunstgeschichte
 
 **Relevanz:**
-Architektur prägt unseren Lebensraum unmittelbar; sie ist "gebaute Geschichte" und spiegelt gesellschaftliche Werte wider.同期
+Architektur prägt unseren Lebensraum unmittelbar; sie ist "gebaute Geschichte" und spiegelt gesellschaftliche Werte wider.

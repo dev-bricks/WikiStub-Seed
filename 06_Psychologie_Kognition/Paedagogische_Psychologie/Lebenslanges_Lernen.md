@@ -7,4 +7,4 @@ Das Konzept, dass Lernen nicht mit der Schule endet, sondern ein kontinuierliche
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-In einer sich schnell wandelnden Wissensgesellschaft ist die Fähigkeit zum selbstregulierten, lebenslangen Lernen eine Kernkompetenz.同期
+In einer sich schnell wandelnden Wissensgesellschaft ist die Fähigkeit zum selbstregulierten, lebenslangen Lernen eine Kernkompetenz.

@@ -7,4 +7,4 @@ Sonderprivatrecht der Kaufleute (HGB) und Recht der Unternehmensformen (GmbH, AG
 Wirtschaft & Recht → Rechtswissenschaft
 
 **Relevanz:**
-Bildet den rechtlichen Rahmen für das gesamte Wirtschaftsleben und Unternehmertum.同期
+Bildet den rechtlichen Rahmen für das gesamte Wirtschaftsleben und Unternehmertum.

@@ -7,4 +7,4 @@ Historische Analyse großer ökonomischer Einbrüche, wie der Tulpenmanie (1637)
 Wirtschaft & Recht → Wirtschaftsgeschichte
 
 **Relevanz:**
-Lehrt uns über Spekulationsblasen, Marktversagen und die Notwendigkeit (oder Gefahr) staatlicher Interventionen.同期
+Lehrt uns über Spekulationsblasen, Marktversagen und die Notwendigkeit (oder Gefahr) staatlicher Interventionen.

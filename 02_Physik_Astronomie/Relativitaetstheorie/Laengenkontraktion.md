@@ -7,4 +7,4 @@ Längenkontraktion bezeichnet die Verkürzung eines Objekts in Bewegungsrichtung
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Zusammen mit der Zeitdilatation stellt sie sicher, dass die Lichtgeschwindigkeit für alle Beobachter konstant bleibt, was die Newton’sche Vorstellung von absolutem Raum widerlegt.同期
+Zusammen mit der Zeitdilatation stellt sie sicher, dass die Lichtgeschwindigkeit für alle Beobachter konstant bleibt, was die Newton’sche Vorstellung von absolutem Raum widerlegt.

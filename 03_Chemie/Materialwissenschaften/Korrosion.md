@@ -7,4 +7,4 @@ Korrosion ist die chemische oder elektrochemische Reaktion eines metallischen We
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Korrosion verursacht jährlich weltweit massive ökonomische Schäden; ihr Verständnis ist die Basis für langlebige Infrastrukturen und effektiven Oberflächenschutz.同期
+Korrosion verursacht jährlich weltweit massive ökonomische Schäden; ihr Verständnis ist die Basis für langlebige Infrastrukturen und effektiven Oberflächenschutz.

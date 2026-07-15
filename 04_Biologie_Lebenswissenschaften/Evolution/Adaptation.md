@@ -7,4 +7,4 @@ Unter Anpassung versteht man sowohl den evolutionären Prozess der Optimierung v
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Anpassungen sind der Grund für die spezialisierten Funktionen von Organismen, wie z. B. die Flügelvorderkanten von Greifvögeln oder die Wasserspeicherkapazitäten von Kakteen.同期
+Anpassungen sind der Grund für die spezialisierten Funktionen von Organismen, wie z. B. die Flügelvorderkanten von Greifvögeln oder die Wasserspeicherkapazitäten von Kakteen.

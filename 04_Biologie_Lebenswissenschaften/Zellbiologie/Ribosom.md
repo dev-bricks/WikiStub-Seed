@@ -7,4 +7,4 @@ Ribosomen sind zelluläre Komplexe aus rRNA und Proteinen, die für die Biosynth
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Sie sind die „Produktionsstätten“ der Zelle, die den genetischen Code der mRNA in funktionelle Proteine umwandeln.同期
+Sie sind die „Produktionsstätten“ der Zelle, die den genetischen Code der mRNA in funktionelle Proteine umwandeln.

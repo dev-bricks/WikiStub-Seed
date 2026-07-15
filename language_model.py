@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from typing import Mapping, MutableMapping
+import unicodedata
 
 
 SUPPORTED_LANGUAGES = ["de", "en", "es", "zh", "ja", "ru"]
@@ -21,6 +22,28 @@ def normalize_language_code(value: object) -> str:
     if not isinstance(value, str):
         return ""
     return value.strip().lower().replace("_", "-").split("-")[0]
+
+
+def identifier_key(value: object) -> str:
+    """Normalize umlaut/ASCII variants for existing category-key lookup."""
+    text = str(value).strip().casefold()
+    text = (
+        text.replace("ä", "ae")
+        .replace("ö", "oe")
+        .replace("ü", "ue")
+        .replace("ß", "ss")
+    )
+    text = unicodedata.normalize("NFKD", text)
+    return "".join(char for char in text if char.isalnum())
+
+
+def existing_mapping_key(mapping: Mapping[str, object], requested: str) -> str:
+    """Reuse an equivalent existing key instead of creating an ASCII variant."""
+    requested_key = identifier_key(requested)
+    return next(
+        (candidate for candidate in mapping if identifier_key(candidate) == requested_key),
+        requested,
+    )
 
 
 def _clean_text(value: object) -> str:
@@ -110,6 +133,64 @@ def normalize_entry(entry: Mapping[str, object]) -> dict[str, object]:
     normalized[LOCALIZED_RELEVANCE_FIELD] = relevance_i18n
     normalized[LEGACY_RELEVANCE_FIELD] = relevance_i18n["de"]
     return normalized
+
+
+def public_entry(entry: Mapping[str, object]) -> dict[str, object]:
+    """Return a normalized dataset entry without local/import metadata."""
+    normalized = normalize_entry(entry)
+    result = {
+        "title": str(normalized.get("title", "")),
+        "definition_de": normalized["definition_de"],
+        "definition_en": normalized["definition_en"],
+        "relevance": normalized[LEGACY_RELEVANCE_FIELD],
+        "definitions": normalized["definitions"],
+        LOCALIZED_RELEVANCE_FIELD: normalized[LOCALIZED_RELEVANCE_FIELD],
+        "tags": list(normalized.get("tags", []))
+        if isinstance(normalized.get("tags"), list)
+        else [],
+    }
+    for key, value in entry.items():
+        if key not in result and key not in {
+            "category",
+            "subcategory",
+            "source_file",
+            "content_hash",
+            "_category",
+            "_subcategory",
+        }:
+            result[key] = value
+    return result
+
+
+def merge_entry(
+    existing: Mapping[str, object], incoming: Mapping[str, object]
+) -> dict[str, object]:
+    """Apply non-empty source edits while retaining untouched translations."""
+    current = public_entry(existing)
+    update = public_entry(incoming)
+
+    definitions = dict(current["definitions"])
+    for lang, text in update["definitions"].items():
+        if text:
+            definitions[lang] = text
+
+    relevance = dict(current[LOCALIZED_RELEVANCE_FIELD])
+    for lang, text in update[LOCALIZED_RELEVANCE_FIELD].items():
+        if text:
+            relevance[lang] = text
+
+    current["definitions"] = definitions
+    current["definition_de"] = definitions["de"]
+    current["definition_en"] = definitions["en"]
+    current[LOCALIZED_RELEVANCE_FIELD] = relevance
+    current[LEGACY_RELEVANCE_FIELD] = relevance[DEFAULT_LANGUAGE]
+
+    if update.get("title"):
+        current["title"] = update["title"]
+    if update.get("tags"):
+        current["tags"] = update["tags"]
+
+    return public_entry(current)
 
 
 def iter_metawiki_entries(data: Mapping[str, object]):

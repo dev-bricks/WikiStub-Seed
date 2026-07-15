@@ -7,4 +7,4 @@ Wirbeltiere sind eine Untergruppe der Chordatier, die durch eine Wirbelsäule un
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Sie stellen die komplexesten Tiere der Erde dar und besetzen Spitzenpositionen in fast allen Nahrungsketten; der Mensch selbst gehört zu dieser Gruppe.同期
+Sie stellen die komplexesten Tiere der Erde dar und besetzen Spitzenpositionen in fast allen Nahrungsketten; der Mensch selbst gehört zu dieser Gruppe.

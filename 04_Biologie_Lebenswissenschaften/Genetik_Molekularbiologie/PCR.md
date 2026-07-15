@@ -7,4 +7,4 @@ Die PCR ist eine Labormethode zur gezielten Vervielfältigung spezifischer DNA-A
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Sie ist das unverzichtbare Werkzeug der modernen Biologie und Medizin für die Diagnose von Krankheiten, die Erstellung genetischer Fingerabdrücke und die experimentelle Forschung.同期
+Sie ist das unverzichtbare Werkzeug der modernen Biologie und Medizin für die Diagnose von Krankheiten, die Erstellung genetischer Fingerabdrücke und die experimentelle Forschung.

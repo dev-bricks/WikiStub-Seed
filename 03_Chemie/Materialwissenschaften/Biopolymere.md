@@ -7,4 +7,4 @@ Biopolymere sind in der Natur vorkommende Makromoleküle oder solche, die aus na
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Sie sind eine nachhaltige Alternative zu erdölbasierten Kunststoffen und spielen eine Schlüsselrolle bei der Reduzierung von Plastikmüll und CO₂-Emissionen.同期
+Sie sind eine nachhaltige Alternative zu erdölbasierten Kunststoffen und spielen eine Schlüsselrolle bei der Reduzierung von Plastikmüll und CO₂-Emissionen.

@@ -7,4 +7,4 @@ Der Energieerhaltungssatz besagt, dass in einem abgeschlossenen System die Gesam
 Physik & Astronomie → Klassische Mechanik
 
 **Relevanz:**
-Dieses universelle Prinzip ist ein Eckpfeiler der gesamten Physik und ermöglicht die Vorhersage energetischer Vorgänge in Mechanik, Thermodynamik und Quantenphysik.同期
+Dieses universelle Prinzip ist ein Eckpfeiler der gesamten Physik und ermöglicht die Vorhersage energetischer Vorgänge in Mechanik, Thermodynamik und Quantenphysik.

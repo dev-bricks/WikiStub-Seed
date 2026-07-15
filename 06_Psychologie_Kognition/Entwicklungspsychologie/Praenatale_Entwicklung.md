@@ -7,4 +7,4 @@ Pränatale Entwicklung befasst sich mit den Wachstumsprozessen von der Empfängn
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Erkenntnisse hieraus sind entscheidend für Schwangerschaftsvorsorge und das Verständnis angeborener Dispositionen und früher Entwicklungsrisiken.同期
+Erkenntnisse hieraus sind entscheidend für Schwangerschaftsvorsorge und das Verständnis angeborener Dispositionen und früher Entwicklungsrisiken.

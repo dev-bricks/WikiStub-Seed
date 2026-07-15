@@ -7,4 +7,4 @@ Methoden zur Ermittlung von Materialkennwerten (z.B. Zugversuch, Härteprüfung)
 Technik & Ingenieurwesen → Materialwissenschaft & Werkstofftechnik
 
 **Relevanz:**
-Sichert, dass verbaute Materialien tatsächlich die geforderten Belastungen aushalten; essentiell für die Qualitätskontrolle.同期
+Sichert, dass verbaute Materialien tatsächlich die geforderten Belastungen aushalten; essentiell für die Qualitätskontrolle.

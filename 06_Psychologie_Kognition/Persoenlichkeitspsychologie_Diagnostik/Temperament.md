@@ -7,4 +7,4 @@ Temperament bezeichnet die biologisch verankerten, früh beobachtbaren Unterschi
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Verständnis des Temperaments hilft Eltern und Erziehern, passgenau auf die Bedürfnisse von Kindern einzugehen ("Goodness of Fit").同期
+Verständnis des Temperaments hilft Eltern und Erziehern, passgenau auf die Bedürfnisse von Kindern einzugehen ("Goodness of Fit").

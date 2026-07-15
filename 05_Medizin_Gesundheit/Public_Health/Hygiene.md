@@ -7,4 +7,4 @@ Hygiene ist die Lehre von der Verhütung von Krankheiten und der Erhaltung der G
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Hygienestandards in Krankenhäusern, lebensmittelverarbeitenden Betrieben und im öffentlichen Raum sind der effektivste Schutz vor der Verbreitung von Infektionen.同期
+Hygienestandards in Krankenhäusern, lebensmittelverarbeitenden Betrieben und im öffentlichen Raum sind der effektivste Schutz vor der Verbreitung von Infektionen.

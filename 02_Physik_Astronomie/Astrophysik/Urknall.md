@@ -7,4 +7,4 @@ Der Urknall bezeichnet den Beginn des Universums aus einer Singularität vor etw
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Es ist das Standardmodell der Kosmologie, das die Entstehung von Zeit, Raum und Materie sowie die beobachtbare Hintergrundstrahlung und Galaxienverteilung erklärt.同期
+Es ist das Standardmodell der Kosmologie, das die Entstehung von Zeit, Raum und Materie sowie die beobachtbare Hintergrundstrahlung und Galaxienverteilung erklärt.

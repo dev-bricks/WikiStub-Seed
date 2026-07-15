@@ -7,4 +7,4 @@ Das Komplementsystem ist eine Gruppe von über 30 Proteinen im Blutplasma, die i
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Es bildet die Brücke zwischen angeborener und erworbener Immunabwehr und verstärkt die Entzündungsreaktion zum Schutz des Körpers.同期
+Es bildet die Brücke zwischen angeborener und erworbener Immunabwehr und verstärkt die Entzündungsreaktion zum Schutz des Körpers.

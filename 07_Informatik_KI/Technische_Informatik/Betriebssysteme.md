@@ -7,4 +7,4 @@ Betriebssysteme (OS) sind die Schnittstelle zwischen Hardware und Anwendungssoft
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Ohne OS wäre komplexe Hardware nicht nutzbar; sie garantieren Abstraktion, Sicherheit und Multitasking.同期
+Ohne OS wäre komplexe Hardware nicht nutzbar; sie garantieren Abstraktion, Sicherheit und Multitasking.

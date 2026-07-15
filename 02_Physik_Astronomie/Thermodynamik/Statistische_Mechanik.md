@@ -7,4 +7,4 @@ Die statistische Mechanik (oder statistische Physik) erklärt die makroskopische
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Sie liefert die theoretische Begründung für die Gesetze der Thermodynamik und erlaubt die Berechnung von Stoffeigenschaften aus Modellen der Atomphysik.同期
+Sie liefert die theoretische Begründung für die Gesetze der Thermodynamik und erlaubt die Berechnung von Stoffeigenschaften aus Modellen der Atomphysik.

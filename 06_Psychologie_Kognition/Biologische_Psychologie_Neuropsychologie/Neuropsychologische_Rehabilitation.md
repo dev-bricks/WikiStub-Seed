@@ -7,4 +7,4 @@ Befasst sich mit der Diagnostik und Therapie kognitiver Defizite nach Hirnschäd
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Ziel ist die Wiederherstellung oder Kompensation verlorener Funktionen, um Patienten die Rückkehr in Alltag und Beruf zu ermöglichen.同期
+Ziel ist die Wiederherstellung oder Kompensation verlorener Funktionen, um Patienten die Rückkehr in Alltag und Beruf zu ermöglichen.

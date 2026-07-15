@@ -7,4 +7,4 @@ Homologie bezeichnet die grundsätzliche Übereinstimmung von Strukturen (z. B. 
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Homologien sind die wichtigsten Belege für die gemeinsame Abstammung von Organismengruppen und bilden das Skelett für die biologische Systematik.同期
+Homologien sind die wichtigsten Belege für die gemeinsame Abstammung von Organismengruppen und bilden das Skelett für die biologische Systematik.

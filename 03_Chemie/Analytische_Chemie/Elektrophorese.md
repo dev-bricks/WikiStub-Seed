@@ -7,4 +7,4 @@ Elektrophorese ist ein Trennverfahren, bei dem geladene Teilchen (z. B. Proteine
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Sie ist das Standardverfahren in der Molekularbiologie und Diagnostik zur Trennung und Analyse von Erbgut und Enzymsubstanzen.同期
+Sie ist das Standardverfahren in der Molekularbiologie und Diagnostik zur Trennung und Analyse von Erbgut und Enzymsubstanzen.

@@ -7,4 +7,4 @@ Beschreibt die grundlegende Struktur eines Softwaresystems, bestehend aus Kompon
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Eine gute Architektur ist entscheidend für Wartbarkeit, Skalierbarkeit und Performance; Architekturfehler sind später kaum zu korrigieren.同期
+Eine gute Architektur ist entscheidend für Wartbarkeit, Skalierbarkeit und Performance; Architekturfehler sind später kaum zu korrigieren.

@@ -7,4 +7,4 @@ Das Pauli-Prinzip besagt, dass sich zwei Fermionen (Teilchen mit halbzahligem Sp
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Es verhindert, dass alle Elektronen eines Atoms in den energetisch tiefsten Zustand fallen, und sorgt so für die räumliche Ausdehnung der Materie und die Vielfalt chemischer Bindungen.同期
+Es verhindert, dass alle Elektronen eines Atoms in den energetisch tiefsten Zustand fallen, und sorgt so für die räumliche Ausdehnung der Materie und die Vielfalt chemischer Bindungen.

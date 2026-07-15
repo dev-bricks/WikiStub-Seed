@@ -7,4 +7,4 @@ Recyclingchemie befasst sich mit den chemischen Prozessen zur Rückgewinnung von
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Sie ist die Voraussetzung für eine funktionierende Kreislaufwirtschaft und hilft, den primären Ressourcenverbrauch sowie die Umweltbelastung massiv zu senken.同期
+Sie ist die Voraussetzung für eine funktionierende Kreislaufwirtschaft und hilft, den primären Ressourcenverbrauch sowie die Umweltbelastung massiv zu senken.

@@ -7,4 +7,4 @@ Befasst sich mit physikalischen Phänomenen (Isolierung, Lichtbögen) und techni
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Ermöglicht den verlustarmen Transport von Strom über weite Strecken vom Kraftwerk zum Verbraucher.同期
+Ermöglicht den verlustarmen Transport von Strom über weite Strecken vom Kraftwerk zum Verbraucher.

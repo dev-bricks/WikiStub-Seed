@@ -7,4 +7,4 @@ Bereitstellung von IT-Ressourcen (Rechenleistung, Speicher, Anwendungen) über d
 Informatik & KI → Netzwerke & Kommunikation
 
 **Relevanz:**
-Hat die IT-Wirtschaft revolutioniert durch Flexibilität ("Pay-as-you-go"), Skalierbarkeit und geringere Investitionskosten für Startups.同期
+Hat die IT-Wirtschaft revolutioniert durch Flexibilität ("Pay-as-you-go"), Skalierbarkeit und geringere Investitionskosten für Startups.

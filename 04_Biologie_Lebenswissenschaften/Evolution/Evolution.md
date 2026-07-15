@@ -7,4 +7,4 @@ Evolution bezeichnet die allmähliche Veränderung der vererbbaren Merkmale eine
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Als zentrales Paradigma der modernen Biologie erklärt sie die Einheit und Vielfalt des Lebens sowie die komplexen wechselseitigen Anpassungen von Organismen an ihre Umwelt.同期
+Als zentrales Paradigma der modernen Biologie erklärt sie die Einheit und Vielfalt des Lebens sowie die komplexen wechselseitigen Anpassungen von Organismen an ihre Umwelt.

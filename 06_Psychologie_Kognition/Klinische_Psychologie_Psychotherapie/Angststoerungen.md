@@ -7,4 +7,4 @@ Angststörungen sind durch übermäßige, unkontrollierbare Furcht und Sorge gek
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Sie gehören zu den häufigsten psychischen Erkrankungen weltweit, sind aber oft gut behandelbar (z.B. mittels Expositionstherapie).同期
+Sie gehören zu den häufigsten psychischen Erkrankungen weltweit, sind aber oft gut behandelbar (z.B. mittels Expositionstherapie).

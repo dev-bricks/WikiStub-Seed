@@ -7,4 +7,4 @@ Lernstörungen (wie Legasthenie, Dyskalkulie) sind spezifische Probleme beim Erw
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Frühe Diagnose und Nachteilsausgleich sind entscheidend, um Sekundärprobleme wie Schulangst und geringen Selbstwert zu verhindern.同期
+Frühe Diagnose und Nachteilsausgleich sind entscheidend, um Sekundärprobleme wie Schulangst und geringen Selbstwert zu verhindern.

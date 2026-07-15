@@ -7,4 +7,4 @@ Dieser Bereich untersucht, was Menschen bei der Arbeit antreibt und erfüllt (z.
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Entscheidend für Unternehmen, um Fluktuation zu senken und Produktivität durch intrinsische Motivation zu steigern.同期
+Entscheidend für Unternehmen, um Fluktuation zu senken und Produktivität durch intrinsische Motivation zu steigern.

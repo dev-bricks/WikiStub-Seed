@@ -7,4 +7,4 @@ Entropie ist ein Maß für die Unordnung oder die Anzahl der mikroskopischen Zus
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Sie definiert die Richtung der Zeit (Zeitpfeil) und ist fundamental für die Informationslehre sowie das Verständnis der Endlichkeit von Energieressourcen.同期
+Sie definiert die Richtung der Zeit (Zeitpfeil) und ist fundamental für die Informationslehre sowie das Verständnis der Endlichkeit von Energieressourcen.

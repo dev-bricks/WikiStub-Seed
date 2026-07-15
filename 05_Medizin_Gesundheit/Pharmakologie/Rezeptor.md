@@ -7,4 +7,4 @@ Ein Rezeptor ist ein Protein auf der Zelloberfläche oder im Inneren der Zelle, 
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Die meisten modernen Medikamente wirken durch die Bindung an Rezeptoren. Die Passgenauigkeit (Affinität) bestimmt dabei die Selektivität und Stärke der Wirkung.同期
+Die meisten modernen Medikamente wirken durch die Bindung an Rezeptoren. Die Passgenauigkeit (Affinität) bestimmt dabei die Selektivität und Stärke der Wirkung.

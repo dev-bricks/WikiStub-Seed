@@ -7,4 +7,4 @@ Das Hormonsystem reguliert über Botenstoffe im Blut (wie Cortisol, Adrenalin, T
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Hormonelle Ungleichgewichte können massive Auswirkungen auf die Psyche haben (z.B. Schilddrüse und Depression).同期
+Hormonelle Ungleichgewichte können massive Auswirkungen auf die Psyche haben (z.B. Schilddrüse und Depression).

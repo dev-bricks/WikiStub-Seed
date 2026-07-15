@@ -7,4 +7,4 @@ Die Inzidenz gibt die Anzahl der Neuerkrankungen in einem Zeitraum an (Dynamik).
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Diese Kennzahlen sind essenziell, um die Ausbreitungsgeschwindigkeit (Inzidenz) und die Gesamtlast (Prävalenz) einer Krankheit für das Gesundheitssystem zu beurteilen.同期
+Diese Kennzahlen sind essenziell, um die Ausbreitungsgeschwindigkeit (Inzidenz) und die Gesamtlast (Prävalenz) einer Krankheit für das Gesundheitssystem zu beurteilen.

@@ -7,4 +7,4 @@ Lernen in der Psychologie beschreibt die relativ dauerhafte Veränderung von Ver
 Psychologie & Kognition → Allgemeine Psychologie
 
 **Relevanz:**
-Es ermöglicht Organismen die Anpassung an eine komplexe und sich wandelnde Umwelt und ist die Basis für Bildung und Kompetenzerwerb.同期
+Es ermöglicht Organismen die Anpassung an eine komplexe und sich wandelnde Umwelt und ist die Basis für Bildung und Kompetenzerwerb.

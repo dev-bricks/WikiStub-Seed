@@ -7,4 +7,4 @@ Unterscheidet volatile (RAM, Cache) und nicht-volatile Speicher (Flash, SSD, HDD
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Speicherbandbreite und -latenz sind oft der Flaschenhals moderner Systeme (Memory Wall); neue Technologien (z.B. MRAM) versprechen Abhilfe.同期
+Speicherbandbreite und -latenz sind oft der Flaschenhals moderner Systeme (Memory Wall); neue Technologien (z.B. MRAM) versprechen Abhilfe.

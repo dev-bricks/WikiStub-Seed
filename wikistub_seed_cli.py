@@ -23,13 +23,13 @@ Nutzung:
 
 import json
 import sys
-import os
 import argparse
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 
 from language_model import get_definition, get_relevance, normalize_entry
+from safe_io import atomic_write_json, backup_file, safe_path_component
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -64,13 +64,9 @@ def load_json():
 def save_json(data):
     """Speichert wikistub_seed.json mit Backup."""
     if JSON_PATH.exists():
-        BACKUP_PATH.mkdir(exist_ok=True)
-        backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        import shutil
-        shutil.copy(JSON_PATH, BACKUP_PATH / backup_name)
+        backup_file(JSON_PATH, BACKUP_PATH, prefix="wikistub_seed", keep=10)
 
-    with open(JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    atomic_write_json(JSON_PATH, data)
 
 
 def get_all_stubs(data):
@@ -308,10 +304,10 @@ def cmd_export(args):
     for stub in stubs:
         cat = stub["_category"]
         subcat = stub["_subcategory"]
-        folder = output_dir / cat / subcat
+        folder = output_dir / safe_path_component(cat) / safe_path_component(subcat)
         folder.mkdir(parents=True, exist_ok=True)
 
-        safe_title = stub["title"].replace(" ", "_").replace("/", "_")
+        safe_title = safe_path_component(stub["title"].replace(" ", "_"))
         filepath = folder / f"{safe_title}.md"
 
         cat_display = cat.lstrip("0123456789_").replace("_", " ")
@@ -340,7 +336,7 @@ def cmd_import_md(args):
     cmd = [sys.executable, str(BASE_PATH / "md_to_json.py")]
     if args.dry_run:
         cmd.append("--dry-run")
-    subprocess.run(cmd)
+    return subprocess.run(cmd).returncode
 
 
 def cmd_check(args):
@@ -350,7 +346,7 @@ def cmd_check(args):
     cmd = [sys.executable, str(BASE_PATH / "check_duplicates.py")]
     if args.similar:
         cmd.append("--similar")
-    subprocess.run(cmd)
+    return subprocess.run(cmd).returncode
 
 
 # ==================== MAIN ====================
@@ -428,7 +424,9 @@ Beispiele:
         parser.print_help()
         return
 
-    args.func(args)
+    exit_code = args.func(args)
+    if isinstance(exit_code, int) and exit_code != 0:
+        sys.exit(exit_code)
 
 
 if __name__ == "__main__":

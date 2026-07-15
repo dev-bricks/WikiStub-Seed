@@ -7,4 +7,4 @@ Nachhaltigkeit bezeichnet ein Nutzungsprinzip, bei dem Ressourcen nur in dem Ma�
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Sie ist das Leitbild für eine moderne Umweltpolitik und Ressourcenökonomie, um die Lebensgrundlagen künftiger Generationen angesichts des weltweiten Bevölkerungswachstums zu sichern.同期
+Sie ist das Leitbild für eine moderne Umweltpolitik und Ressourcenökonomie, um die Lebensgrundlagen künftiger Generationen angesichts des weltweiten Bevölkerungswachstums zu sichern.

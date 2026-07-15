@@ -7,4 +7,4 @@ Die Dichtefunktionaltheorie ist eine quantenmechanische Methode zur Berechnung d
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-DFT ist die am weitesten verbreitete Methode der Quantenchemie für Festkörper und große Moleküle, da sie eine gute Balance zwischen Rechengenauigkeit und Rechenaufwand bietet.同期
+DFT ist die am weitesten verbreitete Methode der Quantenchemie für Festkörper und große Moleküle, da sie eine gute Balance zwischen Rechengenauigkeit und Rechenaufwand bietet.

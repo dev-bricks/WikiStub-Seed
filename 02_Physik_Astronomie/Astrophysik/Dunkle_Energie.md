@@ -7,4 +7,4 @@ Dunkle Energie ist eine hypothetische Energieform, die den gesamten Raum erfüll
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Sie macht etwa 70 % der gesamten Energiedichte des Universums aus; ihre Entschlüsselung ist eine der größten Herausforderungen der modernen Physik.同期
+Sie macht etwa 70 % der gesamten Energiedichte des Universums aus; ihre Entschlüsselung ist eine der größten Herausforderungen der modernen Physik.

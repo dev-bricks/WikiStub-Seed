@@ -7,4 +7,4 @@ Ein Chromosom ist eine fadenförmige Struktur im Zellkern, die aus hochgradig ve
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Chromosomen dienen der geordneten Speicherung und Verteilung der DNA während der Zellteilung und sind die physikalische Basis der Vererbung.同期
+Chromosomen dienen der geordneten Speicherung und Verteilung der DNA während der Zellteilung und sind die physikalische Basis der Vererbung.

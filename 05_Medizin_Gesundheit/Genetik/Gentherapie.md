@@ -7,4 +7,4 @@ Gentherapie ist das Einbringen von genetischem Material in die Zellen eines Pati
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-Sie stellt einen Hoffnungsträger für die Heilung bisher unheilbarer Erbkrankheiten und bestimmter Krebsarten dar, wirft jedoch auch komplexe ethische und regulatorische Fragen auf.同期
+Sie stellt einen Hoffnungsträger für die Heilung bisher unheilbarer Erbkrankheiten und bestimmter Krebsarten dar, wirft jedoch auch komplexe ethische und regulatorische Fragen auf.

@@ -7,4 +7,4 @@ Ein Paradigma, das quantenmechanische Phänomene (Superposition, Verschränkung)
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Könnte klassische Kryptographie brechen (Shor-Algorithmus) und Simulationen in Chemie/Physik revolutionieren.同期
+Könnte klassische Kryptographie brechen (Shor-Algorithmus) und Simulationen in Chemie/Physik revolutionieren.

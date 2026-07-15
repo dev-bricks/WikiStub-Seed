@@ -7,4 +7,4 @@ Die Differentielle Psychologie untersucht systematisch, worin sich Menschen vone
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Wichtig, um Menschen nicht als homogene Masse zu behandeln, sondern individuelle Förderung und Passung in Beruf und Therapie zu ermöglichen.同期
+Wichtig, um Menschen nicht als homogene Masse zu behandeln, sondern individuelle Förderung und Passung in Beruf und Therapie zu ermöglichen.

@@ -16,13 +16,14 @@ Nutzung:
 """
 
 import json
-import shutil
 import sys
 from pathlib import Path
 from collections import defaultdict
 from datetime import datetime
 
 from language_model import get_definition, get_relevance
+from data_policy import duplicate_locations_are_allowed
+from safe_io import atomic_write_json, backup_file
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -101,12 +102,9 @@ def _similarity(a, b):
 def save_json(data):
     """Speichert wikistub_seed.json mit Backup."""
     if JSON_PATH.exists():
-        BACKUP_PATH.mkdir(exist_ok=True)
-        backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        shutil.copy(JSON_PATH, BACKUP_PATH / backup_name)
+        backup_file(JSON_PATH, BACKUP_PATH, prefix="wikistub_seed", keep=10)
 
-    with open(JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    atomic_write_json(JSON_PATH, data)
 
 
 def fix_duplicates_interactive(data, duplicates):
@@ -207,6 +205,17 @@ def main():
     print(f"{'='*60}")
 
     duplicates = find_exact_duplicates(stubs)
+    allowed_duplicates = {
+        title: entries
+        for title, entries in duplicates.items()
+        if duplicate_locations_are_allowed(
+            title,
+            ((entry["category"], entry["subcategory"]) for entry in entries),
+        )
+    }
+    unexpected_duplicates = {
+        title: entries for title, entries in duplicates.items() if title not in allowed_duplicates
+    }
     if duplicates:
         print(f"\n  {len(duplicates)} Duplikate gefunden:\n")
         for title, entries in sorted(duplicates.items()):
@@ -215,11 +224,19 @@ def main():
                 print(f"    -> {e['category']}/{e['subcategory']}")
             print()
 
-        if args.fix:
+        if allowed_duplicates:
+            print(
+                f"  {len(allowed_duplicates)} geprüfte domänenübergreifende "
+                "Doppelbezeichnung(en) sind erlaubt."
+            )
+        if unexpected_duplicates:
+            print(f"  FEHLER: {len(unexpected_duplicates)} unerwartete Duplikatgruppe(n).")
+
+        if args.fix and unexpected_duplicates:
             print(f"\n{'='*60}")
             print("  INTERAKTIVE BEREINIGUNG")
             print(f"{'='*60}")
-            removed = fix_duplicates_interactive(data, duplicates)
+            removed = fix_duplicates_interactive(data, unexpected_duplicates)
             if removed > 0:
                 save_json(data)
                 print(f"\n  {removed} Duplikate entfernt und gespeichert.")
@@ -266,11 +283,14 @@ def main():
     print(f"{'='*60}")
     print(f"    Gesamt Stubs:         {len(stubs)}")
     print(f"    Exakte Duplikate:     {len(duplicates)}")
+    print(f"    Davon erlaubt:        {len(allowed_duplicates)}")
     if args.similar:
         print(f"    Ähnliche Titel:       {len(similar)}")
     print(f"    Unvollständige:       {len(empty)}")
     print(f"{'='*60}")
 
+    return 1 if unexpected_duplicates or empty else 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -7,4 +7,4 @@ Sprachentwicklung umfasst den Erwerb von sprachlichen Fähigkeiten, beginnend be
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Sprache ist das zentrale Werkzeug für Kommunikation und Denken; Verzögerungen können weitreichende Folgen für die kognitive und soziale Entwicklung haben.同期
+Sprache ist das zentrale Werkzeug für Kommunikation und Denken; Verzögerungen können weitreichende Folgen für die kognitive und soziale Entwicklung haben.

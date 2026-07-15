@@ -7,4 +7,4 @@ Prägung ist eine irreversible Form des Lernens, die nur während eines kurzen, 
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Sie sichert die Bindung an die Eltern oder die korrekte Partnerwahl bei Erreichen der Geschlechtsreife und ist eines der faszinierendsten Beispiele für die Verzahnung von Genetik und Erfahrung.同期
+Sie sichert die Bindung an die Eltern oder die korrekte Partnerwahl bei Erreichen der Geschlechtsreife und ist eines der faszinierendsten Beispiele für die Verzahnung von Genetik und Erfahrung.

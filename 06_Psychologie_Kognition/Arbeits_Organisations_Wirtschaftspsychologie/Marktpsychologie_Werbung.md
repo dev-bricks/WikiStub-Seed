@@ -7,4 +7,4 @@ Analysiert das Erleben und Verhalten von Konsumenten (Kaufentscheidungen, Marken
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Essentiell für Produktentwicklung und Marketingstrategien; wirft auch ethische Fragen zur Beeinflussung von Verbrauchern auf.同期
+Essentiell für Produktentwicklung und Marketingstrategien; wirft auch ethische Fragen zur Beeinflussung von Verbrauchern auf.

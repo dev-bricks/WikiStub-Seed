@@ -7,4 +7,4 @@ Prosoziales Verhalten bezeichnet freiwillige Handlungen, die anderen nützen, wi
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Untersucht die Bedingungen für Hilfsbereitschaft (z.B. Bystander-Effekt) und ist essenziell für sozialen Zusammenhalt und Zivilcourage.同期
+Untersucht die Bedingungen für Hilfsbereitschaft (z.B. Bystander-Effekt) und ist essenziell für sozialen Zusammenhalt und Zivilcourage.

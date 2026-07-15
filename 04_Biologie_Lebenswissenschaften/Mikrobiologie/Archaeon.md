@@ -7,4 +7,4 @@ Archäen sind einzellige Mikroorganismen ohne Zellkern, die sich biochemisch und
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Ihre Erforschung liefert Hinweise auf die Frühzeit des Lebens auf der Erde und ermöglicht die Nutzung spezialisierter Enzyme (z. B. für die PCR) bei hohen Temperaturen.同期
+Ihre Erforschung liefert Hinweise auf die Frühzeit des Lebens auf der Erde und ermöglicht die Nutzung spezialisierter Enzyme (z. B. für die PCR) bei hohen Temperaturen.

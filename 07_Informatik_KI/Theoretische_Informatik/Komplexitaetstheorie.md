@@ -7,4 +7,4 @@ Klassifiziert Probleme nach dem Ressourcenaufwand (Zeit und Speicher), der zu ih
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Entscheidend für Kryptographie (die auf schweren Problemen basiert) und die Grenzen der Optimierung in der Praxis.同期
+Entscheidend für Kryptographie (die auf schweren Problemen basiert) und die Grenzen der Optimierung in der Praxis.

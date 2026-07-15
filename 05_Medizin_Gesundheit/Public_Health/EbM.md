@@ -7,4 +7,4 @@ EbM ist der gewissenhafte Gebrauch der aktuell besten wissenschaftlichen Nachwei
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Sie verhindert den Einsatz wirkungsloser oder schädlicher Therapien und bildet die Basis für Leitlinien, um eine qualitativ hochwertige Versorgung sicherzustellen.同期
+Sie verhindert den Einsatz wirkungsloser oder schädlicher Therapien und bildet die Basis für Leitlinien, um eine qualitativ hochwertige Versorgung sicherzustellen.

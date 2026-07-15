@@ -7,4 +7,4 @@ Der Genotyp ist die Gesamtheit der genetischen Information eines Individuums. De
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-In der Medizin zeigt sich oft, dass Menschen mit dem gleichen Genotyp (derselben Mutation) sehr unterschiedliche Phänotypen (Krankheitsverläufe) aufweisen können, was die Diagnose und Prognose erschwert.同期
+In der Medizin zeigt sich oft, dass Menschen mit dem gleichen Genotyp (derselben Mutation) sehr unterschiedliche Phänotypen (Krankheitsverläufe) aufweisen können, was die Diagnose und Prognose erschwert.

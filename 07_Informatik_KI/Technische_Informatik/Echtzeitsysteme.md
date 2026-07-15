@@ -7,4 +7,4 @@ Echtzeitsysteme (Real-time Systems) sind Computersysteme, die Ergebnisse nicht n
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Entscheidend für sicherheitskritische Anwendungen, bei denen Verzögerungen katastrophale Folgen haben könnten.同期
+Entscheidend für sicherheitskritische Anwendungen, bei denen Verzögerungen katastrophale Folgen haben könnten.

@@ -7,4 +7,4 @@ Zellatmung ist der biochemische Prozess, bei dem organische Stoffe (meist Glukos
 Chemie → Biochemie
 
 **Relevanz:**
-Sie ist das chemische Kraftwerk der Zelle und liefert die notwendige Energie für die Aufrechterhaltung aller Lebensprojekte aerober Organismen.同期
+Sie ist das chemische Kraftwerk der Zelle und liefert die notwendige Energie für die Aufrechterhaltung aller Lebensprojekte aerober Organismen.

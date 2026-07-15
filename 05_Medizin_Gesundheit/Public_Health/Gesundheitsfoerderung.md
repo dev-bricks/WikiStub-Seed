@@ -7,4 +7,4 @@ Gesundheitsförderung zielt darauf ab, die Gesundheitskompetenz von Menschen zu 
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Im Gegensatz zur reinen Krankheitsvermeidung (Prävention) fokussiert sie auf die Stärkung von Ressourcen und Schutzfaktoren („Was hält gesund?“), z. B. durch Bewegungsprogramme oder gesunde Arbeitsplätze.同期
+Im Gegensatz zur reinen Krankheitsvermeidung (Prävention) fokussiert sie auf die Stärkung von Ressourcen und Schutzfaktoren („Was hält gesund?“), z. B. durch Bewegungsprogramme oder gesunde Arbeitsplätze.

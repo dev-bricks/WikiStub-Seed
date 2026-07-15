@@ -7,4 +7,4 @@ Anorganisch-nichtmetallische Werkstoffe. Zeichnen sich durch hohe Härte, Hitzeb
 Technik & Ingenieurwesen → Materialwissenschaft & Werkstofftechnik
 
 **Relevanz:**
-Einsatz als Isolatoren, in der Hochtemperaturtechnik, Medizintechnik (Implantate) und Optik.同期
+Einsatz als Isolatoren, in der Hochtemperaturtechnik, Medizintechnik (Implantate) und Optik.

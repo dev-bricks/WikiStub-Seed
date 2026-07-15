@@ -7,4 +7,4 @@ Bestäubung ist die Übertragung von Pollen von den Staubblättern (männlich) a
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Sie ist die Voraussetzung für die Befruchtung und die Bildung von Samen und Früchten, was sowohl für die Fortpflanzung vieler Pflanzen als auch für die menschliche Nahrungsmittelproduktion (Erträge) kritisch ist.同期
+Sie ist die Voraussetzung für die Befruchtung und die Bildung von Samen und Früchten, was sowohl für die Fortpflanzung vieler Pflanzen als auch für die menschliche Nahrungsmittelproduktion (Erträge) kritisch ist.

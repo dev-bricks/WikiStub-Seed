@@ -7,4 +7,4 @@ Neurotransmitter sind biochemische Botenstoffe, die an Synapsen die Information 
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Ein Ungleichgewicht von Neurotransmittern spielt eine zentrale Rolle bei psychischen Erkrankungen (Depression), Sucht oder neurologischen Störungen (Parkinson).同期
+Ein Ungleichgewicht von Neurotransmittern spielt eine zentrale Rolle bei psychischen Erkrankungen (Depression), Sucht oder neurologischen Störungen (Parkinson).

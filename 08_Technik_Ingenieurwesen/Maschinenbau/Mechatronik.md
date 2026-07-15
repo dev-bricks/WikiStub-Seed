@@ -7,4 +7,4 @@ Interdisziplinäres Gebiet, das Mechanik, Elektronik und Informatik verbindet, u
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Moderne Maschinen sind fast nie rein mechanisch; Sensoren, Aktoren und Software sind integraler Bestandteil.同期
+Moderne Maschinen sind fast nie rein mechanisch; Sensoren, Aktoren und Software sind integraler Bestandteil.

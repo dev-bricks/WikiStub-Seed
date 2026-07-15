@@ -7,4 +7,4 @@ Die ökologische Nische beschreibt die Gesamtheit der Ansprüche einer Art an ih
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Nach dem Konkurrenz-Ausschluss-Prinzip können zwei Arten mit identischer Nische nicht dauerhaft koexistieren; die Einnischung ermöglicht somit eine hohe biologische Vielfalt durch Arbeitsteilung.同期
+Nach dem Konkurrenz-Ausschluss-Prinzip können zwei Arten mit identischer Nische nicht dauerhaft koexistieren; die Einnischung ermöglicht somit eine hohe biologische Vielfalt durch Arbeitsteilung.

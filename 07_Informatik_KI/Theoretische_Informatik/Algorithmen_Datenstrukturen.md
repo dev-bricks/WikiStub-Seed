@@ -7,4 +7,4 @@ Algorithmen sind präzise Handlungsvorschriften zur Lösung von Problemen; Daten
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Das Fundament jeder Softwareentwicklung; die Wahl der richtigen Strukturen bestimmt die Performanz und Skalierbarkeit von Systemen.同期
+Das Fundament jeder Softwareentwicklung; die Wahl der richtigen Strukturen bestimmt die Performanz und Skalierbarkeit von Systemen.

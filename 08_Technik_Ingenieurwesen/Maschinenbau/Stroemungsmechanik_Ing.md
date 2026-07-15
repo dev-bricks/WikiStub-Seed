@@ -7,4 +7,4 @@ Untersucht das Verhalten von Fluiden (Flüssigkeiten und Gasen) in Ruhe und Bewe
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Entscheidend für den Luftwiderstand von Fahrzeugen, Pumpenleistung und Windkraftanlagen.同期
+Entscheidend für den Luftwiderstand von Fahrzeugen, Pumpenleistung und Windkraftanlagen.

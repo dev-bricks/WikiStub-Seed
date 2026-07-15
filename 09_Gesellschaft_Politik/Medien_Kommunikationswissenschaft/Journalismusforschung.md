@@ -7,4 +7,4 @@ Untersucht die Arbeitsweisen, Rollenbilder und Produkte von Journalisten sowie d
 Gesellschaft & Politik → Medien- & Kommunikationswissenschaft
 
 **Relevanz:**
-Kritischer Journalismus gilt als "vierte Gewalt"; seine Qualität ist entscheidend für eine informierte Öffentlichkeit.同期
+Kritischer Journalismus gilt als "vierte Gewalt"; seine Qualität ist entscheidend für eine informierte Öffentlichkeit.

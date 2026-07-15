@@ -7,4 +7,4 @@ Unterscheidet politische Ordnungen nach der Beziehung zwischen Parlament, Regier
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Entscheidet über die Machtverteilung und Stabilität eines Staates; das deutsche System (Gewaltenteilung) ist eine Reaktion auf das Scheitern von Weimar.同期
+Entscheidet über die Machtverteilung und Stabilität eines Staates; das deutsche System (Gewaltenteilung) ist eine Reaktion auf das Scheitern von Weimar.

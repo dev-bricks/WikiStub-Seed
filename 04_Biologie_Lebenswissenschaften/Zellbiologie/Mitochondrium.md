@@ -7,4 +7,4 @@ Mitochondrien sind linsenförmige Organelle, die von einer Doppelmembran umgeben
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Als „Kraftwerke der Zelle“ produzieren sie das Energiemolekül ATP und sind somit essenziell für die Energieversorgung aller Stoffwechselprozesse.同期
+Als „Kraftwerke der Zelle“ produzieren sie das Energiemolekül ATP und sind somit essenziell für die Energieversorgung aller Stoffwechselprozesse.

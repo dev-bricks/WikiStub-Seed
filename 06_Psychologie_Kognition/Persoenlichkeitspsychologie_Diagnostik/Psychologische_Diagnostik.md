@@ -7,4 +7,4 @@ Psychologische Diagnostik ist das methodische Sammeln und Bewerten von Informati
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Sie sichert die Qualität und Objektivität von psychologischen Urteilen in Kliniken, Schulen und Unternehmen.同期
+Sie sichert die Qualität und Objektivität von psychologischen Urteilen in Kliniken, Schulen und Unternehmen.

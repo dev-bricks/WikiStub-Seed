@@ -7,7 +7,8 @@ ROOT = Path(__file__).parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from language_model import get_definition, get_relevance, normalize_metawiki_data
+from language_model import get_definition, get_relevance, normalize_metawiki_data  # noqa: E402
+from safe_io import atomic_write_json  # noqa: E402
 
 SRC = ROOT / "wikistub_seed.json"
 OUT_DIR = Path(__file__).parent / "data"
@@ -21,10 +22,7 @@ def build():
     normalized_data = normalize_metawiki_data(data)
 
     # data/wikistub_seed.json bleibt aus wikistub_seed.json abgeleitet, enthält aber normalisierte Sprachmaps.
-    OUT_DATA.write_text(
-        json.dumps(normalized_data, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    atomic_write_json(OUT_DATA, normalized_data)
     print(f"[build] {OUT_DATA} geschrieben")
 
     # Flacher Suchindex: Liste von {cat, sub, title, tags, id}
@@ -48,7 +46,7 @@ def build():
                 })
                 entry_id += 1
 
-    OUT_INDEX.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_json(OUT_INDEX, index)
     print(f"[build] {OUT_INDEX} geschrieben ({len(index)} Einträge)")
 
 

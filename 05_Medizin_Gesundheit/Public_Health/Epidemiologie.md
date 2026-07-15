@@ -7,4 +7,4 @@ Epidemiologie ist die Wissenschaft von der Verteilung und den Ursachen von gesun
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Epidemiologische Daten bilden die Grundlage für gesundheitspolitische Entscheidungen, die Planung von Krankenhäusern und die Bekämpfung von Seuchen.同期
+Epidemiologische Daten bilden die Grundlage für gesundheitspolitische Entscheidungen, die Planung von Krankenhäusern und die Bekämpfung von Seuchen.

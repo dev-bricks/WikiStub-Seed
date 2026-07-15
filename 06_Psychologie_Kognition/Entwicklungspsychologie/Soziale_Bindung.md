@@ -7,4 +7,4 @@ Soziale Bindung (Attachment) bezeichnet die enge, emotionale Beziehung zwischen 
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Sichere Bindungserfahrungen sind ein entscheidender Prädiktor für psychische Gesundheit, Resilienz und soziale Kompetenz im Erwachsenenalter.同期
+Sichere Bindungserfahrungen sind ein entscheidender Prädiktor für psychische Gesundheit, Resilienz und soziale Kompetenz im Erwachsenenalter.

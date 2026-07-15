@@ -7,4 +7,4 @@ Analysiert gesamtwirtschaftliche Phänomene wie Inflation, Arbeitslosigkeit, Wir
 Wirtschaft & Recht → Volkswirtschaftslehre
 
 **Relevanz:**
-Grundlage für Wirtschaftspolitik (Geldpolitik, Fiskalpolitik) und Verständnis globaler Krisen.同期
+Grundlage für Wirtschaftspolitik (Geldpolitik, Fiskalpolitik) und Verständnis globaler Krisen.

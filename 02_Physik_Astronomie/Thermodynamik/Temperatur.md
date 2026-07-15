@@ -7,4 +7,4 @@ Temperatur ist eine makroskopische physikalische Größe, die ein Maß für die 
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Als fundamentale Zustandsgröße ist sie entscheidend für das Verständnis von Phasenübergängen, biologischen Prozessen und klimatischen Entwicklungen.同期
+Als fundamentale Zustandsgröße ist sie entscheidend für das Verständnis von Phasenübergängen, biologischen Prozessen und klimatischen Entwicklungen.

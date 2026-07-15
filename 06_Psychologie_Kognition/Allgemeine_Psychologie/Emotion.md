@@ -7,4 +7,4 @@ Emotionen sind komplexe psychophysiologische Reaktion, die aus einer physiologis
 Psychologie & Kognition → Allgemeine Psychologie
 
 **Relevanz:**
-Sie dienen als Bewertungssystem für Umweltreize, motivieren Handlungen (z. B. Flucht bei Angst) und regulieren soziale Interaktionen.同期
+Sie dienen als Bewertungssystem für Umweltreize, motivieren Handlungen (z. B. Flucht bei Angst) und regulieren soziale Interaktionen.

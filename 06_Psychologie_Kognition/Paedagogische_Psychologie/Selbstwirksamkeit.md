@@ -7,4 +7,4 @@ Die Überzeugung einer Person, auch schwierige Situationen und Herausforderungen
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Hohe Selbstwirksamkeit fördert Ausdauer beim Lernen, Stressresistenz und Leistungen.同期
+Hohe Selbstwirksamkeit fördert Ausdauer beim Lernen, Stressresistenz und Leistungen.

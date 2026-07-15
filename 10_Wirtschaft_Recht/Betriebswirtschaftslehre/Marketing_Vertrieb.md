@@ -7,4 +7,4 @@ Alle Aktivitäten eines Unternehmens, um Produkte oder Dienstleistungen am Markt
 Wirtschaft & Recht → Betriebswirtschaftslehre
 
 **Relevanz:**
-Ohne Absatz keine Einnahmen; schafft Markenwert und Kundenbindung in Wettbewerbsmärkten.同期
+Ohne Absatz keine Einnahmen; schafft Markenwert und Kundenbindung in Wettbewerbsmärkten.

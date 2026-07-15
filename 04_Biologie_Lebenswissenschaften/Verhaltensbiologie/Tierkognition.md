@@ -7,4 +7,4 @@ Tierkognition umfasst die mentalen Prozesse, mit denen Tiere Informationen aufne
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Die Erforschung der kognitiven Fähigkeiten von Tieren (z. B. bei Rabenvögeln, Primaten oder Walen) hinterfragt die Einzigartigkeit menschlicher Intelligenz und ist entscheidend für den ethischen Umgang mit Tieren.同期
+Die Erforschung der kognitiven Fähigkeiten von Tieren (z. B. bei Rabenvögeln, Primaten oder Walen) hinterfragt die Einzigartigkeit menschlicher Intelligenz und ist entscheidend für den ethischen Umgang mit Tieren.

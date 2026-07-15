@@ -7,4 +7,4 @@ Säugetiere sind Wirbeltiere, die ihre Jungen mit Milch aus mütterlichen Milchd
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Sie weisen eine extreme Bandbreite an Lebensweisen auf (vom Blauwal bis zur Fledermaus) und zeichnen sich oft durch hoch entwickelte Gehirne und komplexes Sozialverhalten aus.同期
+Sie weisen eine extreme Bandbreite an Lebensweisen auf (vom Blauwal bis zur Fledermaus) und zeichnen sich oft durch hoch entwickelte Gehirne und komplexes Sozialverhalten aus.

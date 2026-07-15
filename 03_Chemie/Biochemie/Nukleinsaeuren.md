@@ -7,4 +7,4 @@ Nukleinsäuren sind polymere Makromoleküle (Desoxyribonukleinsäure und Ribonuk
 Chemie → Biochemie
 
 **Relevanz:**
-Die DNA bildet den „Bauplan“ des Lebens, während die RNA als Vermittler bei der Übersetzung dieses Plans in funktionale Proteine fungiert.同期
+Die DNA bildet den „Bauplan“ des Lebens, während die RNA als Vermittler bei der Übersetzung dieses Plans in funktionale Proteine fungiert.

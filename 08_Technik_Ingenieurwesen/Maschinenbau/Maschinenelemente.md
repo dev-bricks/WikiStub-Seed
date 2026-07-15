@@ -7,4 +7,4 @@ Die kleinsten, nicht mehr sinnvoll zerlegbaren Bauteile (z.B. Schrauben, Zahnrä
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Normung und Standardisierung dieser Elemente sind die Basis für kostengünstige Konstruktion und Austauschbarkeit.同期
+Normung und Standardisierung dieser Elemente sind die Basis für kostengünstige Konstruktion und Austauschbarkeit.

@@ -7,4 +7,4 @@ Softwarequalität ist der Grad, in dem Software die gestellten Anforderungen (fu
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Schlechte Qualität führt zu Sicherheitslücken, hohen Folgekosten und Nutzerfrustration.同期
+Schlechte Qualität führt zu Sicherheitslücken, hohen Folgekosten und Nutzerfrustration.

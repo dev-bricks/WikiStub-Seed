@@ -7,4 +7,4 @@ Sozialverhalten umfasst alle Verhaltensweisen, die das Zusammenleben von Individ
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Leben in sozialen Gruppen bietet Vorteile beim Schutz vor Fressfeinden und bei der Nahrungsbeschaffung, erfordert aber komplexe Mechanismen zur Konfliktvermeidung und Aufgabenteilung.同期
+Leben in sozialen Gruppen bietet Vorteile beim Schutz vor Fressfeinden und bei der Nahrungsbeschaffung, erfordert aber komplexe Mechanismen zur Konfliktvermeidung und Aufgabenteilung.

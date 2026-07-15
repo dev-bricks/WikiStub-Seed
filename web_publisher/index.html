@@ -151,7 +151,16 @@
       #search { width: 130px; }
     }
     @media (max-width: 420px) {
-      #stub-panel { display: none; }
+      .layout { display: block; overflow-y: auto; }
+      #stub-panel {
+        display: block;
+        width: 100%;
+        max-height: 38vh;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      #detail-panel { overflow: visible; padding: 18px; }
+      #search { min-width: 0; width: min(52vw, 220px); }
     }
   </style>
 </head>

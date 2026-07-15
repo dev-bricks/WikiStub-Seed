@@ -7,4 +7,4 @@ Untersucht die Bedeutung von Kultur, Symbolen, Werten und Normen für das sozial
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-Erklärt Lifestyle-Phänomene, Subkulturen und den Einfluss von Medien und Kunst auf die Gesellschaft.同期
+Erklärt Lifestyle-Phänomene, Subkulturen und den Einfluss von Medien und Kunst auf die Gesellschaft.

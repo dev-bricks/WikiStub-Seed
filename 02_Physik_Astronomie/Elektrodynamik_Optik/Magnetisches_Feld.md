@@ -7,4 +7,4 @@ Ein magnetisches Feld ist ein Kraftfeld, das durch bewegte elektrische Ladungen 
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Es schützt die Erde vor dem Sonnenwind, ermöglicht die Speicherung von Daten auf Festplatten und ist die Grundlage für Motoren, Generatoren und Transformatoren.同期
+Es schützt die Erde vor dem Sonnenwind, ermöglicht die Speicherung von Daten auf Festplatten und ist die Grundlage für Motoren, Generatoren und Transformatoren.

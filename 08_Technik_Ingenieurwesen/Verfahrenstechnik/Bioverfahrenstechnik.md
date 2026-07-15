@@ -7,4 +7,4 @@ Nutzt Mikroorganismen, Zellen oder Enzyme als "Biokatalysatoren", um Stoffe in F
 Technik & Ingenieurwesen → Verfahrenstechnik
 
 **Relevanz:**
-Schlüssel für die Herstellung von Antibiotika, Insulin, Biokraftstoffen und Bier.同期
+Schlüssel für die Herstellung von Antibiotika, Insulin, Biokraftstoffen und Bier.

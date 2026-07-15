@@ -7,4 +7,4 @@ Dieses Feld erforscht, warum Menschen Sympathie füreinander empfinden, Freundsc
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Beziehungen sind eine Hauptquelle für Glück und Gesundheit; Attraktionsforschung hilft, Beziehungsdynamiken zu verstehen.同期
+Beziehungen sind eine Hauptquelle für Glück und Gesundheit; Attraktionsforschung hilft, Beziehungsdynamiken zu verstehen.

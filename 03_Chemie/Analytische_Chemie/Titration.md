@@ -7,4 +7,4 @@ Titration ist ein quantitatives Verfahren zur Bestimmung einer unbekannten Konze
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Sie ist ein kostengünstiges und präzises Standardverfahren in Laboratorien zur Bestimmung von Säuregehalten, Wasserhärten und anderen chemischen Parametern.同期
+Sie ist ein kostengünstiges und präzises Standardverfahren in Laboratorien zur Bestimmung von Säuregehalten, Wasserhärten und anderen chemischen Parametern.

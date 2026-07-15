@@ -7,4 +7,4 @@ Die Entwicklung des menschlichen Denkens von der Antike (Vorsokratiker) über da
 Kultur, Kunst & Sprache → Philosophie
 
 **Relevanz:**
-Zeigt, dass unsere heutigen Ideen (z.B. Menschenrechte) das Ergebnis jahrtausendelanger Debatten sind.同期
+Zeigt, dass unsere heutigen Ideen (z.B. Menschenrechte) das Ergebnis jahrtausendelanger Debatten sind.

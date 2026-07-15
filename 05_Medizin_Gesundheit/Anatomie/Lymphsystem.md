@@ -7,4 +7,4 @@ Das Lymphsystem ist ein Teil des Immunsystems und des Kreislaufsystems, bestehen
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Es ist entscheidend für die Immunabwehr, den Flüssigkeitshaushalt des Gewebes und den Transport von Fetten aus dem Darm in das Blut.同期
+Es ist entscheidend für die Immunabwehr, den Flüssigkeitshaushalt des Gewebes und den Transport von Fetten aus dem Darm in das Blut.

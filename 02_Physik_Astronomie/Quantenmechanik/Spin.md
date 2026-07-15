@@ -7,4 +7,4 @@ Spin ist eine intrinsische Form des Drehimpulses von Elementarteilchen, der kein
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Er ist verantwortlich für magnetische Eigenschaften von Atomen (Magnetismus) und bestimmt nach dem Pauli-Prinzip den Aufbau des Periodensystems der Elemente.同期
+Er ist verantwortlich für magnetische Eigenschaften von Atomen (Magnetismus) und bestimmt nach dem Pauli-Prinzip den Aufbau des Periodensystems der Elemente.

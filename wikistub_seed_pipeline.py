@@ -14,14 +14,13 @@ Features:
 """
 
 import json
-import os
 import re
 import sys
 import hashlib
 from pathlib import Path
-from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Optional, Set, Tuple
-from datetime import datetime
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional, Tuple
+from datetime import datetime, timezone
 import argparse
 
 from language_model import (
@@ -31,11 +30,17 @@ from language_model import (
     SUPPORTED_LANGUAGES,
     get_definition,
     get_relevance,
+    existing_mapping_key,
     language_model_metadata,
+    merge_entry,
     normalize_entry,
     normalize_localized_map,
     normalize_metawiki_data,
+    public_entry,
+    identifier_key,
 )
+from safe_io import atomic_write_json, backup_file, safe_path_component
+from data_policy import duplicate_locations_are_allowed
 
 # ==================== KONFIGURATION ====================
 
@@ -131,14 +136,11 @@ class WikiStub:
 
     def to_dict(self) -> dict:
         language_fields = self.to_language_dict()
-        return {
+        return public_entry({
             "title": self.title,
             **language_fields,
             "tags": self.tags,
-            "category": self.category,
-            "subcategory": self.subcategory,
-            "source_file": self.source_file,
-        }
+        })
 
     @classmethod
     def from_dict(cls, data: dict, category: str = "", subcategory: str = "") -> 'WikiStub':
@@ -274,10 +276,7 @@ class MarkdownParser:
 
     @staticmethod
     def _clean_text(text: str) -> str:
-        """Entfernt unerwünschte Zeichen."""
-        # Entferne nicht-lateinische Zeichen am Ende
-        text = re.sub(r'[^\x00-\x7F]+$', '', text)
-        # Entferne doppelte Leerzeichen
+        """Normalisiert Leerraum, ohne gültigen Unicode-Inhalt zu löschen."""
         text = re.sub(r'\s+', ' ', text)
         return text.strip()
 
@@ -325,25 +324,19 @@ class JsonHandler:
             print(f"  ✗ Fehler beim Laden: {e}")
             return False
 
-    def save(self) -> bool:
+    def save(self, *, create_backup: bool = True) -> bool:
         """Speichert die JSON-Datei."""
         try:
             # Backup erstellen
-            if self.json_path.exists():
-                BACKUP_PATH.mkdir(exist_ok=True)
-                backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-                backup_file = BACKUP_PATH / backup_name
+            if create_backup and self.json_path.exists():
+                backup_file(
+                    self.json_path,
+                    BACKUP_PATH,
+                    prefix="wikistub_seed",
+                    keep=10,
+                )
 
-                import shutil
-                shutil.copy(self.json_path, backup_file)
-
-                # Cleanup: keep only last 10 backups
-                backups = sorted(BACKUP_PATH.glob("wikistub_seed_*.json"))
-                for old in backups[:-10]:
-                    old.unlink(missing_ok=True)
-
-            with open(self.json_path, "w", encoding="utf-8") as f:
-                json.dump(self.data, f, ensure_ascii=False, indent=2)
+            atomic_write_json(self.json_path, self.data)
 
             return True
         except Exception as e:
@@ -358,19 +351,20 @@ class JsonHandler:
         root = self.data["MetaWiki"]
 
         # Kategorie
-        if stub.category not in root:
-            root[stub.category] = {}
+        category = existing_mapping_key(root, stub.category)
+        if category not in root:
+            root[category] = {}
 
         # Subkategorie
-        if stub.subcategory not in root[stub.category]:
-            root[stub.category][stub.subcategory] = []
+        subcategory = existing_mapping_key(root[category], stub.subcategory)
+        if subcategory not in root[category]:
+            root[category][subcategory] = []
 
         # Prüfe auf Duplikate
-        existing = root[stub.category][stub.subcategory]
+        existing = root[category][subcategory]
         for i, item in enumerate(existing):
-            if item.get("title") == stub.title:
-                # Update
-                existing[i] = stub.to_dict()
+            if identifier_key(item.get("title", "")) == identifier_key(stub.title):
+                existing[i] = merge_entry(item, stub.to_dict())
                 return True
 
         # Neu hinzufügen
@@ -473,11 +467,15 @@ class MarkdownGenerator:
         """Schreibt eine Markdown-Datei."""
         try:
             # Ordnerstruktur
-            folder = output_dir / stub.category / stub.subcategory
+            folder = (
+                output_dir
+                / safe_path_component(stub.category)
+                / safe_path_component(stub.subcategory)
+            )
             folder.mkdir(parents=True, exist_ok=True)
 
             # Dateiname
-            safe_title = stub.title.replace(' ', '_').replace('/', '_')
+            safe_title = safe_path_component(stub.title.replace(" ", "_"))
             filepath = folder / f"{safe_title}.md"
 
             # Inhalt generieren
@@ -592,7 +590,7 @@ def build_exchange_payload(data: Dict, source: str = "wikistub_seed.json") -> Di
     normalized_data = normalize_metawiki_data(data)
     return {
         "schema": EXCHANGE_SCHEMA,
-        "generated_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "source": source,
         "languages": EXCHANGE_LANGUAGES,
         "language_model": language_model_metadata(),
@@ -605,21 +603,33 @@ def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
     """Validiert Pflichttexte und optionale Sprachmaps in WikiStub-Seed-Daten."""
     errors: List[str] = []
     warnings: List[str] = []
+    title_locations: Dict[str, List[Tuple[str, str, str]]] = {}
     root = data.get("MetaWiki")
     if not isinstance(root, dict):
         return errors, warnings
 
     for category, subcategories in root.items():
         if not isinstance(subcategories, dict):
+            errors.append(f"{category}: Kategorieinhalt muss ein Objekt sein.")
             continue
         for subcategory, entries in subcategories.items():
             if not isinstance(entries, list):
+                errors.append(
+                    f"{category}/{subcategory}: Subkategorieinhalt muss eine Liste sein."
+                )
                 continue
             for index, entry in enumerate(entries):
                 if not isinstance(entry, dict):
                     errors.append(f"{category}/{subcategory}[{index}] ist kein Objekt.")
                     continue
                 label = f"{category}/{subcategory}/{entry.get('title', index)}"
+                title = entry.get("title")
+                if not isinstance(title, str) or not title.strip():
+                    errors.append(f"{category}/{subcategory}[{index}]: Titel fehlt oder ist leer.")
+                else:
+                    title_locations.setdefault(identifier_key(title), []).append(
+                        (category, subcategory, title)
+                    )
                 if "definitions" in entry and not isinstance(entry["definitions"], dict):
                     errors.append(f"{label}: definitions muss ein Objekt sein.")
                 if LOCALIZED_RELEVANCE_FIELD in entry and not isinstance(entry[LOCALIZED_RELEVANCE_FIELD], dict):
@@ -629,7 +639,16 @@ def validate_localized_data(data: Dict) -> Tuple[List[str], List[str]]:
                 if not get_definition(normalized, "de"):
                     errors.append(f"{label}: Definition für de fehlt.")
                 if not get_definition(normalized, "en"):
-                    warnings.append(f"{label}: Definition für en fehlt.")
+                    errors.append(f"{label}: Definition für en fehlt.")
+
+    for locations in title_locations.values():
+        if len(locations) <= 1:
+            continue
+        title = locations[0][2]
+        if not duplicate_locations_are_allowed(
+            title, ((category, subcategory) for category, subcategory, _ in locations)
+        ):
+            errors.append(f"{title}: unerwartete domänenübergreifende Doppelbezeichnung.")
 
     return errors, warnings
 
@@ -721,7 +740,7 @@ def cmd_import(args):
     json_handler = JsonHandler()
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
-        return
+        return 1
 
     imported = 0
     errors = 0
@@ -743,6 +762,11 @@ def cmd_import(args):
             for md_file in subcat.glob("*.md"):
                 stub = MarkdownParser.parse_file(md_file)
                 if stub:
+                    validation = Validator.validate_stub(stub)
+                    if not validation.is_valid:
+                        errors += 1
+                        print(f"  ✗ {md_file.name}: {', '.join(validation.errors)}")
+                        continue
                     json_handler.add_stub(stub)
                     imported += 1
                     print(f"  ✓ {stub.title}")
@@ -754,9 +778,11 @@ def cmd_import(args):
     if imported > 0:
         if not json_handler.save():
             print("  ✗ Speichern fehlgeschlagen!")
+            return 1
 
     print(f"\n{'=' * 50}")
     print(f"✓ {imported} Stubs importiert, {errors} Fehler")
+    return 1 if errors else 0
 
 
 def cmd_export(args):
@@ -795,7 +821,7 @@ def cmd_export_data(args):
         return 1
 
     payload = build_exchange_payload(json_handler.data, source=JSON_PATH.name)
-    output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    atomic_write_json(output_path, payload)
 
     print(f"  ✓ Schema: {payload['schema']}")
     print(f"  ✓ Stubs: {payload['stub_count']}")
@@ -845,7 +871,9 @@ def cmd_validate(args):
     print("=" * 50)
 
     json_handler = JsonHandler()
-    json_handler.load()
+    if not json_handler.load():
+        print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
+        return 1
     stubs = json_handler.get_all_stubs()
 
     valid = 0
@@ -873,6 +901,20 @@ def cmd_validate(args):
 
     # Duplikate
     duplicates = Validator.find_duplicates(stubs)
+    duplicate_groups: Dict[str, List[WikiStub]] = {}
+    for stub in stubs:
+        duplicate_groups.setdefault(identifier_key(stub.title), []).append(stub)
+    duplicate_groups = {
+        title: group for title, group in duplicate_groups.items() if len(group) > 1
+    }
+    unexpected_duplicates = {
+        title: group
+        for title, group in duplicate_groups.items()
+        if not duplicate_locations_are_allowed(
+            group[0].title,
+            ((stub.category, stub.subcategory) for stub in group),
+        )
+    }
     if duplicates:
         print(f"\n⚠ {len(duplicates)} Duplikate gefunden:")
         for stub1, stub2 in duplicates:
@@ -881,6 +923,11 @@ def cmd_validate(args):
     print(f"\n{'=' * 50}")
     print(f"✓ Gültig: {valid} | ⚠ Mit Warnungen: {with_warnings} | ✗ Ungültig: {invalid}")
     print(f"🔄 Duplikate: {len(duplicates)}")
+    if duplicate_groups and not unexpected_duplicates:
+        print(f"✓ Geprüfte Querschnitts-Duplikate: {len(duplicate_groups)}")
+    if unexpected_duplicates:
+        print(f"✗ Unerwartete Duplikatgruppen: {len(unexpected_duplicates)}")
+    return 1 if invalid or unexpected_duplicates else 0
 
 
 def cmd_stats(args):
@@ -921,7 +968,10 @@ def cmd_sync(args):
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
         return
-    existing_titles = {s.title.lower() for s in json_handler.get_all_stubs()}
+    existing_locations = {
+        (identifier_key(s.category), identifier_key(s.subcategory), s.title.strip().casefold())
+        for s in json_handler.get_all_stubs()
+    }
 
     new_stubs = 0
 
@@ -936,8 +986,14 @@ def cmd_sync(args):
 
             for md_file in subcat.glob("*.md"):
                 stub = MarkdownParser.parse_file(md_file)
-                if stub and stub.title.lower() not in existing_titles:
+                location = (
+                    identifier_key(stub.category) if stub else "",
+                    identifier_key(stub.subcategory) if stub else "",
+                    stub.title.strip().casefold() if stub else "",
+                )
+                if stub and location not in existing_locations:
                     json_handler.add_stub(stub)
+                    existing_locations.add(location)
                     new_stubs += 1
                     print(f"  + {stub.title}")
 
@@ -961,36 +1017,60 @@ def cmd_translate(args):
     print("\n🌐 ÜBERSETZUNG")
     print("=" * 50)
 
+    limit = getattr(args, "limit", None)
+    if not isinstance(limit, int) or limit <= 0:
+        print("  ✗ Eine positive --limit-Grenze ist für API-Läufe erforderlich.")
+        return 1
+    if not getattr(args, "confirm_api_cost", False):
+        print("  ✗ API-Kosten nicht bestätigt; nutze zusätzlich --confirm-api-cost.")
+        return 1
+    max_budget_usd = getattr(args, "max_budget_usd", None)
+    if not isinstance(max_budget_usd, (int, float)) or max_budget_usd <= 0:
+        print("  ✗ Eine positive --max-budget-usd-Kostengrenze ist erforderlich.")
+        return 1
+
     try:
-        from translate import translate_text, is_available
+        from translate import estimate_batch_max_cost_usd, translate_text, is_available
     except ImportError:
         print("  ✗ translate.py nicht gefunden.")
-        return
+        return 1
 
     if not is_available():
         print("  ✗ Übersetzung nicht verfügbar.")
         print("  Bitte setze ANTHROPIC_API_KEY und installiere: pip install anthropic")
-        return
+        return 1
 
     import time
 
     json_handler = JsonHandler()
     if not json_handler.load():
         print("  ✗ JSON-Datei konnte nicht geladen werden. Abbruch.")
-        return
+        return 1
     stubs = json_handler.get_all_stubs()
 
     to_translate = [s for s in stubs if not s.get_definition("en")]
     total = len(to_translate)
 
-    if args.limit and args.limit < total:
-        to_translate = to_translate[:args.limit]
+    if limit < total:
+        to_translate = to_translate[:limit]
+
+    projected_cost = estimate_batch_max_cost_usd(
+        [stub.get_definition("de") for stub in to_translate]
+    )
+    if projected_cost > max_budget_usd:
+        print(
+            f"  ✗ Maximale Laufkosten ${projected_cost:.6f} überschreiten "
+            f"Budget ${max_budget_usd:.6f}."
+        )
+        return 1
 
     print(f"  Gesamt ohne Übersetzung: {total}")
     print(f"  Zu übersetzen: {len(to_translate)}")
+    print(f"  Kostenobergrenze dieses Laufs: ${projected_cost:.6f}")
 
     translated = 0
     errors = 0
+    checkpoint_saved = False
     delay = getattr(args, 'delay', 0.3)  # Konfigurierbare Verzögerung (Standard: 0.3s)
 
     for i, stub in enumerate(to_translate):
@@ -999,6 +1079,10 @@ def cmd_translate(args):
             stub.definition_en = result
             stub.definitions["en"] = result
             json_handler.add_stub(stub)
+            if not json_handler.save(create_backup=not checkpoint_saved):
+                print("  ✗ Atomares Zwischenspeichern fehlgeschlagen; Lauf abgebrochen.")
+                return 1
+            checkpoint_saved = True
             translated += 1
             print(f"  ✓ {stub.title}")
             # Nur nach erfolgreichen API-Calls schlafen (Fehler verbrauchen kein Rate-Limit)
@@ -1008,14 +1092,9 @@ def cmd_translate(args):
             errors += 1
             print(f"  ✗ {stub.title}")
 
-    if translated > 0:
-        if not json_handler.save():
-            print("  ✗ Speichern fehlgeschlagen! Übersetzungen gehen verloren.")
-        else:
-            print(f"  ✓ Gespeichert")
-
     print(f"\n{'=' * 50}")
-    print(f"✓ {translated} übersetzt, {errors} Fehler")
+    print(f"✓ {translated} übersetzt und einzeln gespeichert, {errors} Fehler")
+    return 1 if errors else 0
 
 
 def cmd_clean(args):
@@ -1112,7 +1191,17 @@ Beispiele:
 
     # Translate
     p_translate = subparsers.add_parser("translate", help="Übersetze Stubs via Claude API")
-    p_translate.add_argument("--limit", "-l", type=int, help="Maximale Anzahl zu übersetzender Stubs")
+    p_translate.add_argument("--limit", "-l", type=int, help="Maximale Anzahl kostenpflichtiger API-Aufrufe")
+    p_translate.add_argument(
+        "--confirm-api-cost",
+        action="store_true",
+        help="Bestätigt ausdrücklich, dass der begrenzte API-Lauf Kosten verursachen darf",
+    )
+    p_translate.add_argument(
+        "--max-budget-usd",
+        type=float,
+        help="Explizite konservative Kostenobergrenze in USD",
+    )
     p_translate.set_defaults(func=cmd_translate)
 
     args = parser.parse_args()

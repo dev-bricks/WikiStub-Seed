@@ -7,4 +7,4 @@ Eine Mutation ist eine dauerhafte Veränderung der genetischen Information in ei
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Mutationen sind die ultimative Quelle genetischer Variabilität und bilden somit die Grundlage für die biologische Evolution und Anpassung an Umweltveränderungen.同期
+Mutationen sind die ultimative Quelle genetischer Variabilität und bilden somit die Grundlage für die biologische Evolution und Anpassung an Umweltveränderungen.

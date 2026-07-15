@@ -7,4 +7,4 @@ Das Skelettsystem ist das Stützgerüst des menschlichen Körpers, bestehend aus
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Es ermöglicht zusammen mit der Muskulatur die Fortbewegung, dient als Speicher für Mineralstoffe (Kalzium) und ist der Ort der Blutbildung (im Knochenmark).同期
+Es ermöglicht zusammen mit der Muskulatur die Fortbewegung, dient als Speicher für Mineralstoffe (Kalzium) und ist der Ort der Blutbildung (im Knochenmark).

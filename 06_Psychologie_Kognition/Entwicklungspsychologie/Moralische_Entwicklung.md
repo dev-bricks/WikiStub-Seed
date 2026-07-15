@@ -7,4 +7,4 @@ Moralische Entwicklung beschreibt, wie Individuen lernen, zwischen Recht und Unr
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Sie ist essentiell für das Funktionieren von Gesellschaften und das Verständnis von Ethik, Gerechtigkeit und prosozialem Verhalten.同期
+Sie ist essentiell für das Funktionieren von Gesellschaften und das Verständnis von Ethik, Gerechtigkeit und prosozialem Verhalten.

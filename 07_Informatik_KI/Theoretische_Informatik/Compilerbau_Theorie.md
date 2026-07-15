@@ -7,4 +7,4 @@ Befasst sich mit der Übersetzung von höheren Programmiersprachen in Maschinenc
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Schlägt die Brücke zwischen menschenlesbarem Code und der Ausführung auf der Hardware; nutzt intensiv Konzepte der Automaten- und Sprachtheorie.同期
+Schlägt die Brücke zwischen menschenlesbarem Code und der Ausführung auf der Hardware; nutzt intensiv Konzepte der Automaten- und Sprachtheorie.

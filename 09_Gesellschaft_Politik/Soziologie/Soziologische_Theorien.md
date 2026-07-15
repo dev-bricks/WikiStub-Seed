@@ -7,4 +7,4 @@ Verschiedene Erklärungsmodelle (z.B. Funktionalismus, Konflikttheorie, Symbolis
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-Liefern das intellektuelle Rüstzeug, um gesellschaftlichen Wandel und soziale Probleme zu analysieren.同期
+Liefern das intellektuelle Rüstzeug, um gesellschaftlichen Wandel und soziale Probleme zu analysieren.

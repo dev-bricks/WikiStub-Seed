@@ -7,4 +7,4 @@ Befasst sich mit der Erzeugung und Bearbeitung von Bildern mittels Computer, von
 Informatik & KI → Angewandte Informatik
 
 **Relevanz:**
-Basis für Film-Effekte (CGI), Videospiele, CAD-Anwendungen und wissenschaftliche Visualisierung.同期
+Basis für Film-Effekte (CGI), Videospiele, CAD-Anwendungen und wissenschaftliche Visualisierung.

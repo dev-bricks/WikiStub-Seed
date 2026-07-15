@@ -7,4 +7,4 @@ Die längste Phase der Menschheitsgeschichte, von den ersten Steinwerkzeugen bis
 Geschichte & Archäologie → Ur- & Frühgeschichte
 
 **Relevanz:**
-Hier entstanden Sprache, Kunst, Religion und Sesshaftigkeit – die Fundamente des Menschseins.同期
+Hier entstanden Sprache, Kunst, Religion und Sesshaftigkeit – die Fundamente des Menschseins.

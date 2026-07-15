@@ -7,4 +7,4 @@ Atrophie bezeichnet den Rückgang von Gewebe oder Organen (Zellverkleinerung ode
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Diese Anpassungsreaktionen treten physiologisch (z. B. Muskeltraining) oder pathologisch (z. B. bei chronischer Überlastung oder Inaktivität) auf und verändern die Leistungsfähigkeit des Organs.同期
+Diese Anpassungsreaktionen treten physiologisch (z. B. Muskeltraining) oder pathologisch (z. B. bei chronischer Überlastung oder Inaktivität) auf und verändern die Leistungsfähigkeit des Organs.

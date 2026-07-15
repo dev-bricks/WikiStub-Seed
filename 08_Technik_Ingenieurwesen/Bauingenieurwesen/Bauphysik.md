@@ -7,4 +7,4 @@ Untersucht physikalische Phänomene am Gebäude: Wärme- und Feuchteschutz (Isol
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Entscheidend für Wohnkomfort, Energieverbrauch und Gesundheit (Schimmelvermeidung).同期
+Entscheidend für Wohnkomfort, Energieverbrauch und Gesundheit (Schimmelvermeidung).

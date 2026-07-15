@@ -7,4 +7,4 @@ Vergleicht Literatur über Sprach- und Ländergrenzen hinweg. Untersucht interna
 Kultur, Kunst & Sprache → Literaturwissenschaft
 
 **Relevanz:**
-Zeigt die globale Vernetzung der Literatur ("Weltliteratur") und überwindet den engen Fokus der Nationalphilologien.同期
+Zeigt die globale Vernetzung der Literatur ("Weltliteratur") und überwindet den engen Fokus der Nationalphilologien.

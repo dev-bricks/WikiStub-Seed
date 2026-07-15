@@ -7,4 +7,4 @@ Befasst sich mit dem grenzüberschreitenden Austausch von Waren, Dienstleistunge
 Wirtschaft & Recht → Volkswirtschaftslehre
 
 **Relevanz:**
-Globalisierung und Freihandel mehren den Wohlstand weltweit, schaffen aber auch Gewinner und Verlierer sowie Abhängigkeiten.同期
+Globalisierung und Freihandel mehren den Wohlstand weltweit, schaffen aber auch Gewinner und Verlierer sowie Abhängigkeiten.

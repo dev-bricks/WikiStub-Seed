@@ -7,4 +7,4 @@ Die Lehre vom inneren Aufbau der Wörter. Untersucht Morpheme (kleinste bedeutun
 Kultur, Kunst & Sprache → Sprachwissenschaft
 
 **Relevanz:**
-Erklärt, wie wir unendlich viele neue Wörter bilden ("Donaudampfschifffahrt...") und grammatische Informationen kodieren.同期
+Erklärt, wie wir unendlich viele neue Wörter bilden ("Donaudampfschifffahrt...") und grammatische Informationen kodieren.

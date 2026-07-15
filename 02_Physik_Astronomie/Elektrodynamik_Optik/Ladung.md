@@ -7,4 +7,4 @@ Elektrische Ladung ist eine fundamentale Eigenschaft von Materie, die für elekt
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Als fundamentale Naturkonstante bildet sie die Basis für alle elektrischen Phänomene, vom Gewitter bis zur modernen Mikroelektronik.同期
+Als fundamentale Naturkonstante bildet sie die Basis für alle elektrischen Phänomene, vom Gewitter bis zur modernen Mikroelektronik.

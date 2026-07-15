@@ -7,4 +7,4 @@ Formale Logik (Aussagenlogik, Prädikatenlogik) dient der präzisen Modellierung
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Unverzichtbar für die formale Verifikation von Software ("Ist dieser Code fehlerfrei?") und im Hardware-Design.同期
+Unverzichtbar für die formale Verifikation von Software ("Ist dieser Code fehlerfrei?") und im Hardware-Design.

@@ -7,4 +7,4 @@ Die Reaktionsenthalpie ($\Delta H$) ist die Wärmemenge, die bei einer chemische
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Sie ist entscheidend für die Beurteilung der Energieeffizienz industrieller Prozesse und für das Verständnis der Triebkraft chemischer Reaktionen.同期
+Sie ist entscheidend für die Beurteilung der Energieeffizienz industrieller Prozesse und für das Verständnis der Triebkraft chemischer Reaktionen.

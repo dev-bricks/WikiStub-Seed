@@ -7,4 +7,4 @@ Untersucht, welche mathematischen Probleme prinzipiell algorithmisch lösbar sin
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Zeigt die fundamentalen Grenzen dessen auf, was Computer überhaupt leisten können, unabhängig von ihrer Rechenleistung.同期
+Zeigt die fundamentalen Grenzen dessen auf, was Computer überhaupt leisten können, unabhängig von ihrer Rechenleistung.

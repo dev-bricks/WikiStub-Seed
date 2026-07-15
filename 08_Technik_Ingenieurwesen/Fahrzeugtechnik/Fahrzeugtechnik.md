@@ -7,4 +7,4 @@ Die Gesamtheit der Ingenieurwissenschaften rund um mobile Verkehrsmittel (Autos,
 Technik & Ingenieurwesen → Fahrzeugtechnik
 
 **Relevanz:**
-Die Automobilindustrie ist einer der wichtigsten Wirtschaftszweige weltweit und Treiber technischer Innovationen.同期
+Die Automobilindustrie ist einer der wichtigsten Wirtschaftszweige weltweit und Treiber technischer Innovationen.

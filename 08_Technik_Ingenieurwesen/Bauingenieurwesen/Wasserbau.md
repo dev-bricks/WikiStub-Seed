@@ -7,4 +7,4 @@ Behandelt Planung und Bau von Anlagen zur Nutzung und Regelung von Oberflächen-
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Sichert Wasserversorgung, Energiegewinnung und Transportwege; überlebenswichtig in Zeiten des Klimawandels (Dürren/Fluten).同期
+Sichert Wasserversorgung, Energiegewinnung und Transportwege; überlebenswichtig in Zeiten des Klimawandels (Dürren/Fluten).

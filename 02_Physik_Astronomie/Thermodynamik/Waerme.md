@@ -7,4 +7,4 @@ Wärme ist die Energie, die aufgrund eines Temperaturunterschieds zwischen zwei 
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Wärmeübertragungsprozesse sind die Basis für Wärmekraftmaschinen, Heizsysteme und die Selbstregulierung des menschlichen Körpers.同期
+Wärmeübertragungsprozesse sind die Basis für Wärmekraftmaschinen, Heizsysteme und die Selbstregulierung des menschlichen Körpers.

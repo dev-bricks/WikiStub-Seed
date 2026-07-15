@@ -7,4 +7,4 @@ Regelt die Rechtsbeziehungen zwischen gleichberechtigten Bürgern (Privatpersone
 Wirtschaft & Recht → Rechtswissenschaft
 
 **Relevanz:**
-Betrifft den Alltag wie kaum ein anderes Gebiet: Kaufverträge, Miete, Schadensersatz, Eheschließung und Erbe.同期
+Betrifft den Alltag wie kaum ein anderes Gebiet: Kaufverträge, Miete, Schadensersatz, Eheschließung und Erbe.

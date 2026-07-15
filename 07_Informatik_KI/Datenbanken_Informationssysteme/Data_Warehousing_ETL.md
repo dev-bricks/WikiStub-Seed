@@ -7,4 +7,4 @@ Ein Data Warehouse ist eine zentrale Datenbank, die Daten aus verschiedenen Quel
 Informatik & KI → Datenbanken & Informationssysteme
 
 **Relevanz:**
-Die Single Source of Truth für unternehmerische Entscheidungen.同期
+Die Single Source of Truth für unternehmerische Entscheidungen.

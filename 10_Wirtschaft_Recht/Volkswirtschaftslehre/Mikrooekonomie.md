@@ -7,4 +7,4 @@ Betrachtet das wirtschaftliche Verhalten einzelner Akteure (Haushalte, Unternehm
 Wirtschaft & Recht → Volkswirtschaftslehre
 
 **Relevanz:**
-Erklärt, warum Dinge so viel kosten, wie sie kosten, und wie Anreize Entscheidungen lenken.同期
+Erklärt, warum Dinge so viel kosten, wie sie kosten, und wie Anreize Entscheidungen lenken.

@@ -7,4 +7,4 @@ Analogie bezeichnet die Ähnlichkeit von Merkmalen aufgrund gleicher Funktion un
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Analoge Strukturen verdeutlichen die Macht der Selektion und Anpassung, dürfen aber nicht als Beweis für enge Verwandtschaft missverstanden werden.同期
+Analoge Strukturen verdeutlichen die Macht der Selektion und Anpassung, dürfen aber nicht als Beweis für enge Verwandtschaft missverstanden werden.

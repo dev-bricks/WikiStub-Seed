@@ -7,4 +7,4 @@ Analysiert die Interaktionen zwischen Staaten, internationalen Organisationen (U
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Erklärt Konflikte, Kooperationen und globale Phänomene wie Terrorismus oder Klimadiplomatie.同期
+Erklärt Konflikte, Kooperationen und globale Phänomene wie Terrorismus oder Klimadiplomatie.

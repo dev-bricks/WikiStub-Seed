@@ -7,4 +7,4 @@ Die Posttraumatische Belastungsstörung (PTBS) ist eine Reaktion auf extrem bela
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Relevant für Opfer von Gewalt, Katastrophen oder Kriegen. Traumatherapie zielt auf die Integration des Erlebten ab.同期
+Relevant für Opfer von Gewalt, Katastrophen oder Kriegen. Traumatherapie zielt auf die Integration des Erlebten ab.

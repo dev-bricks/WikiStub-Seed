@@ -7,4 +7,4 @@ Selbstregulation (oder Selbstkontrolle) ist die Fähigkeit, eigene Gedanken, Emo
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Ein Mangel an Selbstregulation wird mit vielen Problemen wie Sucht, Kriminalität und schlechten schulischen Leistungen in Verbindung gebracht.同期
+Ein Mangel an Selbstregulation wird mit vielen Problemen wie Sucht, Kriminalität und schlechten schulischen Leistungen in Verbindung gebracht.

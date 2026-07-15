@@ -7,4 +7,4 @@ Eine Nahrungskette beschreibt die linearen energiewirtschaftlichen Abhängigkeit
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Sie verdeutlicht den Energiefluss in der Natur sowie die Anreicherung von Schadstoffen (Bioakkumulation) in höheren Stufen der Nahrungspyramide.同期
+Sie verdeutlicht den Energiefluss in der Natur sowie die Anreicherung von Schadstoffen (Bioakkumulation) in höheren Stufen der Nahrungspyramide.

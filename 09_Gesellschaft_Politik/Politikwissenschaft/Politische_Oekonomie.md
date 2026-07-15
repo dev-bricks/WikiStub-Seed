@@ -7,4 +7,4 @@ Untersucht die Wechselwirkungen zwischen Politik und Wirtschaft: Wie beeinflusse
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Zentral für das Verständnis von Staatsverschuldung, Sozialstaat, Globalisierung und Wirtschaftskrisen.同期
+Zentral für das Verständnis von Staatsverschuldung, Sozialstaat, Globalisierung und Wirtschaftskrisen.

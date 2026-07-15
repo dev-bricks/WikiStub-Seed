@@ -7,4 +7,4 @@ Technische Verfahren, die Energie mittels Fluiden übertragen: Hydraulik (Öl) f
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Unverzichtbar in Baumaschinen (Bagger), Fertigungsanlagen und der Luftfahrt.同期
+Unverzichtbar in Baumaschinen (Bagger), Fertigungsanlagen und der Luftfahrt.

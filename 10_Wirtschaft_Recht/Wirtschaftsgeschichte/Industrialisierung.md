@@ -7,4 +7,4 @@ Der fundamentale Wandel von der Agrar- zur Industriegesellschaft ab dem späten 
 Wirtschaft & Recht → Wirtschaftsgeschichte
 
 **Relevanz:**
-Der Beginn des modernen Wirtschaftswachstums und des Massenkonsums, aber auch Ursprung der sozialen Frage und ökologischer Probleme.同期
+Der Beginn des modernen Wirtschaftswachstums und des Massenkonsums, aber auch Ursprung der sozialen Frage und ökologischer Probleme.

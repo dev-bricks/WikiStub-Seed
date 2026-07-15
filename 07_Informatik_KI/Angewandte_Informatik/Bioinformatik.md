@@ -7,4 +7,4 @@ Bioinformatik nutzt Informatikmethoden zur Lösung biologischer Probleme, insbes
 Informatik & KI → Angewandte Informatik
 
 **Relevanz:**
-Unverzichtbar für die moderne Genetik, Medikamentenentwicklung und das Verständnis von Krankheiten auf molekularer Ebene.同期
+Unverzichtbar für die moderne Genetik, Medikamentenentwicklung und das Verständnis von Krankheiten auf molekularer Ebene.

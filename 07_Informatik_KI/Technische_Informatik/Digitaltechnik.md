@@ -7,4 +7,4 @@ Die Digitaltechnik befasst sich mit der Verarbeitung von diskreten Signalen (bin
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Sie ist die physikalische Basis aller modernen Computer und digitalen Kommunikationssysteme.同期
+Sie ist die physikalische Basis aller modernen Computer und digitalen Kommunikationssysteme.

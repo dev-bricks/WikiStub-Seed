@@ -7,4 +7,4 @@ Befasst sich mit der biologischen Aufnahme von Reizen durch die Sinnesorgane (Au
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Ist die physiologische Vorstufe der Wahrnehmung; Störungen hier führen zu veränderter Realitätswahrnehmung.同期
+Ist die physiologische Vorstufe der Wahrnehmung; Störungen hier führen zu veränderter Realitätswahrnehmung.

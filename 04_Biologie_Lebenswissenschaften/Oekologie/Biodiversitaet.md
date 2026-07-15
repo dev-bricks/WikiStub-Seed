@@ -7,4 +7,4 @@ Biodiversität umfasst die Vielfalt der Arten auf der Erde, die genetische Vielf
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Eine hohe Biodiversität erhöht die Widerstandsfähigkeit von Ökosystemen gegenüber Störungen und ist eine unverzichtbare Quelle für neue Wirkstoffe, Nahrungsmittel und technisches Wissen (Bionik).同期
+Eine hohe Biodiversität erhöht die Widerstandsfähigkeit von Ökosystemen gegenüber Störungen und ist eine unverzichtbare Quelle für neue Wirkstoffe, Nahrungsmittel und technisches Wissen (Bionik).

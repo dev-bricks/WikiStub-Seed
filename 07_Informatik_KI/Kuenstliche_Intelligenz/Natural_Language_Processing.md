@@ -7,4 +7,4 @@ Befasst sich mit der Interaktion zwischen Computern und menschlicher Sprache. Zi
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Basis für Chatbots, Übersetzungsdienste (DeepL) und Sprachassistenten (Siri, Alexa).同期
+Basis für Chatbots, Übersetzungsdienste (DeepL) und Sprachassistenten (Siri, Alexa).

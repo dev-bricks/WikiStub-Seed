@@ -7,4 +7,4 @@ Plastizität bezeichnet die Fähigkeit des Nervensystems, seine Struktur und Fun
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Sie ist die lebenslange Grundlage für Lernen und Anpassung und ermöglicht die Regeneration oder Kompensation von Funktionen nach Hirnverletzungen (Rehabilitation).同期
+Sie ist die lebenslange Grundlage für Lernen und Anpassung und ermöglicht die Regeneration oder Kompensation von Funktionen nach Hirnverletzungen (Rehabilitation).

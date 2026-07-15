@@ -7,4 +7,4 @@ Phagozytose („Zellfressen“) ist der Prozess, bei dem spezialisierte Immunzel
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Sie ist der wichtigste Mechanismus der unspezifischen (angeborenen) Immunabwehr und dient der schnellen Beseitigung von Eindringlingen und Zelltrümmern.同期
+Sie ist der wichtigste Mechanismus der unspezifischen (angeborenen) Immunabwehr und dient der schnellen Beseitigung von Eindringlingen und Zelltrümmern.

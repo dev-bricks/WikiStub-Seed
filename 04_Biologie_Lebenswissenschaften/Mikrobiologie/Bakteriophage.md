@@ -7,4 +7,4 @@ Bakteriophagen sind Viren, die spezifisch Bakterien infizieren. Sie docken an di
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Sie regulieren Bakterienpopulationen in der Umwelt und werden in der Medizin zunehmend als Alternative zu Antibiotika (Phagentherapie) gegen multiresistente Keime erforscht.同期
+Sie regulieren Bakterienpopulationen in der Umwelt und werden in der Medizin zunehmend als Alternative zu Antibiotika (Phagentherapie) gegen multiresistente Keime erforscht.

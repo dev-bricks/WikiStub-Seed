@@ -7,4 +7,4 @@ Dieser Bereich untersucht, wie Individuen ihr Verhalten oder ihre Meinungen an G
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Erklärt, warum Menschen wider besseres Wissen handeln oder unmoralische Befehle befolgen, und betont die Macht der Situation.同期
+Erklärt, warum Menschen wider besseres Wissen handeln oder unmoralische Befehle befolgen, und betont die Macht der Situation.

@@ -7,4 +7,4 @@ Werkstoffe, die durch metallische Bindung charakterisiert sind. Wichtige Untergr
 Technik & Ingenieurwesen → Materialwissenschaft & Werkstofftechnik
 
 **Relevanz:**
-Aufgrund ihrer Duktilität und Festigkeit das Rückgrat des Maschinen- und Bausektors.同期
+Aufgrund ihrer Duktilität und Festigkeit das Rückgrat des Maschinen- und Bausektors.

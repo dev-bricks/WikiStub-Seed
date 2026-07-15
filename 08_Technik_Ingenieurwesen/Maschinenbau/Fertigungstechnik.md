@@ -7,4 +7,4 @@ Umfasst alle Verfahren zur Herstellung von geometrisch definierten festen Körpe
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Entscheidet über die Machbarkeit und Wirtschaftlichkeit der Produktion (Stichwort: Massenfertigung vs. Unikat).同期
+Entscheidet über die Machbarkeit und Wirtschaftlichkeit der Produktion (Stichwort: Massenfertigung vs. Unikat).

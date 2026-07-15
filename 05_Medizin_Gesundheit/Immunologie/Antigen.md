@@ -7,4 +7,4 @@ Ein Antigen ist eine Substanz (meist ein Protein oder Polysaccharid), die vom Im
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Antigene sind die „Steckbriefe“, anhand derer das Immunsystem zwischen körpereigenen Zellen und fremden Eindringlingen (Bakterien, Viren) unterscheidet.同期
+Antigene sind die „Steckbriefe“, anhand derer das Immunsystem zwischen körpereigenen Zellen und fremden Eindringlingen (Bakterien, Viren) unterscheidet.

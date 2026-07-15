@@ -7,4 +7,4 @@ Das Big-Five-Modell ist das dominierende Paradigma der Persönlichkeitspsycholog
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Es bietet einen universellen Rahmen zur Beschreibung von Persönlichkeit und sagt Lebenserfolg, Gesundheit und Beziehungsverhalten vorher.同期
+Es bietet einen universellen Rahmen zur Beschreibung von Persönlichkeit und sagt Lebenserfolg, Gesundheit und Beziehungsverhalten vorher.

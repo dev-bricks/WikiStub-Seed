@@ -7,4 +7,4 @@ Die Lunge ist das paarige Organ der Atmung. Sie ermöglicht den Gasaustausch zwi
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Sie ist die zentrale Schnittstelle für die äußere Atmung und stellt sicher, dass alle Zellen des Körpers zuverlässig mit lebensnotwendigem Sauerstoff versorgt werden.同期
+Sie ist die zentrale Schnittstelle für die äußere Atmung und stellt sicher, dass alle Zellen des Körpers zuverlässig mit lebensnotwendigem Sauerstoff versorgt werden.

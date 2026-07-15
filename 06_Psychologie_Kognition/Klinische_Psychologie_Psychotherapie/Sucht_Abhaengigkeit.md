@@ -7,4 +7,4 @@ Abhängigkeitserkrankungen (stoffgebunden wie Alkohol/Drogen oder verhaltensbezo
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Ein massives gesellschaftliches Problem. Suchthilfe kombiniert psychotherapeutische, medizinische und sozialarbeiterische Ansätze.同期
+Ein massives gesellschaftliches Problem. Suchthilfe kombiniert psychotherapeutische, medizinische und sozialarbeiterische Ansätze.

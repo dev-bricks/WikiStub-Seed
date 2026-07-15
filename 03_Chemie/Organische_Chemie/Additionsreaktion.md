@@ -7,4 +7,4 @@ In einer Additionsreaktion vereinigen sich zwei oder mehr Moleküle zu einem ein
 Chemie → Organische Chemie
 
 **Relevanz:**
-Sie ist der zentrale Mechanismus bei der Hydrierung von Fetten und der Polymerisation von Ethen zu Polyethylen, einem der weltweit am häufigsten verwendeten Kunststoffe.同期
+Sie ist der zentrale Mechanismus bei der Hydrierung von Fetten und der Polymerisation von Ethen zu Polyethylen, einem der weltweit am häufigsten verwendeten Kunststoffe.

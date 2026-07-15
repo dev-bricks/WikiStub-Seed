@@ -7,4 +7,4 @@ Das "Gehirn" einer technischen Anlage: Messtechnik, Regelungstechnik und IT, die
 Technik & Ingenieurwesen → Verfahrenstechnik
 
 **Relevanz:**
-Garantiert konstante Produktqualität und Anlagensicherheit (z.B. Notabschaltung bei Überdruck).同期
+Garantiert konstante Produktqualität und Anlagensicherheit (z.B. Notabschaltung bei Überdruck).

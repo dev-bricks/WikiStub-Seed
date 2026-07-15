@@ -7,4 +7,4 @@ Klassenführung (Classroom Management) umfasst alle Maßnahmen von Lehrern, um e
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Effektive Klassenführung ist eine der wichtigsten Voraussetzungen für Unterrichtsqualität und Lehrergesundheit.同期
+Effektive Klassenführung ist eine der wichtigsten Voraussetzungen für Unterrichtsqualität und Lehrergesundheit.

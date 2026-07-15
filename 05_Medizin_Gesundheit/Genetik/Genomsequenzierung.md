@@ -7,4 +7,4 @@ Die Sequenzierung ist ein technisches Verfahren zur Entschlüsselung der exakten
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-Sie ermöglicht die Diagnose seltener Erkrankungen und bildet die Grundlage für die Präzisionsmedizin, bei der Therapien individuell auf das genetische Profil des Patienten abgestimmt werden.同期
+Sie ermöglicht die Diagnose seltener Erkrankungen und bildet die Grundlage für die Präzisionsmedizin, bei der Therapien individuell auf das genetische Profil des Patienten abgestimmt werden.

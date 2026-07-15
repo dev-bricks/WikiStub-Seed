@@ -7,4 +7,4 @@ Untersucht den Zusammenhang zwischen der inneren Struktur (Gitteraufbau, Gefüge
 Technik & Ingenieurwesen → Materialwissenschaft & Werkstofftechnik
 
 **Relevanz:**
-Ermöglicht das gezielte "Design" neuer Materialien mit maßgeschneiderten Eigenschaften.同期
+Ermöglicht das gezielte "Design" neuer Materialien mit maßgeschneiderten Eigenschaften.

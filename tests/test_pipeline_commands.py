@@ -101,6 +101,56 @@ class PipelineCommandTests(unittest.TestCase):
         self.assertEqual(serialized["definition_de"], serialized["definitions"]["de"])
         self.assertEqual(serialized["relevance"], serialized["relevance_i18n"]["de"])
 
+    def test_import_merge_preserves_translations_and_canonical_keys(self):
+        handler = wikistub_seed_pipeline.JsonHandler()
+        handler.data = {
+            "MetaWiki": {
+                "07_Informatik_KI": {
+                    "Künstliche_Intelligenz": [
+                        {
+                            "title": "Maschinelles Lernen",
+                            "definition_de": "Alte deutsche Definition.",
+                            "definition_en": "Existing English definition.",
+                            "definitions": {
+                                "de": "Alte deutsche Definition.",
+                                "en": "Existing English definition.",
+                                "es": "Definición existente.",
+                            },
+                            "relevance": "Alte Relevanz.",
+                            "relevance_i18n": {
+                                "de": "Alte Relevanz.",
+                                "es": "Relevancia existente.",
+                            },
+                            "tags": ["KI"],
+                        }
+                    ]
+                }
+            }
+        }
+        imported = wikistub_seed_pipeline.WikiStub(
+            title="Maschinelles Lernen",
+            definition_de="Aktualisierte deutsche Definition.",
+            relevance="Aktualisierte Relevanz.",
+            tags=["Informatik KI", "Kuenstliche Intelligenz"],
+            category="07_Informatik_KI",
+            subcategory="Kuenstliche_Intelligenz",
+            source_file=r"C:\\Users\\private\\Maschinelles_Lernen.md",
+        )
+
+        handler.add_stub(imported)
+
+        self.assertNotIn("Kuenstliche_Intelligenz", handler.data["MetaWiki"]["07_Informatik_KI"])
+        merged = handler.data["MetaWiki"]["07_Informatik_KI"]["Künstliche_Intelligenz"][0]
+        self.assertEqual(merged["definition_de"], "Aktualisierte deutsche Definition.")
+        self.assertEqual(merged["definitions"]["en"], "Existing English definition.")
+        self.assertEqual(merged["definitions"]["es"], "Definición existente.")
+        self.assertEqual(merged["relevance_i18n"]["es"], "Relevancia existente.")
+        self.assertEqual(merged["relevance"], "Aktualisierte Relevanz.")
+        self.assertEqual(merged["tags"], ["Informatik KI", "Kuenstliche Intelligenz"])
+        self.assertNotIn("source_file", merged)
+        self.assertNotIn("category", merged)
+        self.assertNotIn("subcategory", merged)
+
     def test_cmd_import_aborts_when_json_load_fails(self):
         handler_events = []
 
@@ -147,11 +197,70 @@ class PipelineCommandTests(unittest.TestCase):
                 ),
                 contextlib.redirect_stdout(stdout),
             ):
-                wikistub_seed_pipeline.cmd_import(SimpleNamespace())
+                exit_code = wikistub_seed_pipeline.cmd_import(SimpleNamespace())
 
         output = stdout.getvalue()
+        self.assertEqual(exit_code, 1)
         self.assertEqual(handler_events, ["load"])
         self.assertIn("JSON-Datei konnte nicht geladen werden. Abbruch.", output)
+
+    def test_cmd_validate_fails_closed_when_json_load_fails(self):
+        class FailingJsonHandler:
+            def load(self):
+                return False
+
+            def get_all_stubs(self):
+                raise AssertionError("validation must stop after a failed load")
+
+        stdout = io.StringIO()
+        with (
+            mock.patch.object(
+                wikistub_seed_pipeline,
+                "JsonHandler",
+                side_effect=lambda: FailingJsonHandler(),
+            ),
+            contextlib.redirect_stdout(stdout),
+        ):
+            exit_code = wikistub_seed_pipeline.cmd_validate(
+                SimpleNamespace(exchange=None, verbose=False)
+            )
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("JSON-Datei konnte nicht geladen werden", stdout.getvalue())
+
+    def test_cmd_validate_returns_failure_for_invalid_source_stub(self):
+        invalid_stub = wikistub_seed_pipeline.WikiStub(
+            title="",
+            definition_de="",
+            definition_en="",
+            relevance="",
+            tags=[],
+            category="01_Mathematik",
+            subcategory="Algebra",
+        )
+
+        class InvalidJsonHandler:
+            def load(self):
+                return True
+
+            def get_all_stubs(self):
+                return [invalid_stub]
+
+        stdout = io.StringIO()
+        with (
+            mock.patch.object(
+                wikistub_seed_pipeline,
+                "JsonHandler",
+                side_effect=lambda: InvalidJsonHandler(),
+            ),
+            contextlib.redirect_stdout(stdout),
+        ):
+            exit_code = wikistub_seed_pipeline.cmd_validate(
+                SimpleNamespace(exchange=None, verbose=False)
+            )
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Ungültig: 1", stdout.getvalue())
 
     def test_cmd_validate_accepts_valid_exchange_payload(self):
         payload = {
@@ -217,6 +326,28 @@ class PipelineCommandTests(unittest.TestCase):
         self.assertEqual(exit_code, 1)
         self.assertIn("Ungültige Exporthülle", output)
         self.assertIn("schema muss 'wikistub-seed-data-v1' sein.", output)
+
+    def test_exchange_validation_rejects_invalid_nested_shapes(self):
+        base_payload = {
+            "schema": "wikistub-seed-data-v1",
+            "generated_at": "2026-06-01T10:11:12Z",
+            "source": "wikistub_seed.json",
+            "languages": ["de", "en", "es", "zh", "ja", "ru"],
+            "language_model": wikistub_seed_pipeline.language_model_metadata(),
+            "stub_count": 0,
+            "data": {"MetaWiki": {"01_Mathematik": "not-an-object"}},
+        }
+
+        category_result = wikistub_seed_pipeline.validate_exchange_payload(base_payload)
+        self.assertFalse(category_result.is_valid)
+        self.assertTrue(any("01_Mathematik" in error for error in category_result.errors))
+
+        base_payload["data"] = {
+            "MetaWiki": {"01_Mathematik": {"Algebra": "not-a-list"}}
+        }
+        subcategory_result = wikistub_seed_pipeline.validate_exchange_payload(base_payload)
+        self.assertFalse(subcategory_result.is_valid)
+        self.assertTrue(any("Algebra" in error for error in subcategory_result.errors))
 
 
 if __name__ == "__main__":

@@ -7,4 +7,4 @@ Bewährte Lösungsschablonen für wiederkehrende Entwurfsprobleme in der Softwar
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Erleichtern die Kommunikation zwischen Entwicklern und fördern wiederverwendbaren, sauberen Code.同期
+Erleichtern die Kommunikation zwischen Entwicklern und fördern wiederverwendbaren, sauberen Code.

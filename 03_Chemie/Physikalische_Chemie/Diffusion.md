@@ -7,4 +7,4 @@ Diffusion ist der spontane Prozess des Stofftransports von Regionen höherer Kon
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Sie ist der entscheidende Mechanismus für den Stoffaustausch in Zellen, die Durchmischung von Gasen und Flüssigkeiten sowie für Dotierungsprozesse in der Halbleiterfertigung.同期
+Sie ist der entscheidende Mechanismus für den Stoffaustausch in Zellen, die Durchmischung von Gasen und Flüssigkeiten sowie für Dotierungsprozesse in der Halbleiterfertigung.

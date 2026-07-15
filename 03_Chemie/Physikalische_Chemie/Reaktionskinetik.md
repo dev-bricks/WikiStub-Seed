@@ -7,4 +7,4 @@ Die Reaktionskinetik untersucht die Geschwindigkeit chemischer Reaktionen und de
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Das Verständnis der Kinetik erlaubt die Steuerung der Reaktionsdauer und ist essenziell für die Optimierung chemischer Reaktoren in der Produktion.同期
+Das Verständnis der Kinetik erlaubt die Steuerung der Reaktionsdauer und ist essenziell für die Optimierung chemischer Reaktoren in der Produktion.

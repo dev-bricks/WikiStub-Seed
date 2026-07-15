@@ -7,4 +7,4 @@ Das ER ist ein weitverzweigtes Membransystem im Zellkernbereich, das in weites (
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Das raue ER ist zentral für die Synthese von Membran- und Exportproteinen, während das glatte ER für die Lipidsynthese und die Entgiftung der Zelle zuständig ist.同期
+Das raue ER ist zentral für die Synthese von Membran- und Exportproteinen, während das glatte ER für die Lipidsynthese und die Entgiftung der Zelle zuständig ist.

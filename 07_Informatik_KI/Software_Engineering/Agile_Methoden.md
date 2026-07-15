@@ -7,4 +7,4 @@ Iterative Vorgehensmodelle (z.B. Scrum, Kanban), die Flexibilität, Kundenfeedba
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Standard in der modernen Industrie, um schnell auf sich ändernde Marktanforderungen zu reagieren.同期
+Standard in der modernen Industrie, um schnell auf sich ändernde Marktanforderungen zu reagieren.

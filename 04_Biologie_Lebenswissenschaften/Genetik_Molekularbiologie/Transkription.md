@@ -7,4 +7,4 @@ Die Transkription ist der erste Schritt der Genexpression, bei dem die genetisch
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Sie ist der entscheidende Prozess, um genetische Anweisungen aus dem Zellkern zu den Ribosomen zu transportieren, wo sie in Proteine übersetzt werden können.同期
+Sie ist der entscheidende Prozess, um genetische Anweisungen aus dem Zellkern zu den Ribosomen zu transportieren, wo sie in Proteine übersetzt werden können.

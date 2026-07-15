@@ -7,4 +7,4 @@ Dieser Bereich befasst sich mit den mathematischen und methodischen Grundlagen p
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Ohne fundierte Testtheorie sind Messergebnisse (wie IQ-Werte) wertlos und anfällig für Fehlinterpretationen.同期
+Ohne fundierte Testtheorie sind Messergebnisse (wie IQ-Werte) wertlos und anfällig für Fehlinterpretationen.

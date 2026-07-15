@@ -7,4 +7,4 @@ Trophieebenen sind die Stufen einer Nahrungskette oder eines Nahrungsnetzes, in 
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Das Konzept der Trophieebenen ist entscheidend für das Verständnis der ökologischen Pyramiden von Biomasse und Energie, da bei jeder Stufe etwa 90 % der Energie verloren gehen.同期
+Das Konzept der Trophieebenen ist entscheidend für das Verständnis der ökologischen Pyramiden von Biomasse und Energie, da bei jeder Stufe etwa 90 % der Energie verloren gehen.

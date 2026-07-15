@@ -7,4 +7,4 @@ Entwicklung und Fertigung der Fahrzeugstruktur. Ziel ist die Kombination aus ger
 Technik & Ingenieurwesen → Fahrzeugtechnik
 
 **Relevanz:**
-Trägt maßgeblich zur Sicherheit der Insassen und zur Energieeffizienz des Fahrzeugs bei.同期
+Trägt maßgeblich zur Sicherheit der Insassen und zur Energieeffizienz des Fahrzeugs bei.

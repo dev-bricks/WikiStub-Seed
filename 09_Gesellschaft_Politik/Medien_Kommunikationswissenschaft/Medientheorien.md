@@ -7,4 +7,4 @@ Systematische Ansätze zur Erklärung von Wesen, Funktion und Wirkung der Massen
 Gesellschaft & Politik → Medien- & Kommunikationswissenschaft
 
 **Relevanz:**
-Helfen zu verstehen, wie Medien unsere Wahrnehmung der Realität konstruieren und beeinflussen.同期
+Helfen zu verstehen, wie Medien unsere Wahrnehmung der Realität konstruieren und beeinflussen.

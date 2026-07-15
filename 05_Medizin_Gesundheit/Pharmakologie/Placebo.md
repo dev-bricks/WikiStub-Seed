@@ -7,4 +7,4 @@ Ein Placebo ist ein Scheinmedikament, das keinen pharmakologischen Wirkstoff ent
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Placebos sind unverzichtbare Kontrollinstrumente in klinischen Studien, um die tatsächliche Wirksamkeit neuer Medikamente objektiv von psychologischen Faktoren abzugrenzen.同期
+Placebos sind unverzichtbare Kontrollinstrumente in klinischen Studien, um die tatsächliche Wirksamkeit neuer Medikamente objektiv von psychologischen Faktoren abzugrenzen.

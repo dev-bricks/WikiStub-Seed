@@ -7,4 +7,4 @@ Enzyme sind biologische Katalysatoren, meist Proteine, die chemische Reaktionen 
 Chemie → Biochemie
 
 **Relevanz:**
-Fast jede Stoffwechselreaktion wird durch Enzyme gesteuert; sie ermöglichen lebensnotwendige Prozesse wie Verdauung und DNA-Replikation unter milden Bedingungen.同期
+Fast jede Stoffwechselreaktion wird durch Enzyme gesteuert; sie ermöglichen lebensnotwendige Prozesse wie Verdauung und DNA-Replikation unter milden Bedingungen.

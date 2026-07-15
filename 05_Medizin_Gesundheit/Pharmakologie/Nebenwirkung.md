@@ -7,4 +7,4 @@ Eine Nebenwirkung ist jede unerwünschte oder schädliche Reaktion des Körpers 
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Die Nutzen-Risiko-Abwägung ist die Basis jeder Verordnung; schwere Nebenwirkungen müssen gemeldet werden (Pharmakovigilanz) und können zum Marktrückzug eines Medikaments führen.同期
+Die Nutzen-Risiko-Abwägung ist die Basis jeder Verordnung; schwere Nebenwirkungen müssen gemeldet werden (Pharmakovigilanz) und können zum Marktrückzug eines Medikaments führen.

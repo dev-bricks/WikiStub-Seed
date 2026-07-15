@@ -7,4 +7,4 @@ Die Zellmembran ist eine semipermeable Schutzhülle aus einer Phospholipid-Doppe
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Sie ist entscheidend für die Aufrechterhaltung des zellulären Milieus (Homöostase) und dient dem Empfang von Signalen sowie der Kommunikation mit Nachbarzellen.同期
+Sie ist entscheidend für die Aufrechterhaltung des zellulären Milieus (Homöostase) und dient dem Empfang von Signalen sowie der Kommunikation mit Nachbarzellen.

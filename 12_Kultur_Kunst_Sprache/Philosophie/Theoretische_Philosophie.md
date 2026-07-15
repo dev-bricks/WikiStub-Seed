@@ -7,4 +7,4 @@ Befasst sich mit den Grundlagen des Seins und des Wissens. Kerndisziplinen: Meta
 Kultur, Kunst & Sprache → Philosophie
 
 **Relevanz:**
-Hinterfragt die Grundannahmen unserer Realität und Wissenschaft ("Cogito, ergo sum").同期
+Hinterfragt die Grundannahmen unserer Realität und Wissenschaft ("Cogito, ergo sum").

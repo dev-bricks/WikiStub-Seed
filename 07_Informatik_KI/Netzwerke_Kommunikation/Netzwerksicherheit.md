@@ -7,4 +7,4 @@ Umfasst Maßnahmen zum Schutz von Netzwerkinfrastruktur und Datenübertragung vo
 Informatik & KI → Netzwerke & Kommunikation
 
 **Relevanz:**
-In einer vernetzten Welt ist Netzwerksicherheit die erste Verteidigungslinie gegen Cyberkriminalität und Spionage.同期
+In einer vernetzten Welt ist Netzwerksicherheit die erste Verteidigungslinie gegen Cyberkriminalität und Spionage.

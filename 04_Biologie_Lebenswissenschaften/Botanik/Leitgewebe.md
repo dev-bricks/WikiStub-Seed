@@ -7,4 +7,4 @@ Das Leitgewebe dient dem Fern-Transport von Substanzen in der Pflanze. Das Xylem
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Diese Transportsysteme ermöglichten erst die Entwicklung großer Landpflanzen (Bäume), da sie die Versorgung über weite Strecken sicherstellen.同期
+Diese Transportsysteme ermöglichten erst die Entwicklung großer Landpflanzen (Bäume), da sie die Versorgung über weite Strecken sicherstellen.

@@ -7,4 +7,4 @@ Moleküldynamik ist eine Computersimulationsmethode, die die zeitliche Bewegung 
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Sie erlaubt den Einblick in atomare Prozesse, die experimentell schwer zugänglich sind, wie die Faltung von Proteinen oder Diffusionsvorgänge in neuen Materialien.同期
+Sie erlaubt den Einblick in atomare Prozesse, die experimentell schwer zugänglich sind, wie die Faltung von Proteinen oder Diffusionsvorgänge in neuen Materialien.

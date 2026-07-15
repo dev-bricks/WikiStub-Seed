@@ -7,4 +7,4 @@ Eine Impfung ist die künstliche Auslösung einer Immunantwort. Bei der Aktivimp
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Impfungen gehören zu den erfolgreichsten medizinischen Maßnahmen der Geschichte; sie haben Krankheiten wie Pocken ausgerottet und verhindern jährlich Millionen schwere Krankheitsverläufe.同期
+Impfungen gehören zu den erfolgreichsten medizinischen Maßnahmen der Geschichte; sie haben Krankheiten wie Pocken ausgerottet und verhindern jährlich Millionen schwere Krankheitsverläufe.

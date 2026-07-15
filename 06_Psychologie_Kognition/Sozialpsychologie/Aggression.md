@@ -7,4 +7,4 @@ Aggression ist Verhalten, das darauf abzielt, anderen physischen oder psychische
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Das Verständnis von Aggressionsursachen ist notwendig für Gewaltprävention in Familien, Schulen und der Gesellschaft.同期
+Das Verständnis von Aggressionsursachen ist notwendig für Gewaltprävention in Familien, Schulen und der Gesellschaft.

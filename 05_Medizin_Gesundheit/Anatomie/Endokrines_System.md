@@ -7,4 +7,4 @@ Das endokrine System besteht aus Drüsen (wie Schilddrüse, Bauchspeicheldrüse 
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Zusammen mit dem Nervensystem koordiniert es die Homöostase des Körpers und ermöglicht die Anpassung an Stress und wechselnde innere Zustände.同期
+Zusammen mit dem Nervensystem koordiniert es die Homöostase des Körpers und ermöglicht die Anpassung an Stress und wechselnde innere Zustände.

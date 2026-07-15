@@ -7,4 +7,4 @@ Selektion ist der Prozess, bei dem Individuen mit vorteilhaften Merkmalen eine h
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Sie ist der treibende Mechanismus für die gerichtete Anpassung von Populationen an spezifische Umweltbedingungen und bildet den Kern der Darwinschen Evolutionstheorie.同期
+Sie ist der treibende Mechanismus für die gerichtete Anpassung von Populationen an spezifische Umweltbedingungen und bildet den Kern der Darwinschen Evolutionstheorie.

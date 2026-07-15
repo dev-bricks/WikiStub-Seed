@@ -7,4 +7,4 @@ Die Großhirnrinde ist die äußere, an Nervenzellkörpern reiche Schicht (graue
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Sie ist Sitz des Bewusstseins, des Denkens, der Sinneswahrnehmung und der Willkür-Motorik; unterschiedliche Areale sind spezialisiert (z. B. Sehzentrum, Sprachzentrum).同期
+Sie ist Sitz des Bewusstseins, des Denkens, der Sinneswahrnehmung und der Willkür-Motorik; unterschiedliche Areale sind spezialisiert (z. B. Sehzentrum, Sprachzentrum).

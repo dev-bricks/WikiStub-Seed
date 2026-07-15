@@ -7,4 +7,4 @@ Eine monogene Erkrankung wird durch eine Veränderung (Mutation) in einem einzel
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-Obwohl die einzelnen Krankheiten (z. B. Mukoviszidose oder Chorea Huntington) oft selten sind, ist die Kenntnis ihres Vererbungswegs entscheidend für die genetische Beratung und Diagnostik.同期
+Obwohl die einzelnen Krankheiten (z. B. Mukoviszidose oder Chorea Huntington) oft selten sind, ist die Kenntnis ihres Vererbungswegs entscheidend für die genetische Beratung und Diagnostik.

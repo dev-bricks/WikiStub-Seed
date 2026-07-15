@@ -7,4 +7,4 @@ Desinfektion reduziert die Anzahl pathogener Keime auf ein Maß, das keine Infek
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Diese Verfahren sind das Rückgrat der klinischen Hygiene, der Laborsicherheit und der Haltbarmachung von Lebensmitteln und Pharmazeutika.同期
+Diese Verfahren sind das Rückgrat der klinischen Hygiene, der Laborsicherheit und der Haltbarmachung von Lebensmitteln und Pharmazeutika.

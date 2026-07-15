@@ -7,4 +7,4 @@ Resistenzbildung bezeichnet die Fähigkeit von Bakterien, Strategien gegen die W
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Multiresistente Keime (MRSA) stellen eine der größten Bedrohungen für die moderne Gesundheitsversorgung dar und erfordern einen verantwortungsvollen Umgang mit Antibiotika („Antibiotic Stewardship“).同期
+Multiresistente Keime (MRSA) stellen eine der größten Bedrohungen für die moderne Gesundheitsversorgung dar und erfordern einen verantwortungsvollen Umgang mit Antibiotika („Antibiotic Stewardship“).

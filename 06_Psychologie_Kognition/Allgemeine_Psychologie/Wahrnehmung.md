@@ -7,4 +7,4 @@ Wahrnehmung ist der Prozess der Aufnahme und Verarbeitung von Sinnesreizen, durc
 Psychologie & Kognition → Allgemeine Psychologie
 
 **Relevanz:**
-Sie ist nicht bloßes Abbilden der Realität, sondern eine aktive Konstruktion des Gehirns, die durch Erwartungen und Erfahrungen geprägt ist.同期
+Sie ist nicht bloßes Abbilden der Realität, sondern eine aktive Konstruktion des Gehirns, die durch Erwartungen und Erfahrungen geprägt ist.

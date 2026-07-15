@@ -7,4 +7,4 @@ Der Glukosestoffwechsel umfasst die Regulation der Glukosekonzentration im Blut 
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Ein stabiler Blutzuckerspiegel ist lebenswichtig, besonders für das Gehirn. Chronische Störungen dieser Regulation führen zum Krankheitsbild des Diabetes mellitus.同期
+Ein stabiler Blutzuckerspiegel ist lebenswichtig, besonders für das Gehirn. Chronische Störungen dieser Regulation führen zum Krankheitsbild des Diabetes mellitus.

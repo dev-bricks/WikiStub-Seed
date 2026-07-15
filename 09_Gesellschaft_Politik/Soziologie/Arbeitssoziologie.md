@@ -7,4 +7,4 @@ Analysiert die sozialen Beziehungen und Strukturen in der Arbeitswelt, den Wande
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-Wichtig, um Phänomene wie Prekarisierung, Home-Office-Trends und den Wandel zur Dienstleistungsgesellschaft zu verstehen.同期
+Wichtig, um Phänomene wie Prekarisierung, Home-Office-Trends und den Wandel zur Dienstleistungsgesellschaft zu verstehen.

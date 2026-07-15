@@ -7,4 +7,4 @@ Das Periodensystem ist eine systematische Anordnung aller chemischen Elemente na
 Chemie → Anorganische Chemie
 
 **Relevanz:**
-Das PSE ist das zentrale Ordnungsschema der Chemie; es ermöglicht die Vorhersage von Reaktionsverhalten, Bindungsverhältnissen und physikalischen Eigenschaften unbekannter oder bekannter Stoffe.同期
+Das PSE ist das zentrale Ordnungsschema der Chemie; es ermöglicht die Vorhersage von Reaktionsverhalten, Bindungsverhältnissen und physikalischen Eigenschaften unbekannter oder bekannter Stoffe.

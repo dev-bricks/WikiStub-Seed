@@ -7,4 +7,4 @@ Beschreibt den Aufbau, die Programmierung (Assembler) und die Peripherieanbindun
 Informatik & KI → Technische Informatik
 
 **Relevanz:**
-Bildet die Brücke zwischen Hardware-Design und systemnaher Softwareentwicklung.同期
+Bildet die Brücke zwischen Hardware-Design und systemnaher Softwareentwicklung.

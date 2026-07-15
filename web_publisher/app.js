@@ -13,6 +13,18 @@ const searchInput = document.getElementById("search");
 const langToggle  = document.getElementById("lang-toggle");
 const loadingMsg  = document.getElementById("loading");
 
+function bindActivation(element, handler) {
+  element.tabIndex = 0;
+  element.setAttribute("role", "button");
+  element.addEventListener("click", handler);
+  element.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handler(event);
+    }
+  });
+}
+
 function localizedText(map, selectedLang, legacy = {}) {
   const source = map && typeof map === "object" ? map : {};
   const fallback = { ...legacy, ...source };
@@ -59,11 +71,11 @@ async function boot() {
 
 // ── Category tree ─────────────────────────────────────────────────────────────
 function buildTree() {
-  catTree.innerHTML = "";
+  catTree.replaceChildren();
   const all = document.createElement("li");
   all.className = "cat-all active";
   all.textContent = lang === "de" ? "Alle" : "All";
-  all.addEventListener("click", () => { renderList(index); setActive(all); clearHash(); });
+  bindActivation(all, () => { renderList(index); setActive(all); clearHash(); });
   catTree.appendChild(all);
 
   for (const cat of Object.keys(wiki)) {
@@ -71,7 +83,7 @@ function buildTree() {
     li.className = "cat-item";
     li.dataset.cat = cat;
     li.textContent = cat.replace(/^\d+_/, "").replace(/_/g, " ");
-    li.addEventListener("click", () => {
+    bindActivation(li, () => {
       const filtered = index.filter((e) => e.cat === cat);
       renderList(filtered);
       setActive(li);
@@ -85,7 +97,7 @@ function buildTree() {
       subLi.dataset.cat = cat;
       subLi.dataset.sub = sub;
       subLi.textContent = sub.replace(/_/g, " ");
-      subLi.addEventListener("click", (ev) => {
+      bindActivation(subLi, (ev) => {
         ev.stopPropagation();
         const filtered = index.filter((e) => e.cat === cat && e.sub === sub);
         renderList(filtered);
@@ -106,17 +118,20 @@ function setActive(el) {
 
 // ── Stub list ─────────────────────────────────────────────────────────────────
 function renderList(entries) {
-  stubList.innerHTML = "";
-  detail.innerHTML   = "";
+  stubList.replaceChildren();
+  detail.replaceChildren();
   if (!entries.length) {
-    stubList.innerHTML = `<li class="empty">${lang === "de" ? "Keine Treffer." : "No results."}</li>`;
+    const empty = document.createElement("li");
+    empty.className = "empty";
+    empty.textContent = lang === "de" ? "Keine Treffer." : "No results.";
+    stubList.appendChild(empty);
     return;
   }
   for (const entry of entries) {
     const li = document.createElement("li");
     li.textContent = entry.title;
     li.dataset.id  = entry.id;
-    li.addEventListener("click", () => { showDetail(entry.id); setStubActive(li); });
+    bindActivation(li, () => { showDetail(entry.id); setStubActive(li); });
     stubList.appendChild(li);
   }
 }
@@ -127,12 +142,16 @@ function setStubActive(el) {
 }
 
 // ── Detail ────────────────────────────────────────────────────────────────────
-function showDetail(id) {
-  const meta = index[id];
+function showDetail(id, updateHash = true) {
+  const numericId = Number(id);
+  const meta = index.find((candidate) => candidate.id === numericId);
   if (!meta) return;
   const entry = wiki[meta.cat]?.[meta.sub]?.find((e) => e.title === meta.title);
   if (!entry) return;
-  window.location.hash = `#${encodeURIComponent(entry.title)}`;
+  if (updateHash) {
+    const hash = new URLSearchParams({ stub: String(meta.id), title: entry.title });
+    window.location.hash = hash.toString();
+  }
 
   const def  = definitionText(entry, lang);
   const relevance = relevanceText(entry, lang);
@@ -141,15 +160,45 @@ function showDetail(id) {
   const tagsLabel = lang === "de" ? "Tags" : "Tags";
   const catLabel = lang === "de" ? meta.cat.replace(/^\d+_/, "").replace(/_/g, " ") : meta.cat.replace(/^\d+_/, "").replace(/_/g, " ");
 
-  detail.innerHTML = `
-    <h2>${entry.title}</h2>
-    <p class="breadcrumb">${catLabel} › ${meta.sub.replace(/_/g, " ")}</p>
-    <h3>${defLabel}</h3>
-    <p>${def}</p>
-    <h3>${relLabel}</h3>
-    <p>${relevance}</p>
-    <p class="tags"><strong>${tagsLabel}:</strong> ${(entry.tags || []).map((t) => `<span class="tag">${t}</span>`).join(" ")}</p>
-  `;
+  const title = document.createElement("h2");
+  title.textContent = entry.title;
+
+  const breadcrumb = document.createElement("p");
+  breadcrumb.className = "breadcrumb";
+  breadcrumb.textContent = `${catLabel} › ${meta.sub.replace(/_/g, " ")}`;
+
+  const definitionHeading = document.createElement("h3");
+  definitionHeading.textContent = defLabel;
+  const definition = document.createElement("p");
+  definition.textContent = def;
+
+  const relevanceHeading = document.createElement("h3");
+  relevanceHeading.textContent = relLabel;
+  const relevanceParagraph = document.createElement("p");
+  relevanceParagraph.textContent = relevance;
+
+  const tags = document.createElement("p");
+  tags.className = "tags";
+  const tagsHeading = document.createElement("strong");
+  tagsHeading.textContent = `${tagsLabel}: `;
+  tags.appendChild(tagsHeading);
+  for (const tag of entry.tags || []) {
+    const badge = document.createElement("span");
+    badge.className = "tag";
+    badge.textContent = tag;
+    tags.appendChild(badge);
+    tags.append(" ");
+  }
+
+  detail.replaceChildren(
+    title,
+    breadcrumb,
+    definitionHeading,
+    definition,
+    relevanceHeading,
+    relevanceParagraph,
+    tags,
+  );
 }
 
 // ── Search ────────────────────────────────────────────────────────────────────
@@ -183,11 +232,26 @@ langToggle.addEventListener("click", () => {
 
 // ── Hash routing ──────────────────────────────────────────────────────────────
 function routeHash() {
-  const hash = decodeURIComponent(window.location.hash.slice(1));
-  if (!hash || !index) return;
-  const entry = index.find((e) => e.title === hash);
+  const rawHash = window.location.hash.slice(1);
+  if (!rawHash || !index) return;
+
+  let entry = null;
+  if (rawHash.startsWith("stub=")) {
+    const params = new URLSearchParams(rawHash);
+    const id = Number(params.get("stub"));
+    if (Number.isSafeInteger(id)) {
+      entry = index.find((candidate) => candidate.id === id) || null;
+    }
+  } else {
+    try {
+      const legacyTitle = decodeURIComponent(rawHash);
+      entry = index.find((candidate) => candidate.title === legacyTitle) || null;
+    } catch (error) {
+      return;
+    }
+  }
   if (!entry) return;
-  showDetail(entry.id);
+  showDetail(entry.id, false);
   const li = stubList.querySelector(`[data-id="${entry.id}"]`);
   if (li) { setStubActive(li); li.scrollIntoView({ block: "nearest" }); }
 }

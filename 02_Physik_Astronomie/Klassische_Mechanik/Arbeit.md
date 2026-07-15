@@ -7,4 +7,4 @@ Physikalische Arbeit wird verrichtet, wenn eine Kraft längs eines Weges auf ein
 Physik & Astronomie → Klassische Mechanik
 
 **Relevanz:**
-Der Arbeitsbegriff verknüpft Kraft und Energie und ist fundamental für die Berechnung von Leistungen und Wirkungsgraden technischer Systeme.同期
+Der Arbeitsbegriff verknüpft Kraft und Energie und ist fundamental für die Berechnung von Leistungen und Wirkungsgraden technischer Systeme.

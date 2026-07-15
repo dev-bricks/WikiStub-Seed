@@ -7,4 +7,4 @@ Kooperation bezeichnet das Zusammenarbeiten zum gegenseitigen Vorteil. Altruismu
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Uneigennütziges Verhalten scheint auf den ersten Blick der Selektion zu widersprechen, sichert aber über die Erhöhung der Gesamtfitness (Verwandte) das Überleben der eigenen Gene.同期
+Uneigennütziges Verhalten scheint auf den ersten Blick der Selektion zu widersprechen, sichert aber über die Erhöhung der Gesamtfitness (Verwandte) das Überleben der eigenen Gene.

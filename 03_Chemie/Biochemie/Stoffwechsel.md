@@ -7,4 +7,4 @@ Stoffwechsel umfasst alle chemischen Umwandlungsprozesse in einem Organismus. Er
 Chemie → Biochemie
 
 **Relevanz:**
-Der Metabolismus sorgt für die Aufrechterhaltung der Lebensvorgänge, das Wachstum und die Erneuerung der Körpersubstanz.同期
+Der Metabolismus sorgt für die Aufrechterhaltung der Lebensvorgänge, das Wachstum und die Erneuerung der Körpersubstanz.

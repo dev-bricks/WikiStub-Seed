@@ -7,4 +7,4 @@ Umfasst die Erzeugung (Kraftwerke, Generatoren), Übertragung (Hochspannungsleit
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Sichert die Stromversorgung der modernen Zivilisation und steht im Zentrum der Energiewende (Erneuerbare Energien, Smart Grids).同期
+Sichert die Stromversorgung der modernen Zivilisation und steht im Zentrum der Energiewende (Erneuerbare Energien, Smart Grids).

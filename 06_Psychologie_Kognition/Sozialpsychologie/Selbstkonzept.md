@@ -7,4 +7,4 @@ Das Selbstkonzept ist die Gesamtheit der Gedanken und Überzeugungen, die eine P
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Es determiniert Selbstwertgefühl, Motivation und wie wir Informationen verarbeiten (Self-Reference Effect).同期
+Es determiniert Selbstwertgefühl, Motivation und wie wir Informationen verarbeiten (Self-Reference Effect).

@@ -7,4 +7,4 @@ Angiospermen sind Samenpflanzen, deren Samenanlagen in einem Fruchtknoten einges
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Sie dominieren die meisten terrestrischen Ökosysteme und liefern den Großteil der menschlichen Nahrung in Form von Getreide, Obst und Gemüse.同期
+Sie dominieren die meisten terrestrischen Ökosysteme und liefern den Großteil der menschlichen Nahrung in Form von Getreide, Obst und Gemüse.

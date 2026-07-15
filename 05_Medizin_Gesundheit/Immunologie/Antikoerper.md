@@ -7,4 +7,4 @@ Antikörper sind Y-förmige Proteine, die von B-Lymphozyten produziert werden. S
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Sie sind die „Präzisionswaffen“ der humoralen Immunabwehr und bilden die Grundlage für die Wirksamkeit von Impfungen und modernen Antikörper-Therapien.同期
+Sie sind die „Präzisionswaffen“ der humoralen Immunabwehr und bilden die Grundlage für die Wirksamkeit von Impfungen und modernen Antikörper-Therapien.

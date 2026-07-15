@@ -7,4 +7,4 @@ Aromatizität beschreibt eine besondere Stabilität zyklischer, planarer Molekü
 Chemie → Organische Chemie
 
 **Relevanz:**
-Aromatische Verbindungen sind aufgrund ihrer Resonanzstabilität weniger reaktiv als normale Alkene und bilden die Basis für unzählige Farbstoffe, Kunststoffe und wichtige biologische Moleküle wie DNA-Basen.同期
+Aromatische Verbindungen sind aufgrund ihrer Resonanzstabilität weniger reaktiv als normale Alkene und bilden die Basis für unzählige Farbstoffe, Kunststoffe und wichtige biologische Moleküle wie DNA-Basen.

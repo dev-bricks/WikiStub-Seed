@@ -7,4 +7,4 @@ Public Relations (Öffentlichkeitsarbeit) bezeichnet das strategische Management
 Gesellschaft & Politik → Medien- & Kommunikationswissenschaft
 
 **Relevanz:**
-Die Grenze zwischen Information, Werbung und Manipulation ist oft fließend; Medienkompetenz ist hier gefordert.同期
+Die Grenze zwischen Information, Werbung und Manipulation ist oft fließend; Medienkompetenz ist hier gefordert.

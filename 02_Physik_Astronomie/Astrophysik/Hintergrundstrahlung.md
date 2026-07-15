@@ -7,4 +7,4 @@ Die kosmische Hintergrundstrahlung ist ein schwaches Mikrowellenglühen, das den
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Sie ist das wichtigste Werkzeug zur Vermessung des frühen Universums und liefert präzise Daten über dessen Alter, Zusammensetzung und Geometrie.同期
+Sie ist das wichtigste Werkzeug zur Vermessung des frühen Universums und liefert präzise Daten über dessen Alter, Zusammensetzung und Geometrie.

@@ -7,4 +7,4 @@ Eine Wechselwirkung tritt auf, wenn die Wirkung eines Arzneimittels durch die gl
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Interaktionen sind eine häufige Ursache für Therapiefehler und Komplikationen, insbesondere bei älteren Patienten mit Multimedikation (Polypharmazie).同期
+Interaktionen sind eine häufige Ursache für Therapiefehler und Komplikationen, insbesondere bei älteren Patienten mit Multimedikation (Polypharmazie).

@@ -7,4 +7,4 @@ Identitätsentwicklung ist der Prozess der Selbstfindung und -definition, in dem
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Eine stabile Identität ist Voraussetzung für psychisches Wohlbefinden und die Fähigkeit, befriedigende Beziehungen einzugehen und Lebensziele zu verfolgen.同期
+Eine stabile Identität ist Voraussetzung für psychisches Wohlbefinden und die Fähigkeit, befriedigende Beziehungen einzugehen und Lebensziele zu verfolgen.

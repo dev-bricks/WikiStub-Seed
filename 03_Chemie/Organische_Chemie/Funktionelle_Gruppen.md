@@ -7,4 +7,4 @@ Funktionelle Gruppen sind spezifische Atomgruppen in organischen Molekülen, die
 Chemie → Organische Chemie
 
 **Relevanz:**
-Die Identifikation funktioneller Gruppen ermöglicht die systematische Einteilung organischer Stoffe und die gezielte Synthese komplexer Wirkstoffe.同期
+Die Identifikation funktioneller Gruppen ermöglicht die systematische Einteilung organischer Stoffe und die gezielte Synthese komplexer Wirkstoffe.

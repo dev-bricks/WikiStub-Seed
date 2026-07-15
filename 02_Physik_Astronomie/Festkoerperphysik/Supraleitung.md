@@ -7,4 +7,4 @@ Supraleitung ist ein Quantenphänomen, bei dem der elektrische Widerstand eines 
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Sie ermöglicht verlustfreien Stromtransport und die Erzeugung extrem starker Magnetfelder für MRT-Geräte und Teilchenbeschleuniger wie den LHC.同期
+Sie ermöglicht verlustfreien Stromtransport und die Erzeugung extrem starker Magnetfelder für MRT-Geräte und Teilchenbeschleuniger wie den LHC.

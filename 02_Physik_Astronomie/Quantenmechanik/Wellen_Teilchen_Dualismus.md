@@ -7,4 +7,4 @@ Der Wellen-Teilchen-Dualismus besagt, dass Objekte in der Quantenwelt je nach ex
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Dieses Konzept brach radikal mit der klassischen Vorstellung streng getrennter Wellen- und Materiephänomene und ist fundamental für das Verständnis der Quantenphysik.同期
+Dieses Konzept brach radikal mit der klassischen Vorstellung streng getrennter Wellen- und Materiephänomene und ist fundamental für das Verständnis der Quantenphysik.

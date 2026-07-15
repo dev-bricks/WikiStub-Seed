@@ -7,4 +7,4 @@ Lernen ist die individuelle Veränderung des Verhaltens aufgrund von Erfahrungen
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Die Lernfähigkeit ist ein entscheidender Selektionsvorteil, da sie es Individuen erlaubt, aus Fehlern zu lernen, neue Ressourcen zu erschließen und soziale Strukturen effizienter zu nutzen.同期
+Die Lernfähigkeit ist ein entscheidender Selektionsvorteil, da sie es Individuen erlaubt, aus Fehlern zu lernen, neue Ressourcen zu erschließen und soziale Strukturen effizienter zu nutzen.

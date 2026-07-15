@@ -7,4 +7,4 @@ Epoche der Mittelmeerwelt (Griechenland, Rom) etwa von 800 v. Chr. bis 600 n. Ch
 Geschichte & Archäologie → Antike
 
 **Relevanz:**
-Die kulturelle Wiege Europas; Konzepte wie Republik, Bürgerrecht und klassische Kunst stammen von hier.同期
+Die kulturelle Wiege Europas; Konzepte wie Republik, Bürgerrecht und klassische Kunst stammen von hier.

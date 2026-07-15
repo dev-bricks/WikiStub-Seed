@@ -7,4 +7,4 @@ Chromatographie ist ein physikalisch-chemisches Verfahren zur Trennung von Stoff
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Sie ist das wichtigste Trennverfahren der Analytik und wird zur Reinheitsprüfung von Lebensmitteln, zur Dopingkontrolle und zur Isolierung biologischer Wirkstoffe eingesetzt.同期
+Sie ist das wichtigste Trennverfahren der Analytik und wird zur Reinheitsprüfung von Lebensmitteln, zur Dopingkontrolle und zur Isolierung biologischer Wirkstoffe eingesetzt.

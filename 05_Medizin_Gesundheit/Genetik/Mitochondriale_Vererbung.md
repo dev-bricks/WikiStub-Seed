@@ -7,4 +7,4 @@ Mitochondriale Vererbung bezeichnet die Weitergabe von genetischer Information, 
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-Mutationen in der mtDNA führen zu speziellen Erkrankungen (Mitochondriopathien), die oft Organe mit hohem Energiebedarf wie Gehirn, Herz und Muskeln betreffen.同期
+Mutationen in der mtDNA führen zu speziellen Erkrankungen (Mitochondriopathien), die oft Organe mit hohem Energiebedarf wie Gehirn, Herz und Muskeln betreffen.

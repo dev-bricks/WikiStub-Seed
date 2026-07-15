@@ -7,4 +7,4 @@ Teamarbeit beforscht Interaktionsprozesse in Arbeitsgruppen, deren Phasen (Formi
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Da moderne Arbeit fast immer kollaborativ ist, ist das Verständnis von Synergieeffekten und Konfliktlösung in Teams essentiell.同期
+Da moderne Arbeit fast immer kollaborativ ist, ist das Verständnis von Synergieeffekten und Konfliktlösung in Teams essentiell.

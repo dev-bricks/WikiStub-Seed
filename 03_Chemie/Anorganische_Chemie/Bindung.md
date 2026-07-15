@@ -7,4 +7,4 @@ Eine chemische Bindung ist die physikalische Wechselwirkung, die Atome oder Ione
 Chemie → Anorganische Chemie
 
 **Relevanz:**
-Bindungen bestimmen die Form, Festigkeit und Reaktivität von Materie und sind die Grundlage für die Speicherung und Freisetzung chemischer Energie.同期
+Bindungen bestimmen die Form, Festigkeit und Reaktivität von Materie und sind die Grundlage für die Speicherung und Freisetzung chemischer Energie.

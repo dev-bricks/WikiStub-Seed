@@ -7,4 +7,4 @@ Organische Werkstoffe aus langen Molekülketten. Unterteilt in Thermoplaste (sch
 Technik & Ingenieurwesen → Materialwissenschaft & Werkstofftechnik
 
 **Relevanz:**
-Leicht, billig und vielseitig formbar – vom Joghurtbecher bis zum Hochleistungsbauteil im Flugzeug (CFK).同期
+Leicht, billig und vielseitig formbar – vom Joghurtbecher bis zum Hochleistungsbauteil im Flugzeug (CFK).

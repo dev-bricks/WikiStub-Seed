@@ -7,4 +7,4 @@ Ein chemisches Gleichgewicht ist ein Zustand einer reversiblen Reaktion, in dem 
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Nach dem Prinzip von Le Chatelier lässt sich das Gleichgewicht durch Änderung von Druck oder Temperatur beeinflussen, was zur Ertragsoptimierung bei Synthesen wie dem Haber-Bosch-Verfahren genutzt wird.同期
+Nach dem Prinzip von Le Chatelier lässt sich das Gleichgewicht durch Änderung von Druck oder Temperatur beeinflussen, was zur Ertragsoptimierung bei Synthesen wie dem Haber-Bosch-Verfahren genutzt wird.

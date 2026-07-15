@@ -7,4 +7,4 @@ Analysiert die Entstehung, Organisation, Programme und Funktionen politischer Pa
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Parteien sind die zentralen Vermittler zwischen Bevölkerung und Staat; ihre Krise wird oft als Krise der Demokratie gedeutet.同期
+Parteien sind die zentralen Vermittler zwischen Bevölkerung und Staat; ihre Krise wird oft als Krise der Demokratie gedeutet.

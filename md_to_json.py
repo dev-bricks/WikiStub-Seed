@@ -14,13 +14,19 @@ Nutzung:
 """
 
 import json
-import os
 import re
 import sys
 from pathlib import Path
 from datetime import datetime
 
-from language_model import normalize_entry
+from language_model import (
+    existing_mapping_key,
+    identifier_key,
+    merge_entry,
+    normalize_entry,
+    public_entry,
+)
+from safe_io import atomic_write_json, backup_file
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -43,8 +49,7 @@ CATEGORY_FOLDERS = [
 
 
 def clean_text(text):
-    """Entfernt unerwuenschte Zeichen und bereinigt Text."""
-    text = re.sub(r'[^\x00-\xFF]', '', text)
+    """Normalisiert Leerraum, ohne gültigen Unicode-Inhalt zu löschen."""
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
@@ -191,19 +196,16 @@ def save_json(data, dry_run=False):
 
     # Backup
     if JSON_PATH.exists():
-        BACKUP_PATH.mkdir(exist_ok=True)
-        backup_name = f"wikistub_seed_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        import shutil
-        shutil.copy(JSON_PATH, BACKUP_PATH / backup_name)
+        backup_file(JSON_PATH, BACKUP_PATH, prefix="wikistub_seed", keep=10)
 
-    with open(JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    atomic_write_json(JSON_PATH, data)
 
 
 def add_stub_to_data(data, stub_dict):
     """Fuegt einen Stub in die JSON-Struktur ein."""
-    cat = stub_dict.pop("_category", "")
-    subcat = stub_dict.pop("_subcategory", "")
+    incoming = dict(stub_dict)
+    cat = incoming.pop("_category", "")
+    subcat = incoming.pop("_subcategory", "")
 
     if not cat:
         cat = "00_Unsortiert"
@@ -211,19 +213,21 @@ def add_stub_to_data(data, stub_dict):
         subcat = "Allgemein"
 
     root = data["MetaWiki"]
-    if cat not in root:
-        root[cat] = {}
-    if subcat not in root[cat]:
-        root[cat][subcat] = []
+    category = existing_mapping_key(root, cat)
+    if category not in root:
+        root[category] = {}
+    subcategory = existing_mapping_key(root[category], subcat)
+    if subcategory not in root[category]:
+        root[category][subcategory] = []
 
     # Duplikat-Pruefung innerhalb der gleichen Subkategorie
-    existing = root[cat][subcat]
+    existing = root[category][subcategory]
     for i, item in enumerate(existing):
-        if item.get("title", "").lower() == stub_dict["title"].lower():
-            existing[i] = stub_dict  # Update
+        if identifier_key(item.get("title", "")) == identifier_key(incoming["title"]):
+            existing[i] = merge_entry(item, incoming)
             return "updated"
 
-    existing.append(stub_dict)
+    existing.append(public_entry(incoming))
     return "added"
 
 

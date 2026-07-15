@@ -7,4 +7,4 @@ Systematische Prüfung von Software, um Fehler zu finden und sicherzustellen, da
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Fehler im Live-Betrieb sind teuer und imageschädigend; Testautomatisierung ist daher essentiell.同期
+Fehler im Live-Betrieb sind teuer und imageschädigend; Testautomatisierung ist daher essentiell.

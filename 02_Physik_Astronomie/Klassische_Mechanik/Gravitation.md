@@ -7,4 +7,4 @@ Gravitation ist die fundamentale Wechselwirkung, die für die gegenseitige Anzie
 Physik & Astronomie → Klassische Mechanik
 
 **Relevanz:**
-Sie bestimmt die großräumige Struktur des Universums, hält Planeten auf ihren Bahnen und ist verantwortlich für das Gewicht von Objekten auf der Erdoberfläche.同期
+Sie bestimmt die großräumige Struktur des Universums, hält Planeten auf ihren Bahnen und ist verantwortlich für das Gewicht von Objekten auf der Erdoberfläche.

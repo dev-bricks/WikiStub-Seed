@@ -7,4 +7,4 @@ Osmoregulation ist der Prozess, durch den der Körper den osmotischen Druck sein
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Sie verhindert das Anschwellen (Ödeme) oder Schrumpfen von Zellen aufgrund von Konzentrationsunterschieden und sichert das Blutvolumen sowie den Blutdruck.同期
+Sie verhindert das Anschwellen (Ödeme) oder Schrumpfen von Zellen aufgrund von Konzentrationsunterschieden und sichert das Blutvolumen sowie den Blutdruck.

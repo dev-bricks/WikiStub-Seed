@@ -7,4 +7,4 @@ Personalauswahl umfasst Methoden zur Identifikation der besten Bewerber für ein
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Wissenschaftlich fundierte Auswahlprozesse reduzieren Fehlbesetzungsrisiken und Diskriminierung (Diversity Management).同期
+Wissenschaftlich fundierte Auswahlprozesse reduzieren Fehlbesetzungsrisiken und Diskriminierung (Diversity Management).

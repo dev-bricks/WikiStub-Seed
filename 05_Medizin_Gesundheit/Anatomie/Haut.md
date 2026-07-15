@@ -7,4 +7,4 @@ Die Haut ist das flächenmäßig größte Organ des Menschen. Sie besteht aus dr
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Sie schützt den Körper vor mechanischen Verletzungen, UV-Strahlung und dem Eindringen von Krankheitserregern und ist essenziell für das Tastempfinden.同期
+Sie schützt den Körper vor mechanischen Verletzungen, UV-Strahlung und dem Eindringen von Krankheitserregern und ist essenziell für das Tastempfinden.

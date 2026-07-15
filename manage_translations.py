@@ -11,6 +11,9 @@ import json
 import re
 import os
 import sys
+from pathlib import Path
+
+from safe_io import atomic_write_json
 
 TRANSLATION_FILE = "locales/translations.json"
 
@@ -75,9 +78,7 @@ def manage_translations(source_dir="."):
             translations[s] = {"de": s, "en": ""}
             added.append(s)
 
-    os.makedirs(os.path.dirname(trans_file), exist_ok=True)
-    with open(trans_file, "w", encoding="utf-8") as f:
-        json.dump(translations, f, indent=2, ensure_ascii=False)
+    atomic_write_json(Path(trans_file), translations)
 
     if added:
         print(f"[+] {len(added)} neue Einträge hinzugefügt:")

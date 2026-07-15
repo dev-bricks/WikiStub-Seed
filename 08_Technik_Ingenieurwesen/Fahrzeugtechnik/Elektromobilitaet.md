@@ -7,4 +7,4 @@ Nutzung von Elektroantrieben (Batterie oder Brennstoffzelle) für Fahrzeuge. Umf
 Technik & Ingenieurwesen → Fahrzeugtechnik
 
 **Relevanz:**
-Zentraler Baustein für die Dekarbonisierung des Verkehrssektors und die Reduzierung lokaler Emissionen.同期
+Zentraler Baustein für die Dekarbonisierung des Verkehrssektors und die Reduzierung lokaler Emissionen.

@@ -7,4 +7,4 @@ Wirbellose sind alle Tiere, die keine Wirbelsäule besitzen. Diese extrem divers
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Sie besetzen nahezu alle ökologischen Nischen und sind als Bestäuber, Zersetzer und Teil der Nahrungskette für das Funktionieren von Ökosystemen unerlässlich.同期
+Sie besetzen nahezu alle ökologischen Nischen und sind als Bestäuber, Zersetzer und Teil der Nahrungskette für das Funktionieren von Ökosystemen unerlässlich.

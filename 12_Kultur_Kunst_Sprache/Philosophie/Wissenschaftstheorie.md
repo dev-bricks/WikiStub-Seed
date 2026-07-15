@@ -7,4 +7,4 @@ Reflektiert die Methoden, Voraussetzungen und Ziele der Wissenschaften. Fragt z.
 Kultur, Kunst & Sprache → Philosophie
 
 **Relevanz:**
-Essentiell für die Glaubwürdigkeit und Weiterentwicklung der Forschung.同期
+Essentiell für die Glaubwürdigkeit und Weiterentwicklung der Forschung.

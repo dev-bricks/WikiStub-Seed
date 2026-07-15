@@ -7,4 +7,4 @@ Referenzmodelle wie das OSI-Modell (7 Schichten) oder das TCP/IP-Modell beschrei
 Informatik & KI → Netzwerke & Kommunikation
 
 **Relevanz:**
-Ermöglichen herstellerunabhängige Kommunikation und Interoperabilität im weltweiten Datenverkehr.同期
+Ermöglichen herstellerunabhängige Kommunikation und Interoperabilität im weltweiten Datenverkehr.

@@ -7,4 +7,4 @@ Isomerie bezeichnet das Auftreten von zwei oder mehr chemischen Verbindungen mit
 Chemie → Organische Chemie
 
 **Relevanz:**
-Isomere können völlig unterschiedliche physikalische und biologische Eigenschaften besitzen, was besonders in der Pharmakologie bei der Entwicklung von Medikamenten (Chiralität) von kritischer Bedeutung ist.同期
+Isomere können völlig unterschiedliche physikalische und biologische Eigenschaften besitzen, was besonders in der Pharmakologie bei der Entwicklung von Medikamenten (Chiralität) von kritischer Bedeutung ist.

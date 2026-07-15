@@ -7,4 +7,4 @@ Die Wellenfunktion ($\psi$) ist eine mathematische Beschreibung eines Quantenzus
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Sie ersetzt den klassischen Begriff der exakt definierten Trajektorie durch Wahrscheinlichkeitsverteilungen und ist zentral für alle quantenmechanischen Berechnungen.同期
+Sie ersetzt den klassischen Begriff der exakt definierten Trajektorie durch Wahrscheinlichkeitsverteilungen und ist zentral für alle quantenmechanischen Berechnungen.

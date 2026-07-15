@@ -7,4 +7,4 @@ Das Handwerkszeug der Soziologie: Quantitative Methoden (Statistik, Umfragen) un
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-Sichert die Wissenschaftlichkeit und Überprüfbarkeit soziologischer Aussagen; wichtig für Markt- und Meinungsforschung.同期
+Sichert die Wissenschaftlichkeit und Überprüfbarkeit soziologischer Aussagen; wichtig für Markt- und Meinungsforschung.

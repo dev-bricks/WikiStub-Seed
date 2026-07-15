@@ -7,4 +7,4 @@ Eine Galaxie ist ein gravitativ gebundenes System, das aus Sternen, Gas, Staub u
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Galaxien sind die großräumigen „Bausteine“ des sichtbaren Universums und ihre Untersuchung erlaubt Rückschlüsse auf die kosmische Strukturbildung und Expansion.同期
+Galaxien sind die großräumigen „Bausteine“ des sichtbaren Universums und ihre Untersuchung erlaubt Rückschlüsse auf die kosmische Strukturbildung und Expansion.

@@ -7,4 +7,4 @@ Ein Neutronenstern ist der extrem dichte Überrest eines massereichen Sterns nac
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Neutronensterne (oft als Pulsare beobachtet) sind Laboratorien für Materiezustände unter extremen Drücken und Magnetfeldern, die auf der Erde nicht reproduziert werden können.同期
+Neutronensterne (oft als Pulsare beobachtet) sind Laboratorien für Materiezustände unter extremen Drücken und Magnetfeldern, die auf der Erde nicht reproduziert werden können.

@@ -7,4 +7,4 @@ Die Myelinscheide ist eine fetthaltige Isolationsschicht, die die Axone vieler N
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Sie ermöglicht die schnelle, springende (saltatorische) Erregungsleitung; ihre Zerstörung (z. B. bei Multipler Sklerose) führt zu schweren neurologischen Ausfällen.同期
+Sie ermöglicht die schnelle, springende (saltatorische) Erregungsleitung; ihre Zerstörung (z. B. bei Multipler Sklerose) führt zu schweren neurologischen Ausfällen.

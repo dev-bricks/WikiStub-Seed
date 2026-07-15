@@ -7,4 +7,4 @@ Der Infektionsweg beschreibt die Route, auf der ein Krankheitserreger von einer 
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Die Kenntnis der Infektionswege ist die Voraussetzung für effektive Hygienemaßnahmen, die Eindämmung von Epidemien und den persönlichen Infektionsschutz.同期
+Die Kenntnis der Infektionswege ist die Voraussetzung für effektive Hygienemaßnahmen, die Eindämmung von Epidemien und den persönlichen Infektionsschutz.

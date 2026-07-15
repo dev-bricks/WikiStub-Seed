@@ -7,4 +7,4 @@ Die Stereochemie befasst sich mit der räumlichen (3D) Anordnung der Atome in Mo
 Chemie → Organische Chemie
 
 **Relevanz:**
-In biologischen Systemen spielt die räumliche Form eine entscheidende Rolle (Schlüssel-Schloss-Prinzip), da oft nur eine bestimmte räumliche Form eines Moleküls biologisch aktiv ist.同期
+In biologischen Systemen spielt die räumliche Form eine entscheidende Rolle (Schlüssel-Schloss-Prinzip), da oft nur eine bestimmte räumliche Form eines Moleküls biologisch aktiv ist.

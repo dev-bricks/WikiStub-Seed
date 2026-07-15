@@ -7,4 +7,4 @@ Gruppendynamik analysiert die Prozesse und Verhaltensweisen, die innerhalb von G
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Wichtig für Teamarbeit, Führung und das Verständnis von Phänomenen wie Groupthink oder sozialer Faulheit.同期
+Wichtig für Teamarbeit, Führung und das Verständnis von Phänomenen wie Groupthink oder sozialer Faulheit.

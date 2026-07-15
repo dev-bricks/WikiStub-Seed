@@ -7,4 +7,4 @@ Der Tunneleffekt beschreibt das quantenmechanische Phänomen, bei dem ein Teilch
 Physik & Astronomie → Quantenmechanik
 
 **Relevanz:**
-Er ist verantwortlich für den radioaktiven Alpha-Zerfall, ermöglicht die Kernfusion in der Sonne und wird technisch in Rastertunnelmikroskopen und Flash-Speichern genutzt.同期
+Er ist verantwortlich für den radioaktiven Alpha-Zerfall, ermöglicht die Kernfusion in der Sonne und wird technisch in Rastertunnelmikroskopen und Flash-Speichern genutzt.

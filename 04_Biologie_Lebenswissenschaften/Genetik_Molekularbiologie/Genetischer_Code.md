@@ -7,4 +7,4 @@ Der genetische Code ist das System von Regeln, nach denen die Basensequenz der D
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Er ist nahezu universell für alle Lebewesen gültig, was die enge evolutionäre Verwandtschaft allen Lebens auf der Erde belegt und moderne Gentechnik ermöglicht.同期
+Er ist nahezu universell für alle Lebewesen gültig, was die enge evolutionäre Verwandtschaft allen Lebens auf der Erde belegt und moderne Gentechnik ermöglicht.

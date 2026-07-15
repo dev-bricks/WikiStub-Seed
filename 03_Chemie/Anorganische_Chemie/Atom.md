@@ -7,4 +7,4 @@ Das Atom ist der kleinste chemisch nicht weiter teilbare Baustein eines Elements
 Chemie → Anorganische Chemie
 
 **Relevanz:**
-Atome sind die Basiseinheiten der Materie; ihre Struktur bestimmt die chemischen Eigenschaften und das Reaktionsverhalten aller Stoffe im Universum.同期
+Atome sind die Basiseinheiten der Materie; ihre Struktur bestimmt die chemischen Eigenschaften und das Reaktionsverhalten aller Stoffe im Universum.

@@ -7,4 +7,4 @@ Ein Regelkreis ist ein Funktionssystem, das eine physikalische oder chemische Gr
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Das Verständnis von Regelkreisen ist essenziell für die Medizin, um die Selbstregulation des Körpers (z. B. Blutdruck- oder Hormonregelung) zu verstehen und bei Fehlfunktionen gezielt einzugreifen.同期
+Das Verständnis von Regelkreisen ist essenziell für die Medizin, um die Selbstregulation des Körpers (z. B. Blutdruck- oder Hormonregelung) zu verstehen und bei Fehlfunktionen gezielt einzugreifen.

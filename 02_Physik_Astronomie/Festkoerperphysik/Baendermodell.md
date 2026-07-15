@@ -7,4 +7,4 @@ Das Bändermodell beschreibt die erlaubten Energiebereiche (Bänder) für Elektr
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Es erklärt physikalisch fundiert den Unterschied zwischen Metallen, Halbleitern und Isolatoren und ist essenziell für die Entwicklung optoelektronischer Bauelemente.同期
+Es erklärt physikalisch fundiert den Unterschied zwischen Metallen, Halbleitern und Isolatoren und ist essenziell für die Entwicklung optoelektronischer Bauelemente.

@@ -7,4 +7,4 @@ Thematisiert Belastungen (z.B. Zeitdruck, Lärm) und Beanspruchungen (z.B. Ersch
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Wichtig für das Betriebliche Gesundheitsmanagement zur Prävention von Burnout und arbeitsbedingten Erkrankungen.同期
+Wichtig für das Betriebliche Gesundheitsmanagement zur Prävention von Burnout und arbeitsbedingten Erkrankungen.

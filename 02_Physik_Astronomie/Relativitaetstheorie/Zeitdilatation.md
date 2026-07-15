@@ -7,4 +7,4 @@ Zeitdilatation bezeichnet das Phänomen, dass die Zeit in einem bewegten Bezugss
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Sie ist experimentell durch Atomuhren in Flugzeugen und Satelliten bestätigt und muss bei der präzisen Ortung durch GPS-Systeme zwingend korrigiert werden.同期
+Sie ist experimentell durch Atomuhren in Flugzeugen und Satelliten bestätigt und muss bei der präzisen Ortung durch GPS-Systeme zwingend korrigiert werden.

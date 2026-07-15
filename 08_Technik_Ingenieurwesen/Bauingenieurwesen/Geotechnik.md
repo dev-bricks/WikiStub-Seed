@@ -7,4 +7,4 @@ Untersucht die Wechselwirkung zwischen Bauwerk und Baugrund (Boden/Fels). Umfass
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Jedes Bauwerk braucht ein sicheres Fundament; Fehler hier führen zu Setzungen oder Grundbruch.同期
+Jedes Bauwerk braucht ein sicheres Fundament; Fehler hier führen zu Setzungen oder Grundbruch.

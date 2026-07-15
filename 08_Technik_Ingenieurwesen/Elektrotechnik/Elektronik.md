@@ -7,4 +7,4 @@ Befasst sich mit der Steuerung von elektrischem Strom durch Halbleiterbauelement
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Ermöglicht die Informationsverarbeitung und ist die Hardware-Basis der Digitalisierung.同期
+Ermöglicht die Informationsverarbeitung und ist die Hardware-Basis der Digitalisierung.

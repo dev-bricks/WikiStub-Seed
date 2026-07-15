@@ -7,4 +7,4 @@ Die Verhaltensgenetik untersucht den Einfluss von Erbanlagen auf Verhalten und P
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Relativiert die Debatte Nature vs. Nurture hin zu einer Interaktion: Gene geben den Rahmen vor, die Umwelt bestimmt die Entfaltung.同期
+Relativiert die Debatte Nature vs. Nurture hin zu einer Interaktion: Gene geben den Rahmen vor, die Umwelt bestimmt die Entfaltung.

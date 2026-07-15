@@ -7,4 +7,4 @@ Ein elektrisches Feld ist ein Kraftfeld, das den Raum um elektrische Ladungen er
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Es ist der Träger der Energieübertragung in Stromkreisen und essenziell für die Funktionsweise von Kondensatoren, Bildschirmen und Teilchenbeschleunigern.同期
+Es ist der Träger der Energieübertragung in Stromkreisen und essenziell für die Funktionsweise von Kondensatoren, Bildschirmen und Teilchenbeschleunigern.

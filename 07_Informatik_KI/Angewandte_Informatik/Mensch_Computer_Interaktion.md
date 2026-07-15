@@ -7,4 +7,4 @@ Erforscht das Design und die Nutzung von Computerschnittstellen. Ziel ist eine h
 Informatik & KI → Angewandte Informatik
 
 **Relevanz:**
-Entscheidet darüber, ob Technologie für Menschen zugänglich, effizient und angenehm nutzbar ist.同期
+Entscheidet darüber, ob Technologie für Menschen zugänglich, effizient und angenehm nutzbar ist.

@@ -7,4 +7,4 @@ Der absolute Nullpunkt (0 Kelvin ≈ -273,15 °C) ist die theoretisch tiefstmög
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Er ist die Nullpunktsetzung der Kelvinskala und markiert den Übergang zu Quanteneffekten wie Supraleitung und Bose-Einstein-Kondensation in der Tieftemperaturphysik.同期
+Er ist die Nullpunktsetzung der Kelvinskala und markiert den Übergang zu Quanteneffekten wie Supraleitung und Bose-Einstein-Kondensation in der Tieftemperaturphysik.

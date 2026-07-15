@@ -7,4 +7,4 @@ Der Zellkern ist das wichtigste Organell der eukaryotischen Zelle, das die Chrom
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Er fungiert als „Steuerzentrale“ der Zelle, steuert die Genexpression und ist der Ort der DNA-Replikation und Transkription.同期
+Er fungiert als „Steuerzentrale“ der Zelle, steuert die Genexpression und ist der Ort der DNA-Replikation und Transkription.

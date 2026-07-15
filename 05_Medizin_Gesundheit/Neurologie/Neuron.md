@@ -7,4 +7,4 @@ Ein Neuron ist die spezialisierte Zelle des Nervensystems, die für die Aufnahme
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Neuronen bilden das materielle Fundament für Empfindungen, Bewegungen, komplexe Denkprozesse und das Bewusstsein.同期
+Neuronen bilden das materielle Fundament für Empfindungen, Bewegungen, komplexe Denkprozesse und das Bewusstsein.

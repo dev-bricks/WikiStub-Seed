@@ -7,4 +7,4 @@ Ein Aktionspotenzial ist eine kurzzeitige Abweichung des Membranpotenzials einer
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Es ist der fundamentale Mechanismus der Signalübertragung im Nervensystem und ermöglicht die Steuerung von Muskeln sowie die Verarbeitung von Sinnesreizen.同期
+Es ist der fundamentale Mechanismus der Signalübertragung im Nervensystem und ermöglicht die Steuerung von Muskeln sowie die Verarbeitung von Sinnesreizen.

@@ -7,4 +7,4 @@ Kraftfeldmethoden berechnen die Energie eines molekularen Systems mithilfe klass
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Aufgrund ihres geringen Rechenaufwands ermöglichen sie die Simulation extrem großer Systeme mit Millionen von Atomen, wie vollständige Viren oder komplexe Polymerstrukturen.同期
+Aufgrund ihres geringen Rechenaufwands ermöglichen sie die Simulation extrem großer Systeme mit Millionen von Atomen, wie vollständige Viren oder komplexe Polymerstrukturen.

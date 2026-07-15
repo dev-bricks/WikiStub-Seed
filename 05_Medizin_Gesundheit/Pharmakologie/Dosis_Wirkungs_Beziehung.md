@@ -7,4 +7,4 @@ Diese Beziehung beschreibt den Zusammenhang zwischen der verabreichten Menge ein
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Sie erlaubt die Bestimmung der therapeutischen Breite – dem Sicherheitsabstand zwischen der minimal wirksamen und der toxischen (giftigen) Dosis eines Heilmittels.同期
+Sie erlaubt die Bestimmung der therapeutischen Breite – dem Sicherheitsabstand zwischen der minimal wirksamen und der toxischen (giftigen) Dosis eines Heilmittels.

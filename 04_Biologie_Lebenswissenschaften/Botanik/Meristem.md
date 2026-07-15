@@ -7,4 +7,4 @@ Meristeme sind die Gewebe von Pflanzen, deren Zellen noch nicht differenziert si
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Sie ermöglichen das quasi unbegrenzte Wachstum der Pflanzen und die Bildung neuer Organe wie Blätter und Blüten während des gesamten Lebenszyklus.同期
+Sie ermöglichen das quasi unbegrenzte Wachstum der Pflanzen und die Bildung neuer Organe wie Blätter und Blüten während des gesamten Lebenszyklus.

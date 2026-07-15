@@ -7,4 +7,4 @@ Das limbische System ist ein Verbund von Hirnstrukturen (u. a. Hippocampus, Amyg
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Es bewertet Informationen emotional, steuert die Triebsteuerung (Angst, Belohnung) und ist entscheidend für das Speichern neuer Fakten im Langzeitgedächtnis.同期
+Es bewertet Informationen emotional, steuert die Triebsteuerung (Angst, Belohnung) und ist entscheidend für das Speichern neuer Fakten im Langzeitgedächtnis.

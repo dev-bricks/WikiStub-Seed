@@ -7,4 +7,4 @@ Eine Metastase ist die Absiedelung von Tumorzellen aus einem Primärtumor in ent
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Die Fähigkeit zur Metastasierung ist das Hauptmerkmal bösartiger Tumoren und erschwert die erfolgreiche Behandlung von Krebserkrankungen erheblich.同期
+Die Fähigkeit zur Metastasierung ist das Hauptmerkmal bösartiger Tumoren und erschwert die erfolgreiche Behandlung von Krebserkrankungen erheblich.

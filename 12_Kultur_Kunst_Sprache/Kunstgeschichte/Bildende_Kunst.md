@@ -7,4 +7,4 @@ Umfasst visuelle Künste wie Malerei, Bildhauerei, Grafik und Fotografie. Kunstg
 Kultur, Kunst & Sprache → Kunstgeschichte
 
 **Relevanz:**
-Kunst ist Ausdruck von Zeitgeist, Macht und individueller Kreativität; sie speichert das kulturelle Gedächtnis der Menschheit.同期
+Kunst ist Ausdruck von Zeitgeist, Macht und individueller Kreativität; sie speichert das kulturelle Gedächtnis der Menschheit.

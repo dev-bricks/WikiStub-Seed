@@ -7,4 +7,4 @@ Die Lehre von den literarischen Formen. Unterscheidet traditionell drei Hauptgat
 Kultur, Kunst & Sprache → Literaturwissenschaft
 
 **Relevanz:**
-Gattungen schaffen Erwartungshaltungen beim Leser und bieten dem Autor ein Gerüst, mit dem er arbeiten (oder das er brechen) kann.同期
+Gattungen schaffen Erwartungshaltungen beim Leser und bieten dem Autor ein Gerüst, mit dem er arbeiten (oder das er brechen) kann.

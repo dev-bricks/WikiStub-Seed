@@ -7,4 +7,4 @@ Verfahren zur Ausgrabung, Datierung (C14-Methode, Dendrochronologie) und Konserv
 Geschichte & Archäologie → Archäologie
 
 **Relevanz:**
-Macht Geschichte sichtbar, wo schriftliche Quellen schweigen oder lügen.同期
+Macht Geschichte sichtbar, wo schriftliche Quellen schweigen oder lügen.

@@ -7,4 +7,4 @@ Analysiert die körperliche Antwort auf Stressoren (Sympathikus-Aktivierung, HPA
 Psychologie & Kognition → Biologische Psychologie & Neuropsychologie
 
 **Relevanz:**
-Chronischer Stress ist pathologisch; Verständnis der Mechanismen ist wichtig für Stressmanagement und Prävention.同期
+Chronischer Stress ist pathologisch; Verständnis der Mechanismen ist wichtig für Stressmanagement und Prävention.

@@ -7,4 +7,4 @@ Hormone sind biochemische Botenstoffe, die in speziellen Zellen oder Drüsen pro
 Chemie → Biochemie
 
 **Relevanz:**
-Sie koordinieren komplexe Körpervorgänge wie Wachstum, Blutzuckerspiegel (Insulin) und die Stressreaktion (Adrenalin).同期
+Sie koordinieren komplexe Körpervorgänge wie Wachstum, Blutzuckerspiegel (Insulin) und die Stressreaktion (Adrenalin).

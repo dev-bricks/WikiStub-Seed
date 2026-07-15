@@ -7,4 +7,4 @@ Ein Ökosystem ist eine funktionelle Einheit, die aus einer Lebensgemeinschaft v
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Das Verständnis von Ökosystemen ist die Grundlage für den Naturschutz und die Bewirtschaftung natürlicher Ressourcen, da es die komplexen Abhängigkeiten zwischen Arten und Umwelt aufzeigt.同期
+Das Verständnis von Ökosystemen ist die Grundlage für den Naturschutz und die Bewirtschaftung natürlicher Ressourcen, da es die komplexen Abhängigkeiten zwischen Arten und Umwelt aufzeigt.

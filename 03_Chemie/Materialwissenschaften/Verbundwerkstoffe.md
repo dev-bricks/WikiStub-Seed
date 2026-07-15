@@ -7,4 +7,4 @@ Verbundwerkstoffe entstehen durch die Kombination von zwei oder mehr Materialien
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Leichtbauanwendungen in der Luft- und Raumfahrt sowie Hochleistungskonstruktionen im Motorsport basieren maßgeblich auf Verbundwerkstoffen wie kohlenstofffaserverstärktem Kunststoff (CFK).同期
+Leichtbauanwendungen in der Luft- und Raumfahrt sowie Hochleistungskonstruktionen im Motorsport basieren maßgeblich auf Verbundwerkstoffen wie kohlenstofffaserverstärktem Kunststoff (CFK).

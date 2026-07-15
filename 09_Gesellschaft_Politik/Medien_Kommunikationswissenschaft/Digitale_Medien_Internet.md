@@ -7,4 +7,4 @@ Behandelt die Technisierung der Kommunikation durch Computer und Internet (Socia
 Gesellschaft & Politik → Medien- & Kommunikationswissenschaft
 
 **Relevanz:**
-Hat Kommunikation räumlich und zeitlich entgrenzt und traditionelle Gatekeeper-Strukturen (Zeitungen) fundamental herausgefordert.同期
+Hat Kommunikation räumlich und zeitlich entgrenzt und traditionelle Gatekeeper-Strukturen (Zeitungen) fundamental herausgefordert.

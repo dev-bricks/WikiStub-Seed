@@ -7,4 +7,4 @@ Das Nervensystem umfasst alle Nervengewebe des Körpers und lässt sich funktion
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Es dient der schnellen Informationsverarbeitung und Koordination aller Körperfunktionen sowie der Wahrnehmung der Umwelt durch die Sinnesorgane.同期
+Es dient der schnellen Informationsverarbeitung und Koordination aller Körperfunktionen sowie der Wahrnehmung der Umwelt durch die Sinnesorgane.

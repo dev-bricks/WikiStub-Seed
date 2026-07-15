@@ -7,4 +7,4 @@ Behandelt die elektrischen Grundgrößen (Ladung, Strom, Spannung, Widerstand), 
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Das Fundament für alle elektrischen Anwendungen, vom Toaster bis zum Smartphone.同期
+Das Fundament für alle elektrischen Anwendungen, vom Toaster bis zum Smartphone.

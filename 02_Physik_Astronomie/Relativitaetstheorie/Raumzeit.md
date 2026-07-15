@@ -7,4 +7,4 @@ Raumzeit ist die vierdimensionale Struktur, die die drei Raumdimensionen und die
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Dieses Konzept ist notwendig, um die physikalische Realität gemäß der Relativitätstheorie korrekt abzubilden, da Raum und Zeit nicht mehr unabhängig voneinander betrachtet werden können.同期
+Dieses Konzept ist notwendig, um die physikalische Realität gemäß der Relativitätstheorie korrekt abzubilden, da Raum und Zeit nicht mehr unabhängig voneinander betrachtet werden können.

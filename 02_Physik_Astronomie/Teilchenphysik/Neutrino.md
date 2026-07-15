@@ -7,4 +7,4 @@ Neutrinos sind extrem leichte, elektrisch neutrale Elementarteilchen, die nur ü
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Sie tragen wichtige Informationen über Prozesse im Inneren der Sonne und von Supernovae ins All und sind entscheidend für die Erforschung der Materie-Antimaterie-Asymmetrie.同期
+Sie tragen wichtige Informationen über Prozesse im Inneren der Sonne und von Supernovae ins All und sind entscheidend für die Erforschung der Materie-Antimaterie-Asymmetrie.

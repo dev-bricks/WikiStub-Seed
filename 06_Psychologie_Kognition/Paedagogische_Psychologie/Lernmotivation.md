@@ -7,4 +7,4 @@ Lernmotivation beschreibt den Wunsch und die Bereitschaft, sich mit Lerninhalten
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Ein Schlüsselfaktor für Lernerfolg; wichtig für Lehrer, um Schüler nachhaltig für Themen zu begeistern.同期
+Ein Schlüsselfaktor für Lernerfolg; wichtig für Lehrer, um Schüler nachhaltig für Themen zu begeistern.

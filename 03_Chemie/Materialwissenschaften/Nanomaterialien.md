@@ -7,4 +7,4 @@ Nanomaterialien sind Stoffe, deren Strukturen in mindestens einer Dimension eine
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Sie ermöglichen extrem leichte und zugleich feste Materialien sowie hochspezialisierte Oberflächen für die Medizintechnik, Elektronik und Energiegewinnung.同期
+Sie ermöglichen extrem leichte und zugleich feste Materialien sowie hochspezialisierte Oberflächen für die Medizintechnik, Elektronik und Energiegewinnung.

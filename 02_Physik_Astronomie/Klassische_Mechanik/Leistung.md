@@ -7,4 +7,4 @@ Leistung ist die pro Zeitspanne verrichtete Arbeit oder die pro Zeitspanne umges
 Physik & Astronomie → Klassische Mechanik
 
 **Relevanz:**
-Sie ist die zentrale Kenngröße für Motoren, Kraftwerke und Haushaltsgeräte, um deren Leistungsfähigkeit und Energieeffizienz zu beurteilen.同期
+Sie ist die zentrale Kenngröße für Motoren, Kraftwerke und Haushaltsgeräte, um deren Leistungsfähigkeit und Energieeffizienz zu beurteilen.

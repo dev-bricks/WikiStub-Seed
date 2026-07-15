@@ -7,4 +7,4 @@ Mollusken sind ein stammreiches Tierreich, das durch einen weichen, unsegmentier
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Sie sind wichtige Indikatoren für die Wasserqualität und haben als Speiseopfer sowie als Produzenten von Perlen und Schalen eine große wirtschaftliche Bedeutung.同期
+Sie sind wichtige Indikatoren für die Wasserqualität und haben als Speiseopfer sowie als Produzenten von Perlen und Schalen eine große wirtschaftliche Bedeutung.

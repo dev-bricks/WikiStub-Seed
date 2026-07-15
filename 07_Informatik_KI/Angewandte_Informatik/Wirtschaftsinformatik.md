@@ -7,4 +7,4 @@ Die Schnittstelle zwischen BWL und Informatik; beschäftigt sich mit der Konzept
 Informatik & KI → Angewandte Informatik
 
 **Relevanz:**
-Sorgt dafür, dass IT-Systeme wirtschaftlichen Mehrwert schaffen und Geschäftsprozesse optimal unterstützen.同期
+Sorgt dafür, dass IT-Systeme wirtschaftlichen Mehrwert schaffen und Geschäftsprozesse optimal unterstützen.

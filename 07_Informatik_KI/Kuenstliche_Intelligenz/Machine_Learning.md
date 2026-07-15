@@ -7,4 +7,4 @@ Teilgebiet der KI, das Algorithmen entwickelt, die Muster in Daten erkennen und 
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Treibt Anwendungen wie Empfehlungssysteme, Spam-Filter und medizinische Diagnostik an.同期
+Treibt Anwendungen wie Empfehlungssysteme, Spam-Filter und medizinische Diagnostik an.

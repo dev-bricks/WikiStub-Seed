@@ -7,4 +7,4 @@ Die Allgemeine Relativitätstheorie (ART) beschreibt die Gravitation nicht als K
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Sie ist unser bestes Modell für das Verständnis des Universums auf großen Skalen, von der Umlaufbahn des Merkur bis hin zur Existenz Schwarzer Löcher und der Expansion des Kosmos.同期
+Sie ist unser bestes Modell für das Verständnis des Universums auf großen Skalen, von der Umlaufbahn des Merkur bis hin zur Existenz Schwarzer Löcher und der Expansion des Kosmos.

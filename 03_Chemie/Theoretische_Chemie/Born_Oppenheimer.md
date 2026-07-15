@@ -7,4 +7,4 @@ Diese Näherung trennt in quantenchemischen Berechnungen die Bewegung der leicht
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Sie ist die fundamentale Annahme fast aller quantenchemischen Berechnungen, da sie es ermöglicht, die Schrödinger-Gleichung für komplexe Moleküle überhaupt erst lösbar zu machen.同期
+Sie ist die fundamentale Annahme fast aller quantenchemischen Berechnungen, da sie es ermöglicht, die Schrödinger-Gleichung für komplexe Moleküle überhaupt erst lösbar zu machen.

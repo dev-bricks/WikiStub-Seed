@@ -7,4 +7,4 @@ Investition ist die Verwendung von Kapital (Mittelverwendung), Finanzierung die 
 Wirtschaft & Recht → Betriebswirtschaftslehre
 
 **Relevanz:**
-Sichert das Wachstum und die finanzielle Stabilität des Unternehmens; falsche Investitionsentscheidungen können zur Insolvenz führen.同期
+Sichert das Wachstum und die finanzielle Stabilität des Unternehmens; falsche Investitionsentscheidungen können zur Insolvenz führen.

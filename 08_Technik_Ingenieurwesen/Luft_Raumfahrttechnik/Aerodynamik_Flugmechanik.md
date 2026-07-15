@@ -7,4 +7,4 @@ Untersucht die Kräfte, die auf einen Flugkörper in der Luft wirken (Auftrieb, 
 Technik & Ingenieurwesen → Luft- & Raumfahrttechnik
 
 **Relevanz:**
-Bestimmt, ob und wie effizient ein Flugzeug fliegt; Optimierung senkt den Treibstoffverbrauch drastisch.同期
+Bestimmt, ob und wie effizient ein Flugzeug fliegt; Optimierung senkt den Treibstoffverbrauch drastisch.

@@ -7,4 +7,4 @@ Thermoregulation ist die Fähigkeit des Körpers, seine Kerntemperatur innerhalb
 Medizin & Gesundheit → Physiologie
 
 **Relevanz:**
-Eine konstante Temperatur ist notwendig, damit die Enzyme des Stoffwechsels optimal arbeiten können; extreme Abweichungen (Fieber oder Unterkühlung) sind lebensgefährlich.同期
+Eine konstante Temperatur ist notwendig, damit die Enzyme des Stoffwechsels optimal arbeiten können; extreme Abweichungen (Fieber oder Unterkühlung) sind lebensgefährlich.

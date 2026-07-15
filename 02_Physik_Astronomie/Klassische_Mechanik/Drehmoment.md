@@ -7,4 +7,4 @@ Das Drehmoment ist das Maß für die Drehwirkung einer Kraft auf einen Körper b
 Physik & Astronomie → Klassische Mechanik
 
 **Relevanz:**
-Es ist fundamental für die Statik und Dynamik rotierender Körper und unverzichtbar für das Ingenieurwesen bei der Konstruktion von Maschinen und Bauwerken.同期
+Es ist fundamental für die Statik und Dynamik rotierender Körper und unverzichtbar für das Ingenieurwesen bei der Konstruktion von Maschinen und Bauwerken.

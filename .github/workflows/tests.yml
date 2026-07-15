@@ -1,4 +1,4 @@
-name: WikiStub-Seed smoke tests
+name: WikiStub-Seed test gates
 
 on:
   push:
@@ -11,37 +11,61 @@ permissions:
   contents: read
 
 jobs:
-  smoke:
-    runs-on: ubuntu-latest
+  python-tests:
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.10', '3.11', '3.12']
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.10', '3.13']
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Compile Python sources
-        run: |
-          python -m py_compile \
-            check_duplicates.py \
-            manage_translations.py \
-            md_to_json.py \
-            wikistub_seed_cli.py \
-            wikistub_seed_pipeline.py \
-            pipeline.py \
-            translate.py \
-            translator.py
+        run: python -m compileall -q -f .
+
+      - name: Run Python unit and regression tests
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -m unittest discover -s tests -p "test_*.py"
 
       - name: Check CLI and data pipeline
         env:
           PYTHONIOENCODING: utf-8
+          PYTHONDONTWRITEBYTECODE: '1'
         run: |
           python wikistub_seed_cli.py --help
           python wikistub_seed_cli.py stats
           python wikistub_seed_cli.py check
           python wikistub_seed_pipeline.py validate
+
+  pwa-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: '24'
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.13'
+
+      - name: Rebuild PWA data
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python web_publisher/_build.py
+
+      - name: Reject stale generated data
+        run: git diff --exit-code -- web_publisher/data
+
+      - name: Run PWA regression tests
+        run: node --test web_publisher/tests/publisher.test.mjs

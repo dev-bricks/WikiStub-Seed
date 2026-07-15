@@ -7,4 +7,4 @@ Das Mikrobiom bezeichnet die Gesamtheit aller Mikroorganismen (Bakterien, Archä
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Besonders das menschliche Darmmikrobiom ist entscheidend für das Immunsystem, die Verdauung und die psychische Gesundheit; Störungen des Gleichgewichts werden mit zahlreichen Krankheiten in Verbindung gebracht.同期
+Besonders das menschliche Darmmikrobiom ist entscheidend für das Immunsystem, die Verdauung und die psychische Gesundheit; Störungen des Gleichgewichts werden mit zahlreichen Krankheiten in Verbindung gebracht.

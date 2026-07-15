@@ -7,4 +7,4 @@ Die Gibbs-Energie (G) ist ein thermodynamisches Potenzial, das angibt, wie viel 
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Sie ist das wichtigste Kriterium zur Vorhersage, ob eine Reaktion spontan abläuft (delta G < 0) und bildet die Basis für die chemische Thermodynamik und Bioenergetik.同期
+Sie ist das wichtigste Kriterium zur Vorhersage, ob eine Reaktion spontan abläuft (delta G < 0) und bildet die Basis für die chemische Thermodynamik und Bioenergetik.

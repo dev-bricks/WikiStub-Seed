@@ -7,4 +7,4 @@ Umfasst die technische Realisierung von Weltraummissionen, inkl. Raketenantriebe
 Technik & Ingenieurwesen → Luft- & Raumfahrttechnik
 
 **Relevanz:**
-Ermöglicht GPS, Wettervorhersage, weltweite Kommunikation und die Erforschung des Universums.同期
+Ermöglicht GPS, Wettervorhersage, weltweite Kommunikation und die Erforschung des Universums.

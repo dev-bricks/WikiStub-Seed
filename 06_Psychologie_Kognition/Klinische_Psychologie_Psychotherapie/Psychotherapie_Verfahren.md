@@ -7,4 +7,4 @@ Psychotherapie ist die gezielte Behandlung psychischer Störungen mit psychologi
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Wirksamkeitsforschung ist zentral, um zu bestimmen, welches Verfahren für wen am besten geeignet ist.同期
+Wirksamkeitsforschung ist zentral, um zu bestimmen, welches Verfahren für wen am besten geeignet ist.

@@ -7,4 +7,4 @@ Die Phylogenetik ist die Analyse der stammesgeschichtlichen Verwandtschaftsverh�
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Sie erlaubt die Rekonstruktion des „Stammbaums des Lebens“ und hilft dabei, die evolutionäre Geschichte und Herkunft von Arten objektiv zu verstehen.同期
+Sie erlaubt die Rekonstruktion des „Stammbaums des Lebens“ und hilft dabei, die evolutionäre Geschichte und Herkunft von Arten objektiv zu verstehen.

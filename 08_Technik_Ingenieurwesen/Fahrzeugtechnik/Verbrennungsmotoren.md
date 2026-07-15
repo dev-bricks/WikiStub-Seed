@@ -7,4 +7,4 @@ Wärmekraftmaschinen, die durch Verbrennung von Kraftstoff (Benzin, Diesel) chem
 Technik & Ingenieurwesen → Fahrzeugtechnik
 
 **Relevanz:**
-Trotz des Wandels zur E-Mobilität noch immer der dominierende Antrieb für den Schwerlastverkehr und Bestandsflotten.同期
+Trotz des Wandels zur E-Mobilität noch immer der dominierende Antrieb für den Schwerlastverkehr und Bestandsflotten.

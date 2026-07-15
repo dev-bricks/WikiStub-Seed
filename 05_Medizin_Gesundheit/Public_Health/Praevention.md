@@ -7,4 +7,4 @@ Prävention umfasst Maßnahmen zur Vorbeugung von Krankheiten. Primärpräventio
 Medizin & Gesundheit → Public Health & Prävention
 
 **Relevanz:**
-Effektive Prävention senkt die Krankheitslast der Bevölkerung und schont die Ressourcen des Gesundheitssystems durch Vermeidung teurer Langzeitbehandlungen.同期
+Effektive Prävention senkt die Krankheitslast der Bevölkerung und schont die Ressourcen des Gesundheitssystems durch Vermeidung teurer Langzeitbehandlungen.

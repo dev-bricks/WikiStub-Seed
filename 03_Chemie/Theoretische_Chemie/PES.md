@@ -7,4 +7,4 @@ Die Potenzialenergiefläche beschreibt die Gesamtenergie eines Moleküls in Abh�
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Sie ist das zentrale Konzept zur Visualisierung und Berechnung chemischer Reaktionspfade und zur Bestimmung der stabilsten Konformere einer Verbindung.同期
+Sie ist das zentrale Konzept zur Visualisierung und Berechnung chemischer Reaktionspfade und zur Bestimmung der stabilsten Konformere einer Verbindung.

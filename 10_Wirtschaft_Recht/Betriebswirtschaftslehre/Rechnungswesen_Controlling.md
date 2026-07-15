@@ -7,4 +7,4 @@ Erfasst, überwacht und steuert alle Geld- und Leistungsströme. Umfasst Bilanzi
 Wirtschaft & Recht → Betriebswirtschaftslehre
 
 **Relevanz:**
-Liefert die Zahlenbasis ("KPIs") für jede unternehmerische Entscheidung und sichert die Liquidität.同期
+Liefert die Zahlenbasis ("KPIs") für jede unternehmerische Entscheidung und sichert die Liquidität.

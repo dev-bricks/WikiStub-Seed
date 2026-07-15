@@ -7,4 +7,4 @@ Hierbei handelt es sich um Materialien (z. B. Silicium, Galliumarsenid), deren R
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Sie bilden das materielle Rückgrat der Informationstechnologie; die stetige Entwicklung neuer Halbleitermaterialien ermöglicht immer schnellere und effizientere Computerchips.同期
+Sie bilden das materielle Rückgrat der Informationstechnologie; die stetige Entwicklung neuer Halbleitermaterialien ermöglicht immer schnellere und effizientere Computerchips.

@@ -7,4 +7,4 @@ Solvenzeffekte beschreiben den Einfluss der Umgebung (des Lösungsmittels) auf d
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Da fast alle chemischen und biochemischen Reaktionen in Lösungen stattfinden, ist deren theoretische Berücksichtigung essenziell für die realitätsnahe Vorhersage von Reaktionsprodukten.同期
+Da fast alle chemischen und biochemischen Reaktionen in Lösungen stattfinden, ist deren theoretische Berücksichtigung essenziell für die realitätsnahe Vorhersage von Reaktionsprodukten.

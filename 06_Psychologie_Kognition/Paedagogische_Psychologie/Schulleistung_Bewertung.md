@@ -7,4 +7,4 @@ Dieser Bereich befasst sich mit der Messung (Zensuren, Vergleichstests wie PISA)
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Diskussionen um Notengerechtigkeit, Selektion und Chancengleichheit basieren auf Erkenntnissen dieses Feldes.同期
+Diskussionen um Notengerechtigkeit, Selektion und Chancengleichheit basieren auf Erkenntnissen dieses Feldes.

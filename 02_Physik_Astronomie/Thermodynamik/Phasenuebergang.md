@@ -7,4 +7,4 @@ Ein Phasenübergang ist die Umwandlung eines Stoffes von einem Aggregatzustand i
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Das Verständnis von Phasenübergängen ist essenziell für die Materialwissenschaft, die Meteorologie (Wolkenbildung) und die Kryotechnik.同期
+Das Verständnis von Phasenübergängen ist essenziell für die Materialwissenschaft, die Meteorologie (Wolkenbildung) und die Kryotechnik.

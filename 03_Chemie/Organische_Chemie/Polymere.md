@@ -7,4 +7,4 @@ Polymere sind Makromoleküle, die aus vielen sich wiederholenden Grundeinheiten,
 Chemie → Organische Chemie
 
 **Relevanz:**
-Die Polymerchemie ermöglicht die maßgeschneiderte Entwicklung von Materialien mit spezifischen mechanischen und thermischen Eigenschaften für Verpackungen, Textilien und Medizintechnik.同期
+Die Polymerchemie ermöglicht die maßgeschneiderte Entwicklung von Materialien mit spezifischen mechanischen und thermischen Eigenschaften für Verpackungen, Textilien und Medizintechnik.

@@ -7,4 +7,4 @@ Eine Legierung ist ein metallischer Werkstoff, der aus mindestens zwei Elementen
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Durch Legierungsbildung (z. B. Stahl, Bronze oder Duraluminium) lassen sich gezielt Eigenschaften wie Härte, Korrosionsbeständigkeit und Leitfähigkeit verbessern, die Reinelemente nicht besitzen.同期
+Durch Legierungsbildung (z. B. Stahl, Bronze oder Duraluminium) lassen sich gezielt Eigenschaften wie Härte, Korrosionsbeständigkeit und Leitfähigkeit verbessern, die Reinelemente nicht besitzen.

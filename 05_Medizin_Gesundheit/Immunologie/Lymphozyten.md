@@ -7,4 +7,4 @@ Lymphozyten sind eine Untergruppe der weißen Blutkörperchen. B-Zellen produzie
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Sie sind die Hauptakteure der spezifischen (erworbenen) Immunabwehr und ermöglichen dem Körper ein „Gedächtnis“ für bereits durchgemachte Infektionen.同期
+Sie sind die Hauptakteure der spezifischen (erworbenen) Immunabwehr und ermöglichen dem Körper ein „Gedächtnis“ für bereits durchgemachte Infektionen.

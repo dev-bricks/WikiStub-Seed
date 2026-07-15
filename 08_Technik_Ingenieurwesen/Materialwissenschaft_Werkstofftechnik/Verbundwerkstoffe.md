@@ -7,4 +7,4 @@ Kombination aus zwei oder mehr Materialien, die sich in ihren Eigenschaften erg�
 Technik & Ingenieurwesen → Materialwissenschaft & Werkstofftechnik
 
 **Relevanz:**
-Schlüssel zum Leichtbau mit hoher Festigkeit, unverzichtbar im modernen Flugzeug- und Automobilbau.同期
+Schlüssel zum Leichtbau mit hoher Festigkeit, unverzichtbar im modernen Flugzeug- und Automobilbau.

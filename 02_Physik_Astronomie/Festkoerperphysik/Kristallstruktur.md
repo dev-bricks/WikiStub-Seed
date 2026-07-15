@@ -7,4 +7,4 @@ Unter Kristallstruktur versteht man die regelmäßige, dreidimensionale Anordnun
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Sie bestimmt die mechanischen, optischen und elektrischen Eigenschaften von Materialien und ist die Grundlage für die moderne Halbleitertechnik und Metallurgie.同期
+Sie bestimmt die mechanischen, optischen und elektrischen Eigenschaften von Materialien und ist die Grundlage für die moderne Halbleitertechnik und Metallurgie.

@@ -7,4 +7,4 @@ Der Wirkungsgrad gibt das Verhältnis der nutzbaren Energie zur aufgewandten Ene
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Er ist das zentrale Maß für die Effizienz technischer Systeme und motiviert die Entwicklung ressourcenschonender Technologien und Optimierungsverfahren.同期
+Er ist das zentrale Maß für die Effizienz technischer Systeme und motiviert die Entwicklung ressourcenschonender Technologien und Optimierungsverfahren.

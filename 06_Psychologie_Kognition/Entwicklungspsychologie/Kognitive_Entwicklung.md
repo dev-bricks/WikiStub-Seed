@@ -7,4 +7,4 @@ Kognitive Entwicklung beschreibt die Entstehung und Veränderung der geistigen F
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Sie ist fundamental für das Verständnis, wie Kinder die Welt begreifen lernen und bildet die Basis für pädagogische Konzepte und Lehrpläne.同期
+Sie ist fundamental für das Verständnis, wie Kinder die Welt begreifen lernen und bildet die Basis für pädagogische Konzepte und Lehrpläne.

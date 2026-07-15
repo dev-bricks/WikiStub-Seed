@@ -7,4 +7,4 @@ Sternentwicklung beschreibt den Lebenszyklus eines Sterns von seiner Entstehung 
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Dieser Prozess ist verantwortlich für die Entstehung fast aller schweren chemischen Elemente im Universum (Nucleosynthese) und prägt die chemische Zusammensetzung von Galaxien.同期
+Dieser Prozess ist verantwortlich für die Entstehung fast aller schweren chemischen Elemente im Universum (Nucleosynthese) und prägt die chemische Zusammensetzung von Galaxien.

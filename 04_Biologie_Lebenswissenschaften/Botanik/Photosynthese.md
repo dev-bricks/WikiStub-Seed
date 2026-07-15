@@ -7,4 +7,4 @@ Photosynthese ist der biochemische Prozess, bei dem Pflanzen, Algen und bestimmt
 Biologie & Lebenswissenschaften → Botanik
 
 **Relevanz:**
-Sie ist die wichtigste Energiequelle fast allen Lebens auf der Erde, da sie Sonnenenergie in chemisch nutzbare Energie umwandelt und den atmosphärischen Sauerstoff produziert.同期
+Sie ist die wichtigste Energiequelle fast allen Lebens auf der Erde, da sie Sonnenenergie in chemisch nutzbare Energie umwandelt und den atmosphärischen Sauerstoff produziert.

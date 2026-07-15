@@ -7,4 +7,4 @@ Territorialität ist die aktive Verteidigung eines bestimmten Gebiets (Revier) g
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Revierverhalten dient der optimalen Verteilung von Individuen im Lebensraum und reduziert durch klare Grenzen und Markierungen (z. B. Duftmarken) die Notwendigkeit physischer Kämpfe.同期
+Revierverhalten dient der optimalen Verteilung von Individuen im Lebensraum und reduziert durch klare Grenzen und Markierungen (z. B. Duftmarken) die Notwendigkeit physischer Kämpfe.

@@ -7,4 +7,4 @@ Behandelt abstrakte Maschinen (Automaten) und die Sprachen, die sie erkennen kö
 Informatik & KI → Theoretische Informatik
 
 **Relevanz:**
-Die theoretische Basis für Compilerbau, Textverarbeitung und das Parsen von Programmiersprachen.同期
+Die theoretische Basis für Compilerbau, Textverarbeitung und das Parsen von Programmiersprachen.

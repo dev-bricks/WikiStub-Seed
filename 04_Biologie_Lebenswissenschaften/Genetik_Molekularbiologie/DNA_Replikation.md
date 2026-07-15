@@ -7,4 +7,4 @@ Die DNA-Replikation ist der Prozess der identischen Verdopplung des Erbmaterials
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Sie gewährleistet die getreue Weitergabe der genetischen Information an die Tochterzellen und ist somit die Basis für Wachstum, Zellerneuerung und Fortpflanzung.同期
+Sie gewährleistet die getreue Weitergabe der genetischen Information an die Tochterzellen und ist somit die Basis für Wachstum, Zellerneuerung und Fortpflanzung.

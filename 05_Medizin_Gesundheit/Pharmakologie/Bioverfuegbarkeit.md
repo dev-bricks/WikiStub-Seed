@@ -7,4 +7,4 @@ Bioverfügbarkeit gibt an, welcher Anteil eines verabreichten Wirkstoffes unver�
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Sie ist entscheidend für den Vergleich verschiedener Darreichungsformen (z. B. Tablette vs. Spritze) und die Bestimmung der therapeutischen Gleichwertigkeit (Bioäquivalenz) von Medikamenten.同期
+Sie ist entscheidend für den Vergleich verschiedener Darreichungsformen (z. B. Tablette vs. Spritze) und die Bestimmung der therapeutischen Gleichwertigkeit (Bioäquivalenz) von Medikamenten.

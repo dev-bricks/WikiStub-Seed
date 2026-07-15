@@ -7,4 +7,4 @@ Das Gedächtnis ist die Fähigkeit des Nervensystems, Informationen zu speichern
 Psychologie & Kognition → Allgemeine Psychologie
 
 **Relevanz:**
-Es ist die Grundlage für Lernen, Identität und die Planung der Zukunft; ohne Gedächtnis gäbe es kein kontinuierliches Ich-Erleben.同期
+Es ist die Grundlage für Lernen, Identität und die Planung der Zukunft; ohne Gedächtnis gäbe es kein kontinuierliches Ich-Erleben.

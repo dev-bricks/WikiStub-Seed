@@ -7,4 +7,4 @@ Befasst sich mit den normativen Grundlagen der Politik, Begriffen wie Gerechtigk
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Dient der Reflexion und Begründung politischer Ordnung und hilft, aktuelle Debatten ideengeschichtlich einzuordnen.同期
+Dient der Reflexion und Begründung politischer Ordnung und hilft, aktuelle Debatten ideengeschichtlich einzuordnen.

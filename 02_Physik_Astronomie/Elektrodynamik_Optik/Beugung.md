@@ -7,4 +7,4 @@ Beugung ist die Ablenkung von Wellen an Hindernissen oder Öffnungen im Vergleic
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Die Beugung setzt das theoretische Auflösungshaslimit für optische Instrumente wie Mikroskope und Kameras und ist entscheidend für die Analyse von Kristallstrukturen mittels Röntgenbeugung.同期
+Die Beugung setzt das theoretische Auflösungshaslimit für optische Instrumente wie Mikroskope und Kameras und ist entscheidend für die Analyse von Kristallstrukturen mittels Röntgenbeugung.

@@ -7,4 +7,4 @@ Das HLA-System (Human Leukocyte Antigen) besteht aus Proteinen auf der Zelloberf
 Medizin & Gesundheit → Immunologie
 
 **Relevanz:**
-Es ist entscheidend für die Erkennung von „selbst“ und „fremd“ und spielt eine zentrale Rolle bei der Abstoßungsreaktion nach Organtransplantationen.同期
+Es ist entscheidend für die Erkennung von „selbst“ und „fremd“ und spielt eine zentrale Rolle bei der Abstoßungsreaktion nach Organtransplantationen.

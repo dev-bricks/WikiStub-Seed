@@ -7,4 +7,4 @@ Konstruktion von Tragwerken aus Baustahl (Träger, Stützen). Zeichnet sich durc
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Ermöglicht weitgespannte Hallen, Wolkenkratzer und filigrane Brückenkonstruktionen.同期
+Ermöglicht weitgespannte Hallen, Wolkenkratzer und filigrane Brückenkonstruktionen.

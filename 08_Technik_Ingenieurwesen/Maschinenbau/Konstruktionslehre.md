@@ -7,4 +7,4 @@ Die Lehre vom methodischen Entwickeln und Gestalten technischer Produkte, von de
 Technik & Ingenieurwesen → Maschinenbau
 
 **Relevanz:**
-Hier wird die Funktion in Form gegossen; Fehler in der Konstruktion sind später die teuersten.同期
+Hier wird die Funktion in Form gegossen; Fehler in der Konstruktion sind später die teuersten.

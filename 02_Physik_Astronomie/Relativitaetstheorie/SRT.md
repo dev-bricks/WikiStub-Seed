@@ -7,4 +7,4 @@ Die Spezielle Relativitätstheorie (SRT) beschreibt die Physik von Raum und Zeit
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Sie ersetzte das Newton’sche Konzept der absoluten Zeit durch eine relative Raumzeit und ist die Grundlage für die berühmte Äquivalenz von Masse und Energie (E = mc²).同期
+Sie ersetzte das Newton’sche Konzept der absoluten Zeit durch eine relative Raumzeit und ist die Grundlage für die berühmte Äquivalenz von Masse und Energie (E = mc²).

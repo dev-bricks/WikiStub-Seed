@@ -7,4 +7,4 @@ Elementarteilchen sind die kleinsten bekannten Bausteine der Materie, die nach h
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Die Untersuchung dieser Teilchen gibt Aufschluss über die fundamentale Zusammensetzung der Welt und die Bedingungen unmittelbar nach dem Urknall.同期
+Die Untersuchung dieser Teilchen gibt Aufschluss über die fundamentale Zusammensetzung der Welt und die Bedingungen unmittelbar nach dem Urknall.

@@ -7,4 +7,4 @@ Das Äquivalenzprinzip besagt, dass schwere Masse (Träger der Gravitation) und 
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Es war Einsteins entscheidender gedanklicher Durchbruch zur Entwicklung der Allgemeinen Relativitätstheorie und erklärt, warum im freien Fall Schwerelosigkeit herrscht.同期
+Es war Einsteins entscheidender gedanklicher Durchbruch zur Entwicklung der Allgemeinen Relativitätstheorie und erklärt, warum im freien Fall Schwerelosigkeit herrscht.

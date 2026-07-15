@@ -7,4 +7,4 @@ Die Verfahrenstechnik befasst sich mit der technischen Durchführung von physika
 Technik & Ingenieurwesen → Verfahrenstechnik
 
 **Relevanz:**
-Basis der chemischen Industrie, Lebensmittelproduktion und Umwelttechnik.同期
+Basis der chemischen Industrie, Lebensmittelproduktion und Umwelttechnik.

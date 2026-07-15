@@ -7,4 +7,4 @@ Die Biosphäre umfasst den gesamten von Lebewesen besiedelten Raum der Erde, ein
 Biologie & Lebenswissenschaften → Ökologie & Umweltschutz
 
 **Relevanz:**
-Sie stellt das übergeordnete System dar, in dem alle biologischen und geochemischen Prozesse der Erde interagieren, und ist somit das Objekt globaler Umweltschutzbemühungen.同期
+Sie stellt das übergeordnete System dar, in dem alle biologischen und geochemischen Prozesse der Erde interagieren, und ist somit das Objekt globaler Umweltschutzbemühungen.

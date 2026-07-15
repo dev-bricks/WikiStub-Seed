@@ -7,4 +7,4 @@ Konvergenz bezeichnet die unabhängige Entwicklung ähnlicher Merkmale bei versc
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Sie ist das makroevolutionäre Ergebnis analoger Anpassungsprozesse und zeigt, dass die Evolution oft zu strukturell ähnlichen Lösungen für dieselben ökologischen Probleme führt.同期
+Sie ist das makroevolutionäre Ergebnis analoger Anpassungsprozesse und zeigt, dass die Evolution oft zu strukturell ähnlichen Lösungen für dieselben ökologischen Probleme führt.

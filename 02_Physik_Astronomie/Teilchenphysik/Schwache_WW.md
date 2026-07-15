@@ -7,4 +7,4 @@ Die schwache Wechselwirkung ist eine fundamentale Wechselwirkung, die für besti
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Sie ermöglicht die Kernfusion in der Sonne, indem sie Protonen in Neutronen umwandelt, und ist somit indirekt verantwortlich für die Energieerzeugung der Sterne.同期
+Sie ermöglicht die Kernfusion in der Sonne, indem sie Protonen in Neutronen umwandelt, und ist somit indirekt verantwortlich für die Energieerzeugung der Sterne.

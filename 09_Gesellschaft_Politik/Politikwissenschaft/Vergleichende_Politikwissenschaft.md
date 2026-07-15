@@ -7,4 +7,4 @@ Vergleicht systematisch politische Systeme, Institutionen und Prozesse verschied
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Hilft, die Stärken und Schwächen der eigenen Demokratie im globalen Kontext zu bewerten.同期
+Hilft, die Stärken und Schwächen der eigenen Demokratie im globalen Kontext zu bewerten.

@@ -7,4 +7,4 @@ Regelt das Verhältnis zwischen Staat und Bürger sowie die Organisation des Sta
 Wirtschaft & Recht → Rechtswissenschaft
 
 **Relevanz:**
-Grundlage für das Handeln von Behörden, Grundrechte und die Kontrolle staatlicher Macht (Rechtsstaatsprinzip).同期
+Grundlage für das Handeln von Behörden, Grundrechte und die Kontrolle staatlicher Macht (Rechtsstaatsprinzip).

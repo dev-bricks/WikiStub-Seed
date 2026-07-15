@@ -7,4 +7,4 @@ Die starke Wechselwirkung ist die stärkste der vier Grundkräfte der Physik. Si
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Ohne die starke Wechselwirkung gäbe es keine stabilen Atomkerne und somit keine Materie in der uns bekannten Form.同期
+Ohne die starke Wechselwirkung gäbe es keine stabilen Atomkerne und somit keine Materie in der uns bekannten Form.

@@ -7,4 +7,4 @@ Befasst sich mit Karriereplanung, Laufbahnmodellen und den psychologischen Aspek
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Unterstützt Individuen bei der Navigation durch eine sich wandelnde Arbeitswelt und Unternehmen bei der Personalentwicklung.同期
+Unterstützt Individuen bei der Navigation durch eine sich wandelnde Arbeitswelt und Unternehmen bei der Personalentwicklung.

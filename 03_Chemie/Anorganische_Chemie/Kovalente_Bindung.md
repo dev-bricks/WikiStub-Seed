@@ -7,4 +7,4 @@ Die kovalente Bindung entsteht durch das Teilen von Elektronenpaaren zwischen At
 Chemie → Anorganische Chemie
 
 **Relevanz:**
-Sie ist die vorherrschende Bindungsart in der organischen Chemie und Grundlage für die Struktur von Proteinen, DNA und Kunststoffen.同期
+Sie ist die vorherrschende Bindungsart in der organischen Chemie und Grundlage für die Struktur von Proteinen, DNA und Kunststoffen.

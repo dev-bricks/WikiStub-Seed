@@ -7,4 +7,4 @@ Die Valence-Bond-Theorie erklärt chemische Bindungen durch die Überlappung von
 Chemie → Theoretische Chemie
 
 **Relevanz:**
-Sie korrespondiert eng mit der klassischen Lewis-Schreibweise von Molekülen und ist besonders nützlich zur Beschreibung lokalisierter Bindungen und der Hybridisierung (z. B. sp³-Hybridisierung).同期
+Sie korrespondiert eng mit der klassischen Lewis-Schreibweise von Molekülen und ist besonders nützlich zur Beschreibung lokalisierter Bindungen und der Hybridisierung (z. B. sp³-Hybridisierung).

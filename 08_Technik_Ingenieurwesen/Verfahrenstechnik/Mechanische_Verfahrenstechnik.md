@@ -7,4 +7,4 @@ Behandelt Stoffwandlungen durch mechanische Einwirkungen. Hauptoperationen sind 
 Technik & Ingenieurwesen → Verfahrenstechnik
 
 **Relevanz:**
-Entscheidend in der Aufbereitung von Erzen, Recycling von Baustoffen und der Herstellung von Pulvern.同期
+Entscheidend in der Aufbereitung von Erzen, Recycling von Baustoffen und der Herstellung von Pulvern.

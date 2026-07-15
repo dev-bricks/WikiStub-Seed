@@ -7,4 +7,4 @@ Vögel sind gleichwarme (endotherme) Wirbeltiere, deren Vordergliedmaßen zu Fl�
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Ihre Fähigkeit zum Flug und die hohe Stoffwechselrate ermöglichen ihnen die Besiedlung fast aller Regionen der Erde, einschließlich der Antarktis und der offenen Weltmeere.同期
+Ihre Fähigkeit zum Flug und die hohe Stoffwechselrate ermöglichen ihnen die Besiedlung fast aller Regionen der Erde, einschließlich der Antarktis und der offenen Weltmeere.

@@ -7,4 +7,4 @@ Härte ist der mechanische Widerstand, den ein Festkörper dem Eindringen eines 
 Physik & Astronomie → Festkörperphysik
 
 **Relevanz:**
-Sie ist eine der wichtigsten Materialkennwerte im Bauwesen und Maschinenbau zur Beurteilung von Verschleißfestigkeit und Eignung für Werkzeuge.同期
+Sie ist eine der wichtigsten Materialkennwerte im Bauwesen und Maschinenbau zur Beurteilung von Verschleißfestigkeit und Eignung für Werkzeuge.

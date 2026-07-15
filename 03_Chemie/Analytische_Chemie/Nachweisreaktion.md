@@ -7,4 +7,4 @@ Eine Nachweisreaktion ist eine chemische Reaktion, die durch eine leicht beobach
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Sie sind einfache und schnelle diagnostische Tests im Laboralltag, wie der Stärkenachweis mit Iod oder der Flammentest für Metallkationen.同期
+Sie sind einfache und schnelle diagnostische Tests im Laboralltag, wie der Stärkenachweis mit Iod oder der Flammentest für Metallkationen.

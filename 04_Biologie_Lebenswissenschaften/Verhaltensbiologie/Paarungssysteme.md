@@ -7,4 +7,4 @@ Paarungssysteme beschreiben die Art und Weise, wie Männchen und Weibchen einer 
 Biologie & Lebenswissenschaften → Verhaltensbiologie (Ethologie)
 
 **Relevanz:**
-Das Paarungssystem einer Art ist eng mit der elterlichen Brutpflege, der Verteilung von Ressourcen und den evolutionären Strategien zur Maximierung des Fortpflanzungserfolgs verknüpft.同期
+Das Paarungssystem einer Art ist eng mit der elterlichen Brutpflege, der Verteilung von Ressourcen und den evolutionären Strategien zur Maximierung des Fortpflanzungserfolgs verknüpft.

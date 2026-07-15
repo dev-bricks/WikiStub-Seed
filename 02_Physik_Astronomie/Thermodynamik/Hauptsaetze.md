@@ -7,4 +7,4 @@ Die vier Hauptsätze der Thermodynamik legen die grundlegenden Regeln für Energ
 Physik & Astronomie → Thermodynamik & Statistische Physik
 
 **Relevanz:**
-Sie bilden das unumstößliche Gesetzgerüst für alle makroskopischen Wärmeprozesse und setzen Grenzen für die Effizienz technischer Maschinen (Wirkungsgrad).同期
+Sie bilden das unumstößliche Gesetzgerüst für alle makroskopischen Wärmeprozesse und setzen Grenzen für die Effizienz technischer Maschinen (Wirkungsgrad).

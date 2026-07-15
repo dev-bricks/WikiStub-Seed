@@ -7,4 +7,4 @@ Eine Geodäte ist die Verallgemeinerung des Begriffs der „geraden Linie“ auf
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Sie erklären die Umlaufbahnen von Himmelskörpern ohne die Annahme einer Fernkraft; Gravitation wird somit rein durch die Geometrie der Raumzeit beschrieben.同期
+Sie erklären die Umlaufbahnen von Himmelskörpern ohne die Annahme einer Fernkraft; Gravitation wird somit rein durch die Geometrie der Raumzeit beschrieben.

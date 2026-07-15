@@ -7,4 +7,4 @@ Kohlenhydrate sind organische Verbindungen aus Kohlenstoff, Wasserstoff und Saue
 Chemie → Biochemie
 
 **Relevanz:**
-Sie sind die primäre Energiequelle für Zellen (Zuckerverbrennung) und dienen als Gerüstsubstanzen in Pflanzen (Cellulose) und Insekten (Chitin).同期
+Sie sind die primäre Energiequelle für Zellen (Zuckerverbrennung) und dienen als Gerüstsubstanzen in Pflanzen (Cellulose) und Insekten (Chitin).

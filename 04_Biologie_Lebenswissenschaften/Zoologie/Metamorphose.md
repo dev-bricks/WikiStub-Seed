@@ -7,4 +7,4 @@ Metamorphose bezeichnet die Umwandlung eines Tieres von einer Larvenform zum adu
 Biologie & Lebenswissenschaften → Zoologie
 
 **Relevanz:**
-Sie ermöglicht die Nutzung unterschiedlicher ökologischer Ressourcen in verschiedenen Lebensstadien und verringert so die Konkurrenz zwischen Jungtieren und Adulten.同期
+Sie ermöglicht die Nutzung unterschiedlicher ökologischer Ressourcen in verschiedenen Lebensstadien und verringert so die Konkurrenz zwischen Jungtieren und Adulten.

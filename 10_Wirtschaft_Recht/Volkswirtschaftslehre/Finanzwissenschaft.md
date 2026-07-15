@@ -7,4 +7,4 @@ Die Lehre von den öffentlichen Einnahmen (Steuern) und Ausgaben (Staatskonsum, 
 Wirtschaft & Recht → Volkswirtschaftslehre
 
 **Relevanz:**
-Entscheidet über Steuergerechtigkeit, Staatsverschuldung und die Finanzierung öffentlicher Güter.同期
+Entscheidet über Steuergerechtigkeit, Staatsverschuldung und die Finanzierung öffentlicher Güter.

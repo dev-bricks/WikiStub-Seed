@@ -7,4 +7,4 @@ Organisationskultur bezeichnet das System gemeinsamer Werte, Normen und Annahmen
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Eine starke, positive Kultur fördert Identifikation und Engagement; eine toxische Kultur kann Innovation hemmen und Burnout begünstigen.同期
+Eine starke, positive Kultur fördert Identifikation und Engagement; eine toxische Kultur kann Innovation hemmen und Burnout begünstigen.

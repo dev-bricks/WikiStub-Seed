@@ -7,4 +7,4 @@ Synthetische Polymere sind künstlich hergestellte makromolekulare Stoffe, die d
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Sie sind die allgegenwärtigen Werkstoffe der Moderne (z. B. PE, PVC, PET) und ermöglichen Innovationen in der Elektrotechnik, Fahrzeugbau und Verpackungstechnologie.同期
+Sie sind die allgegenwärtigen Werkstoffe der Moderne (z. B. PE, PVC, PET) und ermöglichen Innovationen in der Elektrotechnik, Fahrzeugbau und Verpackungstechnologie.

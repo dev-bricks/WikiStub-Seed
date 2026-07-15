@@ -7,4 +7,4 @@ Vergleichende Analyse von Schul- und Hochschulsystemen (z.B. föderales System i
 Gesellschaft & Politik → Erziehungswissenschaft
 
 **Relevanz:**
-Systemdesign entscheidet über Chancengleichheit und die Leistungsfähigkeit einer Volkswirtschaft.同期
+Systemdesign entscheidet über Chancengleichheit und die Leistungsfähigkeit einer Volkswirtschaft.

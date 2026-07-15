@@ -7,4 +7,4 @@ Ein Ödem ist eine krankhafte Ansammlung von Flüssigkeit im Gewebe (interstitie
 Medizin & Gesundheit → Pathologie
 
 **Relevanz:**
-Ödeme sind wichtige klinische Warnsignale für Herz- oder Nierenschwäche sowie für Entzündungen und können Organfunktionen (z. B. Lungenödem) akut gefährden.同期
+Ödeme sind wichtige klinische Warnsignale für Herz- oder Nierenschwäche sowie für Entzündungen und können Organfunktionen (z. B. Lungenödem) akut gefährden.

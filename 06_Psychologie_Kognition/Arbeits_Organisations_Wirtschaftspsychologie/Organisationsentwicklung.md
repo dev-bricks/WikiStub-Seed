@@ -7,4 +7,4 @@ Organisationsentwicklung (OE) ist ein geplanter, systemischer Prozess zur Verän
 Psychologie & Kognition → Arbeits-, Organisations- & Wirtschaftspsychologie
 
 **Relevanz:**
-Hilft Unternehmen, sich an Marktveränderungen anzupassen und gleichzeitig die Humanisierung der Arbeit zu fördern.同期
+Hilft Unternehmen, sich an Marktveränderungen anzupassen und gleichzeitig die Humanisierung der Arbeit zu fördern.

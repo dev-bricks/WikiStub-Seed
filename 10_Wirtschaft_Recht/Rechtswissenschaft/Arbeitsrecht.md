@@ -7,4 +7,4 @@ Umfasst alle Gesetze, die die unselbstständige Erwerbsarbeit regeln (Individual
 Wirtschaft & Recht → Rechtswissenschaft
 
 **Relevanz:**
-Schützt Arbeitnehmer als die strukturell schwächere Vertragspartei und sichert soziale Standards.同期
+Schützt Arbeitnehmer als die strukturell schwächere Vertragspartei und sichert soziale Standards.

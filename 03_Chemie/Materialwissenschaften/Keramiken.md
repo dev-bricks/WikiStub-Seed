@@ -7,4 +7,4 @@ Keramiken sind anorganische, nichtmetallische, kristalline Werkstoffe, die meist
 Chemie → Materialwissenschaften & Polymerchemie
 
 **Relevanz:**
-Wegen ihrer hohen Temperaturbeständigkeit, Härte und chemischen Trägheit werden sie als Isolatoren, Hitzekacheln in der Raumfahrt und für biokompatible Implantate genutzt.同期
+Wegen ihrer hohen Temperaturbeständigkeit, Härte und chemischen Trägheit werden sie als Isolatoren, Hitzekacheln in der Raumfahrt und für biokompatible Implantate genutzt.

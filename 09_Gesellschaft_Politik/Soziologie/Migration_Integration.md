@@ -7,4 +7,4 @@ Befasst sich mit Wanderungsbewegungen von Menschen, den Ursachen (Push/Pull-Fakt
 Gesellschaft & Politik → Soziologie
 
 **Relevanz:**
-In einer globalisierten Welt ein politisches Dauerthema mit großen Auswirkungen auf Demografie und Kultur.同期
+In einer globalisierten Welt ein politisches Dauerthema mit großen Auswirkungen auf Demografie und Kultur.

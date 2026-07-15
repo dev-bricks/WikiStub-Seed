@@ -7,4 +7,4 @@ Ein Agonist bindet an einen Rezeptor und löst dessen biologische Antwort aus. E
 Medizin & Gesundheit → Pharmakologie
 
 **Relevanz:**
-Dieses Prinzip ermöglicht es, körpereigene Signale entweder zu verstärken (Agonisten) oder abzuschwächen (Antagonisten, z. B. Betablocker).同期
+Dieses Prinzip ermöglicht es, körpereigene Signale entweder zu verstärken (Agonisten) oder abzuschwächen (Antagonisten, z. B. Betablocker).

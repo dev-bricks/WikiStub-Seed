@@ -7,4 +7,4 @@ Building Information Modeling (BIM) ist die digitale Planung und Verwaltung von 
 Technik & Ingenieurwesen → Bauingenieurwesen
 
 **Relevanz:**
-Der Standard der Zukunft; steigert Effizienz, reduziert Planungsfehler und erleichtert das Facility Management.同期
+Der Standard der Zukunft; steigert Effizienz, reduziert Planungsfehler und erleichtert das Facility Management.

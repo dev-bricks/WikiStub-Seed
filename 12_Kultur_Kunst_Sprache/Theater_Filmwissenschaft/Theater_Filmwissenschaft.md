@@ -7,4 +7,4 @@ Untersucht performative Künste (Theater, Tanz) und das Medium Film hinsichtlich
 Kultur, Kunst & Sprache → Theater- & Filmwissenschaft
 
 **Relevanz:**
-Analysiert, wie Gesellschaften sich selbst inszenieren und Geschichten erzählen – von der griechischen Tragödie bis zu Netflix.同期
+Analysiert, wie Gesellschaften sich selbst inszenieren und Geschichten erzählen – von der griechischen Tragödie bis zu Netflix.

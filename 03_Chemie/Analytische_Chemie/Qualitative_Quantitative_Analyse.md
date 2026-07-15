@@ -7,4 +7,4 @@ Die qualitative Analyse identifiziert, *welche* Stoffe in einer Probe enthalten 
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Diese beiden Ansätze bilden die methodische Basis jeder chemischen Untersuchung in der Forensik, Umweltüberwachung und Qualitätskontrolle.同期
+Diese beiden Ansätze bilden die methodische Basis jeder chemischen Untersuchung in der Forensik, Umweltüberwachung und Qualitätskontrolle.

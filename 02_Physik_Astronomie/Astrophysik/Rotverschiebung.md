@@ -7,4 +7,4 @@ Die kosmologische Rotverschiebung bezeichnet die Dehnung der Wellenlänge des Li
 Physik & Astronomie → Astrophysik & Kosmologie
 
 **Relevanz:**
-Sie ist der direkte Beweis für die Expansion des Universums (Hubble-Gesetz) und ermöglicht die Bestimmung der Entfernung und Fluchtgeschwindigkeit weit entfernter astronomischer Objekte.同期
+Sie ist der direkte Beweis für die Expansion des Universums (Hubble-Gesetz) und ermöglicht die Bestimmung der Entfernung und Fluchtgeschwindigkeit weit entfernter astronomischer Objekte.

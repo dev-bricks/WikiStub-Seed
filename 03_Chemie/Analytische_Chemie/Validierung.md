@@ -7,4 +7,4 @@ Validierung ist die systematische Erbringung des objektiven Nachweises, dass ein
 Chemie → Analytische Chemie
 
 **Relevanz:**
-Sie ist gesetzlich vorgeschrieben für Labore in der Medizin und Pharmaindustrie, um sicherzustellen, dass Testergebnisse verlässlich und rechtssicher sind.同期
+Sie ist gesetzlich vorgeschrieben für Labore in der Medizin und Pharmaindustrie, um sicherzustellen, dass Testergebnisse verlässlich und rechtssicher sind.

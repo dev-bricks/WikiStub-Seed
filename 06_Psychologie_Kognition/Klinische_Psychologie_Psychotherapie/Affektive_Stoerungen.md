@@ -7,4 +7,4 @@ Affektive Störungen sind Erkrankungen, bei denen die Stimmungslage pathologisch
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Depression ist eine führende Ursache für Berufsunfähigkeit und Suizide; Verständnis und Entstigmatisierung sind daher lebenswichtig.同期
+Depression ist eine führende Ursache für Berufsunfähigkeit und Suizide; Verständnis und Entstigmatisierung sind daher lebenswichtig.

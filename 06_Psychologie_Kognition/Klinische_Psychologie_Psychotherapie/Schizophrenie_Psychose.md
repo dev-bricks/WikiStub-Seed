@@ -7,4 +7,4 @@ Psychosen sind Zustände des Realitätsverlusts (Wahn, Halluzinationen). Schizop
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Erfordert oft komplexe, multimodale Behandlungsansätze (Medikation plus Soziotherapie) und ist Gegenstand intensiver Hirnforschung.同期
+Erfordert oft komplexe, multimodale Behandlungsansätze (Medikation plus Soziotherapie) und ist Gegenstand intensiver Hirnforschung.

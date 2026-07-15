@@ -7,4 +7,4 @@ Gendrift ist die zufällige Änderung der Allelfrequenzen innerhalb einer Popula
 Biologie & Lebenswissenschaften → Evolution & Phylogenie
 
 **Relevanz:**
-Sie kann zum Verlust genetischer Vielfalt führen und ist ein wichtiger Evolutionsfaktor, der neben der Selektion die genetische Struktur von Arten beeinflusst.同期
+Sie kann zum Verlust genetischer Vielfalt führen und ist ein wichtiger Evolutionsfaktor, der neben der Selektion die genetische Struktur von Arten beeinflusst.

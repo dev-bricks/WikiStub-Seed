@@ -7,4 +7,4 @@ Interferenz beschreibt die Überlagerung von zwei oder mehr Wellen, die zu einer
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Sie findet Anwendung in der Lasertechnik, der Holographie und der hochpräzisen Messtechnik (Interferometrie) zur Detektion kleinster Abstandsänderungen.同期
+Sie findet Anwendung in der Lasertechnik, der Holographie und der hochpräzisen Messtechnik (Interferometrie) zur Detektion kleinster Abstandsänderungen.

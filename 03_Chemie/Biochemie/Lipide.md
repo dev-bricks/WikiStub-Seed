@@ -7,4 +7,4 @@ Lipide sind eine Gruppe wasserunlöslicher (hydrophober) organischer Moleküle, 
 Chemie → Biochemie
 
 **Relevanz:**
-Sie dienen als hocheffiziente Energiespeicher, bilden die Hauptkomponente der Zellmembranen und fungieren als Signalmoleküle (Hormone).同期
+Sie dienen als hocheffiziente Energiespeicher, bilden die Hauptkomponente der Zellmembranen und fungieren als Signalmoleküle (Hormone).

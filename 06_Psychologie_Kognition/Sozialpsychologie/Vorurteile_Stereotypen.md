@@ -7,4 +7,4 @@ Vorurteile sind (meist negative) affektive Einstellungen gegenüber Gruppenmitgl
 Psychologie & Kognition → Sozialpsychologie
 
 **Relevanz:**
-Die Erforschung hilft, Mechanismen von Rassismus und Ausgrenzung zu verstehen und Strategien zum Abbau von Feindseligkeiten zu entwickeln.同期
+Die Erforschung hilft, Mechanismen von Rassismus und Ausgrenzung zu verstehen und Strategien zum Abbau von Feindseligkeiten zu entwickeln.

@@ -7,4 +7,4 @@ Bakterien sind einzellige Mikroorganismen ohne Zellkern (Prokaryoten). Sie besit
 Biologie & Lebenswissenschaften → Mikrobiologie & Virologie
 
 **Relevanz:**
-Sie sind als Zersetzer (Destruenten) unverzichtbar für Stoffkreisläufe, werden industriell in der Biotechnologie genutzt, können aber auch schwere Krankheiten bei Mensch und Tier verursachen.同期
+Sie sind als Zersetzer (Destruenten) unverzichtbar für Stoffkreisläufe, werden industriell in der Biotechnologie genutzt, können aber auch schwere Krankheiten bei Mensch und Tier verursachen.

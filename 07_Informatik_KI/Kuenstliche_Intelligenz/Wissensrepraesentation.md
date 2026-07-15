@@ -7,4 +7,4 @@ Untersucht, wie Wissen formalisiert (z.B. in Ontologien, semantischen Netzen) ge
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Kernbestandteil des Semantic Web und von Expertensystemen, die menschliches Expertenwissen emulieren.同期
+Kernbestandteil des Semantic Web und von Expertensystemen, die menschliches Expertenwissen emulieren.

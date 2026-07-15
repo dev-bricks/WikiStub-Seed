@@ -7,4 +7,4 @@ Die Lehre von der Übertragung und Verarbeitung von Informationen (Signalen) üb
 Technik & Ingenieurwesen → Elektrotechnik
 
 **Relevanz:**
-Basis für Radio, Fernsehen, Mobilfunk und das Internet.同期
+Basis für Radio, Fernsehen, Mobilfunk und das Internet.

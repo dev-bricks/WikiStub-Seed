@@ -7,4 +7,4 @@ Der Verdauungstrakt ist das System von Organen, das der Zerkleinerung, dem Trans
 Medizin & Gesundheit → Anatomie
 
 **Relevanz:**
-Er ermöglicht die Aufnahme von Nährstoffen und Wasser sowie die Ausscheidung unverdaulicher Reste und beherbergt einen Großteil des menschlichen Immunsystems.同期
+Er ermöglicht die Aufnahme von Nährstoffen und Wasser sowie die Ausscheidung unverdaulicher Reste und beherbergt einen Großteil des menschlichen Immunsystems.

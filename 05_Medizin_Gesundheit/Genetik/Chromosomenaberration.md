@@ -7,4 +7,4 @@ Chromosomenaberrationen sind Veränderungen in der Anzahl oder Struktur der Chro
 Medizin & Gesundheit → Medizinische Genetik
 
 **Relevanz:**
-Sie sind eine häufige Ursache für angeborene Syndrome und Entwicklungsstörungen; ihre Diagnose erfolgt meist über eine Karyogramm-Analyse.同期
+Sie sind eine häufige Ursache für angeborene Syndrome und Entwicklungsstörungen; ihre Diagnose erfolgt meist über eine Karyogramm-Analyse.

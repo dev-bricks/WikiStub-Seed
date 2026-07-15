@@ -7,4 +7,4 @@ Dieser Bereich betrachtet Entwicklung als lebenslangen Prozess (Life-Span Psycho
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Angesichts des demografischen Wandels wird das Verständnis von gesundem Altern und lebenslangem Lernen immer wichtiger für Gesellschaft und Gesundheitssysteme.同期
+Angesichts des demografischen Wandels wird das Verständnis von gesundem Altern und lebenslangem Lernen immer wichtiger für Gesellschaft und Gesundheitssysteme.

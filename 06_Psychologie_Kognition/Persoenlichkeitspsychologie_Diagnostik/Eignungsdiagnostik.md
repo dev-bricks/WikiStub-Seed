@@ -7,4 +7,4 @@ Eignungsdiagnostik nutzt psychologische Verfahren, um die Passung zwischen einer
 Psychologie & Kognition → Persönlichkeitspsychologie & Diagnostik
 
 **Relevanz:**
-Fehlbesetzungen verursachen hohe Kosten; valide Diagnostik steigert Produktivität und Arbeitszufriedenheit.同期
+Fehlbesetzungen verursachen hohe Kosten; valide Diagnostik steigert Produktivität und Arbeitszufriedenheit.

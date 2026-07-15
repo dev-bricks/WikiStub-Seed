@@ -7,4 +7,4 @@ Teilgebiet der Ethnologie, das sich speziell mit den geistigen und sozialen Aspe
 Gesellschaft & Politik → Ethnologie
 
 **Relevanz:**
-Hilft zu verstehen, was "menschlich" ist und wie unterschiedlich Gesellschaften Antworten auf universelle Fragen (Geburt, Tod, Sinn) finden.同期
+Hilft zu verstehen, was "menschlich" ist und wie unterschiedlich Gesellschaften Antworten auf universelle Fragen (Geburt, Tod, Sinn) finden.

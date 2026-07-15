@@ -7,4 +7,4 @@ Die Gesamtheit aller Komponenten, die im Fahrzeug die Leistung vom Motor auf die
 Technik & Ingenieurwesen → Fahrzeugtechnik
 
 **Relevanz:**
-Entscheidend für Beschleunigung, Fahrkomfort und Kraftstoffverbrauch.同期
+Entscheidend für Beschleunigung, Fahrkomfort und Kraftstoffverbrauch.

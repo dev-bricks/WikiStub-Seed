@@ -7,4 +7,4 @@ Optimiert den Ablauf chemischer Reaktionen in technischen Reaktoren (Rührkessel
 Technik & Ingenieurwesen → Verfahrenstechnik
 
 **Relevanz:**
-Das Herzstück jeder Chemieanlage; bestimmt die Wirtschaftlichkeit der Produktion neuer Stoffe.同期
+Das Herzstück jeder Chemieanlage; bestimmt die Wirtschaftlichkeit der Produktion neuer Stoffe.

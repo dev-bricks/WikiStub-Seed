@@ -7,4 +7,4 @@ Lichtgeschwindigkeit ist die universelle Grenzgeschwindigkeit, mit der sich elek
 Physik & Astronomie → Elektrodynamik & Optik
 
 **Relevanz:**
-Sie ist die fundamentale Skala des Universums, verknüpft Raum und Zeit in der Raumzeit und ist entscheidend für physikalische Berechnungen von der Atomphysik bis zur Astronomie.同期
+Sie ist die fundamentale Skala des Universums, verknüpft Raum und Zeit in der Raumzeit und ist entscheidend für physikalische Berechnungen von der Atomphysik bis zur Astronomie.

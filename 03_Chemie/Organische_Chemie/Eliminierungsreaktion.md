@@ -7,4 +7,4 @@ Eine Eliminierungsreaktion ist das Gegenstück zur Addition; dabei werden zwei A
 Chemie → Organische Chemie
 
 **Relevanz:**
-Dieses Verfahren wird großtechnisch zur Herstellung von ungesättigten Verbindungen wie Ethen aus Ethanol oder Alkanen eingesetzt, die wichtige Vorprodukte der Kunststoffchemie sind.同期
+Dieses Verfahren wird großtechnisch zur Herstellung von ungesättigten Verbindungen wie Ethen aus Ethanol oder Alkanen eingesetzt, die wichtige Vorprodukte der Kunststoffchemie sind.

@@ -17,6 +17,7 @@ import json
 import re
 from pathlib import Path
 from typing import Dict, List, Set
+from safe_io import atomic_write_json
 
 
 class TranslationSystem:
@@ -69,9 +70,7 @@ class TranslationSystem:
             self.translations = {}
 
     def _save_translations(self):
-        self.translations_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(self.translations_file, 'w', encoding='utf-8') as f:
-            json.dump(self.translations, f, indent=2, ensure_ascii=False)
+        atomic_write_json(self.translations_file, self.translations)
 
     def t(self, key: str) -> str:
         """

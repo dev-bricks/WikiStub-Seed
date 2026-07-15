@@ -7,4 +7,4 @@ Die Gesamtheit aller Maßnahmen staatlicher Instanzen (Bund, EZB), um die Wirtsc
 Wirtschaft & Recht → Volkswirtschaftslehre
 
 **Relevanz:**
-Bestimmt die Rahmenbedingungen für Wohlstand und soziale Sicherheit in einem Land.同期
+Bestimmt die Rahmenbedingungen für Wohlstand und soziale Sicherheit in einem Land.

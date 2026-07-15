@@ -7,4 +7,4 @@ Analysiert soziale Ungleichheiten im Bildungssystem, den Einfluss der familiäre
 Psychologie & Kognition → Pädagogische Psychologie
 
 **Relevanz:**
-Zeigt strukturelle Barrieren auf und fordert Bildungsgerechtigkeit.同期
+Zeigt strukturelle Barrieren auf und fordert Bildungsgerechtigkeit.

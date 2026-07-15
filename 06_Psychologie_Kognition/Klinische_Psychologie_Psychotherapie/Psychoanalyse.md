@@ -7,4 +7,4 @@ Begründet von Freud, fokussiert die Psychoanalyse auf unbewusste Konflikte, oft
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Auch wenn klassische Analysen seltener sind, bilden tiefenpsychologische Konzepte (z.B. Übertragung) weiterhin eine wichtige Basis für viele Therapien.同期
+Auch wenn klassische Analysen seltener sind, bilden tiefenpsychologische Konzepte (z.B. Übertragung) weiterhin eine wichtige Basis für viele Therapien.

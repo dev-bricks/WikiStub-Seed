@@ -7,4 +7,4 @@ Die Zelle ist die kleinste lebende Funktionseinheit aller Organismen. Sie kann e
 Biologie & Lebenswissenschaften → Zellbiologie (Zytologie)
 
 **Relevanz:**
-Als atomare Einheit des Lebens ist die Zelle der Ort aller biologischen Grundvorgänge und das Fundament für den Aufbau komplexer Gewebe und Organe.同期
+Als atomare Einheit des Lebens ist die Zelle der Ort aller biologischen Grundvorgänge und das Fundament für den Aufbau komplexer Gewebe und Organe.

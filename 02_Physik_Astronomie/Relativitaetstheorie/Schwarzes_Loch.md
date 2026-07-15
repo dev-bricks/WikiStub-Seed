@@ -7,4 +7,4 @@ Ein Schwarzes Loch ist ein Objekt mit einer so extremen Massenkonzentration, das
 Physik & Astronomie → Relativitätstheorie & Gravitation
 
 **Relevanz:**
-Schwarze Löcher sind Endstadien massereicher Sterne und spielen eine zentrale Rolle in der Entwicklung von Galaxien sowie bei der Erforschung der Grenzen physikalischer Gesetze (Singularität).同期
+Schwarze Löcher sind Endstadien massereicher Sterne und spielen eine zentrale Rolle in der Entwicklung von Galaxien sowie bei der Erforschung der Grenzen physikalischer Gesetze (Singularität).

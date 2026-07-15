@@ -7,4 +7,4 @@ Erforscht Religionen empirisch und vergleichend als kulturelle Phänomene, unabh
 Kultur, Kunst & Sprache → Religionswissenschaft
 
 **Relevanz:**
-Wichtig für das Verständnis globaler Konflikte, Wertevorstellungen und der menschlichen Sinnsuche.同期
+Wichtig für das Verständnis globaler Konflikte, Wertevorstellungen und der menschlichen Sinnsuche.

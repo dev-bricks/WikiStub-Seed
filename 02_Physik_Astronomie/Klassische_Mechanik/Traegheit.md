@@ -7,4 +7,4 @@ Trägheit ist die Eigenschaft von Körpern, in ihrem aktuellen Bewegungszustand 
 Physik & Astronomie → Klassische Mechanik
 
 **Relevanz:**
-Dieses erste Newton’sche Axiom ist die Grundlage für das Verständnis von Kräften und Bewegungsabläufen in der klassischen Physik.同期
+Dieses erste Newton’sche Axiom ist die Grundlage für das Verständnis von Kräften und Bewegungsabläufen in der klassischen Physik.

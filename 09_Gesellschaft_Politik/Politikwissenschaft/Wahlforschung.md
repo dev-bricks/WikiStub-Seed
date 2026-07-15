@@ -7,4 +7,4 @@ Empirische Analyse von Wahlen, Wählerverhalten und Wahlkampagnen. Untersucht, w
 Gesellschaft & Politik → Politikwissenschaft
 
 **Relevanz:**
-Essentiell für Parteienstrategien und das Verständnis demokratischer Legitimation.同期
+Essentiell für Parteienstrategien und das Verständnis demokratischer Legitimation.

@@ -7,4 +7,4 @@ Die Blut-Hirn-Schranke ist eine selektive Barriere zwischen dem Blutkreislauf un
 Medizin & Gesundheit → Neurologie & Neurowissenschaften
 
 **Relevanz:**
-Sie ist ein großes Hindernis bei der Behandlung von Hirnerkrankungen, da viele Medikamente diese Schranke nicht überwinden können (Schwierigkeit der Wirkstoffabgabe).同期
+Sie ist ein großes Hindernis bei der Behandlung von Hirnerkrankungen, da viele Medikamente diese Schranke nicht überwinden können (Schwierigkeit der Wirkstoffabgabe).

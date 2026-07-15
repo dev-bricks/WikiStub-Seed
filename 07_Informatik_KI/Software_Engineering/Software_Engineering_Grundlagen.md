@@ -7,4 +7,4 @@ Software Engineering ist die ingenieurmäßige Entwicklung von Software; es umfa
 Informatik & KI → Software Engineering
 
 **Relevanz:**
-Unverzichtbar für die Bewältigung der steigenden Komplexität moderner Softwaresysteme ("Softwarekrise").同期
+Unverzichtbar für die Bewältigung der steigenden Komplexität moderner Softwaresysteme ("Softwarekrise").

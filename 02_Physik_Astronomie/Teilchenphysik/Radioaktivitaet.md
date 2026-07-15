@@ -7,4 +7,4 @@ Radioaktivität ist die Eigenschaft instabiler Atomkerne, sich spontan unter Aus
 Physik & Astronomie → Kern- & Teilchenphysik
 
 **Relevanz:**
-Sie findet Anwendung in der Krebstherapie, der archäologischen Altersbestimmung (C14-Methode) und ist die Grundlage für die Energiegewinnung in Kernreaktoren.同期
+Sie findet Anwendung in der Krebstherapie, der archäologischen Altersbestimmung (C14-Methode) und ist die Grundlage für die Energiegewinnung in Kernreaktoren.

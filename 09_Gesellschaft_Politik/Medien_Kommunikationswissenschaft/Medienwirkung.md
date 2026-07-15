@@ -7,4 +7,4 @@ Analysiert die Einflüsse von Medienkonsum auf Wissen, Einstellungen, Emotionen 
 Gesellschaft & Politik → Medien- & Kommunikationswissenschaft
 
 **Relevanz:**
-Politisch brisant, etwa bei Debatten über den Einfluss sozialer Medien auf Wahlen oder die psychische Gesundheit Jugendlicher.同期
+Politisch brisant, etwa bei Debatten über den Einfluss sozialer Medien auf Wahlen oder die psychische Gesundheit Jugendlicher.

@@ -7,4 +7,4 @@ Die Kognitive Verhaltenstherapie (KVT) geht davon aus, dass fehlangepasstes Verh
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Sie ist das am häufigsten empirisch validierte Verfahren und gilt als Goldstandard insbesondere bei Angst und Depression.同期
+Sie ist das am häufigsten empirisch validierte Verfahren und gilt als Goldstandard insbesondere bei Angst und Depression.

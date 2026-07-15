@@ -7,4 +7,4 @@ Epigenetik untersucht vererbbare Änderungen der Genfunktion, die nicht auf eine
 Biologie & Lebenswissenschaften → Genetik & Molekularbiologie
 
 **Relevanz:**
-Sie erklärt, wie Umweltfaktoren und Lebensstil die Genaktivität langfristig beeinflussen können und wie aus identischen Genomen unterschiedliche Zelltypen entstehen.同期
+Sie erklärt, wie Umweltfaktoren und Lebensstil die Genaktivität langfristig beeinflussen können und wie aus identischen Genomen unterschiedliche Zelltypen entstehen.

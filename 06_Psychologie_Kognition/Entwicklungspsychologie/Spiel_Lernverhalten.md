@@ -7,4 +7,4 @@ Dieser Bereich untersucht, wie Kinder durch Spiel interagieren, experimentieren 
 Psychologie & Kognition → Entwicklungspsychologie
 
 **Relevanz:**
-Spiel ist kein bloßer Zeitvertreib, sondern der "Beruf" des Kindes – essentiell für kognitive, soziale und emotionale Reifung.同期
+Spiel ist kein bloßer Zeitvertreib, sondern der "Beruf" des Kindes – essentiell für kognitive, soziale und emotionale Reifung.

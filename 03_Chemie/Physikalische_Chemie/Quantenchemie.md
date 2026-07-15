@@ -7,4 +7,4 @@ Die Quantenchemie wendet die Prinzipien der Quantenmechanik auf chemische Frages
 Chemie → Physikalische Chemie
 
 **Relevanz:**
-Sie liefert das theoretische Fundament für das Verständnis chemischer Bindungen und erlaubt die computergestützte Vorhersage (Molecular Modeling) neuer Materialien und Medikamente.同期
+Sie liefert das theoretische Fundament für das Verständnis chemischer Bindungen und erlaubt die computergestützte Vorhersage (Molecular Modeling) neuer Materialien und Medikamente.

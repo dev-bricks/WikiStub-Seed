@@ -7,4 +7,4 @@ Maßnahmen zum Schutz von Datenbanken vor unbefugtem Zugriff, Missbrauch und Zer
 Informatik & KI → Datenbanken & Informationssysteme
 
 **Relevanz:**
-Da Datenbanken oft die wertvollsten Assets speichern, sind sie ein Hauptziel von Angriffen (Data Breaches).同期
+Da Datenbanken oft die wertvollsten Assets speichern, sind sie ein Hauptziel von Angriffen (Data Breaches).

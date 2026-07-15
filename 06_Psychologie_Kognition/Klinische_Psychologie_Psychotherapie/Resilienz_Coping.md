@@ -7,4 +7,4 @@ Resilienz bezeichnet die psychische Widerstandskraft gegenüber Belastungen. Cop
 Psychologie & Kognition → Klinische Psychologie & Psychotherapie
 
 **Relevanz:**
-Forschung hierzu verschiebt den Fokus von der Pathologie hin zur Ressourcentheorie und Prävention: Was hält den Menschen gesund?同期
+Forschung hierzu verschiebt den Fokus von der Pathologie hin zur Ressourcentheorie und Prävention: Was hält den Menschen gesund?

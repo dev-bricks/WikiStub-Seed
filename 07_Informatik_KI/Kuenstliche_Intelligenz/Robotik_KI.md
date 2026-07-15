@@ -7,4 +7,4 @@ Robotik befasst sich mit dem Entwurf und Bau von Robotern; KI in der Robotik erm
 Informatik & KI → Künstliche Intelligenz
 
 **Relevanz:**
-Revolutioniert Fertigung (Industrie 4.0), Pflege und Logistik, wirft aber auch Fragen zur Sicherheit und Arbeitsplatzverlust auf.同期
+Revolutioniert Fertigung (Industrie 4.0), Pflege und Logistik, wirft aber auch Fragen zur Sicherheit und Arbeitsplatzverlust auf.
