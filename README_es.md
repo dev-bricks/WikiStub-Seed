@@ -4,7 +4,7 @@
 
 [EN](README.md) | [DE](README_de.md) | **ES** | [JA](README_ja.md) | [RU](README_ru.md) | [ZH](README_zh-Hans.md)
 
-**WikiStub-Seed es un marco de conocimiento JSON multilingüe para investigación asistida por IA, documentación, sistemas de aprendizaje y flujos de trabajo con LLM.** Incluye un conjunto de datos curado `wikistub_seed.json` con 630 stubs de conocimiento compactos en alemán e inglés distribuidos en 12 dominios científicos y culturales, slots de idioma preparados para ES/ZH/JA/RU, además de herramientas Python para validación, exportación y traducción.
+**WikiStub-Seed es un marco de conocimiento JSON multilingüe para investigación asistida por IA, documentación, sistemas de aprendizaje y flujos de trabajo con LLM.** Incluye 630 stubs en 12 dominios. Las definiciones están completas en DE/EN/ES/ZH/JA/RU; las notas de relevancia están completas en DE/ES/ZH/JA/RU y usan el fallback alemán para los slots ingleses vacíos.
 
 WikiStub-Seed es una biblioteca semilla de stubs de conocimiento, no un wiki.
 
@@ -17,7 +17,7 @@ WikiStub-Seed es una biblioteca semilla de stubs de conocimiento, no un wiki.
 
 ## Contenido
 
-- 630 stubs de conocimiento en `wikistub_seed.json` con contenido DE/EN y slots de idioma preparados para ES/ZH/JA/RU
+- 630 stubs en `wikistub_seed.json` con definiciones en seis idiomas y notas de relevancia en cinco
 - 12 dominios de primer nivel, incluidos matemáticas, física, química, biología, medicina, psicología, IA, ingeniería, sociedad, economía, historia y cultura
 - 85 subcategorías con definiciones cortas y neutrales y notas de relevancia
 - Mapas canónicos `definitions.{lang}` y `relevance_i18n.{lang}` conservando los campos heredados `definition_de`, `definition_en` y `relevance`
@@ -94,14 +94,14 @@ En Windows, `start.bat` abre el punto de entrada de la CLI. Los archivos exporta
 
 | Ruta | Propósito |
 |---|---|
-| `wikistub_seed.json` | Conjunto de datos de conocimiento bilingüe autoritativo |
+| `wikistub_seed.json` | Conjunto de datos de conocimiento multilingüe autoritativo |
 | `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Estructura de fuente/exportación Markdown orientada a dominio |
 | `wikistub_seed_cli.py` | CLI para estadísticas y comprobaciones |
 | `wikistub_seed_pipeline.py` | Pipeline de importación, exportación, validación y traducción opcional |
 | `md_to_json.py` | Herramienta auxiliar de importación Markdown a JSON |
 | `check_duplicates.py` | Herramienta auxiliar de duplicados/consistencia |
 | `EXPORTFORMAT.md` | Plan de formato de intercambio estable |
-| `web_publisher/` | Editor web estático/PWA (PWA, caché sin conexión, búsqueda, alternancia DE/EN) |
+| `web_publisher/` | Editor web estático/PWA (caché sin conexión, búsqueda, selector de seis idiomas) |
 
 ## Privacidad
 
@@ -114,11 +114,11 @@ El comando de traducción opcional puede llamar a una API externa únicamente cu
 Completado:
 
 - 12 dominios de primer nivel y 85 subcategorías
-- 630 stubs bilingües en un único archivo maestro JSON
+- 630 stubs multilingües en un único archivo maestro JSON
 - Herramientas de exportación a Markdown y sincronización JSON
 - Pruebas de humo CLI en GitHub Actions, más pruebas de humo de fuente dedicadas para macOS/Linux de `wikistub_seed_cli.py check` y `wikistub_seed_pipeline.py validate`
 - Editor web estático/PWA con búsqueda y caché sin conexión (`web_publisher/`)
-- Envolvente de esquema `wikistub-seed-data-v1` con slots de idioma DE/EN/ES/ZH/JA/RU preparados
+- Envolvente de esquema `wikistub-seed-data-v1` con mapas DE/EN/ES/ZH/JA/RU
 
 Planificado:
 
@@ -128,7 +128,7 @@ Planificado:
 
 ## Deutsch
 
-**WikiStub-Seed ist ein mehrsprachig vorbereitetes JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs mit Deutsch/Englisch-Inhalten und vorbereiteten Sprachslots für Spanisch, Chinesisch, Japanisch und Russisch, verteilt auf 12 Wissenschafts- und Kulturbereiche. Die Stubs sind kurz, neutral, versionierbar und für Automatisierung, Dokumentation, Lernsysteme und LLM-Kontexte geeignet.
+**WikiStub-Seed ist ein mehrsprachiges JSON-Wissensgerüst.** Definitionen sind in DE/EN/ES/ZH/JA/RU gefüllt; Relevanztexte in DE/ES/ZH/JA/RU, mit deutschem Fallback für Englisch.
 
 WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
 
@@ -138,7 +138,7 @@ Wichtige Einstiegspunkte:
 - `python wikistub_seed_cli.py check` prüft den Datenbestand.
 - `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und DE/EN-Toggle.
+- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
 
 ## Licencia
 

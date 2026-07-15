@@ -60,7 +60,7 @@ Jeder Stub führt die alten Felder weiter und hat zusätzlich kanonische Sprachm
 - `definitions.{lang}` ist das kanonische Feld für Definitionen.
 - `relevance_i18n.{lang}` ist das kanonische Feld für Relevanztexte.
 - `definition_de`, `definition_en` und `relevance` bleiben Legacy-Kompatibilitätsfelder.
-- `de` und `en` sind Pflichtsprachen im Modell; `es`, `zh`, `ja` und `ru` sind vorbereitete Slots.
+- `de` und `en` bleiben Pflichtsprachen im Modell. Der aktuelle Datensatz füllt Definitionen zusätzlich für `es`, `zh`, `ja` und `ru`; Relevanztexte sind in `de`, `es`, `zh`, `ja` und `ru` gefüllt.
 - Browser, CLI und Pipeline verwenden die Fallback-Kette `gewählte Sprache -> de -> en -> irgendein vorhandener Text`.
 - Fehlende Zusatzsprachen bleiben leer, bis ein kuratierter Übersetzungsworkflow abgeschlossen ist.
 

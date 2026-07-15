@@ -5,6 +5,24 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Hinzugefügt / Added
+- Sechs-Sprachen-Auswahl im statischen PWA-Reader und stabile, reihenfolgeunabhängige Deep-Link-IDs.
+- `TODO.md`, `RELEASE_GATE.md`, Modulmanifest, Ruff-Gate und CodeQL-Workflow für den öffentlichen Repository-Betrieb.
+- Regressionstests für fehlende oder defekte Masterdaten, atomare Schreibpfade, Import-Rollback, endliche API-Budgets und blockierten Browser-Speicher.
+
+### Geändert / Changed
+- Pflichtdaten werden fail-closed geladen; Import-/Sync-Fehler verwerfen standardmäßig alle Teiländerungen.
+- JSON-, Markdown- und PWA-Build-Ausgaben werden atomar und deterministisch geschrieben.
+- Sprachspezifische Markdown-Exporte behalten beim Reimport Definitionen und Relevanztexte der gewählten Sprache sowie die deutschen Pflichtfelder.
+- CLI-/Pipeline-Fehler liefern aussagekräftige Exitcodes; API-Übersetzungen benötigen explizite Mengen-, Kosten- und Zielsprache-Grenzen.
+- Dokumentation beschreibt den tatsächlichen Sprachstand: sechs Definitionssprachen, fünf Relevanzsprachen und deutscher Fallback für Englisch.
+- Service-Worker-Lebenszyklus wartet auf `skipWaiting()` und `clients.claim()`; PWA-Datenantworten und `localStorage` werden defensiv behandelt.
+
+### Behoben / Fixed
+- Verhindert stilles Ersetzen defekter Übersetzungs- oder Masterdateien durch leere Grundstrukturen.
+- Windows-CLI stürzt bei umgeleiteter Legacy-Konsolencodierung nicht mehr an Statusglyphen ab.
+- Exakte Checkout-Action-Version ist nun auf den unveränderlichen Commit von `v6.0.3` gepinnt.
+
 ## [1.1.1] - 2026-07-06
 
 ### Geändert / Changed

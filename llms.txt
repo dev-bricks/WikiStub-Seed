@@ -1,16 +1,16 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-07-06
+## Last-checked: 2026-07-15
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 
-WikiStub-Seed is a local-first, bilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. WikiStub-Seed is a knowledge-stub seed library, not a wiki.
+WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. Definitions are populated in six languages; relevance notes are populated in five, with a documented German fallback for empty English relevance slots. WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
 ## Audience
 
-- **AI and LLM developers**: feeding 630 bilingual domain stubs into RAG pipelines, embeddings or LLM context windows without external dependencies
-- **Knowledge workers and researchers**: building structured personal wikis, concept catalogs or glossaries from curated bilingual domain stubs
-- **Python developers**: extending, validating or exporting the bilingual JSON dataset via CLI tools, pipeline scripts and the wikistub-seed-data-v1 exchange format
+- **AI and LLM developers**: feeding 630 multilingual domain stubs into RAG pipelines, embeddings or LLM context windows without external dependencies
+- **Knowledge workers and researchers**: building structured concept catalogs or glossaries from curated multilingual domain stubs
+- **Python developers**: extending, validating or exporting the multilingual JSON dataset via CLI tools, pipeline scripts and the wikistub-seed-data-v1 exchange format
 - **Documentation and education teams**: exporting structured Markdown or JSON to static sites, GitHub Pages, Obsidian vaults or learning systems
 - **Open-source contributors**: adding multilingual knowledge stubs, new domain categories or static Web/PWA publisher features
 
@@ -28,11 +28,11 @@ WikiStub-Seed is a local-first, bilingual JSON knowledge framework for AI-assist
 ## Main Files
 
 - `README.md`: public overview, usage and project positioning
-- `wikistub_seed.json`: authoritative bilingual knowledge dataset
+- `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks
 - `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline
 - `EXPORTFORMAT.md`: planned stable `wikistub-seed-data-v1` exchange format
-- `web_publisher/`: static PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (34 Node.js tests)
+- `web_publisher/`: static six-language PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (45 Node.js tests)
 - `web_publisher/README.md`: Web/PWA publisher documentation
 - `AUFGABEN.txt`: current development tasks
 - `CHANGELOG.md`: project changes

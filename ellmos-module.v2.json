@@ -1,0 +1,41 @@
+{
+  "schema": "ellmos.module.v2",
+  "id": "WikiStub-Seed",
+  "display_name": "WikiStub-Seed",
+  "category": "knowledge",
+  "kind": "dataset",
+  "status": "released",
+  "visibility": "public",
+  "provides": [
+    "knowledge.dataset.wikistub",
+    "knowledge.seed.multilingual"
+  ],
+  "requires": [],
+  "optional": [],
+  "conflicts": [],
+  "surfaces": [
+    "dataset",
+    "cli",
+    "ui"
+  ],
+  "state": {
+    "ownership": "module",
+    "location": "project"
+  },
+  "boundaries": {
+    "network": "optional",
+    "data": "public",
+    "platforms": [
+      "windows",
+      "macos",
+      "linux",
+      "web"
+    ]
+  },
+  "source_of_truth": {
+    "type": "git-repository",
+    "path": ".",
+    "repository": "https://github.com/dev-bricks/WikiStub-Seed"
+  },
+  "adapters": []
+}

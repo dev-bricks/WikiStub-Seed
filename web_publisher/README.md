@@ -1,29 +1,43 @@
 # WikiStub-Seed Web/PWA Publisher
 
-Stand: 2026-06-14
+Stand: 2026-07-15
 
-Dieser Ordner dokumentiert den geplanten plattformübergreifenden Pfad für WikiStub-Seed. Die Umsetzung soll einen statischen Web-Build aus `wikistub_seed.json` erzeugen, der auf GitHub Pages oder einem anderen statischen Host laufen kann.
+Dieser Ordner enthält den statischen, serverlosen Web-/PWA-Reader für den maßgeblichen Datensatz `../wikistub_seed.json`.
 
-## Ziel
+## Funktionen
 
-- Statische, durchsuchbare Oberfläche für alle WikiStub-Seed-Stubs.
-- Offlinefähige PWA für Android, iOS und Desktop-Browser.
-- Keine Serverpflicht und keine Nutzerkonten.
-- Suchindex und Manifest werden reproduzierbar aus `wikistub_seed.json` erzeugt.
+- Kategoriebaum, Volltextsuche und Stub-Detailansicht für 630 Einträge.
+- Sprachauswahl für Deutsch, Englisch, Spanisch, Chinesisch, Japanisch und Russisch.
+- Offline-Cache über einen Service Worker; veränderliche Datendateien werden online zuerst aktualisiert und offline aus dem Cache gelesen.
+- Stabile, inhaltsbezogene Deep-Link-IDs statt positionsabhängiger Nummern.
+- Keine Konten, Telemetrie, Serverpflicht oder automatische externe API-Kommunikation.
 
-## Nicht-Ziele
+Definitionen sind im Masterdatensatz in allen sechs Sprachen gefüllt. Relevanztexte sind in DE/ES/ZH/JA/RU gefüllt; für die leeren englischen Relevanzslots verwendet der Reader die gemeinsame Fallback-Kette.
 
-- Kein nativer Android- oder iOS-Clone.
-- Keine Windows-Store-App ohne fertige lokale Oberfläche.
+## Reproduzierbarer Build
+
+Aus dem Repository-Root:
+
+```bash
+python web_publisher/_build.py
+node --test web_publisher/tests/publisher.test.mjs
+git diff --exit-code -- web_publisher/data
+```
+
+`_build.py` validiert die Grundstruktur, normalisiert die Sprachmaps und schreibt `data/wikistub_seed.json` sowie `data/search-index.json` atomar. IDs werden deterministisch aus Kategorie, Subkategorie und Titel abgeleitet; ein wiederholter Build erzeugt dieselben Dateien.
+
+## Hosting und lokaler Smoke
+
+Die Dateien müssen über HTTP(S) bereitgestellt werden, damit Fetch und Service Worker funktionieren. Für einen lokalen Smoke genügt beispielsweise:
+
+```bash
+python -m http.server 8000 --directory web_publisher
+```
+
+Danach `http://localhost:8000/` öffnen. GitHub Pages oder jeder andere statische Host kann denselben Ordner ausliefern.
+
+## Grenzen
+
+- Kein nativer Android-, iOS- oder Desktop-Clone.
 - Keine zweite Datenquelle neben `wikistub_seed.json`.
-- Keine automatische externe API-Kommunikation im Web-Build.
-
-## Erste Umsetzungsschritte
-
-Stand 2026-06-14: Der Build normalisiert `definitions.{lang}` und `relevance_i18n.{lang}` für `de`, `en`, `es`, `zh`, `ja` und `ru`. Der sichtbare Web-Reader nutzt weiter DE/EN, liest aber bereits über Sprach-Fallbacks.
-
-1. Datenhülle `wikistub-seed-data-v1` aus `wikistub_seed.json` erzeugen.
-2. Statischen Suchindex für Titel, Kategorien, Definitionen und Tags bauen.
-3. Minimalen Reader mit Kategoriebaum, Suche und Stub-Detailansicht erstellen.
-4. PWA-Manifest und Offline-Cache ergänzen.
-5. Mobile Smoke-Tests für Android- und iOS-Browser dokumentieren.
+- Ein echter Browser-/Geräte-Smoke für Installation, Offline-Start und Deep Links bleibt manuell und ist in `../TODO.md` vermerkt.
