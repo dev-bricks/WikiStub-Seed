@@ -7,7 +7,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ### Hinzugefügt / Added
 - Sechs-Sprachen-Auswahl im statischen PWA-Reader und stabile, reihenfolgeunabhängige Deep-Link-IDs.
-- `TODO.md`, `RELEASE_GATE.md`, Modulmanifest, Ruff-Gate und CodeQL-Workflow für den öffentlichen Repository-Betrieb.
+- `TODO.md`, `RELEASE_GATE.md`, Modulmanifest, Ruff-Gate und dokumentierter GitHub-Default-CodeQL-Schutz für den öffentlichen Repository-Betrieb.
 - Regressionstests für fehlende oder defekte Masterdaten, atomare Schreibpfade, Import-Rollback, endliche API-Budgets und blockierten Browser-Speicher.
 
 ### Geändert / Changed

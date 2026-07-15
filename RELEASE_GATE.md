@@ -25,7 +25,7 @@ The repository is already public. This gate records that its public visibility m
 | 9 | No BACH-internal documents | PASS | Internal `AUFGABEN.txt` remains ignored and untracked. |
 | 10 | `TODO.md` with STATUS table | PASS | Tracked root TODO records open non-blocking work. |
 | 11 | Tests and static analysis | PASS | Ruff, 41 Python tests and 45 PWA tests pass locally. |
-| 12 | Security automation | PASS | CodeQL covers Python and JavaScript; Actions are pinned to immutable commits. |
+| 12 | Security automation | PASS | GitHub default CodeQL covers Python and JavaScript; project-owned Actions are pinned to immutable commits. |
 
 ## Gate Check Execution
 

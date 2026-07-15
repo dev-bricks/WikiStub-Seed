@@ -6,7 +6,7 @@
 |---|---|---|
 | Tests | PASS | Python, CLI/pipeline and static PWA gates run on Windows; CI covers Windows, Linux and macOS source paths. |
 | Documentation | READY | Public README, security, contribution, changelog, format and release-gate documents are present. |
-| Release hygiene | PASS | Public repository metadata, pinned Actions, CodeQL workflow and fail-closed data writes were reviewed on 2026-07-15. |
+| Release hygiene | PASS | Public repository metadata, pinned project Actions, GitHub default CodeQL and fail-closed data writes were reviewed on 2026-07-15. |
 | Integration | READY | Standalone multilingual dataset and offline Web/PWA module with `wikistub-seed-data-v1` export. |
 
 ## Open
@@ -21,4 +21,4 @@
 - [x] Remove hard-coded DE/EN assumptions from shared localization helpers and generated Web data.
 - [x] Make required JSON inputs fail closed and make generated/output writes atomic.
 - [x] Add explicit translation call, cost and finite-budget gates.
-- [x] Add `RELEASE_GATE.md`, CodeQL and pinned GitHub Actions.
+- [x] Add `RELEASE_GATE.md`, retain GitHub default CodeQL, and pin project GitHub Actions.
