@@ -5,6 +5,7 @@
 # ---- Python ----
 __pycache__/
 *.py[cod]
+*.pyc
 *$py.class
 *.egg-info/
 *.egg
@@ -16,6 +17,10 @@ build/
 .mypy_cache/
 .coverage
 htmlcov/
+*.db
+data/
+!web_publisher/data/
+!web_publisher/data/*.json
 
 # ---- Virtuelle Umgebungen ----
 venv/
@@ -84,7 +89,6 @@ backups/
 *-ASUS-GEI.md
 DECISIONS.md
 PORTIERUNGSPLAN.md
-TODO.md
 DONE.md
 
 # ---- Übersetzungs-Artefakte (lokale Pfade, nicht für public Repo) ----
