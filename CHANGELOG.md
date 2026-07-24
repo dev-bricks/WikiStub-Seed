@@ -16,6 +16,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 - Sprachspezifische Markdown-Exporte behalten beim Reimport Definitionen und Relevanztexte der gewählten Sprache sowie die deutschen Pflichtfelder.
 - CLI-/Pipeline-Fehler liefern aussagekräftige Exitcodes; API-Übersetzungen benötigen explizite Mengen-, Kosten- und Zielsprache-Grenzen.
 - Dokumentation beschreibt den tatsächlichen Sprachstand: sechs Definitionssprachen, fünf Relevanzsprachen und deutscher Fallback für Englisch.
+- `llms.txt` auf `Last-checked: 2026-07-24` und technische Hygiene-Prüfung durchgeführt.
 - Service-Worker-Lebenszyklus wartet auf `skipWaiting()` und `clients.claim()`; PWA-Datenantworten und `localStorage` werden defensiv behandelt.
 
 ### Behoben / Fixed
