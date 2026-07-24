@@ -13,6 +13,8 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+[![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Start Here
@@ -24,7 +26,23 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 | Export Markdown for docs or notes | `python wikistub_seed_pipeline.py export --output --english` |
 | Understand the exchange format | `EXPORTFORMAT.md` |
 | Browse the static PWA source | `web_publisher/` |
-| Read the German guide | `README_de.md` |
+| Read AI/LLM index file | [llms.txt](llms.txt) |
+| Read the German guide | [README_de.md](README_de.md) |
+
+> [!NOTE]
+> **AI & LLM Integration**: For machine-readable context, repository structure, search phrases, and LLM guidelines, see [llms.txt](llms.txt).
+
+## Architecture & Data Flow
+
+```mermaid
+flowchart TD
+    A["wikistub_seed.json<br/>(630 Multilingual Stubs)"] --> B["wikistub_seed_cli.py<br/>(Stats & Validation)"]
+    A --> C["wikistub_seed_pipeline.py<br/>(Markdown & JSON Exporter)"]
+    A --> D["web_publisher/ _build.py<br/>(Static PWA Publisher)"]
+    A --> E["RAG & LLM Context Pipelines<br/>(AI Workflows & Embeddings)"]
+    C --> F["Structured Markdown<br/>(Obsidian / GitHub Pages / Docs)"]
+    D --> G["PWA Web Frontend<br/>(Offline Search / 6 Languages)"]
+```
 
 ## Discovery Context
 

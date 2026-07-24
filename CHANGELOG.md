@@ -5,6 +5,15 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-07-25
+
+### Hinzugefügt / Added
+- `pyproject.toml` mit Metadaten und `[tool.pytest.ini_options] pythonpath = "."` für direkte `pytest`-Ausführung angelegt.
+- Shields.io Badges (`llms.txt`, Test-Metriken `41 Python | 45 Node`), KI/LLM-Integrationshinweis und Mermaid-Architektur- & Datenfluss-Diagramm in `README.md` und `README_de.md` integriert.
+
+### Geändert / Changed
+- `llms.txt` Header auf `Last-checked: 2026-07-25` aktualisiert und um `pyproject.toml` sowie Test-Suite-Metriken ergänzt.
+
 ### Hinzugefügt / Added
 - Sechs-Sprachen-Auswahl im statischen PWA-Reader und stabile, reihenfolgeunabhängige Deep-Link-IDs.
 - `TODO.md`, `RELEASE_GATE.md`, Modulmanifest, Ruff-Gate und dokumentierter GitHub-Default-CodeQL-Schutz für den öffentlichen Repository-Betrieb.

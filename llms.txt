@@ -1,6 +1,6 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-07-24
+## Last-checked: 2026-07-25
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 
@@ -28,6 +28,7 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 ## Main Files
 
 - `README.md`: public overview, usage and project positioning
+- `pyproject.toml`: build & pytest configuration with `pythonpath = "."` (41 Python tests)
 - `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks
 - `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline

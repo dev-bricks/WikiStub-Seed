@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wikistub-seed"
+version = "1.1.2"
+description = "Local-first multilingual JSON knowledge-stub framework with 630+ stubs for AI research, documentation, RAG and LLM workflows."
+readme = "README.md"
+authors = [
+    { name = "dev-bricks" }
+]
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: Markdown"
+]
+keywords = [
+    "knowledge-base",
+    "rag",
+    "llm-context",
+    "multilingual",
+    "local-first",
+    "json",
+    "ontology",
+    "wikistub"
+]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/dev-bricks/WikiStub-Seed"
+Repository = "https://github.com/dev-bricks/WikiStub-Seed.git"
+"Bug Tracker" = "https://github.com/dev-bricks/WikiStub-Seed/issues"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+testpaths = ["tests"]

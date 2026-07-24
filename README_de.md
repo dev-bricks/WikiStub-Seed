@@ -13,6 +13,8 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+[![llms.txt](https://img.shields.io/badge/llms.txt-verf%C3%BCgbar-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Einstieg
@@ -24,7 +26,23 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 | Markdown für Doku oder Notizen exportieren willst | `python wikistub_seed_pipeline.py export --output --english` |
 | Das Austauschformat verstehen willst | `EXPORTFORMAT.md` |
 | Die statische PWA-Quelle ansehen willst | `web_publisher/` |
-| Die englische Anleitung lesen willst | `README.md` |
+| Die KI/LLM-Indexdatei lesen willst | [llms.txt](llms.txt) |
+| Die englische Anleitung lesen willst | [README.md](README.md) |
+
+> [!NOTE]
+> **KI- & LLM-Integration**: Für maschinenlesbaren Kontext, Repository-Struktur, Suchphrasen und LLM-Richtlinien siehe [llms.txt](llms.txt).
+
+## Architektur & Datenfluss
+
+```mermaid
+flowchart TD
+    A["wikistub_seed.json<br/>(630 Mehrsprachige Stubs)"] --> B["wikistub_seed_cli.py<br/>(Statistik & Validierung)"]
+    A --> C["wikistub_seed_pipeline.py<br/>(Markdown & JSON Exporter)"]
+    A --> D["web_publisher/ _build.py<br/>(Statischer PWA-Publisher)"]
+    A --> E["RAG & LLM Kontext-Pipelines<br/>(KI-Workflows & Embeddings)"]
+    C --> F["Strukturiertes Markdown<br/>(Obsidian / GitHub Pages / Doku)"]
+    D --> G["PWA Web-Frontend<br/>(Offline-Suche / 6 Sprachen)"]
+```
 
 ## Auffindbarkeit
 
