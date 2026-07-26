@@ -5,10 +5,11 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
-### Geändert / Changed
-- `llms.txt` Header auf `Last-checked: 2026-07-26` aktualisiert und technische Hygiene & Wartungs-Audit (Pfad A) durchgeführt.
-- Pytest- und Node.js-Testsuiten verifiziert (86/86 Tests 100% grün: 41 Python + 45 Node).
+## [1.1.3] - 2026-07-26
 
+### Geändert / Changed
+- `llms.txt` Header auf `Last-checked: 2026-07-26` und Test-Suite-Verifikation (86 Tests: 41 Python + 45 Node.js) aktualisiert.
+- Technische Hygiene-, Wartungs- & Marketing-Audits (Pfad A & B) erfolgreich durchgeführt und verifiziert.
 
 ## [1.1.2] - 2026-07-25
 
