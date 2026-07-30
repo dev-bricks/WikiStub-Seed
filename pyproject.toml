@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wikistub-seed"
-version = "1.1.2"
+version = "1.1.6"
 description = "Local-first multilingual JSON knowledge-stub framework with 630+ stubs for AI research, documentation, RAG and LLM workflows."
 readme = "README.md"
 authors = [
