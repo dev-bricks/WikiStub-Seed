@@ -181,6 +181,24 @@ Wichtige Einstiegspunkte:
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
 - `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
 
+<!-- BEGIN GENERATED ELLMOS BUNDLE DISCOVERY -->
+
+## Bundles and partners
+
+Generated discovery projection for `module:WikiStub-Seed` from `catalog:v4-bundles` (`a52688938bcad21469beb546acfe6dd79ca40196a2bbaf246e5bd6aaac4bbbd7`).
+Target repository visibility: `public`. Bundle manifests remain the membership authority; this section does not install or activate components.
+Discovery approval: `public` module-registry record, explicit default-deny bundle allowlist.
+
+### `ellmos-knowledge-bundle`
+
+- Bundle recipe visibility: `private`; role: `declared-component`; requirement: `recommended`.
+- module partners: `module:KnowledgeDigest`, `module:project-docs-template`, `module:report-forge`, `module:web-scraper`.
+- skill partners: `skill:bilingual-doc-sync`, `skill:docs-analysis`, `skill:document-chunker`.
+
+Composition and runtime details are intentionally omitted.
+
+<!-- END GENERATED ELLMOS BUNDLE DISCOVERY -->
+
 ## License
 
 MIT License. See `LICENSE`.

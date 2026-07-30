@@ -140,6 +140,31 @@ Wichtige Einstiegspunkte:
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
 - `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
 
+<!-- BEGIN ELLMOS BUNDLE DISCOVERY ZH-HANS -->
+
+## Bundle 与合作组件
+
+这是从 `catalog:v4-bundles`
+（`a52688938bcad21469beb546acfe6dd79ca40196a2bbaf246e5bd6aaac4bbbd7`）
+生成并验证的 `module:WikiStub-Seed` Discovery 投影。目标仓库的可见性为
+`public`。Bundle Manifest 仍是成员关系的权威来源；本节不会安装或激活
+任何组件。批准依据是公开的模块注册记录，以及采用 default-deny 策略的
+显式 Bundle Allowlist。
+
+### `ellmos-knowledge-bundle`
+
+- Bundle Recipe 可见性：`private`；角色：`declared-component`；
+  要求：`recommended`。
+- 模块合作组件：`module:KnowledgeDigest`,
+  `module:project-docs-template`, `module:report-forge`,
+  `module:web-scraper`。
+- Skill 合作组件：`skill:bilingual-doc-sync`, `skill:docs-analysis`,
+  `skill:document-chunker`。
+
+组合与 Runtime 细节有意省略。
+
+<!-- END ELLMOS BUNDLE DISCOVERY ZH-HANS -->
+
 ## 许可证
 
 MIT 许可证。参见 `LICENSE`。
