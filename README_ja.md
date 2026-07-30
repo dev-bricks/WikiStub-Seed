@@ -140,6 +140,32 @@ Wichtige Einstiegspunkte:
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
 - `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
 
+<!-- BEGIN ELLMOS BUNDLE DISCOVERY JA -->
+
+## バンドルとパートナー
+
+`catalog:v4-bundles`
+（`a52688938bcad21469beb546acfe6dd79ca40196a2bbaf246e5bd6aaac4bbbd7`）
+から生成された、`module:WikiStub-Seed` の検証済み Discovery
+プロジェクションです。対象リポジトリの可視性は `public` です。
+メンバーシップの権威は引き続き Bundle Manifest にあり、この節は
+コンポーネントをインストールも有効化もしません。承認根拠は公開
+Module Registry レコードと、default-deny の明示的な Bundle Allowlist です。
+
+### `ellmos-knowledge-bundle`
+
+- Bundle Recipe の可視性: `private`、役割: `declared-component`、
+  要件: `recommended`。
+- Module パートナー: `module:KnowledgeDigest`,
+  `module:project-docs-template`, `module:report-forge`,
+  `module:web-scraper`。
+- Skill パートナー: `skill:bilingual-doc-sync`, `skill:docs-analysis`,
+  `skill:document-chunker`。
+
+Composition と Runtime の詳細は意図的に省略しています。
+
+<!-- END ELLMOS BUNDLE DISCOVERY JA -->
+
 ## ライセンス
 
 MIT ライセンス。`LICENSE` を参照してください。
