@@ -1,4 +1,4 @@
-![WikiStub-Seed](assets/banner.svg)
+![WikiStub-Seed](assets/banner.png)
 
 # WikiStub-Seed
 
