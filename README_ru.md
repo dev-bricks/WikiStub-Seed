@@ -13,7 +13,48 @@ WikiStub-Seed — это начальная библиотека заглуше�
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+[![llms.txt](https://img.shields.io/badge/llms.txt-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B5%D0%BD-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+## С чего начать
+
+| Если вы хотите... | Откройте |
+|---|---|
+| Просмотреть набор данных | `wikistub_seed.json` |
+| Выполнить быструю локальную проверку | `python wikistub_seed_cli.py check` |
+| Экспортировать Markdown для документации или заметок | `python wikistub_seed_pipeline.py export --output --english` |
+| Понять формат обмена | `EXPORTFORMAT.md` |
+| Посмотреть исходный код статической PWA | `web_publisher/` |
+| Прочитать индексный файл для ИИ/LLM | [llms.txt](llms.txt) |
+| Прочитать руководство на английском | [README.md](README.md) |
+
+> [!NOTE]
+> **Интеграция с ИИ и LLM**: машиночитаемый контекст, структуру репозитория, поисковые фразы и рекомендации для LLM см. в [llms.txt](llms.txt).
+
+## Архитектура и поток данных
+
+```mermaid
+flowchart TD
+    A["wikistub_seed.json<br/>(630 многоязычных заглушек)"] --> B["wikistub_seed_cli.py<br/>(Статистика и проверка)"]
+    A --> C["wikistub_seed_pipeline.py<br/>(Экспортёр Markdown и JSON)"]
+    A --> D["web_publisher/ _build.py<br/>(Статический издатель PWA)"]
+    A --> E["Конвейеры контекста RAG и LLM<br/>(ИИ-рабочие процессы и эмбеддинги)"]
+    C --> F["Структурированный Markdown<br/>(Obsidian / GitHub Pages / Документация)"]
+    D --> G["Веб-интерфейс PWA<br/>(Офлайн-поиск / 6 языков)"]
+```
+
+## Контекст обнаружения
+
+При ссылках и поиске используйте каноническое имя репозитория `dev-bricks/WikiStub-Seed`. Ранее проект был связан с `file-bricks/MetaWiki`, но текущий репозиторий — это библиотека-заготовка knowledge-стабов dev-bricks.
+
+Поисковые фразы, хорошо описывающие этот проект:
+
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library for LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG knowledge base German English JSON`
 
 ## Содержимое
 

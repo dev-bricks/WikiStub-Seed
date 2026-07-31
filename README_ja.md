@@ -13,7 +13,48 @@ WikiStub-Seedはナレッジスタブのシードライブラリであり、Wiki
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+[![llms.txt](https://img.shields.io/badge/llms.txt-%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+## まずはここから
+
+| したいこと | 開くファイル |
+|---|---|
+| データセットを確認する | `wikistub_seed.json` |
+| ローカルで簡易チェックを実行する | `python wikistub_seed_cli.py check` |
+| ドキュメントやメモ用に Markdown をエクスポートする | `python wikistub_seed_pipeline.py export --output --english` |
+| 交換フォーマットを理解する | `EXPORTFORMAT.md` |
+| 静的 PWA のソースを見る | `web_publisher/` |
+| AI/LLM インデックスファイルを読む | [llms.txt](llms.txt) |
+| 英語ガイドを読む | [README.md](README.md) |
+
+> [!NOTE]
+> **AI・LLM 統合**: 機械可読コンテキスト、リポジトリ構造、検索フレーズ、LLM ガイドラインについては [llms.txt](llms.txt) を参照してください。
+
+## アーキテクチャとデータフロー
+
+```mermaid
+flowchart TD
+    A["wikistub_seed.json<br/>(630件の多言語スタブ)"] --> B["wikistub_seed_cli.py<br/>(統計と検証)"]
+    A --> C["wikistub_seed_pipeline.py<br/>(Markdown・JSONエクスポーター)"]
+    A --> D["web_publisher/ _build.py<br/>(静的PWAパブリッシャー)"]
+    A --> E["RAG・LLMコンテキストパイプライン<br/>(AIワークフローと埋め込み)"]
+    C --> F["構造化Markdown<br/>(Obsidian / GitHub Pages / ドキュメント)"]
+    D --> G["PWA Webフロントエンド<br/>(オフライン検索 / 6言語)"]
+```
+
+## 検出コンテキスト
+
+リンクや検索の際には、正規のリポジトリ名 `dev-bricks/WikiStub-Seed` を使用してください。このプロジェクトは以前 `file-bricks/MetaWiki` と関連していましたが、現在のリポジトリは dev-bricks のナレッジスタブ・シードライブラリです。
+
+このプロジェクトをよく表す検索フレーズ:
+
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library for LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG knowledge base German English JSON`
 
 ## 収録内容
 

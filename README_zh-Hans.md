@@ -13,7 +13,48 @@ WikiStub-Seed 是一个知识存根种子库，而非 Wiki。
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+[![llms.txt](https://img.shields.io/badge/llms.txt-%E5%8F%AF%E7%94%A8-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+## 从这里开始
+
+| 如果你想…… | 打开这个 |
+|---|---|
+| 查看数据集 | `wikistub_seed.json` |
+| 运行快速本地检查 | `python wikistub_seed_cli.py check` |
+| 为文档或笔记导出 Markdown | `python wikistub_seed_pipeline.py export --output --english` |
+| 了解交换格式 | `EXPORTFORMAT.md` |
+| 浏览静态 PWA 源码 | `web_publisher/` |
+| 阅读 AI/LLM 索引文件 | [llms.txt](llms.txt) |
+| 阅读英文指南 | [README.md](README.md) |
+
+> [!NOTE]
+> **AI 与 LLM 集成**：有关机器可读上下文、仓库结构、搜索短语和 LLM 指南，请参阅 [llms.txt](llms.txt)。
+
+## 架构与数据流
+
+```mermaid
+flowchart TD
+    A["wikistub_seed.json<br/>(630 条多语言存根)"] --> B["wikistub_seed_cli.py<br/>(统计与验证)"]
+    A --> C["wikistub_seed_pipeline.py<br/>(Markdown 与 JSON 导出器)"]
+    A --> D["web_publisher/ _build.py<br/>(静态 PWA 发布器)"]
+    A --> E["RAG 与 LLM 上下文管道<br/>(AI 工作流与嵌入)"]
+    C --> F["结构化 Markdown<br/>(Obsidian / GitHub Pages / 文档)"]
+    D --> G["PWA Web 前端<br/>(离线搜索 / 6 种语言)"]
+```
+
+## 发现上下文
+
+链接或搜索时请使用规范的仓库名 `dev-bricks/WikiStub-Seed`。该项目此前与 `file-bricks/MetaWiki` 相关，但当前仓库是 dev-bricks 的知识存根种子库。
+
+能准确描述本项目的搜索短语：
+
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library for LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG knowledge base German English JSON`
 
 ## 内容
 
