@@ -13,7 +13,48 @@ WikiStub-Seed es una biblioteca semilla de stubs de conocimiento, no un wiki.
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
+![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+[![llms.txt](https://img.shields.io/badge/llms.txt-disponible-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+## Empezar aquí
+
+| Si quieres... | Abre esto |
+|---|---|
+| Inspeccionar el conjunto de datos | `wikistub_seed.json` |
+| Ejecutar una comprobación local rápida | `python wikistub_seed_cli.py check` |
+| Exportar Markdown para documentación o notas | `python wikistub_seed_pipeline.py export --output --english` |
+| Entender el formato de intercambio | `EXPORTFORMAT.md` |
+| Explorar el código fuente de la PWA estática | `web_publisher/` |
+| Leer el archivo índice para IA/LLM | [llms.txt](llms.txt) |
+| Leer la guía en inglés | [README.md](README.md) |
+
+> [!NOTE]
+> **Integración con IA y LLM**: para contexto legible por máquinas, estructura del repositorio, frases de búsqueda y directrices para LLM, consulta [llms.txt](llms.txt).
+
+## Arquitectura y flujo de datos
+
+```mermaid
+flowchart TD
+    A["wikistub_seed.json<br/>(630 stubs multilingües)"] --> B["wikistub_seed_cli.py<br/>(Estadísticas y validación)"]
+    A --> C["wikistub_seed_pipeline.py<br/>(Exportador de Markdown y JSON)"]
+    A --> D["web_publisher/ _build.py<br/>(Publicador PWA estático)"]
+    A --> E["Pipelines de contexto RAG y LLM<br/>(Flujos de trabajo de IA y embeddings)"]
+    C --> F["Markdown estructurado<br/>(Obsidian / GitHub Pages / Documentación)"]
+    D --> G["Frontend web PWA<br/>(Búsqueda offline / 6 idiomas)"]
+```
+
+## Contexto de descubrimiento
+
+Usa el nombre canónico del repositorio `dev-bricks/WikiStub-Seed` al enlazar o buscar. El proyecto estuvo relacionado anteriormente con `file-bricks/MetaWiki`, pero el repositorio actual es la biblioteca semilla de stubs de conocimiento de dev-bricks.
+
+Frases de búsqueda que describen bien este proyecto:
+
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library for LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG knowledge base German English JSON`
 
 ## Contenido
 
