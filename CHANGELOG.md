@@ -5,6 +5,12 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Maintainer verification (2026-08-01)
+- 41 Python-Tests, 45 Node.js-PWA-Tests, der CLI-Konsistenzcheck über 630 Stubs
+  und die Pipeline-Validierung erfolgreich ausgeführt. Die zwei dokumentierten
+  domänenübergreifenden Duplikate sind erlaubt; unvollständige oder ungültige
+  Einträge wurden nicht gefunden.
+
 ## [1.1.6] - 2026-07-30
 
 ### Geändert / Changed
