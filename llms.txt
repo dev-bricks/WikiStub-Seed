@@ -1,9 +1,9 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-08-01
+## Last-checked: 2026-08-02
 
 Verification: 41 Python tests, 45 Node.js PWA tests, the 630-stub CLI
-consistency check and pipeline validation passed locally on 2026-08-01. The
+consistency check and pipeline validation passed locally on 2026-08-02. The
 two documented cross-domain duplicate titles are allowed; no incomplete or
 invalid entries were reported.
 
