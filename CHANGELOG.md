@@ -5,6 +5,10 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Maintainer verification (2026-08-04)
+- 41 Python-Tests, 2 Source-Smoke-Tests und 45 Node.js-PWA-Tests erfolgreich
+  ausgeführt; der Arbeitsbaum blieb nach der Verifikation sauber.
+
 ### Maintainer verification (2026-08-02)
 - 41 Python-Tests, 2 Source-Smoke-Tests und 45 Node.js-PWA-Tests erfolgreich
   ausgeführt. Ruff, Compileall, CLI-Konsistenzcheck über 630 Stubs,
