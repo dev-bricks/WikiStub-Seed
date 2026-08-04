@@ -87,18 +87,18 @@ flowchart TD
   "definitions": {
     "de": "Ein Ansatz zur Modellierung komplexer Software, der die Fachdomäne in den Mittelpunkt stellt.",
     "en": "An approach to modeling complex software that places the business domain at the center of development.",
-    "es": "",
-    "zh": "",
-    "ja": "",
-    "ru": ""
+    "es": "Un enfoque para modelar software complejo que sitúa el dominio de especialidad en el centro.",
+    "zh": "一种对复杂软件进行建模的方法，它将专业领域置于中心位置。",
+    "ja": "専門領域をその中心に据える、複雑なソフトウェアをモデリングするためのアプローチ。",
+    "ru": "Подход к моделированию сложного программного обеспечения, который ставит предметную область в центр внимания."
   },
   "relevance_i18n": {
     "de": "Hilft, komplexe Systeme verständlich und wartbar zu gestalten.",
     "en": "",
-    "es": "",
-    "zh": "",
-    "ja": "",
-    "ru": ""
+    "es": "Ayuda a que los sistemas complejos sean comprensibles y mantenibles.",
+    "zh": "有助于使复杂系统更易于理解和维护。",
+    "ja": "複雑なシステムを理解しやすく、保守しやすく構築するのに役立ちます。",
+    "ru": "Помогает сделать сложные системы понятными и простыми в сопровождении."
   },
   "tags": ["Informatik", "Software Engineering"]
 }
