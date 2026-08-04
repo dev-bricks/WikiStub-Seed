@@ -187,7 +187,7 @@ Wichtige Einstiegspunkte:
 
 Proyección de descubrimiento verificada para `module:WikiStub-Seed` procedente
 de `catalog:v4-bundles`
-(`a52688938bcad21469beb546acfe6dd79ca40196a2bbaf246e5bd6aaac4bbbd7`).
+(`7f6121371fd05d85d32c2e75f8fbdb682aa76ebdf879dd40d36ceefb4aae18d3`).
 El repositorio de destino es `public`. Los manifiestos de los bundles siguen
 siendo la autoridad sobre la pertenencia; esta sección no instala ni activa
 componentes. La aprobación se basa en un registro público del módulo y en una
