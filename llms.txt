@@ -1,9 +1,11 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-08-04
+## Last-checked: 2026-08-10
 
 Verification: 41 Python tests, 2 source-platform smoke tests and 45 Node.js PWA
-tests passed locally on 2026-08-04. The
+tests passed locally on 2026-08-10. Ruff, full Python compileall, CLI stats/check,
+pipeline validation, duplicate checking and the deterministic PWA rebuild also
+passed without a tracked data diff. The
 two documented cross-domain duplicate titles are allowed; no incomplete or
 invalid entries were reported.
 
