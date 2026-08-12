@@ -5,6 +5,15 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Maintainer verification (2026-08-12)
+- 41 Python-Tests, 2 Source-Smoke-Tests und 45 Node.js-PWA-Tests erfolgreich
+  ausgeführt; Ruff, vollständiges Compileall, CLI-Stats/Check,
+  Pipeline-Validierung, Duplicate-Check und der deterministische PWA-Rebuild
+  waren ebenfalls erfolgreich und erzeugten keine getrackte Datendifferenz.
+- Die zwei dokumentierten domänenübergreifenden Duplikate bleiben erlaubt;
+  unvollständige oder ungültige Einträge wurden nicht gefunden. Es gab keinen
+  Übersetzungs-API-Aufruf, Browser-/Device-Smoke, Push oder Release-Schritt.
+
 ### Maintainer verification (2026-08-10)
 - 41 Python-Tests, 2 Source-Smoke-Tests und 45 Node.js-PWA-Tests erfolgreich
   ausgeführt; Ruff, vollständiges Compileall, CLI-Stats/Check,
