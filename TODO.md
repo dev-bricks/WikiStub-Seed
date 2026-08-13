@@ -11,9 +11,9 @@
 
 ## Open
 
-- [ ] Decide whether English relevance texts should be authored independently; the reader currently falls back to German where `relevance_i18n.en` is empty.
+- [ ] Author independent English relevance texts for all 630 stubs; the 2026-08-13 readback confirmed 630 empty `relevance_i18n.en` slots and a working German fallback. A curated translation run still needs an explicitly authorized translation backend and cost boundary.
 - [ ] Run and document manual browser/device smokes for offline install and deep links on current iOS, Android and desktop browsers.
-- [ ] Specify an optional embedding/search API without making network access or external dependencies part of the core runtime.
+- [x] Specify an optional embedding/search API without making network access or external dependencies part of the core runtime (`EMBEDDING_SEARCH_API.md`, 2026-08-13).
 
 ## Completed
 

@@ -64,6 +64,10 @@ Jeder Stub führt die alten Felder weiter und hat zusätzlich kanonische Sprachm
 - Browser, CLI und Pipeline verwenden die Fallback-Kette `gewählte Sprache -> de -> en -> irgendein vorhandener Text`.
 - Fehlende Zusatzsprachen bleiben leer, bis ein kuratierter Übersetzungsworkflow abgeschlossen ist.
 
+Die optionale lokale Retrieval-Schnittstelle ist in
+[`EMBEDDING_SEARCH_API.md`](EMBEDDING_SEARCH_API.md) spezifiziert. Sie ergänzt
+dieses Austauschformat, ändert aber weder Schema noch Kernabhängigkeiten.
+
 ## Befehle
 
 ```bash

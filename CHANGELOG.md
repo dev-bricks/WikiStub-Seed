@@ -5,6 +5,14 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### TASKSOLVER readback (2026-08-13)
+- Die optionale lokale Embedding-/Such-API ist in `EMBEDDING_SEARCH_API.md`
+  als loopback-only, offline-fähiger Vertrag mit lexikalischem Fallback,
+  deterministischen Stub-IDs und atomarem Index-Rebuild spezifiziert.
+- Der Relevanz-Fallback wurde über alle 630 Stubs regressiongetestet. Die
+  englischen Relevanzslots sind weiterhin leer; ohne ausdrücklich autorisierten
+  Übersetzungs-Backend wurde kein externer API-Aufruf durchgeführt.
+
 ### Maintainer verification (2026-08-12)
 - 41 Python-Tests, 2 Source-Smoke-Tests und 45 Node.js-PWA-Tests erfolgreich
   ausgeführt; Ruff, vollständiges Compileall, CLI-Stats/Check,

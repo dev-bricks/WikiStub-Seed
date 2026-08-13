@@ -25,6 +25,7 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 | Einen schnellen lokalen Check ausführen willst | `python wikistub_seed_cli.py check` |
 | Markdown für Doku oder Notizen exportieren willst | `python wikistub_seed_pipeline.py export --output --english` |
 | Das Austauschformat verstehen willst | `EXPORTFORMAT.md` |
+| Den optionalen lokalen Suchvertrag lesen willst | `EMBEDDING_SEARCH_API.md` |
 | Die statische PWA-Quelle ansehen willst | `web_publisher/` |
 | Die KI/LLM-Indexdatei lesen willst | [llms.txt](llms.txt) |
 | Die englische Anleitung lesen willst | [README.md](README.md) |
@@ -165,7 +166,7 @@ Geplant:
 
 - Einheitliche Tag-Bereinigung
 - Obsidian-/GitHub-Pages-Exportpfade
-- Optionale Embeddings und Such-API
+- Optionale Embeddings und Such-API (in [`EMBEDDING_SEARCH_API.md`](EMBEDDING_SEARCH_API.md) spezifiziert; Implementierung bleibt optional)
 
 ## Deutsch
 
