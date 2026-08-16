@@ -5,6 +5,18 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.7] - 2026-08-16
+
+### Hinzugefügt / Added
+- Automatisierte Metadaten-, Manifest- und Dokumentationsparitätstestsuite in `tests/test_metadata.py` zur Verifikation von Version-Parität, Core-Docs, `llms.txt`-Freshness, `ellmos-module.v2.json` Schema und 630-Stubs-Integrität.
+- `[tool.ruff]` und `[tool.ruff.lint]` Konfiguration in `pyproject.toml` integriert (`target-version = "py310"`, `line-length = 120`, `ruff check` 100% sauber).
+- Discoverability- und Ökosystem-Badges in `README.md` und `README_de.md` um `dev-bricks` Ecosystem- und `open-bricks` Umbrella-Badges sowie Querverweise zu Geschwisterwerkzeugen (`CareCenter-for-Codex`, `MethodenAnalyser`, `DevCenter`, `CodeBox`, `safe-start-for-codex`) erweitert.
+
+### Geändert / Changed
+- `pyproject.toml` Version auf `1.1.7` aktualisiert.
+- `llms.txt` Header auf `Last-checked: 2026-08-16` und Test-Suite-Verifikation (94 Tests: 49 Python + 45 Node.js) synchronisiert.
+- Badges in `README.md` und `README_de.md` auf Teststand und Version synchronisiert.
+
 ### TASKSOLVER readback (2026-08-13)
 - Die optionale lokale Embedding-/Such-API ist in `EMBEDDING_SEARCH_API.md`
   als loopback-only, offline-fähiger Vertrag mit lexikalischem Fallback,

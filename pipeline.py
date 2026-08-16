@@ -62,10 +62,10 @@ def main(argv=None):
         )
 
     print("Starte WikiStub-Seed Pipeline...")
-    
+
     base_path = os.path.dirname(os.path.abspath(__file__))
     json_path = os.path.join(base_path, "wikistub_seed.json")
-    
+
     if not os.path.exists(json_path):
         print(f"FEHLER: {json_path} nicht gefunden.")
         return 1
@@ -109,14 +109,14 @@ def main(argv=None):
     count_processed = 0
     translation_calls = 0
     failures = 0
-    
+
     for category, subcats in data[root_key].items():
         print(f"Verarbeite Kategorie: {category}")
         for subcat, stubs in subcats.items():
             for stub in stubs:
                 title = stub.get("title", "Unbenannt")
                 print(f"  - Generiere Stub: {title}")
-                
+
                 # Auto-Übersetzung (Simulation)
                 stub.update(normalize_entry(stub))
                 if (
@@ -147,7 +147,7 @@ def main(argv=None):
                 # Markdown generieren
                 safe_title = safe_path_component(title.replace(" ", "_"))
                 filename = folder / f"{safe_title}.md"
-                
+
                 try:
                     content = (
                         f"# {title}\n\n"
@@ -157,7 +157,7 @@ def main(argv=None):
                         f"**Tags:** {tags_str}\n"
                     )
                     atomic_write_text(filename, content)
-                    
+
                     count_processed += 1
                 except IOError as e:
                     print(f"    FEHLER beim Schreiben von {filename}: {e}")

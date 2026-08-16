@@ -9,11 +9,14 @@
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
 [![WikiStub-Seed smoke tests](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
+[![Version](https://img.shields.io/badge/version-1.1.7-blue.svg)](pyproject.toml)
+[![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
+[![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
-![Tests](https://img.shields.io/badge/tests-41%20Python%20%7C%2045%20Node-success)
+![Tests](https://img.shields.io/badge/tests-49%20Python%20%7C%2045%20Node%20passed-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -200,6 +203,19 @@ Composition and runtime details are intentionally omitted.
 
 <!-- END GENERATED ELLMOS BUNDLE DISCOVERY -->
 
+## Sibling Tools & Ecosystem
+ 
+WikiStub-Seed is part of the **dev-bricks** ecosystem and the broader **open-bricks** family:
+ 
+| Tool | Purpose | Status |
+|---|---|---|
+| [`dev-bricks/CareCenter-for-Codex`](https://github.com/dev-bricks/CareCenter-for-Codex) | Workspace health check, diagnostics & test orchestration | Production |
+| [`dev-bricks/MethodenAnalyser`](https://github.com/dev-bricks/MethodenAnalyser) | AST-based Python code analysis, import optimizer & dead-code detection | Production |
+| [`dev-bricks/DevCenter`](https://github.com/dev-bricks/DevCenter) | Unified developer dashboard, repo health overview & project launcher | Production |
+| [`dev-bricks/CodeBox`](https://github.com/dev-bricks/CodeBox) | Lightweight PySide6 desktop IDE with syntax highlighting & terminal | Beta |
+| [`dev-bricks/safe-start-for-codex`](https://github.com/dev-bricks/safe-start-for-codex) | Safe initialization and verification for development workspaces | Production |
+| [`ellmos-ai/project-docs-template`](https://github.com/ellmos-ai/project-docs-template) | Standardized documentation generator and compliance framework | Production |
+ 
 ## License
 
 MIT License. See `LICENSE`.
