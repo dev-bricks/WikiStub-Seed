@@ -16,7 +16,7 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
-![Tests](https://img.shields.io/badge/tests-49%20Python%20%7C%2045%20Node%20passed-success)
+![Tests](https://img.shields.io/badge/tests-150%20Python%20%7C%2045%20Node%20passed-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-verf%C3%BCgbar-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -125,6 +125,29 @@ python wikistub_seed_pipeline.py export --output --english
 
 Unter Windows öffnet `start.bat` den CLI-Einstiegspunkt. Exportierte Dateien werden in `output/` abgelegt; dieser Ordner ist lokal und nicht versioniert.
 
+## Lokaler Edit-Modus
+
+`web_publisher/` ist eine statische Seite (kein Server, nur `fetch()`) und kann nicht schreiben. `edit_server.py` legt einen kleinen, ausschließlich an `127.0.0.1` gebundenen HTTP-Server darüber, sodass dieselbe Leseoberfläche Artikel/Kategorien anlegen, bearbeiten und löschen kann:
+
+```bash
+python edit_server.py            # Standardport 8879, öffnet den Browser
+```
+
+**Rechtemodell** (wörtlich aus der spezifizierenden Anfrage übernommen, und die eine verbindliche Regel, der dieses Feature folgt):
+
+- Neuanlegen ist standardmäßig für jeden erlaubt.
+- Bearbeiten und Löschen sind für jeden erlaubt, **solange kein Passwort hinterlegt ist**.
+- Ist ein Passwort hinterlegt, entscheidet der Hinterleger, was ohne Anmeldung noch erlaubt bleibt — von "alles" bis nur-lesend (Neuanlegen/Bearbeiten/Löschen sind einzeln entziehbar, über das "Konto"-Panel im Header).
+- Es gibt bewusst nur **ein** Passwort/eine Rolle. Mehrere Tokens mit unterschiedlichen Rechten plus eine Administrator-Rolle wurden erwogen, aber als "vielleicht etwas übertrieben" eingestuft und weiter unten als Roadmap-Idee dokumentiert, nicht gebaut.
+
+**Sicherheitshinweise:**
+
+- Der Server bindet ausschließlich an `127.0.0.1` — nicht konfigurierbar, kein Cloud-/Netz-Exposure per Design.
+- Das Passwort wird als PBKDF2-HMAC-SHA256-Hash gespeichert (`wiki_auth.json`, gitignored), nie im Klartext. Dieser Hash schützt davor, dass ein beiläufiges Lesen der Datei ein (möglicherweise wiederverwendetes) Passwort preisgibt — er schützt **nicht** vor lokalem Dateisystemzugriff; wer bereits Dateien auf dem Rechner lesen/schreiben kann, kann `wiki_auth.json` ohnehin ersetzen. Passwort vergessen? `wiki_auth.json` löschen, um zum Standard (kein Passwort, volle Rechte für alle) zurückzukehren.
+- Jede schreibende Anfrage muss `Content-Type: application/json` tragen (verhindert klassisches formularbasiertes CSRF, das diesen Content-Type ohne einen von diesem Server unbeantworteten CORS-Preflight nicht senden kann) sowie einen `Host`-Header aus `localhost`/`127.0.0.1` (verhindert DNS-Rebinding).
+- Löschungen sind weich: Artikel und Kategorien wandern in `wikistub_seed_trash.json` (gitignored) statt endgültig entfernt zu werden, und können über die API wiederhergestellt werden.
+- **`web_publisher/data/wikistub_seed.json` und `search-index.json` sind getrackte, committete Build-Artefakte.** Jeder erfolgreiche Schreibvorgang im Edit-Modus baut sie über dasselbe `_build.py` neu, das auch die CI dieses Repos nutzt. Wer den lokalen Edit-Server zum Ausprobieren genutzt hat: vor dem Commit `git status` prüfen — ein lokaler Testedit verschmutzt diese beiden Dateien genauso wie ein echter, und nichts hier ignoriert sie automatisch (sie müssen für GitHub-Pages-Hosting ohne Build-Schritt getrackt bleiben).
+
 ## Kernbefehle
 
 | Befehl | Zweck |
@@ -147,12 +170,17 @@ Unter Windows öffnet `start.bat` den CLI-Einstiegspunkt. Exportierte Dateien we
 | `check_duplicates.py` | Duplikat-/Konsistenz-Hilfsprogramm |
 | `EXPORTFORMAT.md` | Stabiler Austauschformat-Plan |
 | `web_publisher/` | Statischer Web-/PWA-Publisher (Offline-Cache, Suche, Sechs-Sprachen-Auswahl) |
+| `edit_server.py` | Nur-lokaler (`127.0.0.1`) HTTP-Server, ergänzt `web_publisher/` um GUI-Neuanlegen/Bearbeiten/Löschen |
+| `wiki_store.py` | Reine CRUD- + Papierkorb-Funktionen, die der Edit-Server (und jeder künftige Aufrufer) nutzt |
+| `wiki_auth.py` | Passwort-Hashing, Rechtemodell und Session-Verwaltung für den Edit-Server |
 
 ## Datenschutz
 
 WikiStub-Seed arbeitet standardmäßig lokal. Der Kernbetrieb liest und schreibt ausschließlich lokale JSON-/Markdown-Dateien. Es gibt keine Telemetrie und keine automatische Netzwerkkommunikation.
 
 Der optionale Übersetzungsbefehl kann eine externe API aufrufen, wenn `ANTHROPIC_API_KEY` gesetzt und das optionale Paket `anthropic` installiert ist.
+
+`edit_server.py` (siehe „Lokaler Edit-Modus" oben) bindet ausschließlich an `127.0.0.1` und spricht von sich aus nie mit dem Netz; die einzigen neuen lokalen Dateien sind `wiki_auth.json` (ein Passwort-Hash, gitignored) und `wikistub_seed_trash.json` (weich gelöschter Inhalt, gitignored).
 
 ## Roadmap
 
@@ -164,12 +192,14 @@ Abgeschlossen:
 - CLI-Smoke-Tests in GitHub Actions sowie dedizierte macOS/Linux-Quell-Smokes für `wikistub_seed_cli.py check` und `wikistub_seed_pipeline.py validate`
 - Statischer Web-/PWA-Publisher mit Suche und Offline-Cache (`web_publisher/`)
 - `wikistub-seed-data-v1`-Schema-Wrapper mit DE/EN/ES/ZH/JA/RU-Sprachmaps
+- Lokaler, passwortgeschützter GUI-Edit-Modus für die PWA (`edit_server.py`, `wiki_store.py`, `wiki_auth.py`) — Neuanlegen/Bearbeiten/Löschen für Artikel und Kategorien, Papierkorb, vollständige Testabdeckung der Rechte-Matrix
 
 Geplant:
 
 - Einheitliche Tag-Bereinigung
 - Obsidian-/GitHub-Pages-Exportpfade
 - Optionale Embeddings und Such-API (in [`EMBEDDING_SEARCH_API.md`](EMBEDDING_SEARCH_API.md) spezifiziert; Implementierung bleibt optional)
+- **Enterprise-Edit-Modus-Konzept (hier dokumentiert, nicht gebaut):** mehrere benannte Zugangstokens mit unabhängig konfigurierten Rechten, plus eine eigene Administrator-Rolle, die diese Tokens verwaltet. Der aktuelle Edit-Modus hat bewusst nur ein Passwort/eine Rolle — das wurde vom Spezifizierenden als „vielleicht etwas übertrieben" eingestuft und ist hier als bewusst erwogene, vorerst zurückgestellte Ausbaustufe festgehalten, nicht als stille Lücke.
 
 ## Deutsch
 

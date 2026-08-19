@@ -1,9 +1,9 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-08-16
+## Last-checked: 2026-08-19
 
-Verification: 49 Python tests, 2 source-platform smoke tests and 45 Node.js PWA
-tests (total 94 tests) passed locally on 2026-08-16. Ruff, full Python compileall, CLI stats/check,
+Verification: 150 Python tests (including 2 source-platform smoke tests) and 45
+Node.js PWA tests (total 195 tests) passed locally on 2026-08-19. Ruff, full Python compileall, CLI stats/check,
 pipeline validation, duplicate checking and the deterministic PWA rebuild also
 passed without a tracked data diff. The
 two documented cross-domain duplicate titles are allowed; no incomplete or
@@ -37,7 +37,7 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 
 - `README.md`: public overview, usage and project positioning
 - `README_de.md`: German documentation and guide
-- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (49 Python tests)
+- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (150 Python tests)
 - `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks
 - `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline

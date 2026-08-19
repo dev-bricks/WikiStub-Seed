@@ -16,7 +16,7 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
-![Tests](https://img.shields.io/badge/tests-49%20Python%20%7C%2045%20Node%20passed-success)
+![Tests](https://img.shields.io/badge/tests-150%20Python%20%7C%2045%20Node%20passed-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -125,6 +125,29 @@ python wikistub_seed_pipeline.py export --output --english
 
 On Windows, `start.bat` opens the CLI entry point. Exported files are written to `output/`; that folder is local and not versioned.
 
+## Local Edit Mode
+
+`web_publisher/` is a static site (no server, `fetch()`-only) and cannot write. `edit_server.py` adds a small, `127.0.0.1`-only HTTP server on top of it so the same reader UI can create, edit and delete articles/categories:
+
+```bash
+python edit_server.py            # default port 8879, opens the browser
+```
+
+**Rights model** (verbatim from the specifying request, and the one binding rule this feature follows):
+
+- Creating new entries is allowed by default, for everyone.
+- Editing and deleting are allowed for everyone **as long as no password is set**.
+- Once a password is set, whoever set it decides what an anonymous visitor may still do — anywhere from "everything" down to read-only (create/edit/delete are independently revocable via the "Konto" panel in the header).
+- There is deliberately only **one** password/role. Multiple tokens with different rights plus an administrator role were considered "maybe a bit much" and are documented as a Roadmap idea below, not built.
+
+**Security notes:**
+
+- The server only ever binds to `127.0.0.1` — this is not configurable; there is no network/cloud exposure by design.
+- The password is stored as a PBKDF2-HMAC-SHA256 hash (`wiki_auth.json`, gitignored), never in plaintext. This hash defends against a casual read of the file revealing a reused password — it does **not** defend against local filesystem access; anyone who can already read/write files on the machine can replace `wiki_auth.json` outright. Forgotten password? Delete `wiki_auth.json` to return to the default (no password, full rights for everyone).
+- Every mutating request must carry `Content-Type: application/json` (rejects classic `<form>`-based CSRF, which cannot send that content type without a CORS preflight this server does not answer) and a `Host` header of `localhost`/`127.0.0.1` (rejects DNS rebinding).
+- Deletions are soft: articles and categories move to `wikistub_seed_trash.json` (gitignored) instead of being removed outright, and can be restored via the API.
+- **`web_publisher/data/wikistub_seed.json` and `search-index.json` are tracked, committed build artifacts.** Every successful edit-mode write rebuilds them from the same `_build.py` this repository's CI already runs. If you used the local edit server to try something out, `git status` before committing — a local test edit dirties these two files exactly like a real one would, and nothing here git-ignores them for you (they need to stay tracked for GitHub Pages hosting without a build step).
+
 ## Core Commands
 
 | Command | Purpose |
@@ -147,12 +170,17 @@ On Windows, `start.bat` opens the CLI entry point. Exported files are written to
 | `check_duplicates.py` | Duplicate/consistency helper |
 | `EXPORTFORMAT.md` | Stable exchange-format plan |
 | `web_publisher/` | Static Web/PWA publisher (offline cache, search, six-language selector) |
+| `edit_server.py` | Local-only (`127.0.0.1`) HTTP server adding GUI create/edit/delete to `web_publisher/` |
+| `wiki_store.py` | Pure CRUD + soft-delete/trash functions the edit server (and any future caller) uses |
+| `wiki_auth.py` | Password hashing, permission model and session tracking for the edit server |
 
 ## Privacy
 
 WikiStub-Seed is local-first. Core usage reads and writes local JSON/Markdown files only. There is no telemetry and no automatic network communication.
 
 The optional translation command can call an external API only when `ANTHROPIC_API_KEY` is set and the optional `anthropic` package is installed.
+
+`edit_server.py` (see "Local Edit Mode" above) binds to `127.0.0.1` only and never talks to the network on its own; the only new local files it creates are `wiki_auth.json` (a password hash, gitignored) and `wikistub_seed_trash.json` (soft-deleted content, gitignored).
 
 ## Roadmap
 
@@ -164,12 +192,14 @@ Completed:
 - CLI smoke tests in GitHub Actions, plus dedicated macOS/Linux source smokes for `wikistub_seed_cli.py check` and `wikistub_seed_pipeline.py validate`
 - Static Web/PWA publisher with search and offline cache (`web_publisher/`)
 - `wikistub-seed-data-v1` schema wrapper with DE/EN/ES/ZH/JA/RU language maps
+- Local, password-gated GUI edit mode for the PWA (`edit_server.py`, `wiki_store.py`, `wiki_auth.py`) — create/edit/delete for articles and categories, soft-delete trash, full permission-matrix test coverage
 
 Planned:
 
 - Unified tag cleanup
 - Obsidian/GitHub Pages export paths
 - Optional embeddings and search API (specified in [`EMBEDDING_SEARCH_API.md`](EMBEDDING_SEARCH_API.md); implementation remains opt-in)
+- **Enterprise edit-mode concept (documented here, not built):** multiple named access tokens with independently configured rights, plus a distinct administrator role that can manage those tokens. The current edit mode deliberately has only one password/role — this was called "maybe a bit much" by the person who specified it, and is recorded here as a considered, rejected-for-now shape rather than a silent gap.
 
 ## Deutsch
 

@@ -155,6 +155,103 @@
     }
     #loading { padding: 24px; color: var(--muted); }
 
+    /* ── Edit mode ── */
+    #readonly-banner {
+      display: none;
+      padding: 6px 16px;
+      background: #fef7e0;
+      color: #7a5c00;
+      font-size: 12.5px;
+      border-bottom: 1px solid #f0d78c;
+      flex-shrink: 0;
+    }
+    #readonly-banner.visible { display: block; }
+    #auth-controls { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+    #auth-controls button {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff;
+      border-radius: 4px;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 12px;
+      min-height: 32px;
+    }
+    #auth-status { opacity: 0.9; white-space: nowrap; }
+    .action-bar { margin: 4px 0 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .action-bar button, #stub-panel-actions button, .tree-add, .tree-del {
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 12.5px;
+    }
+    .action-bar button:hover, #stub-panel-actions button:hover { background: #f1f3f4; }
+    .action-bar .danger { color: #c5221f; border-color: #f3c8c6; }
+    #stub-panel-actions { padding: 8px 14px; border-bottom: 1px solid var(--border); }
+    .tree-row { display: flex; align-items: center; justify-content: space-between; }
+    .tree-add, .tree-del {
+      padding: 0 5px;
+      font-size: 11px;
+      line-height: 1.6;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      opacity: 0;
+    }
+    li.cat-item:hover .tree-add, li.cat-item:hover .tree-del,
+    .sub-list li:hover .tree-add, .sub-list li:hover .tree-del { opacity: 1; }
+    .tree-del:hover { color: #c5221f; }
+    .tree-add:hover { color: var(--accent); }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay.visible { display: flex; }
+    .overlay-panel {
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      width: min(92vw, 440px);
+      max-height: 86vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+    .overlay-panel h3 { font-size: 1rem; margin-bottom: 12px; }
+    .overlay-panel label { display: block; font-size: 12.5px; color: var(--muted); margin: 10px 0 3px; }
+    .overlay-panel input, .overlay-panel textarea, .overlay-panel select {
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 13.5px;
+      font-family: inherit;
+    }
+    .overlay-panel textarea { resize: vertical; min-height: 60px; }
+    .overlay-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+    .overlay-actions button {
+      padding: 7px 14px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .overlay-actions .primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .overlay-error { color: #c5221f; font-size: 12.5px; margin-top: 8px; min-height: 1em; }
+    .overlay-hint { color: var(--muted); font-size: 11.5px; margin-top: 10px; line-height: 1.5; }
+    fieldset { border: 1px solid var(--border); border-radius: 4px; padding: 10px; margin-top: 12px; }
+    fieldset legend { font-size: 12px; color: var(--muted); padding: 0 4px; }
+    .perm-row { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 4px 0; }
+
     /* ── Mobile ── */
     @media (max-width: 680px) {
       nav { display: none; }
@@ -188,15 +285,109 @@
       <option value="ja">JA</option>
       <option value="ru">RU</option>
     </select>
+    <div id="auth-controls">
+      <span id="auth-status"></span>
+      <button id="auth-open-btn" type="button" hidden>Konto</button>
+    </div>
   </header>
+  <p id="readonly-banner">Lesemodus — kein lokaler Editier-Server erkannt. Zum Bearbeiten <code>python edit_server.py</code> starten.</p>
   <div class="layout">
-    <nav><ul id="cat-tree"></ul></nav>
-    <div id="stub-panel"><ul id="stub-list"></ul></div>
+    <nav>
+      <div id="cat-tree-actions" hidden>
+        <button id="new-category-btn" type="button" class="tree-add">+ Kategorie</button>
+      </div>
+      <ul id="cat-tree"></ul>
+    </nav>
+    <div id="stub-panel">
+      <div id="stub-panel-actions" hidden>
+        <button id="new-entry-btn" type="button">+ Artikel</button>
+      </div>
+      <ul id="stub-list"></ul>
+    </div>
     <main id="detail-panel">
       <p id="loading">Lade Daten…</p>
       <div id="detail"></div>
     </main>
   </div>
+
+  <div id="auth-overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Konto">
+    <div class="overlay-panel">
+      <h3 id="auth-overlay-title">Anmelden</h3>
+      <div id="auth-logged-out-view">
+        <label for="login-password">Passwort</label>
+        <input id="login-password" type="password" autocomplete="current-password">
+        <p class="overlay-hint">Solange kein Passwort hinterlegt ist, dürfen alle bearbeiten. Wer ein Passwort setzt, entscheidet danach, was ohne Anmeldung noch erlaubt bleibt.</p>
+        <div class="overlay-error" id="auth-error"></div>
+        <div class="overlay-actions">
+          <button type="button" id="auth-cancel-btn">Abbrechen</button>
+          <button type="button" id="set-password-btn">Passwort setzen</button>
+          <button type="button" id="login-btn" class="primary">Anmelden</button>
+        </div>
+      </div>
+      <div id="auth-logged-in-view" hidden>
+        <fieldset>
+          <legend>Rechte ohne Anmeldung</legend>
+          <label class="perm-row"><input type="checkbox" id="perm-create"> Neuanlegen erlaubt</label>
+          <label class="perm-row"><input type="checkbox" id="perm-edit"> Bearbeiten erlaubt</label>
+          <label class="perm-row"><input type="checkbox" id="perm-delete"> Löschen erlaubt</label>
+          <div class="overlay-actions"><button type="button" id="save-permissions-btn" class="primary">Speichern</button></div>
+        </fieldset>
+        <fieldset>
+          <legend>Passwort ändern</legend>
+          <input id="change-password" type="password" placeholder="Neues Passwort" autocomplete="new-password">
+          <div class="overlay-actions"><button type="button" id="change-password-btn">Ändern</button></div>
+        </fieldset>
+        <div class="overlay-error" id="auth-error-2"></div>
+        <div class="overlay-actions">
+          <button type="button" id="remove-password-btn" class="danger">Passwort entfernen</button>
+          <button type="button" id="logout-btn">Abmelden</button>
+          <button type="button" id="auth-close-btn" class="primary">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="entry-editor-overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Artikel bearbeiten">
+    <div class="overlay-panel">
+      <h3 id="entry-editor-title">Artikel bearbeiten</h3>
+      <label for="entry-category">Kategorie</label>
+      <input id="entry-category" type="text" list="entry-category-list">
+      <datalist id="entry-category-list"></datalist>
+      <label for="entry-subcategory">Unterkategorie</label>
+      <input id="entry-subcategory" type="text" list="entry-subcategory-list">
+      <datalist id="entry-subcategory-list"></datalist>
+      <label for="entry-title">Titel</label>
+      <input id="entry-title" type="text">
+      <label for="entry-def-de">Kurzdefinition (DE)</label>
+      <textarea id="entry-def-de"></textarea>
+      <label for="entry-def-en">Definition (EN)</label>
+      <textarea id="entry-def-en"></textarea>
+      <label for="entry-relevance">Relevanz</label>
+      <textarea id="entry-relevance"></textarea>
+      <label for="entry-tags">Tags (kommagetrennt)</label>
+      <input id="entry-tags" type="text">
+      <div class="overlay-error" id="entry-editor-error"></div>
+      <div class="overlay-actions">
+        <button type="button" id="entry-editor-cancel-btn">Abbrechen</button>
+        <button type="button" id="entry-editor-delete-btn" class="danger" hidden>Löschen</button>
+        <button type="button" id="entry-editor-save-btn" class="primary">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="category-editor-overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Kategorie anlegen">
+    <div class="overlay-panel">
+      <h3 id="category-editor-title">Neue Kategorie</h3>
+      <label for="category-editor-name">Name</label>
+      <input id="category-editor-name" type="text">
+      <div class="overlay-error" id="category-editor-error"></div>
+      <div class="overlay-actions">
+        <button type="button" id="category-editor-cancel-btn">Abbrechen</button>
+        <button type="button" id="category-editor-save-btn" class="primary">Anlegen</button>
+      </div>
+    </div>
+  </div>
+
   <script src="./app.js"></script>
 </body>
 </html>

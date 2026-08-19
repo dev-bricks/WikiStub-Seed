@@ -94,3 +94,10 @@ DONE.md
 # ---- Übersetzungs-Artefakte (lokale Pfade, nicht für public Repo) ----
 _translate/
 TRANSLATION-PROGRESS.md
+
+# ---- edit_server.py: lokaler Runtime-Zustand, niemals committen ----
+# wiki_auth.json traegt einen Passwort-HASH (siehe wiki_auth.py) und
+# wikistub_seed_trash.json den Inhalt geloeschter Artikel/Kategorien --
+# beides ist instanzspezifisch, nicht Teil des Datensatzes.
+wiki_auth.json
+wikistub_seed_trash.json

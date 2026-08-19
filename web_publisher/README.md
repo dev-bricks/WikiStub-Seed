@@ -36,6 +36,10 @@ python -m http.server 8000 --directory web_publisher
 
 Danach `http://localhost:8000/` öffnen. GitHub Pages oder jeder andere statische Host kann denselben Ordner ausliefern.
 
+## Lokaler Edit-Modus
+
+Diese Kombination aus `python -m http.server`/GitHub Pages liest nur — sie kann nicht schreiben. Für GUI-Editing (Artikel/Kategorien anlegen, bearbeiten, löschen) `python edit_server.py` (Repository-Root) statt eines einfachen HTTP-Servers starten: liefert dieselben Dateien aus diesem Ordner UND eine `/api/`-JSON-Schnittstelle fürs Schreiben, ausschließlich an `127.0.0.1` gebunden. Details, Rechtemodell und Sicherheitshinweise: `../README.md`/`../README_de.md`, Abschnitt „Lokaler Edit-Modus". Ohne laufenden `edit_server.py` (also z. B. auf GitHub Pages) zeigt die Seite automatisch einen Lesemodus-Hinweis und blendet alle Bearbeiten-Bedienelemente aus.
+
 ## Grenzen
 
 - Kein nativer Android-, iOS- oder Desktop-Clone.
