@@ -1,13 +1,28 @@
 """Metadata, manifest parity and documentation tests for WikiStub-Seed."""
 
 import json
+import re
 from pathlib import Path
-import tomllib
 
 from language_model import iter_metawiki_entries
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+# tomllib is stdlib only from Python 3.11 on; pyproject.toml's own
+# requires-python = ">=3.10" commits this project to 3.10 too, and CI's
+# python-tests matrix actually runs 3.10 (found failing this way on
+# Windows and Ubuntu 3.10 runners: "ModuleNotFoundError: No module named
+# 'tomllib'"). A single-line regex read of `version = "..."` under
+# [project] needs no TOML parser (and no new dependency) for the one field
+# this test actually uses.
+_VERSION_RE = re.compile(r'(?m)^\s*version\s*=\s*"([^"]+)"')
+
+
+def _pyproject_version(pyproject_path: Path) -> str | None:
+    content = pyproject_path.read_text(encoding="utf-8")
+    match = _VERSION_RE.search(content)
+    return match.group(1) if match else None
 
 
 def test_version_parity():
@@ -15,10 +30,7 @@ def test_version_parity():
     pyproject_path = PROJECT_ROOT / "pyproject.toml"
     assert pyproject_path.is_file(), "pyproject.toml missing"
 
-    with open(pyproject_path, "rb") as f:
-        pyproject_data = tomllib.load(f)
-
-    pyproject_version = pyproject_data.get("project", {}).get("version")
+    pyproject_version = _pyproject_version(pyproject_path)
     assert pyproject_version, "Version missing in pyproject.toml"
 
     changelog_path = PROJECT_ROOT / "CHANGELOG.md"
