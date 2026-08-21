@@ -2,57 +2,60 @@
 
 ## Deutsch
 
+### Sicherheitsphilosophie & Zero-Egress-Garantie
+
+WikiStub-Seed ist als **lokal-zentriertes Wissensgerüst (Local-First)** konzipiert.
+1. **Kein unerwarteter Netzwerkverkehr (Zero-Egress)**: Kern-Import, Export, Konsistenzprüfungen und CLI-Befehle arbeiten vollständig offline auf lokalen JSON- und Markdown-Dateien. Es existiert keine Telemetrie und kein Hintergrund-Tracking.
+2. **Isolierte optionale Übersetzungs-Schnittstelle**: Externe API-Aufrufe erfolgen ausschließlich bei expliziter Nutzeraktion über den Übersetzungs-Befehl, wenn `ANTHROPIC_API_KEY` konfiguriert und das optionale Paket installiert ist.
+3. **Deterministische Integrität**: Die Datensatz-Validierung und der statische PWA-Build (`web_publisher/_build.py`) arbeiten deterministisch und atomar ohne Root- oder Administrationsrechte (Non-Elevation).
+
 ### Sicherheitslücke melden
 
 Wenn Sie eine Sicherheitslücke finden, melden Sie diese bitte verantwortungsvoll:
 
 1. **Öffnen Sie kein öffentliches Issue**
-2. **Nutzen Sie GitHubs [Private Vulnerability Reporting](https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new)**
-3. Nennen Sie: Beschreibung, Schritte zur Reproduktion und mögliche Auswirkungen
-
-### Meldeweg
-
-1. Öffnen Sie: https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new
-2. Füllen Sie das Formular aus (Titel, Beschreibung, Schweregrad, betroffene Versionen)
-3. Senden Sie die Meldung privat ab; sie ist nicht öffentlich sichtbar
+2. **Nutzen Sie GitHubs [Private Vulnerability Reporting](https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new)** oder kontaktieren Sie uns direkt per E-Mail:
+   - `security@ellmos.ai`
+   - `support@lukasgeiger.com`
+3. Nennen Sie: Beschreibung, Schritte zur Reproduktion, betroffene Komponenten und mögliche Auswirkungen
 
 ### Geltungsbereich
 
-- Wissensdatenbank
-- Dateisystemzugriff
+- Datenintegrität des JSON-Hauptbestands (`wikistub_seed.json`)
+- Dateisystem- und Pfadvalidierung in Import-/Export-Pipelines
+- XSS- und Injektionsschutz im statischen Web- und PWA-Publisher (`web_publisher/`)
 
 ### Reaktion
 
-Dieses Projekt wird einzeln gepflegt; Antwortzeiten können variieren. Kritische
-Probleme werden priorisiert. Bitte räumen Sie angemessene Zeit vor einer
-öffentlichen Offenlegung ein.
+Kritische Sicherheitsmeldungen werden prioritär bearbeitet. Bitte räumen Sie eine angemessene Frist zur Behebung vor einer öffentlichen Offenlegung ein (Coordinated Vulnerability Disclosure).
 
 ---
 
 ## English
 
-## Reporting a Vulnerability
+### Security Philosophy & Zero-Egress Guarantee
+
+WikiStub-Seed is designed as a **local-first knowledge framework**.
+1. **Zero-Egress by Default**: Core data import, Markdown export, consistency checks and CLI operations run completely offline on local JSON and Markdown files. No telemetry, analytics, or background network calls exist.
+2. **Isolated Optional Translation Boundary**: External API communication is restricted to explicit user invocation of the translation command and requires an explicitly configured `ANTHROPIC_API_KEY`.
+3. **Deterministic Integrity**: Dataset validation and the static PWA build (`web_publisher/_build.py`) operate deterministically and atomically in unprivileged user space (non-elevation).
+
+### Reporting a Vulnerability
 
 If you find a security vulnerability, please report it responsibly:
 
 1. **Do NOT open a public issue**
-2. **Use GitHub's [private vulnerability reporting](https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new)**
-3. Include: description, steps to reproduce, potential impact
+2. **Use GitHub's [Private Vulnerability Reporting](https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new)** or contact us directly via email:
+   - `security@ellmos.ai`
+   - `support@lukasgeiger.com`
+3. Include: description, steps to reproduce, affected components, and potential impact
 
-### How to Report
+### Scope
 
-1. Go to: https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new
-2. Fill out the form (title, description, severity, affected versions)
-3. Submit privately (not visible to public until disclosed)
+- Data integrity of the canonical dataset (`wikistub_seed.json`)
+- File system path traversal and sanitization in import/export pipelines
+- XSS and DOM injection defenses in the static Web/PWA publisher (`web_publisher/`)
 
-We will respond as soon as possible.
+### Response
 
-## Scope
-
-- Knowledge database
-- File system access
-
-## Response
-
-As a solo project, response times may vary. Critical issues will be
-prioritized. Please allow reasonable time before public disclosure.
+Critical vulnerabilities receive highest priority. Please allow reasonable time for investigation and patch deployment before coordinated public disclosure.

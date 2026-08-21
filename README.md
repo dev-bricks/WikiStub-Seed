@@ -8,15 +8,18 @@
 
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
-[![WikiStub-Seed smoke tests](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
-[![Version](https://img.shields.io/badge/version-1.1.7-blue.svg)](pyproject.toml)
+[![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
+[![Version](https://img.shields.io/badge/version-1.1.8-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
 ![Languages](https://img.shields.io/badge/languages-DE%20%7C%20EN%20%7C%20ES%20%7C%20ZH%20%7C%20JA%20%7C%20RU-orange)
 ![Format](https://img.shields.io/badge/format-JSON-green)
-![Python](https://img.shields.io/badge/python-3.10%2B-yellow)
-![Tests](https://img.shields.io/badge/tests-150%20Python%20%7C%2045%20Node%20passed-success)
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+![Privacy](https://img.shields.io/badge/privacy-100%25%20Offline%20%7C%20Zero--Egress-success)
+![Security](https://img.shields.io/badge/security-Local--First%20%7C%20Deterministic-blue)
+![Tests](https://img.shields.io/badge/tests-199%20passed%20(154%20Python%20%2B%2045%20Node)-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -46,6 +49,36 @@ flowchart TD
     A --> E["RAG & LLM Context Pipelines<br/>(AI Workflows & Embeddings)"]
     C --> F["Structured Markdown<br/>(Obsidian / GitHub Pages / Docs)"]
     D --> G["PWA Web Frontend<br/>(Offline Search / 6 Languages)"]
+```
+
+### Zero-Egress Lifecycle & Query Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Developer / AI Agent
+    participant CLI as wikistub_seed_cli / pipeline
+    participant Data as wikistub_seed.json (630 Stubs)
+    participant Builder as web_publisher/_build.py
+    participant PWA as Static PWA / ServiceWorker
+    
+    User->>CLI: Run check / stats / validate
+    CLI->>Data: Validate 12 Domains, 85 Subcategories & Maps
+    Data-->>CLI: 630 Stubs Validated (Zero Egress / 100% Local)
+    CLI-->>User: Console Report & Consistency Proof
+    
+    opt Export Markdown / RAG Context
+        User->>CLI: export --output --english
+        CLI->>Data: Read definitions & relevance maps
+        CLI-->>User: Write structured Markdown to output/
+    end
+    
+    opt Build & Serve Local PWA
+        User->>Builder: Run _build.py
+        Builder->>Data: Slices & indexes stubs
+        Builder-->>PWA: Generates data/wikistub_seed.json & search-index.json
+        PWA-->>User: Offline instant search in 6 languages
+    end
 ```
 
 ## Discovery Context
@@ -237,14 +270,26 @@ Composition and runtime details are intentionally omitted.
  
 WikiStub-Seed is part of the **dev-bricks** ecosystem and the broader **open-bricks** family:
  
-| Tool | Purpose | Status |
-|---|---|---|
-| [`dev-bricks/CareCenter-for-Codex`](https://github.com/dev-bricks/CareCenter-for-Codex) | Workspace health check, diagnostics & test orchestration | Production |
-| [`dev-bricks/MethodenAnalyser`](https://github.com/dev-bricks/MethodenAnalyser) | AST-based Python code analysis, import optimizer & dead-code detection | Production |
-| [`dev-bricks/DevCenter`](https://github.com/dev-bricks/DevCenter) | Unified developer dashboard, repo health overview & project launcher | Production |
-| [`dev-bricks/CodeBox`](https://github.com/dev-bricks/CodeBox) | Lightweight PySide6 desktop IDE with syntax highlighting & terminal | Beta |
-| [`dev-bricks/safe-start-for-codex`](https://github.com/dev-bricks/safe-start-for-codex) | Safe initialization and verification for development workspaces | Production |
-| [`ellmos-ai/project-docs-template`](https://github.com/ellmos-ai/project-docs-template) | Standardized documentation generator and compliance framework | Production |
+| Tool | Organization | Purpose | Status |
+|---|---|---|---|
+| [`dev-bricks/DevCenter`](https://github.com/dev-bricks/DevCenter) | dev-bricks | Unified developer dashboard, repo health overview & project launcher | Production |
+| [`dev-bricks/CodeBox`](https://github.com/dev-bricks/CodeBox) | dev-bricks | Lightweight PySide6 desktop IDE with syntax highlighting & terminal | Beta |
+| [`dev-bricks/MethodenAnalyser`](https://github.com/dev-bricks/MethodenAnalyser) | dev-bricks | AST-based Python code analysis, import optimizer & dead-code detection | Production |
+| [`dev-bricks/CareCenter-for-Codex`](https://github.com/dev-bricks/CareCenter-for-Codex) | dev-bricks | Workspace health check, diagnostics & test orchestration | Production |
+| [`dev-bricks/safe-start-for-codex`](https://github.com/dev-bricks/safe-start-for-codex) | dev-bricks | Safe initialization and verification for development workspaces | Production |
+| [`dev-bricks/automation-master`](https://github.com/dev-bricks/automation-master) | dev-bricks | Automated release management and workflow orchestration | Production |
+| [`dev-bricks/automizer-for-claude-desktop`](https://github.com/dev-bricks/automizer-for-claude-desktop) | dev-bricks | Claude Desktop scheduled task and workflow automation utility | Production |
+| [`ellmos-ai/project-docs-template`](https://github.com/ellmos-ai/project-docs-template) | ellmos-ai | Standardized documentation generator and compliance framework | Production |
+| [`ellmos-ai/policy-registry`](https://github.com/ellmos-ai/policy-registry) | ellmos-ai | Declarative governance and machine-readable policy enforcement engine | Production |
+| [`ellmos-ai/sqlite-transit-sync`](https://github.com/ellmos-ai/sqlite-transit-sync) | ellmos-ai | Zero-egress local SQLite synchronization and replication engine | Production |
+| [`doc-bricks/PDFtoPDFocr`](https://github.com/doc-bricks/PDFtoPDFocr) | doc-bricks | Offline OCR PDF processor with zero external telemetry | Production |
+| [`doc-bricks/MediaBrain`](https://github.com/doc-bricks/MediaBrain) | doc-bricks | Local multimedia indexer, transcriber & offline metadata vault | Production |
+| [`doc-bricks/DokuReader`](https://github.com/doc-bricks/DokuReader) | doc-bricks | Document reader and semantic exploration desktop environment | Production |
+| [`doc-bricks/CleanMarkdown`](https://github.com/doc-bricks/CleanMarkdown) | doc-bricks | Markdown formatting, linting and structure standardization tool | Production |
+| [`file-bricks/WinStorePackager`](https://github.com/file-bricks/WinStorePackager) | file-bricks | Automated MSIX packager for Python & PySide6 desktop apps | Production |
+| [`file-bricks/NoteSpaceLLM`](https://github.com/file-bricks/NoteSpaceLLM) | file-bricks | Note management and semantic retrieval system for desktop | Production |
+| [`open-bricks/open-bricks`](https://github.com/open-bricks/open-bricks) | open-bricks | Umbrella repository for all open-source bricks components | Production |
+
  
 ## License
 

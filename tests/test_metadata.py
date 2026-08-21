@@ -105,3 +105,64 @@ def test_dataset_integrity():
         assert "title" in entry, f"Entry in {cat}/{sub} missing title"
         assert "definitions" in entry, f"Stub {entry['title']} missing definitions map"
         assert "relevance_i18n" in entry, f"Stub {entry['title']} missing relevance_i18n map"
+
+
+def test_pyproject_classifiers_and_urls():
+    """Verify pyproject.toml PEP 621 classifiers, python version support and project URLs."""
+    pyproject_path = PROJECT_ROOT / "pyproject.toml"
+    assert pyproject_path.is_file(), "pyproject.toml missing"
+    content = pyproject_path.read_text(encoding="utf-8")
+
+    assert '"Programming Language :: Python :: 3.10"' in content
+    assert '"Programming Language :: Python :: 3.11"' in content
+    assert '"Programming Language :: Python :: 3.12"' in content
+    assert '"Programming Language :: Python :: 3.13"' in content
+    assert '"Operating System :: OS Independent"' in content
+    assert '"License :: OSI Approved :: MIT License"' in content
+
+    assert 'Homepage = "https://github.com/dev-bricks/WikiStub-Seed"' in content
+    assert 'Repository = "https://github.com/dev-bricks/WikiStub-Seed.git"' in content
+    assert 'Documentation = "https://github.com/dev-bricks/WikiStub-Seed#readme"' in content
+    assert '"Bug Tracker" = "https://github.com/dev-bricks/WikiStub-Seed/issues"' in content
+
+
+def test_security_policy_invariants():
+    """Verify SECURITY.md contains bilingual sections, zero-egress invariants and contacts."""
+    sec_path = PROJECT_ROOT / "SECURITY.md"
+    assert sec_path.is_file(), "SECURITY.md missing"
+    content = sec_path.read_text(encoding="utf-8")
+
+    assert "## Deutsch" in content
+    assert "## English" in content
+    assert "Zero-Egress" in content or "zero-egress" in content.lower()
+    assert "Local-First" in content or "local-first" in content.lower()
+    assert "security@ellmos.ai" in content
+    assert "support@lukasgeiger.com" in content
+    assert "Private Vulnerability Reporting" in content
+
+
+def test_ci_workflow_integrity():
+    """Verify GitHub Actions workflow file exists and configures multi-version matrix."""
+    ci_path = PROJECT_ROOT / ".github" / "workflows" / "tests.yml"
+    assert ci_path.is_file(), "tests.yml missing"
+    content = ci_path.read_text(encoding="utf-8")
+
+    assert "python-version" in content
+    assert "'3.10'" in content or '"3.10"' in content
+    assert "'3.13'" in content or '"3.13"' in content
+    assert "ubuntu-latest" in content
+    assert "windows-latest" in content
+    assert "node --test" in content
+
+
+def test_sibling_tools_matrix():
+    """Verify sibling tools matrix exists in both README.md and README_de.md."""
+    for fname in ["README.md", "README_de.md"]:
+        path = PROJECT_ROOT / fname
+        assert path.is_file(), f"{fname} missing"
+        content = path.read_text(encoding="utf-8")
+        assert "dev-bricks/DevCenter" in content or "DevCenter" in content
+        assert "dev-bricks/CodeBox" in content or "CodeBox" in content
+        assert "dev-bricks/safe-start-for-codex" in content or "safe-start-for-codex" in content
+        assert "open-bricks" in content
+

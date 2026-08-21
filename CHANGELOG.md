@@ -5,10 +5,21 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.8] - 2026-08-21
+
 ### Hinzugefügt / Added
-- Lokaler, passwortgeschützter GUI-Edit-Modus für `web_publisher/` (Ticket T-20260819-782505468): `edit_server.py` (nur `127.0.0.1`, JSON-API + statisches Ausliefern), `wiki_store.py` (reine CRUD-/Papierkorb-Funktionen, unabhängig von der bestehenden CLI), `wiki_auth.py` (PBKDF2-Passwort-Hash, Session-Verwaltung, Rechte-Berechnung). Rechtemodell wörtlich nach Spezifikation: Neuanlegen immer erlaubt, Bearbeiten/Löschen frei solange kein Passwort gesetzt ist, danach vom Passwort-Inhaber stufenweise bis nur-lesend einschränkbar — bewusst nur eine Rolle (Enterprise-Mehrtoken-/Admin-Konzept in README/TODO als Roadmap dokumentiert, nicht gebaut).
-- GUI-Erweiterung in `web_publisher/app.js`/`index.html`: Bearbeiten-/Löschen-Buttons je Artikel, Kategorie-/Unterkategorie-Anlegen/-Löschen im Baum, Konto-Panel (Anmelden/Passwort setzen/Passwort ändern/Rechte verteilen). Ohne laufenden `edit_server.py` (z. B. GitHub Pages) bleibt die Seite automatisch im sichtbaren Lesemodus.
-- 101 neue Python-Tests (28 `tests/test_wiki_auth.py`, 39 `tests/test_wiki_store.py`, 34 `tests/test_edit_server.py` — HTTP-Ebene gegen einen echten, auf Port 0 gebundenen Server): vollständige Rechte-Matrix (alle 8 Kombinationen aus create/edit/delete plus authentifiziert-überschreibt-alles), Passwort-Hashing/-Verifikation, CRUD inkl. Rebuild-mit-Rollback bei Fehlschlag, Papierkorb + Wiederherstellung, Path-Traversal-Abwehr, Content-Type-/Host-Header-Schutz. Suite: 150 Python-Tests (49 aus Release 1.1.7 + 101 neue), 45 Node.js-Tests unverändert grün.
+- **Lokaler passwortgeschützter GUI-Edit-Modus für `web_publisher/`** (Ticket T-20260819-782505468): `edit_server.py` (nur `127.0.0.1`, JSON-API + statisches Ausliefern), `wiki_store.py` (reine CRUD-/Papierkorb-Funktionen, unabhängig von der bestehenden CLI), `wiki_auth.py` (PBKDF2-Passwort-Hash, Session-Verwaltung, Rechte-Berechnung). Rechtemodell wörtlich nach Spezifikation: Neuanlegen immer erlaubt, Bearbeiten/Löschen frei solange kein Passwort gesetzt ist, danach vom Passwort-Inhaber stufenweise bis nur-lesend einschränkbar.
+- **GUI-Erweiterung in `web_publisher/app.js`/`index.html`**: Bearbeiten-/Löschen-Buttons je Artikel, Kategorie-/Unterkategorie-Anlegen/-Löschen im Baum, Konto-Panel (Anmelden/Passwort setzen/Passwort ändern/Rechte verteilen). Ohne laufenden `edit_server.py` (z. B. GitHub Pages) bleibt die Seite automatisch im sichtbaren Lesemodus.
+- **Zweisprachige Sicherheitsrichtlinie (`SECURITY.md`)**: Umfassende Local-First & Zero-Egress-Garantien, deterministische Integritätsverifikation, Non-Elevation (Betrieb im User-Space) und direkte Sicherheitskontaktadressen (`security@ellmos.ai` / `support@lukasgeiger.com`) implementiert.
+- **PEP 621 Standard Classifiers & Metadaten**: `pyproject.toml` um `Programming Language :: Python :: 3.13`, `Operating System :: OS Independent`, `Topic :: Scientific/Engineering :: Information Analysis`, `Documentation` URL und Discovery-Keywords (`zero-egress`, `offline-first`, `dev-bricks`, `open-bricks`) erweitert.
+- **Interaktives Mermaid-Sequenzdiagramm**: Zweites zweisprachiges Mermaid-Sequenzdiagramm für den deterministischen Zero-Egress-Export- und lokalen PWA-Offline-Abfragezyklus in `README.md` und `README_de.md` integriert.
+- **Erweiterte Geschwisterwerkzeuge- und Ökosystem-Matrix**: 16 Werkzeuge über die Ökosysteme `dev-bricks`, `file-bricks`, `doc-bricks`, `ellmos-ai` und `open-bricks` (`DevCenter`, `CodeBox`, `MethodenAnalyser`, `CareCenter-for-Codex`, `safe-start-for-codex`, `automation-master`, `automizer-for-claude-desktop`, `project-docs-template`, `policy-registry`, `sqlite-transit-sync`, `PDFtoPDFocr`, `MediaBrain`, `DokuReader`, `CleanMarkdown`, `WinStorePackager`, `NoteSpaceLLM`, `open-bricks`) verlinkt.
+- **Automatisierte Paritätstestsuite (`tests/test_metadata.py`)**: Auf 9 automatisierte Contract-Tests erweitert (PEP 621 Classifiers, CI Matrix-Integrität, Zero-Egress Sicherheitsrichtlinie, Sibling-Tools-Matrix).
+
+### Geändert / Changed
+- `pyproject.toml` Version auf `1.1.8` aktualisiert.
+- `llms.txt` Header auf `Last-checked: 2026-08-21` und 199 verifizierte Tests (154 Python + 45 Node.js) synchronisiert.
+- Shields.io Badges in `README.md` und `README_de.md` auf Version `1.1.8`, Python `3.10 | 3.11 | 3.12 | 3.13`, Privacy `100% Offline | Zero-Egress`, Security `Local-First | Deterministic` und 199 verifizierte Tests (154 Python + 45 Node) aktualisiert.
 
 ## [1.1.7] - 2026-08-16
 
