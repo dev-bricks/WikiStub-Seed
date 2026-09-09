@@ -1,4 +1,4 @@
-﻿# =============================================================================
+# =============================================================================
 # .gitignore - WikiStub-Seed
 # =============================================================================
 
@@ -101,3 +101,14 @@ TRANSLATION-PROGRESS.md
 # beides ist instanzspezifisch, nicht Teil des Datensatzes.
 wiki_auth.json
 wikistub_seed_trash.json
+
+# ---- Synchronisations- & Cloud-Konflikte ----
+*.sync-conflict-*
+*.conflict
+*-CONFLIT-*
+*-conflict-*
+
+# ---- Multi-Agent-Sperren & Locks ----
+LOCK.*
+*.lock
+LOCK*.txt

@@ -56,6 +56,7 @@ def test_core_documentation_files_exist():
         "EMBEDDING_SEARCH_API.md",
         "EXPORTFORMAT.md",
         "ellmos-module.v2.json",
+        "MARKETING-LOG.txt",
     ]
 
     for fname in required_files:
@@ -71,7 +72,7 @@ def test_llms_txt_structure_and_freshness():
 
     content = llms_path.read_text(encoding="utf-8")
 
-    assert "## Last-checked:" in content, "Last-checked timestamp missing in llms.txt"
+    assert "## Last-checked: 2026-09-09" in content, "Last-checked timestamp missing in llms.txt"
     assert "https://github.com/dev-bricks/WikiStub-Seed" in content, "Canonical repo link missing in llms.txt"
     assert "wikistub_seed.json" in content, "Authoritative dataset not mentioned in llms.txt"
     assert "630" in content, "Stub count missing in llms.txt"
@@ -119,6 +120,9 @@ def test_pyproject_classifiers_and_urls():
     assert '"Programming Language :: Python :: 3.12"' in content
     assert '"Programming Language :: Python :: 3.13"' in content
     assert '"Operating System :: OS Independent"' in content
+    assert '"Operating System :: Microsoft :: Windows"' in content
+    assert '"Operating System :: POSIX :: Linux"' in content
+    assert '"Operating System :: MacOS"' in content
     assert re.search(r'(?m)^license\s*=\s*"MIT"\s*$', content)
     assert re.search(r'(?m)^license-files\s*=\s*\[\s*"LICENSE"\s*\]\s*$', content)
     assert '"License :: OSI Approved :: MIT License"' not in content
@@ -127,6 +131,10 @@ def test_pyproject_classifiers_and_urls():
     assert 'Repository = "https://github.com/dev-bricks/WikiStub-Seed.git"' in content
     assert 'Documentation = "https://github.com/dev-bricks/WikiStub-Seed#readme"' in content
     assert '"Bug Tracker" = "https://github.com/dev-bricks/WikiStub-Seed/issues"' in content
+    assert 'Changelog = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CHANGELOG.md"' in content
+    assert 'Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"' in content
+    assert '"Parent Organization" = "https://github.com/dev-bricks"' in content
+    assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in content
 
 
 def test_security_policy_invariants():
@@ -139,9 +147,13 @@ def test_security_policy_invariants():
     assert "## English" in content
     assert "Zero-Egress" in content or "zero-egress" in content.lower()
     assert "Local-First" in content or "local-first" in content.lower()
+    assert "security@open-bricks.org" in content
     assert "security@ellmos.ai" in content
     assert "support@lukasgeiger.com" in content
+    assert "lukas@open-bricks.org" in content
     assert "Private Vulnerability Reporting" in content
+    assert "48" in content  # 48h SLA
+    assert "security/advisories" in content
 
 
 def test_ci_workflow_integrity():
@@ -169,3 +181,123 @@ def test_sibling_tools_matrix():
         assert "dev-bricks/safe-start-for-codex" in content or "safe-start-for-codex" in content
         assert "open-bricks" in content
 
+
+def test_readme_bilingual_badges_and_mermaid():
+    """Verify modern badges and dual Mermaid diagrams in README.md and README_de.md."""
+    for fname in ["README.md", "README_de.md"]:
+        path = PROJECT_ROOT / fname
+        assert path.is_file(), f"{fname} missing"
+        content = path.read_text(encoding="utf-8")
+
+        assert "shields.io" in content
+        assert "version-1.1.9" in content
+        assert "dev--bricks" in content
+        assert "open--bricks" in content
+        assert "flowchart TD" in content
+        assert "sequenceDiagram" in content
+        assert "autonumber" in content
+
+
+def test_quick_navigation_anchors_and_parity():
+    """Verify 14-point quick navigation exists with anchor parity across README.md and README_de.md."""
+    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "### Quick Navigation" in readme_en
+    assert "### Schnellnavigation" in readme_de
+
+    en_points = [
+        "1. Executive Summary",
+        "2. System Architecture & Data Flow",
+        "3. Zero-Egress Lifecycle & Query Flow",
+        "4. Safety Model & Governance Invariants",
+        "5. Installation & Quick Start",
+        "6. Local Edit Mode & HTTP Server",
+        "7. Core Commands & CLI Operations",
+        "8. Repository Map & Key Files",
+        "9. Data Shape & Knowledge Schema",
+        "10. Sibling Tools & Ecosystem Matrix",
+        "11. Discovery & Search Keywords",
+        "12. Security & Vulnerability Reporting",
+        "13. License & Liability",
+        "14. German Documentation / Deutsche Version",
+    ]
+    for pt in en_points:
+        assert pt in readme_en, f"Missing English quick navigation point: {pt}"
+
+    de_points = [
+        "1. Übersicht & Management Summary",
+        "2. Systemarchitektur & Datenfluss",
+        "3. Zero-Egress Lebenszyklus & Abfragefluss",
+        "4. Sicherheitsmodell & Governance-Invarianten",
+        "5. Installation & Schnellstart",
+        "6. Lokaler Editiermodus & HTTP-Server",
+        "7. Kernbefehle & CLI-Betrieb",
+        "8. Repository-Struktur & Hauptdateien",
+        "9. Datenstruktur & Wissensschema",
+        "10. Geschwisterwerkzeuge & Ökosystem-Matrix",
+        "11. Auffindbarkeit & Suchbegriffe",
+        "12. Sicherheitsrichtlinie & Meldewege",
+        "13. Lizenz & Haftung",
+        "14. Englische Dokumentation / English Version",
+    ]
+    for pt in de_points:
+        assert pt in readme_de, f"Missing German quick navigation point: {pt}"
+
+
+def test_governance_invariants_table():
+    """Verify 10-point Governance Invariants table in README.md and README_de.md."""
+    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "## 4. Safety Model & Governance Invariants" in readme_en
+    assert "## 4. Sicherheitsmodell & Governance-Invarianten" in readme_de
+
+    invariants = [
+        "100% Local-First & Zero-Egress",
+        "Non-Elevation (RunAsInvoker)",
+        "Deterministic Knowledge Schema",
+        "Pure Offline Storage & Zero Telemetry",
+        "Localhost-Bound Edit Server (127.0.0.1)",
+        "PBKDF2 Password Hashing & Soft-Delete Trash",
+        "Cross-Platform Operating Parity",
+        "Pure Python Standard Library Core",
+        "Cloud-Sync Conflict Defense",
+        "48h Security SLA & Coordinated Disclosure",
+    ]
+    for inv in invariants:
+        assert inv in readme_en, f"Missing invariant in README.md: {inv}"
+
+
+def test_gitignore_conflict_and_lock_patterns():
+    """Verify .gitignore filters cloud-sync conflicts and multi-agent lock patterns."""
+    gi_path = PROJECT_ROOT / ".gitignore"
+    assert gi_path.is_file(), ".gitignore missing"
+    content = gi_path.read_text(encoding="utf-8")
+
+    assert "*.sync-conflict-*" in content
+    assert "*.conflict" in content
+    assert "*-conflict-*" in content
+    assert "LOCK.*" in content
+    assert "*.lock" in content
+    assert "LOCK*.txt" in content
+
+
+def test_ci_concurrency_configured():
+    """Verify concurrency group and cancel-in-progress are configured in CI workflows."""
+    for wfname in ["tests.yml", "source-platform-smoke.yml"]:
+        wf_path = PROJECT_ROOT / ".github" / "workflows" / wfname
+        assert wf_path.is_file(), f"{wfname} missing"
+        content = wf_path.read_text(encoding="utf-8")
+        assert "concurrency:" in content, f"concurrency missing in {wfname}"
+        assert "cancel-in-progress: true" in content, f"cancel-in-progress missing in {wfname}"
+
+
+def test_local_marketing_log_exists():
+    """Verify local MARKETING-LOG.txt exists and logs recent Pfad B improvements."""
+    mlog_path = PROJECT_ROOT / "MARKETING-LOG.txt"
+    assert mlog_path.is_file(), "MARKETING-LOG.txt missing"
+    content = mlog_path.read_text(encoding="utf-8")
+    assert "[GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN]" in content
+    assert "PFAD_B_UPGRADE" in content
+    assert "WikiStub-Seed" in content

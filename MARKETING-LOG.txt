@@ -1,0 +1,4 @@
+# MARKETING-LOG.txt - WikiStub-Seed
+# Format: [YYYY-MM-DD HH:MM:SS TZ] [TASK_NAME] ACTION: ... | DETAILS: ...
+
+[2026-09-09 05:50:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 14-Point Quick Navigation in README.md & README_de.md with strict bilingual anchor parity, 10 Governance & Runtime Invariants Table, Modern Badges (v1.1.9, 48h Security SLA, Ruff, Tests), CI Concurrency (cancel-in-progress), .gitignore cloud-sync conflict and lock hardening, PEP 621 ecosystem URLs (Changelog, Security, Parent Org, Umbrella Ecosystem) & OS classifiers, bilingual SECURITY.md with 48h SLA and multi-channel contacts, and expanded test_metadata.py contract tests (206/206 total passed).

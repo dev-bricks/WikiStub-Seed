@@ -9,7 +9,7 @@
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
 [![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
-[![Version](https://img.shields.io/badge/version-1.1.8-blue.svg)](pyproject.toml)
+[![Version](https://img.shields.io/badge/version-1.1.9-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
@@ -19,11 +19,32 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
 ![Privacy](https://img.shields.io/badge/privacy-100%25%20Offline%20%7C%20Zero--Egress-success)
 ![Security](https://img.shields.io/badge/security-Local--First%20%7C%20Deterministic-blue)
-![Tests](https://img.shields.io/badge/tests-199%20passed%20(154%20Python%20%2B%2045%20Node)-success)
+[![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
+[![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
+![Tests](https://img.shields.io/badge/tests-206%20passed%20(161%20Python%20%2B%2045%20Node)-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## Start Here
+### Quick Navigation
+
+- [1. Executive Summary](#1-executive-summary)
+- [2. System Architecture & Data Flow](#2-system-architecture--data-flow)
+- [3. Zero-Egress Lifecycle & Query Flow](#3-zero-egress-lifecycle--query-flow)
+- [4. Safety Model & Governance Invariants](#4-safety-model--governance-invariants)
+- [5. Installation & Quick Start](#5-installation--quick-start)
+- [6. Local Edit Mode & HTTP Server](#6-local-edit-mode--http-server)
+- [7. Core Commands & CLI Operations](#7-core-commands--cli-operations)
+- [8. Repository Map & Key Files](#8-repository-map--key-files)
+- [9. Data Shape & Knowledge Schema](#9-data-shape--knowledge-schema)
+- [10. Sibling Tools & Ecosystem Matrix](#10-sibling-tools--ecosystem-matrix)
+- [11. Discovery & Search Keywords](#11-discovery--search-keywords)
+- [12. Security & Vulnerability Reporting](#12-security--vulnerability-reporting)
+- [13. License & Liability](#13-license--liability)
+- [14. German Documentation / Deutsche Version](README_de.md)
+
+---
+
+## 1. Executive Summary
 
 | If you want to... | Open this |
 |---|---|
@@ -39,19 +60,39 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 > [!NOTE]
 > **AI & LLM Integration**: For machine-readable context, repository structure, search phrases, and LLM guidelines, see [llms.txt](llms.txt).
 
-## Architecture & Data Flow
+### Key Features
+
+- **630 Knowledge Stubs**: Curated in `wikistub_seed.json` with definitions across 6 languages (DE, EN, ES, ZH, JA, RU) and relevance notes across 5 languages.
+- **12 Top-Level Domains**: Mathematics, physics, chemistry, biology, medicine, psychology, AI/CS, engineering, society, economics, history, and culture.
+- **85 Structured Subcategories**: Short, neutral definitions and practical relevance notes.
+- **Zero Third-Party Runtime Dependencies**: Core import, export, validation, CLI, and edit server run on the standard Python 3.10+ library.
+- **Dual Consumption Models**: Batch CLI export to structured Markdown or static PWA reader with offline ServiceWorker search.
+
+### Use Cases
+
+- Seed a local knowledge base for AI-assisted writing or research.
+- Build documentation glossaries, learning maps or concept catalogs.
+- Export structured Markdown for Obsidian, GitHub Pages or static documentation sites.
+- Feed retrieval, embeddings or LLM context pipelines with compact domain stubs.
+- Translate and extend a domain-neutral knowledge skeleton in a controlled JSON format.
+
+---
+
+## 2. System Architecture & Data Flow
 
 ```mermaid
 flowchart TD
     A["wikistub_seed.json<br/>(630 Multilingual Stubs)"] --> B["wikistub_seed_cli.py<br/>(Stats & Validation)"]
     A --> C["wikistub_seed_pipeline.py<br/>(Markdown & JSON Exporter)"]
-    A --> D["web_publisher/ _build.py<br/>(Static PWA Publisher)"]
+    A --> D["web_publisher/_build.py<br/>(Static PWA Publisher)"]
     A --> E["RAG & LLM Context Pipelines<br/>(AI Workflows & Embeddings)"]
     C --> F["Structured Markdown<br/>(Obsidian / GitHub Pages / Docs)"]
     D --> G["PWA Web Frontend<br/>(Offline Search / 6 Languages)"]
 ```
 
-### Zero-Egress Lifecycle & Query Flow
+---
+
+## 3. Zero-Egress Lifecycle & Query Flow
 
 ```mermaid
 sequenceDiagram
@@ -81,39 +122,102 @@ sequenceDiagram
     end
 ```
 
-## Discovery Context
+---
 
-Use the canonical repository name `dev-bricks/WikiStub-Seed` when linking or searching. The project was formerly connected to `file-bricks/MetaWiki`, but the current repo is the dev-bricks knowledge-stub seed library.
+## 4. Safety Model & Governance Invariants
 
-Search phrases that describe this project well:
+The following 10 invariants govern all WikiStub-Seed components, pipelines, and tools:
 
-- `WikiStub-Seed JSON knowledge stubs`
-- `bilingual JSON knowledge base Python`
-- `local-first ontology seed library for LLM workflows`
-- `multilingual knowledge stubs framework`
-- `RAG knowledge base German English JSON`
+| # | Invariant | Guarantee | Enforcement Mechanism |
+|---|---|---|---|
+| 1 | **100% Local-First & Zero-Egress** | Core datasets, CLI operations, and exports execute completely offline with zero telemetry. | Python standard library only; no unsolicited network calls during import, export, or check. |
+| 2 | **Non-Elevation (RunAsInvoker)** | System never requires or requests root or administrator privileges. | Operates in unprivileged user space; file and loopback operations run as invoker. |
+| 3 | **Deterministic Knowledge Schema** | 630 stubs strictly validated across 12 domains and 85 subcategories. | Automated schema validation (`wikistub_seed_pipeline.py validate`) and duplicate checkers. |
+| 4 | **Pure Offline Storage & Zero Telemetry** | No tracking, telemetry, user data transmission, or external logging. | Local JSON (`wikistub_seed.json`) and Markdown output files only. |
+| 5 | **Localhost-Bound Edit Server (127.0.0.1)** | Optional HTTP GUI server binds strictly to the loopback interface. | Hardcoded `127.0.0.1` binding, DNS rebinding rejection, strict `Content-Type: application/json` CSRF defense. |
+| 6 | **PBKDF2 Password Hashing & Soft-Delete Trash** | Passwords stored with cryptographic salt/hash; accidental deletes recoverable. | `hashlib.pbkdf2_hmac` in `wiki_auth.json` and soft-delete in `wikistub_seed_trash.json` (both gitignored). |
+| 7 | **Cross-Platform Operating Parity** | Identical behavior across Windows, Linux and macOS environments. | Multi-OS GitHub Actions CI matrix and dual runner smoke validation. |
+| 8 | **Pure Python Standard Library Core** | Zero required third-party dependencies for runtime operations. | Built entirely on Python stdlib (`json`, `pathlib`, `http.server`, `hashlib`, `argparse`). |
+| 9 | **Cloud-Sync Conflict Defense** | Protection against multi-device synchronization collisions. | `.gitignore` filters `*.sync-conflict-*`, `*.conflict`, `LOCK.*`. |
+| 10 | **48h Security SLA & Coordinated Disclosure** | Responsible reporting with guaranteed acknowledgment SLA. | Documented `SECURITY.md` SLA, private vulnerability reporting & multi-channel contact emails. |
 
-## What It Contains
+---
 
-- 630 knowledge stubs in `wikistub_seed.json` with definitions in six languages and relevance notes in five languages
-- 12 top-level domains, including mathematics, physics, chemistry, biology, medicine, psychology, AI, engineering, society, economics, history and culture
-- 85 subcategories with short, neutral definitions and relevance notes
-- Canonical `definitions.{lang}` and `relevance_i18n.{lang}` maps while retaining legacy `definition_de`, `definition_en` and `relevance`
-- Python CLI tooling for statistics, validation, consistency checks and Markdown export
-- A documented `wikistub-seed-data-v1` export direction for future static Web/PWA use
-- No required external dependencies for core import, export, validation or CLI use
+## 5. Installation & Quick Start
 
-## Use Cases
+```bash
+git clone https://github.com/dev-bricks/WikiStub-Seed.git
+cd WikiStub-Seed
 
-- Seed a local knowledge base for AI-assisted writing or research
-- Build documentation glossaries, learning maps or concept catalogs
-- Export structured Markdown for Obsidian, GitHub Pages or static sites
-- Feed retrieval, embeddings or LLM context pipelines with compact domain stubs
-- Translate and extend a domain-neutral knowledge skeleton in a controlled JSON format
+python wikistub_seed_cli.py --help
+python wikistub_seed_cli.py stats
+python wikistub_seed_cli.py check
+python wikistub_seed_pipeline.py validate
+python wikistub_seed_pipeline.py export --output --english
+```
 
-## Data Shape
+On Windows, `start.bat` opens the CLI entry point. Exported files are written to `output/`; that folder is local and not versioned.
 
-Each stub is intentionally small and machine-readable:
+---
+
+## 6. Local Edit Mode & HTTP Server
+
+`web_publisher/` is a static site (no server, `fetch()`-only) and cannot write. `edit_server.py` adds a small, `127.0.0.1`-only HTTP server on top of it so the same reader UI can create, edit and delete articles/categories:
+
+```bash
+python edit_server.py            # default port 8879, opens the browser
+```
+
+**Rights model** (verbatim from the specifying request, and the one binding rule this feature follows):
+
+- Creating new entries is allowed by default, for everyone.
+- Editing and deleting are allowed for everyone **as long as no password is set**.
+- Once a password is set, whoever set it decides what an anonymous visitor may still do — anywhere from "everything" down to read-only (create/edit/delete are independently revocable via the "Konto" panel in the header).
+- There is deliberately only **one** password/role. Multiple tokens with different rights plus an administrator role were considered "maybe a bit much" and are documented as a Roadmap idea below, not built.
+
+**Security notes:**
+
+- The server only ever binds to `127.0.0.1` — this is not configurable; there is no network/cloud exposure by design.
+- The password is stored as a PBKDF2-HMAC-SHA256 hash (`wiki_auth.json`, gitignored), never in plaintext. This hash defends against a casual read of the file revealing a reused password — it does **not** defend against local filesystem access; anyone who can already read/write files on the machine can replace `wiki_auth.json` outright. Forgotten password? Delete `wiki_auth.json` to return to the default (no password, full rights for everyone).
+- Every mutating request must carry `Content-Type: application/json` (rejects classic `<form>`-based CSRF, which cannot send that content type without a CORS preflight this server does not answer) and a `Host` header of `localhost`/`127.0.0.1` (rejects DNS rebinding).
+- Deletions are soft: articles and categories move to `wikistub_seed_trash.json` (gitignored) instead of being removed outright, and can be restored via the API.
+- **`web_publisher/data/wikistub_seed.json` and `search-index.json` are tracked, committed build artifacts.** Every successful edit-mode write rebuilds them from the same `_build.py` this repository's CI already runs. If you used the local edit server to try something out, `git status` before committing — a local test edit dirties these two files exactly like a real one would, and nothing here git-ignores them for you (they need to stay tracked for GitHub Pages hosting without a build step).
+
+---
+
+## 7. Core Commands & CLI Operations
+
+| Command | Purpose |
+|---|---|
+| `python wikistub_seed_cli.py stats` | Print stub, category and tag statistics |
+| `python wikistub_seed_cli.py check` | Run consistency checks over the JSON dataset |
+| `python wikistub_seed_pipeline.py validate` | Validate the pipeline input data |
+| `python wikistub_seed_pipeline.py export --output --english` | Export the JSON dataset to Markdown |
+| `python wikistub_seed_pipeline.py translate` | Optionally translate missing English definitions when configured |
+
+---
+
+## 8. Repository Map & Key Files
+
+| Path | Purpose |
+|---|---|
+| `wikistub_seed.json` | Authoritative multilingual knowledge dataset |
+| `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Domain-oriented Markdown source/export structure |
+| `wikistub_seed_cli.py` | CLI for stats and checks |
+| `wikistub_seed_pipeline.py` | Import, export, validation and optional translation pipeline |
+| `md_to_json.py` | Markdown-to-JSON import helper |
+| `check_duplicates.py` | Duplicate/consistency helper |
+| `EXPORTFORMAT.md` | Stable exchange-format plan |
+| `web_publisher/` | Static Web/PWA publisher (offline cache, search, six-language selector) |
+| `edit_server.py` | Local-only (`127.0.0.1`) HTTP server adding GUI create/edit/delete to `web_publisher/` |
+| `wiki_store.py` | Pure CRUD + soft-delete/trash functions the edit server uses |
+| `wiki_auth.py` | Password hashing, permission model and session tracking for the edit server |
+
+---
+
+## 9. Data Shape & Knowledge Schema
+
+Each stub is intentionally small, machine-readable, and deterministic:
 
 ```json
 {
@@ -143,110 +247,7 @@ Each stub is intentionally small and machine-readable:
 
 The current authoritative source is `wikistub_seed.json`. `EXPORTFORMAT.md` documents the stable wrapper format `wikistub-seed-data-v1` for Web/PWA, API and LLM exports.
 
-## Quick Start
-
-```bash
-git clone https://github.com/dev-bricks/WikiStub-Seed.git
-cd WikiStub-Seed
-
-python wikistub_seed_cli.py --help
-python wikistub_seed_cli.py stats
-python wikistub_seed_cli.py check
-python wikistub_seed_pipeline.py validate
-python wikistub_seed_pipeline.py export --output --english
-```
-
-On Windows, `start.bat` opens the CLI entry point. Exported files are written to `output/`; that folder is local and not versioned.
-
-## Local Edit Mode
-
-`web_publisher/` is a static site (no server, `fetch()`-only) and cannot write. `edit_server.py` adds a small, `127.0.0.1`-only HTTP server on top of it so the same reader UI can create, edit and delete articles/categories:
-
-```bash
-python edit_server.py            # default port 8879, opens the browser
-```
-
-**Rights model** (verbatim from the specifying request, and the one binding rule this feature follows):
-
-- Creating new entries is allowed by default, for everyone.
-- Editing and deleting are allowed for everyone **as long as no password is set**.
-- Once a password is set, whoever set it decides what an anonymous visitor may still do — anywhere from "everything" down to read-only (create/edit/delete are independently revocable via the "Konto" panel in the header).
-- There is deliberately only **one** password/role. Multiple tokens with different rights plus an administrator role were considered "maybe a bit much" and are documented as a Roadmap idea below, not built.
-
-**Security notes:**
-
-- The server only ever binds to `127.0.0.1` — this is not configurable; there is no network/cloud exposure by design.
-- The password is stored as a PBKDF2-HMAC-SHA256 hash (`wiki_auth.json`, gitignored), never in plaintext. This hash defends against a casual read of the file revealing a reused password — it does **not** defend against local filesystem access; anyone who can already read/write files on the machine can replace `wiki_auth.json` outright. Forgotten password? Delete `wiki_auth.json` to return to the default (no password, full rights for everyone).
-- Every mutating request must carry `Content-Type: application/json` (rejects classic `<form>`-based CSRF, which cannot send that content type without a CORS preflight this server does not answer) and a `Host` header of `localhost`/`127.0.0.1` (rejects DNS rebinding).
-- Deletions are soft: articles and categories move to `wikistub_seed_trash.json` (gitignored) instead of being removed outright, and can be restored via the API.
-- **`web_publisher/data/wikistub_seed.json` and `search-index.json` are tracked, committed build artifacts.** Every successful edit-mode write rebuilds them from the same `_build.py` this repository's CI already runs. If you used the local edit server to try something out, `git status` before committing — a local test edit dirties these two files exactly like a real one would, and nothing here git-ignores them for you (they need to stay tracked for GitHub Pages hosting without a build step).
-
-## Core Commands
-
-| Command | Purpose |
-|---|---|
-| `python wikistub_seed_cli.py stats` | Print stub, category and tag statistics |
-| `python wikistub_seed_cli.py check` | Run consistency checks over the JSON dataset |
-| `python wikistub_seed_pipeline.py validate` | Validate the pipeline input data |
-| `python wikistub_seed_pipeline.py export --output --english` | Export the JSON dataset to Markdown |
-| `python wikistub_seed_pipeline.py translate` | Optionally translate missing English definitions when configured |
-
-## Repository Map
-
-| Path | Purpose |
-|---|---|
-| `wikistub_seed.json` | Authoritative multilingual knowledge dataset |
-| `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Domain-oriented Markdown source/export structure |
-| `wikistub_seed_cli.py` | CLI for stats and checks |
-| `wikistub_seed_pipeline.py` | Import, export, validation and optional translation pipeline |
-| `md_to_json.py` | Markdown-to-JSON import helper |
-| `check_duplicates.py` | Duplicate/consistency helper |
-| `EXPORTFORMAT.md` | Stable exchange-format plan |
-| `web_publisher/` | Static Web/PWA publisher (offline cache, search, six-language selector) |
-| `edit_server.py` | Local-only (`127.0.0.1`) HTTP server adding GUI create/edit/delete to `web_publisher/` |
-| `wiki_store.py` | Pure CRUD + soft-delete/trash functions the edit server (and any future caller) uses |
-| `wiki_auth.py` | Password hashing, permission model and session tracking for the edit server |
-
-## Privacy
-
-WikiStub-Seed is local-first. Core usage reads and writes local JSON/Markdown files only. There is no telemetry and no automatic network communication.
-
-The optional translation command can call an external API only when `ANTHROPIC_API_KEY` is set and the optional `anthropic` package is installed.
-
-`edit_server.py` (see "Local Edit Mode" above) binds to `127.0.0.1` only and never talks to the network on its own; the only new local files it creates are `wiki_auth.json` (a password hash, gitignored) and `wikistub_seed_trash.json` (soft-deleted content, gitignored).
-
-## Roadmap
-
-Completed:
-
-- 12 top-level domains and 85 subcategories
-- 630 multilingual stubs in a single JSON master file
-- Markdown export and JSON synchronization tooling
-- CLI smoke tests in GitHub Actions, plus dedicated macOS/Linux source smokes for `wikistub_seed_cli.py check` and `wikistub_seed_pipeline.py validate`
-- Static Web/PWA publisher with search and offline cache (`web_publisher/`)
-- `wikistub-seed-data-v1` schema wrapper with DE/EN/ES/ZH/JA/RU language maps
-- Local, password-gated GUI edit mode for the PWA (`edit_server.py`, `wiki_store.py`, `wiki_auth.py`) — create/edit/delete for articles and categories, soft-delete trash, full permission-matrix test coverage
-
-Planned:
-
-- Unified tag cleanup
-- Obsidian/GitHub Pages export paths
-- Optional embeddings and search API (specified in [`EMBEDDING_SEARCH_API.md`](EMBEDDING_SEARCH_API.md); implementation remains opt-in)
-- **Enterprise edit-mode concept (documented here, not built):** multiple named access tokens with independently configured rights, plus a distinct administrator role that can manage those tokens. The current edit mode deliberately has only one password/role — this was called "maybe a bit much" by the person who specified it, and is recorded here as a considered, rejected-for-now shape rather than a silent gap.
-
-## Deutsch
-
-**WikiStub-Seed ist ein mehrsprachiges JSON-Wissensgerüst für KI-gestützte Wissensarbeit.** Das Repository enthält 630 kompakte Wissens-Stubs mit Definitionen in Deutsch, Englisch, Spanisch, Chinesisch, Japanisch und Russisch. Relevanztexte liegen in allen diesen Sprachen außer Englisch vor; dort greift der dokumentierte deutsche Fallback.
-
-WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
-
-Wichtige Einstiegspunkte:
-
-- `python wikistub_seed_cli.py stats` zeigt Statistik und Kategorien.
-- `python wikistub_seed_cli.py check` prüft den Datenbestand.
-- `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
-- `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
+---
 
 <!-- BEGIN GENERATED ELLMOS BUNDLE DISCOVERY -->
 
@@ -266,10 +267,10 @@ Composition and runtime details are intentionally omitted.
 
 <!-- END GENERATED ELLMOS BUNDLE DISCOVERY -->
 
-## Sibling Tools & Ecosystem
- 
-WikiStub-Seed is part of the **dev-bricks** ecosystem and the broader **open-bricks** family:
- 
+## 10. Sibling Tools & Ecosystem Matrix
+
+WikiStub-Seed is part of the **dev-bricks** developer suite and the wider **open-bricks** ecosystem:
+
 | Tool | Organization | Purpose | Status |
 |---|---|---|---|
 | [`dev-bricks/DevCenter`](https://github.com/dev-bricks/DevCenter) | dev-bricks | Unified developer dashboard, repo health overview & project launcher | Production |
@@ -290,9 +291,43 @@ WikiStub-Seed is part of the **dev-bricks** ecosystem and the broader **open-bri
 | [`file-bricks/NoteSpaceLLM`](https://github.com/file-bricks/NoteSpaceLLM) | file-bricks | Note management and semantic retrieval system for desktop | Production |
 | [`open-bricks/open-bricks`](https://github.com/open-bricks/open-bricks) | open-bricks | Umbrella repository for all open-source bricks components | Production |
 
- 
-## License
+---
 
-MIT License. See `LICENSE`.
+## 11. Discovery & Search Keywords
 
-This project is an unpaid open-source donation. Liability is limited to intent and gross negligence under Section 521 of the German Civil Code, with the MIT License disclaimers applying as well. Use at your own risk.
+Use the canonical repository name `dev-bricks/WikiStub-Seed` when linking or searching. The project was formerly connected to `file-bricks/MetaWiki`, but the current repo is the dev-bricks knowledge-stub seed library.
+
+Search phrases that describe this project well:
+
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library for LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG knowledge base German English JSON`
+- `static PWA knowledge publisher offline`
+- `domain knowledge ontology open source Python`
+
+---
+
+## 12. Security & Vulnerability Reporting
+
+WikiStub-Seed adheres to strict local-first and zero-egress invariants. For detailed vulnerability reporting guidelines, SLAs, and PGP keys, consult [SECURITY.md](SECURITY.md).
+
+- **Initial Response SLA**: 48 hours
+- **Triage SLA**: 5 business days
+- **Private Reporting**: [GitHub Security Advisories](https://github.com/dev-bricks/WikiStub-Seed/security/advisories)
+- **Direct Contacts**: `security@open-bricks.org`, `security@ellmos.ai`, `support@lukasgeiger.com`, `lukas@open-bricks.org`
+
+---
+
+## 13. License & Liability
+
+MIT License. See [LICENSE](LICENSE).
+
+This project is an unpaid open-source donation. Liability is limited to intent and gross negligence under Section 521 of the German Civil Code (BGB), with the MIT License disclaimers applying as well. Use at your own risk.
+
+---
+
+## 14. German Documentation / Deutsche Version
+
+Eine vollständige deutsche Dokumentation inklusive Schnellnavigation, Architekturübersicht und Governance-Tabelle steht unter [README_de.md](README_de.md) zur Verfügung.

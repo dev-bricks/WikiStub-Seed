@@ -5,11 +5,22 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
-### Maintainer verification (2026-08-23)
-- 154 Python-Tests und 45 Node.js-PWA-Tests erfolgreich ausgeführt.
-  Ruff, vollständiges Compileall, CLI-Konsistenzcheck, Pipeline-Validierung
-  und Duplicate-Check waren erfolgreich; `llms.txt` wurde auf den aktuellen
-  Verifikationsstand synchronisiert.
+## [1.1.9] - 2026-09-09
+
+### Hinzugefügt / Added
+- **14-Punkte Schnellnavigation mit strikter Ankerparität**: Standardisierte Schnellnavigation in `README.md` (`### Quick Navigation`) und `README_de.md` (`### Schnellnavigation`) implementiert mit exakter 1:1-Entsprechung aller 14 Abschnitte.
+- **Sicherheitsmodell & 10 Governance-Invarianten**: Verbindliche Tabelle der 10 Architektur- und Laufzeitinvarianten (100% Local-First & Zero-Egress, Non-Elevation / RunAsInvoker, deterministisches Wissensschema, reine Offline-Speicherung, localhost-gebundener Editierserver 127.0.0.1, PBKDF2-Passworthash & Soft-Delete, plattformübergreifende Betriebsparität, reiner Python-Standardbibliothek-Kern, Cloud-Sync-Konfliktschutz, 48h Sicherheits-SLA) in `README.md` und `README_de.md` ergänzt.
+- **Sicherheitsrichtlinie & SLA-Erweiterung (`SECURITY.md`)**: Supported Versions Tabelle (1.1.x aktiv unterstützt), feste SLAs (48h Erstbestätigung, 5 Werktage Triage), Sicherheitsadvisories-Verlinkung und Multi-Kanal-Kontaktadressen (`security@open-bricks.org`, `security@ellmos.ai`, `support@lukasgeiger.com`, `lukas@open-bricks.org`) integriert.
+- **PEP 621 Metadaten & URLs in `pyproject.toml`**: `Changelog`, `Security`, `"Parent Organization"` und `"Umbrella Ecosystem"` URLs sowie Betriebssystem-Klassifikatoren für Windows, Linux und macOS hinzugefügt.
+- **Cloud-Sync-Konflikt- & Lock-Muster in `.gitignore`**: Erweiterung um `*.sync-conflict-*`, `*.conflict`, `*-CONFLIT-*`, `*-conflict-*` sowie `LOCK.*`, `*.lock`, `LOCK*.txt`.
+- **CI-Härtung mit Concurrency-Regeln**: GitHub Actions Workflows `tests.yml` und `source-platform-smoke.yml` mit `concurrency: cancel-in-progress: true` abgesichert.
+- **Lokales Marketing- und Auffindbarkeitsregister (`MARKETING-LOG.txt`)**: Strukturierte Dokumentation relevanter Discoverability-Pfade, RAG-Kataloge und Ökosystem-Integrationen angelegt.
+- **Erweiterte Metadaten- & Contract-Tests (`tests/test_metadata.py`)**: 6 neue automatisierte Tests für Badges, 14-Punkte-Navigation, Governance-Invarianten, Gitignore-Muster, Concurrency und lokales Marketing-Register hinzugefügt (161 Python-Tests + 45 Node.js-Tests = 206 Gesamtprüfungen).
+
+### Geändert / Changed
+- Version in `pyproject.toml` auf `1.1.9` angehoben.
+- `llms.txt` auf Version 1.1.9, `Last-checked: 2026-09-09` und 206 verifizierte Tests synchronisiert.
+- Shields.io Badges in `README.md` und `README_de.md` auf Version `1.1.9`, Security-SLA (48h), Ruff und 206 bestandene Tests aktualisiert.
 
 ## [1.1.8] - 2026-08-21
 
