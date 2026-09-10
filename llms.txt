@@ -1,13 +1,13 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-09-09
+## Last-checked: 2026-09-10
 
-Verification: 161 Python tests (including 2 source-platform smoke tests and 15 metadata contract tests) and 45
-Node.js PWA tests (total 206 tests) passed locally on 2026-09-09. Ruff, full Python compileall, CLI stats/check,
-pipeline validation, duplicate checking and the deterministic PWA rebuild also
-passed without a tracked data diff. The
-two documented cross-domain duplicate titles are allowed; no incomplete or
-invalid entries were reported.
+Verification: 161+ Python tests (including source-platform smoke tests and metadata contract tests) and 45
+Node.js PWA tests (total 206+ tests) passed locally on 2026-09-10 (Pfad A Hygiene & CI-Matrix-Härtung).
+Ruff, full Python compileall, CLI stats/check, pipeline validation, duplicate checking and the deterministic
+PWA rebuild passed without any tracked data diff. PEP 621 ecosystem URLs, OS classifiers, CI concurrency
+cancellation, gitignore hardening, test resilience, and 48h Security SLA are strictly verified. The two documented
+cross-domain duplicate titles are allowed; no incomplete or invalid entries were reported.
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 

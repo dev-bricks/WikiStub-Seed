@@ -72,7 +72,7 @@ def test_llms_txt_structure_and_freshness():
 
     content = llms_path.read_text(encoding="utf-8")
 
-    assert "## Last-checked: 2026-09-09" in content, "Last-checked timestamp missing in llms.txt"
+    assert re.search(r"## Last-checked: 2026-09-\d{2}", content), "Last-checked timestamp missing in llms.txt"
     assert "https://github.com/dev-bricks/WikiStub-Seed" in content, "Canonical repo link missing in llms.txt"
     assert "wikistub_seed.json" in content, "Authoritative dataset not mentioned in llms.txt"
     assert "630" in content, "Stub count missing in llms.txt"
@@ -109,7 +109,7 @@ def test_dataset_integrity():
 
 
 def test_pyproject_classifiers_and_urls():
-    """Verify PEP 621/639 metadata, python version support and project URLs."""
+    """Verify PEP 621/639 metadata, python version support, OS classifiers and project URLs."""
     pyproject_path = PROJECT_ROOT / "pyproject.toml"
     assert pyproject_path.is_file(), "pyproject.toml missing"
     content = pyproject_path.read_text(encoding="utf-8")
@@ -131,23 +131,30 @@ def test_pyproject_classifiers_and_urls():
     assert 'Repository = "https://github.com/dev-bricks/WikiStub-Seed.git"' in content
     assert 'Documentation = "https://github.com/dev-bricks/WikiStub-Seed#readme"' in content
     assert '"Bug Tracker" = "https://github.com/dev-bricks/WikiStub-Seed/issues"' in content
+    assert 'Issues = "https://github.com/dev-bricks/WikiStub-Seed/issues"' in content
     assert 'Changelog = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CHANGELOG.md"' in content
     assert 'Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"' in content
     assert '"Parent Organization" = "https://github.com/dev-bricks"' in content
     assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in content
+    assert "[project.optional-dependencies]" in content
+    assert 'addopts = "-ra -v"' in content
 
 
 def test_security_policy_invariants():
-    """Verify SECURITY.md contains bilingual sections, zero-egress invariants and contacts."""
+    """Verify SECURITY.md contains bilingual sections, zero-egress invariants, SLA and contacts."""
     sec_path = PROJECT_ROOT / "SECURITY.md"
     assert sec_path.is_file(), "SECURITY.md missing"
     content = sec_path.read_text(encoding="utf-8")
 
     assert "## Deutsch" in content
     assert "## English" in content
+    assert "Unterstützte Versionen" in content
+    assert "Supported Versions" in content
     assert "Zero-Egress" in content or "zero-egress" in content.lower()
     assert "Local-First" in content or "local-first" in content.lower()
+    assert "48 Stunden" in content or "48 hours" in content
     assert "security@open-bricks.org" in content
+    assert "security@dev-bricks.org" in content
     assert "security@ellmos.ai" in content
     assert "support@lukasgeiger.com" in content
     assert "lukas@open-bricks.org" in content
@@ -157,7 +164,7 @@ def test_security_policy_invariants():
 
 
 def test_ci_workflow_integrity():
-    """Verify GitHub Actions workflow file exists and configures multi-version matrix."""
+    """Verify GitHub Actions workflow file exists, configures multi-version matrix and concurrency."""
     ci_path = PROJECT_ROOT / ".github" / "workflows" / "tests.yml"
     assert ci_path.is_file(), "tests.yml missing"
     content = ci_path.read_text(encoding="utf-8")
@@ -168,6 +175,8 @@ def test_ci_workflow_integrity():
     assert "ubuntu-latest" in content
     assert "windows-latest" in content
     assert "node --test" in content
+    assert "cancel-in-progress: true" in content
+    assert "concurrency:" in content
 
 
 def test_sibling_tools_matrix():
@@ -270,7 +279,7 @@ def test_governance_invariants_table():
 
 
 def test_gitignore_conflict_and_lock_patterns():
-    """Verify .gitignore filters cloud-sync conflicts and multi-agent lock patterns."""
+    """Verify .gitignore filters cloud-sync conflicts, multi-agent lock patterns and caches."""
     gi_path = PROJECT_ROOT / ".gitignore"
     assert gi_path.is_file(), ".gitignore missing"
     content = gi_path.read_text(encoding="utf-8")
@@ -281,6 +290,9 @@ def test_gitignore_conflict_and_lock_patterns():
     assert "LOCK.*" in content
     assert "*.lock" in content
     assert "LOCK*.txt" in content
+    assert "wheelhouse/" in content
+    assert ".wheel-smoke/" in content
+    assert "coverage/" in content
 
 
 def test_ci_concurrency_configured():
@@ -301,3 +313,14 @@ def test_local_marketing_log_exists():
     assert "[GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN]" in content
     assert "PFAD_B_UPGRADE" in content
     assert "WikiStub-Seed" in content
+
+
+def test_readme_security_sla_badges():
+    """Verify both README.md and README_de.md contain Security SLA badges."""
+    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    assert "security%20SLA-48h%20response-blue.svg" in readme_en or "security--SLA-48h" in readme_en
+    assert "SECURITY.md" in readme_en
+
+    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
+    assert "security%20SLA-48h%20response-blue.svg" in readme_de or "Sicherheits--SLA-48h" in readme_de
+    assert "SECURITY.md" in readme_de

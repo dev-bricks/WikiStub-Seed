@@ -102,13 +102,25 @@ TRANSLATION-PROGRESS.md
 wiki_auth.json
 wikistub_seed_trash.json
 
-# ---- Synchronisations- & Cloud-Konflikte ----
+# ---- Multi-Host-Synchronisationskonflikte ----
+*-conflict-*
 *.sync-conflict-*
 *.conflict
 *-CONFLIT-*
-*-conflict-*
+*.sync-temp-*
+*-ASUS-GEI.*
+*-WORKSTATION-LG.*
 
-# ---- Multi-Agent-Sperren & Locks ----
+# ---- Multi-Agent Locks ----
+LOCK
 LOCK.*
 *.lock
 LOCK*.txt
+LOCK.permissions.json
+!package-lock.json
+
+# ---- Test-, Coverage- & Packaging-Caches ----
+coverage/
+.coverage.*
+wheelhouse/
+.wheel-smoke/

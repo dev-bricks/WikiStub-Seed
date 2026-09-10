@@ -46,11 +46,21 @@ keywords = [
 ]
 requires-python = ">=3.10"
 
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+    "pytest>=8.0.0",
+]
+test = [
+    "pytest>=8.0.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/dev-bricks/WikiStub-Seed"
 Repository = "https://github.com/dev-bricks/WikiStub-Seed.git"
 Documentation = "https://github.com/dev-bricks/WikiStub-Seed#readme"
 "Bug Tracker" = "https://github.com/dev-bricks/WikiStub-Seed/issues"
+Issues = "https://github.com/dev-bricks/WikiStub-Seed/issues"
 Changelog = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CHANGELOG.md"
 Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"
 "Parent Organization" = "https://github.com/dev-bricks"
@@ -59,6 +69,7 @@ Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"
 [tool.pytest.ini_options]
 pythonpath = "."
 testpaths = ["tests"]
+addopts = "-ra -v"
 
 [tool.ruff]
 target-version = "py310"

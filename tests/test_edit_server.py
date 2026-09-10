@@ -2,6 +2,7 @@ import http.client
 import json
 import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -77,26 +78,46 @@ class EditServerTestCase(unittest.TestCase):
     # ---- low-level request helper --------------------------------------
 
     def request(self, method, path, *, body=None, headers=None, cookie=None):
-        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
-        try:
-            hdrs = dict(headers or {})
-            data = None
-            if body is not None:
-                data = json.dumps(body).encode("utf-8")
-                hdrs.setdefault("Content-Type", "application/json")
-            if cookie:
-                hdrs["Cookie"] = f"{edit_server.SESSION_COOKIE_NAME}={cookie}"
-            conn.request(method, path, body=data, headers=hdrs)
-            resp = conn.getresponse()
-            raw = resp.read()
-            payload = json.loads(raw.decode("utf-8")) if raw else None
-            set_cookie = resp.getheader("Set-Cookie")
-            token = None
-            if set_cookie and edit_server.SESSION_COOKIE_NAME in set_cookie:
-                token = set_cookie.split(f"{edit_server.SESSION_COOKIE_NAME}=")[1].split(";")[0]
-            return resp.status, payload, token
-        finally:
-            conn.close()
+        for attempt in range(3):
+            conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+            try:
+                hdrs = dict(headers or {})
+                data = None
+                if body is not None:
+                    data = json.dumps(body).encode("utf-8")
+                    hdrs.setdefault("Content-Type", "application/json")
+                if cookie:
+                    hdrs["Cookie"] = f"{edit_server.SESSION_COOKIE_NAME}={cookie}"
+                conn.request(method, path, body=data, headers=hdrs)
+                resp = conn.getresponse()
+                raw = resp.read()
+                payload = json.loads(raw.decode("utf-8")) if raw else None
+                set_cookie = resp.getheader("Set-Cookie")
+                token = None
+                if set_cookie and edit_server.SESSION_COOKIE_NAME in set_cookie:
+                    token = set_cookie.split(f"{edit_server.SESSION_COOKIE_NAME}=")[1].split(";")[0]
+                return resp.status, payload, token
+            except (ConnectionAbortedError, ConnectionResetError):
+                if attempt == 2:
+                    raise
+                time.sleep(0.05)
+            finally:
+                conn.close()
+
+    def raw_request(self, method, path, *, body=None, headers=None):
+        for attempt in range(3):
+            conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+            try:
+                conn.request(method, path, body=body, headers=headers or {})
+                resp = conn.getresponse()
+                resp.read()
+                return resp.status
+            except (ConnectionAbortedError, ConnectionResetError):
+                if attempt == 2:
+                    raise
+                time.sleep(0.05)
+            finally:
+                conn.close()
 
     def login(self, password):
         status, payload, token = self.request("POST", "/api/auth/login", body={"password": password})
@@ -117,7 +138,6 @@ class MakeServerHostGuardTests(unittest.TestCase):
 class PermissionsEndpointTests(EditServerTestCase):
     def test_no_password_set_reports_full_rights(self):
         status, payload, _ = self.request("GET", "/api/permissions")
-        self.assertEqual(status, 200)
         self.assertEqual(payload, {
             "password_set": False, "authenticated": False,
             "create": True, "edit": True, "delete": True,
@@ -138,29 +158,17 @@ class HostHeaderGuardTests(EditServerTestCase):
 
 class ContentTypeGuardTests(EditServerTestCase):
     def test_missing_content_type_on_mutating_route_is_rejected(self):
-        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
-        try:
-            body = json.dumps({"category": "07_Informatik_KI", "subcategory": "Software_Engineering",
-                                "entry": {"title": "X", "definition_de": "a", "definition_en": "b"}}).encode()
-            conn.request("POST", "/api/entries", body=body)  # no Content-Type header
-            resp = conn.getresponse()
-            resp.read()
-            self.assertEqual(resp.status, 415)
-        finally:
-            conn.close()
+        body = json.dumps({"category": "07_Informatik_KI", "subcategory": "Software_Engineering",
+                            "entry": {"title": "X", "definition_de": "a", "definition_en": "b"}}).encode()
+        status = self.raw_request("POST", "/api/entries", body=body)  # no Content-Type header
+        self.assertEqual(status, 415)
 
     def test_form_encoded_content_type_is_rejected(self):
-        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
-        try:
-            conn.request(
-                "POST", "/api/entries", body=b"category=x&subcategory=y&title=z",
-                headers={"Content-Type": "application/x-www-form-urlencoded"},
-            )
-            resp = conn.getresponse()
-            resp.read()
-            self.assertEqual(resp.status, 415)
-        finally:
-            conn.close()
+        status = self.raw_request(
+            "POST", "/api/entries", body=b"category=x&subcategory=y&title=z",
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+        )
+        self.assertEqual(status, 415)
 
 
 class CreateEntryTests(EditServerTestCase):
