@@ -9,7 +9,7 @@
 WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 
 [![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
-[![Version](https://img.shields.io/badge/version-1.1.9-blue.svg)](pyproject.toml)
+[![Version](https://img.shields.io/badge/version-1.1.10-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
@@ -21,7 +21,9 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 ![Security](https://img.shields.io/badge/security-Local--First%20%7C%20Deterministic-blue)
 [![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-![Tests](https://img.shields.io/badge/tests-206%20passed%20(161%20Python%20%2B%2045%20Node)-success)
+[![Third-Party Licenses](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
+[![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
+![Tests](https://img.shields.io/badge/tests-210%20passed%20(165%20Python%20%2B%2045%20Node)-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-verf%C3%BCgbar-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -39,8 +41,9 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 - [10. Geschwisterwerkzeuge & Ökosystem-Matrix](#10-geschwisterwerkzeuge--ökosystem-matrix)
 - [11. Auffindbarkeit & Suchbegriffe](#11-auffindbarkeit--suchbegriffe)
 - [12. Sicherheitsrichtlinie & Meldewege](#12-sicherheitsrichtlinie--meldewege)
-- [13. Lizenz & Haftung](#13-lizenz--haftung)
-- [14. Englische Dokumentation / English Version](README.md)
+- [13. Drittanbieter-Lizenzen & Transparenz](#13-drittanbieter-lizenzen--transparenz)
+- [14. Marketing & Zielgruppen](#14-marketing--zielgruppen)
+- [15. Englische Dokumentation / English Version](README.md)
 
 ---
 
@@ -130,16 +133,16 @@ Die folgenden 10 Invarianten gelten verbindlich für alle Komponenten und Workfl
 
 | # | Invariante | Garantie | Durchsetzungsmechanismus |
 |---|---|---|---|
-| 1 | **100% Local-First & Zero-Egress** | Kern-Datensatz, CLI-Operationen und Exporte laufen vollständig offline ohne Telemetrie. | Ausschließlich Python-Standardbibliothek; keine ungefragten Netzwerkaufrufe bei Import/Export/Check. |
-| 2 | **Non-Elevation (RunAsInvoker)** | Das System fordert niemals Root- oder Administratorrechte an. | Läuft im nicht-privilegierten Benutzerkontext; Dateisystem- und Loopback-Operationen als Aufrufer. |
-| 3 | **Deterministisches Wissensschema** | 630 Stubs werden strikt über 12 Domänen und 85 Subkategorien validiert. | Automatisierte Schemaprüfung (`wikistub_seed_pipeline.py validate`) und Duplikatserkenner. |
-| 4 | **Reine Offline-Speicherung & Null Telemetrie** | Kein Tracking, keine Nutzerdatenübertragung und kein externes Logging. | Ausschließlich lokale JSON-Dateien (`wikistub_seed.json`) und Markdown-Ausgabeordner. |
-| 5 | **Localhost-gebundener Editierserver (127.0.0.1)** | Der optionale HTTP-GUI-Server bindet strikt an die Loopback-Schnittstelle. | Feste `127.0.0.1`-Bindung, DNS-Rebinding-Schutz, strikte `Content-Type: application/json` CSRF-Abweisung. |
-| 6 | **PBKDF2-Passworthash & Soft-Delete-Papierkorb** | Passwörter werden kryptografisch gesalzen gehasht; versehentlich gelöschte Inhalte sind wiederherstellbar. | `hashlib.pbkdf2_hmac` in `wiki_auth.json` und Soft-Delete in `wikistub_seed_trash.json` (beide gitignored). |
-| 7 | **Plattformübergreifende Betriebsparität** | Identisches Verhalten unter Windows, Linux und macOS. | Multi-OS GitHub-Actions CI-Matrix und duale Runner-Smokeprüfungen. |
-| 8 | **Reiner Python-Standardbibliothek-Kern** | Keine erforderlichen Drittanbieter-Pakete für den operativen Betrieb. | Vollständig auf Python stdlib aufgebaut (`json`, `pathlib`, `http.server`, `hashlib`, `argparse`). |
-| 9 | **Cloud-Sync-Konflikt-Schutz** | Schutz gegen Kollisionen bei Cloud-Synchronisation über mehrere Geräte. | `.gitignore` filtert `*.sync-conflict-*`, `*.conflict`, `LOCK.*`. |
-| 10 | **48h Sicherheits-SLA & CVD** | Verantwortungsbewusste Meldungsannahme mit garantierter Reaktionszeit. | Dokumentiertes `SECURITY.md`-SLA, Private Vulnerability Reporting & Multi-Kanal-Kontaktadressen. |
+| 1 | **100% Local-First & Zero-Egress (INV-LOCAL-01)** | Kern-Datensatz, CLI-Operationen und Exporte laufen vollständig offline ohne Telemetrie. | Ausschließlich Python-Standardbibliothek; keine ungefragten Netzwerkaufrufe bei Import/Export/Check. |
+| 2 | **Non-Elevation (RunAsInvoker / INV-SEC-02)** | Das System fordert niemals Root- oder Administratorrechte an. | Läuft im nicht-privilegierten Benutzerkontext; Dateisystem- und Loopback-Operationen als Aufrufer. |
+| 3 | **Deterministisches Wissensschema (INV-SCHEMA-03)** | 630 Stubs werden strikt über 12 Domänen und 85 Subkategorien validiert. | Automatisierte Schemaprüfung (`wikistub_seed_pipeline.py validate`) und Duplikatserkenner. |
+| 4 | **Reine Offline-Speicherung & Null Telemetrie (INV-STORE-04)** | Kein Tracking, keine Nutzerdatenübertragung und kein externes Logging. | Ausschließlich lokale JSON-Dateien (`wikistub_seed.json`) und Markdown-Ausgabeordner. |
+| 5 | **Localhost-gebundener Editierserver (127.0.0.1 / INV-SRV-05)** | Der optionale HTTP-GUI-Server bindet strikt an die Loopback-Schnittstelle. | Feste `127.0.0.1`-Bindung, DNS-Rebinding-Schutz, strikte `Content-Type: application/json` CSRF-Abweisung. |
+| 6 | **PBKDF2-Passworthash & Soft-Delete-Papierkorb (INV-AUTH-06)** | Passwörter werden kryptografisch gesalzen gehasht; versehentlich gelöschte Inhalte sind wiederherstellbar. | `hashlib.pbkdf2_hmac` in `wiki_auth.json` und Soft-Delete in `wikistub_seed_trash.json` (beide gitignored). |
+| 7 | **Plattformübergreifende Betriebsparität (INV-PLAT-07)** | Identisches Verhalten unter Windows, Linux und macOS. | Multi-OS GitHub-Actions CI-Matrix und duale Runner-Smokeprüfungen. |
+| 8 | **Reiner Python-Standardbibliothek-Kern (INV-CORE-08)** | Keine erforderlichen Drittanbieter-Pakete für den operativen Betrieb. | Vollständig auf Python stdlib aufgebaut (`json`, `pathlib`, `http.server`, `hashlib`, `argparse`). |
+| 9 | **Cloud-Sync-Konflikt-Schutz (INV-SYNC-09)** | Schutz gegen Kollisionen bei Cloud-Synchronisation über mehrere Geräte. | `.gitignore` filtert `*.sync-conflict-*`, `*.conflict`, `LOCK.*`. |
+| 10 | **48h Sicherheits-SLA & CVD (INV-SLA-10)** | Verantwortungsbewusste Meldungsannahme mit garantierter Reaktionszeit. | Dokumentiertes `SECURITY.md`-SLA, Private Vulnerability Reporting & Multi-Kanal-Kontaktadressen. |
 
 ---
 
@@ -320,14 +323,22 @@ WikiStub-Seed folgt strengen Local-First- und Zero-Egress-Richtlinien. Ausführl
 
 ---
 
-## 13. Lizenz & Haftung
+## 13. Drittanbieter-Lizenzen & Transparenz
 
-MIT-Lizenz. Siehe [LICENSE](LICENSE).
+WikiStub-Seed verpflichtet sich zu 100% permissiver Lizenzierung, strikter Zero-Egress-Architektur und vollkommener Transparenz aller Abhängigkeiten. Der Kern-Betrieb erfordert **keinerlei externe Drittanbieter-Abhängigkeiten** und basiert ausschließlich auf der Python-Standardbibliothek.
 
-Dieses Projekt ist eine unentgeltliche Open-Source-Schenkung. Die Haftung ist gemäß § 521 BGB auf Vorsatz und grobe Fahrlässigkeit beschränkt; ergänzend gelten die Haftungsausschlüsse der MIT-Lizenz. Nutzung auf eigene Verantwortung.
+Das vollständige Inventar aller Laufzeit-, optionalen Übersetzungs-, Build- und QA-Werkzeuge, inklusive der vollständigen Lizenztexte und der 10 Governance-Garantien (`INV-LOCAL-01` bis `INV-SLA-10`), ist in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) dokumentiert.
+
+Der Quellcode steht unter der [MIT-Lizenz](LICENSE). Dieses Projekt ist eine unentgeltliche Open-Source-Schenkung. Die Haftung ist gemäß § 521 BGB auf Vorsatz und grobe Fahrlässigkeit beschränkt; ergänzend gelten die Haftungsausschlüsse der MIT-Lizenz.
 
 ---
 
-## 14. Englische Dokumentation / English Version
+## 14. Marketing & Zielgruppen
 
-Die englischsprachige Dokumentation inklusive Schnellnavigation, Systemarchitektur und Governance-Tabelle steht unter [README.md](README.md) zur Verfügung.
+WikiStub-Seed liefert präzise, kuratierte Wissens-Stubs für KI-Kontextinjektion, RAG-Architekturen und Offline-Dokumentation. Detaillierte Ziel-Personas (KI/LLM-Entwickler, Wissensforscher & Ontologen, Local-First/Zero-Egress-Entwickler, Bildungs- und Dokumentationsteams), zweisprachige Suchbegriffe, die Wettbewerbsmatrix (vs. Kiwix/Wikipedia-Dumps, MediaWiki, Common Crawl, Docusaurus) und die strategische Roadmap sind im [MARKETING-LOG.txt](MARKETING-LOG.txt) festgehalten.
+
+---
+
+## 15. Englische Dokumentation / English Version
+
+Die englischsprachige Dokumentation inklusive 15-Punkte-Schnellnavigation, Systemarchitektur, Governance-Tabelle und Drittanbieter-Transparenz steht unter [README.md](README.md) zur Verfügung.

@@ -57,6 +57,7 @@ def test_core_documentation_files_exist():
         "EXPORTFORMAT.md",
         "ellmos-module.v2.json",
         "MARKETING-LOG.txt",
+        "THIRD_PARTY_LICENSES.md",
     ]
 
     for fname in required_files:
@@ -199,16 +200,18 @@ def test_readme_bilingual_badges_and_mermaid():
         content = path.read_text(encoding="utf-8")
 
         assert "shields.io" in content
-        assert "version-1.1.9" in content
+        assert "version-1.1.10" in content
         assert "dev--bricks" in content
         assert "open--bricks" in content
+        assert "third--party%20licenses" in content
+        assert "marketing%20log" in content
         assert "flowchart TD" in content
         assert "sequenceDiagram" in content
         assert "autonumber" in content
 
 
 def test_quick_navigation_anchors_and_parity():
-    """Verify 14-point quick navigation exists with anchor parity across README.md and README_de.md."""
+    """Verify 15-point quick navigation exists with bidirectional anchor parity across README.md and README_de.md."""
     readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
 
@@ -228,8 +231,9 @@ def test_quick_navigation_anchors_and_parity():
         "10. Sibling Tools & Ecosystem Matrix",
         "11. Discovery & Search Keywords",
         "12. Security & Vulnerability Reporting",
-        "13. License & Liability",
-        "14. German Documentation / Deutsche Version",
+        "13. Third-Party Licenses & Transparency",
+        "14. Marketing & Target Personas",
+        "15. German Documentation / Deutsche Version",
     ]
     for pt in en_points:
         assert pt in readme_en, f"Missing English quick navigation point: {pt}"
@@ -247,15 +251,22 @@ def test_quick_navigation_anchors_and_parity():
         "10. Geschwisterwerkzeuge & Ökosystem-Matrix",
         "11. Auffindbarkeit & Suchbegriffe",
         "12. Sicherheitsrichtlinie & Meldewege",
-        "13. Lizenz & Haftung",
-        "14. Englische Dokumentation / English Version",
+        "13. Drittanbieter-Lizenzen & Transparenz",
+        "14. Marketing & Zielgruppen",
+        "15. Englische Dokumentation / English Version",
     ]
     for pt in de_points:
         assert pt in readme_de, f"Missing German quick navigation point: {pt}"
 
+    # Verify bidirectional anchor parity
+    assert "(#13-third-party-licenses--transparency)" in readme_en
+    assert "(#14-marketing--target-personas)" in readme_en
+    assert "(#13-drittanbieter-lizenzen--transparenz)" in readme_de
+    assert "(#14-marketing--zielgruppen)" in readme_de
+
 
 def test_governance_invariants_table():
-    """Verify 10-point Governance Invariants table in README.md and README_de.md."""
+    """Verify 10-point Governance Invariants table and canonical IDs in README.md and README_de.md."""
     readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
 
@@ -264,10 +275,10 @@ def test_governance_invariants_table():
 
     invariants = [
         "100% Local-First & Zero-Egress",
-        "Non-Elevation (RunAsInvoker)",
+        "Non-Elevation (RunAsInvoker",
         "Deterministic Knowledge Schema",
         "Pure Offline Storage & Zero Telemetry",
-        "Localhost-Bound Edit Server (127.0.0.1)",
+        "Localhost-Bound Edit Server (127.0.0.1",
         "PBKDF2 Password Hashing & Soft-Delete Trash",
         "Cross-Platform Operating Parity",
         "Pure Python Standard Library Core",
@@ -276,6 +287,37 @@ def test_governance_invariants_table():
     ]
     for inv in invariants:
         assert inv in readme_en, f"Missing invariant in README.md: {inv}"
+
+    de_invariants = [
+        "100% Local-First & Zero-Egress",
+        "Non-Elevation (RunAsInvoker",
+        "Deterministisches Wissensschema",
+        "Reine Offline-Speicherung & Null Telemetrie",
+        "Localhost-gebundener Editierserver (127.0.0.1",
+        "PBKDF2-Passworthash & Soft-Delete-Papierkorb",
+        "Plattformübergreifende Betriebsparität",
+        "Reiner Python-Standardbibliothek-Kern",
+        "Cloud-Sync-Konflikt-Schutz",
+        "48h Sicherheits-SLA & CVD",
+    ]
+    for inv in de_invariants:
+        assert inv in readme_de, f"Missing invariant in README_de.md: {inv}"
+
+    canonical_ids = [
+        "INV-LOCAL-01",
+        "INV-SEC-02",
+        "INV-SCHEMA-03",
+        "INV-STORE-04",
+        "INV-SRV-05",
+        "INV-AUTH-06",
+        "INV-PLAT-07",
+        "INV-CORE-08",
+        "INV-SYNC-09",
+        "INV-SLA-10",
+    ]
+    for inv_id in canonical_ids:
+        assert inv_id in readme_en, f"Missing {inv_id} in README.md"
+        assert inv_id in readme_de, f"Missing {inv_id} in README_de.md"
 
 
 def test_gitignore_conflict_and_lock_patterns():
@@ -324,3 +366,70 @@ def test_readme_security_sla_badges():
     readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
     assert "security%20SLA-48h%20response-blue.svg" in readme_de or "Sicherheits--SLA-48h" in readme_de
     assert "SECURITY.md" in readme_de
+
+
+def test_third_party_licenses_audit():
+    """Verify THIRD_PARTY_LICENSES.md contains 100% permissive inventory and all 10 governance invariants."""
+    lic_path = PROJECT_ROOT / "THIRD_PARTY_LICENSES.md"
+    assert lic_path.is_file(), "THIRD_PARTY_LICENSES.md missing"
+    content = lic_path.read_text(encoding="utf-8")
+
+    assert "PSFL-2.0" in content
+    assert "MIT License" in content or "MIT" in content
+    assert "Apache-2.0" in content or "Apache" in content
+    assert "Zero-Egress" in content
+    assert "RunAsInvoker" in content
+
+    # Verify all 10 governance invariant IDs
+    for i in range(1, 11):
+        if i == 1:
+            code = "INV-LOCAL-01"
+        elif i == 2:
+            code = "INV-SEC-02"
+        elif i == 3:
+            code = "INV-SCHEMA-03"
+        elif i == 4:
+            code = "INV-STORE-04"
+        elif i == 5:
+            code = "INV-SRV-05"
+        elif i == 6:
+            code = "INV-AUTH-06"
+        elif i == 7:
+            code = "INV-PLAT-07"
+        elif i == 8:
+            code = "INV-CORE-08"
+        elif i == 9:
+            code = "INV-SYNC-09"
+        else:
+            code = "INV-SLA-10"
+        assert code in content, f"Missing {code} in THIRD_PARTY_LICENSES.md"
+
+
+def test_pyproject_extended_urls():
+    """Verify PEP 621 URLs include Third-Party Licenses, Marketing Log, and LLM Ready."""
+    pyproject_path = PROJECT_ROOT / "pyproject.toml"
+    assert pyproject_path.is_file(), "pyproject.toml missing"
+    content = pyproject_path.read_text(encoding="utf-8")
+
+    assert '"Third-Party Licenses"' in content
+    assert "THIRD_PARTY_LICENSES.md" in content
+    assert '"Marketing Log"' in content
+    assert "MARKETING-LOG.txt" in content
+    assert '"LLM Ready"' in content
+    assert "llms.txt" in content
+
+
+def test_marketing_log_full_pfad_b_structure():
+    """Verify MARKETING-LOG.txt follows standard Pfad B structure with personas and competitive matrix."""
+    mlog_path = PROJECT_ROOT / "MARKETING-LOG.txt"
+    assert mlog_path.is_file(), "MARKETING-LOG.txt missing"
+    content = mlog_path.read_text(encoding="utf-8")
+
+    assert "1. REPOSITORY AUDIT & DISCOVERABILITY BASELINE" in content
+    assert "2. TARGET PERSONAS & USER JOURNEYS" in content
+    assert "3. HIGH-INTENT SEARCH QUERIES (BILINGUAL EN & DE)" in content
+    assert "4. COMPETITIVE DIFFERENTIATION MATRIX" in content
+    assert "5. STRATEGIC ACTION ITEMS & DISCOVERABILITY ROADMAP" in content
+    assert "AI & LLM Engineers" in content
+    assert "Kiwix" in content
+

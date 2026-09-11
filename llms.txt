@@ -1,13 +1,16 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-09-10
+## Last-checked: 2026-09-11
 
-Verification: 161+ Python tests (including source-platform smoke tests and metadata contract tests) and 45
-Node.js PWA tests (total 206+ tests) passed locally on 2026-09-10 (Pfad A Hygiene & CI-Matrix-Härtung).
-Ruff, full Python compileall, CLI stats/check, pipeline validation, duplicate checking and the deterministic
-PWA rebuild passed without any tracked data diff. PEP 621 ecosystem URLs, OS classifiers, CI concurrency
-cancellation, gitignore hardening, test resilience, and 48h Security SLA are strictly verified. The two documented
-cross-domain duplicate titles are allowed; no incomplete or invalid entries were reported.
+Verification: 165 Python tests (including source-platform smoke tests, local edit server tests, and metadata
+contract tests) and 45 Node.js PWA tests (total 210 tests) passed locally on 2026-09-11 (Pfad B Discoverability,
+Licensing & Governance Audit). Full Python compileall, CLI stats/check, pipeline validation, duplicate checking,
+and the deterministic PWA rebuild passed without tracked data diff. Audited THIRD_PARTY_LICENSES.md (100%
+permissive open-source stack), enriched MARKETING-LOG.txt (4 target personas, search queries, competitive matrix),
+PEP 621 ecosystem URLs, OS classifiers, CI concurrency cancellation, gitignore hardening, test resilience,
+15-point bilingual quick navigation with 100% anchor parity, and 10 canonical Governance & Runtime Invariants
+(INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented cross-domain duplicate titles are allowed;
+no incomplete or invalid entries were reported.
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 
@@ -46,6 +49,9 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 - `web_publisher/`: static six-language PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (45 Node.js tests)
 - `web_publisher/README.md`: Web/PWA publisher documentation
 - `CHANGELOG.md`: project changes and release logs
+- `THIRD_PARTY_LICENSES.md`: comprehensive third-party license audit, 100% permissive dependency inventory and runtime invariant guarantees
+- `MARKETING-LOG.txt`: discoverability audit, 4 target personas, bilingual search queries, competitive matrix and strategic roadmap
+- `SECURITY.md`: bilingual security policy with 48h response SLA, triage guarantees and multi-channel contacts
 
 ## Data Model
 
@@ -57,9 +63,9 @@ Typical stub fields:
 - `definition_de`, `definition_en`, `relevance`: legacy compatibility fields kept in sync with the canonical maps
 - `tags`: topic tags for filtering and export
 
-## Privacy and Network Behavior
+## Privacy, Security and Governance Invariants
 
-Core WikiStub-Seed usage is local-first and has no telemetry. It reads and writes local JSON/Markdown files. The optional translation command may call an external API only when `ANTHROPIC_API_KEY` is configured and the optional `anthropic` package is installed.
+Core WikiStub-Seed usage is 100% local-first and has zero telemetry (INV-LOCAL-01, INV-STORE-04). It operates strictly in unprivileged user space (RunAsInvoker / INV-SEC-02), requires zero third-party packages for core operations (INV-CORE-08), and binds the optional GUI edit server strictly to loopback (127.0.0.1 / INV-SRV-05) with PBKDF2 hashing and soft-delete trash recovery (INV-AUTH-06). Multi-host sync conflicts are defended via gitignore (INV-SYNC-09), cross-platform parity is maintained across Windows, Linux, and macOS (INV-PLAT-07), and a 48-hour security response SLA is guaranteed (INV-SLA-10). The optional translation command may call an external API only when `ANTHROPIC_API_KEY` is configured and the optional `anthropic` package is installed.
 
 ## Search Phrases
 

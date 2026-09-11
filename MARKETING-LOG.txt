@@ -1,4 +1,96 @@
-# MARKETING-LOG.txt - WikiStub-Seed
-# Format: [YYYY-MM-DD HH:MM:SS TZ] [TASK_NAME] ACTION: ... | DETAILS: ...
+# MARKETING-LOG: WikiStub-Seed
+Date: 2026-09-11
+Operator: Antigravity / Gemini (via GITHUBBOT Pfad B)
+Target Repo: dev-bricks/WikiStub-Seed
+Canonical Path: C:\_Local_DEV\repos\WikiStub-Seed
+Version: 1.1.10
 
-[2026-09-09 05:50:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 14-Point Quick Navigation in README.md & README_de.md with strict bilingual anchor parity, 10 Governance & Runtime Invariants Table, Modern Badges (v1.1.9, 48h Security SLA, Ruff, Tests), CI Concurrency (cancel-in-progress), .gitignore cloud-sync conflict and lock hardening, PEP 621 ecosystem URLs (Changelog, Security, Parent Org, Umbrella Ecosystem) & OS classifiers, bilingual SECURITY.md with 48h SLA and multi-channel contacts, and expanded test_metadata.py contract tests (206/206 total passed).
+# Audit & Action Tracking:
+# [2026-09-09 05:50:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 14-Point Quick Navigation in README.md & README_de.md with strict bilingual anchor parity, 10 Governance & Runtime Invariants Table, Modern Badges (v1.1.9, 48h Security SLA, Ruff, Tests), CI Concurrency (cancel-in-progress), .gitignore cloud-sync conflict and lock hardening, PEP 621 ecosystem URLs (Changelog, Security, Parent Org, Umbrella Ecosystem) & OS classifiers, bilingual SECURITY.md with 48h SLA and multi-channel contacts, and expanded test_metadata.py contract tests (206/206 total passed).
+# [2026-09-11 12:45:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 15-Point Quick Navigation standard with 100% bidirectional anchor parity (#13-third-party-licenses--transparency / #13-drittanbieter-lizenzen--transparenz, #14-marketing--target-personas / #14-marketing--zielgruppen), canonical invariant identifiers (INV-LOCAL-01 to INV-SLA-10), audited THIRD_PARTY_LICENSES.md (100% permissive open source stack), enriched MARKETING-LOG.txt with 4 personas & competitive matrix, PEP 621 project URLs in pyproject.toml ("Third-Party Licenses", "Marketing Log", "LLM Ready"), version bump to 1.1.10, llms.txt synchronization, and automated contract testsuite extension.
+
+================================================================================
+1. REPOSITORY AUDIT & DISCOVERABILITY BASELINE
+================================================================================
+- Organization: dev-bricks
+- Umbrella Ecosystem: open-bricks
+- Target Audience: AI researchers, LLM application engineers, RAG pipeline architects, knowledge curators, domain researchers, offline tool builders, educators
+- Core Positioning: Local-first, zero-egress multilingual JSON knowledge-stub framework delivering 630 curated domain concepts across 12 scientific/cultural fields for structured AI context injection, RAG retrieval, and offline exploration.
+- Distinct Value Proposition: Operates 100% offline with zero external runtime dependencies (Python standard library only). Provides 6 languages (DE, EN, ES, ZH, JA, RU), structured domain taxonomy (85 subcategories), deterministic schema validation, a localhost-bound GUI edit server (127.0.0.1) with soft-delete trash recovery, and a standalone PWA offline web publisher.
+- Sibling Ecosystem Integration: Interoperates with dev-bricks developer tooling (DevCenter, CodeBox, MethodenAnalyser, CareCenter-for-Codex, safe-start-for-codex, automation-master) and open-bricks document & AI tools (CleanMarkdown, PDFtoPDFocr, MediaBrain, DokuReader).
+
+================================================================================
+2. TARGET PERSONAS & USER JOURNEYS
+================================================================================
+1. AI & LLM Engineers (RAG & Local Knowledge Injection)
+   - Needs: Inject high-signal, domain-curated knowledge stubs into local LLM contexts, vector stores (FAISS, Chroma, Qdrant), or agent prompts without scraping latency or noisy web HTML.
+   - Pain Points: Raw Wikipedia dumps (XML/Wikitext) are multi-gigabyte beasts packed with parsing noise, navigation boilerplate, and inconsistent schemas.
+   - WikiStub-Seed Solution: Compact, deterministic `wikistub_seed.json` (630 stubs) with structured definitions and relevance notes across 6 languages ready for direct JSON or Markdown ingestion (`wikistub_seed_pipeline.py export`).
+
+2. Domain Researchers, Curators & Ontologists
+   - Needs: Maintain a clean, cross-disciplinary concept hierarchy spanning 12 academic fields (Math, Physics, Chemistry, Biology, Medicine, CS/AI, etc.) with verified terminology.
+   - Pain Points: Complex ontology tools (Protégé, OWL, RDF stores) require specialized knowledge and heavy setups, making rapid curation cumbersome.
+   - WikiStub-Seed Solution: Human-readable JSON structure with built-in validation CLI (`wikistub_seed_cli.py check/stats`), duplicate verification, and optional local browser GUI (`python edit_server.py`).
+
+3. Local-First & Zero-Egress Tool Builders
+   - Needs: Build air-gapped, privacy-preserving desktop and offline mobile applications that provide instant reference and semantic search without internet connectivity.
+   - Pain Points: SaaS dictionary and encyclopedia APIs leak user queries, demand API keys, and fail completely during travel or in secure network environments.
+   - WikiStub-Seed Solution: 100% Local-First / Zero-Egress architecture (INV-LOCAL-01), zero telemetry, and a built-in Progressive Web App (PWA) with ServiceWorker caching and instant search.
+
+4. Educators & Technical Documentation Specialists
+   - Needs: Rapidly generate course glossaries, foundational concept notes, and study decks for students in Markdown, Obsidian vaults, or static web pages.
+   - Pain Points: Manually writing multi-lingual definitions and linking related concepts across disciplines takes weeks of manual authoring.
+   - WikiStub-Seed Solution: One-command batch export to categorized Markdown folders (`wikistub_seed_pipeline.py export --output --english`), easily imported into Obsidian, Docusaurus, or MkDocs.
+
+================================================================================
+3. HIGH-INTENT SEARCH QUERIES (BILINGUAL EN & DE)
+================================================================================
+English (EN):
+- `local-first multilingual json knowledge base`
+- `llm context dataset 630 stubs bilingual`
+- `rag knowledge base json python standard library`
+- `wikipedia stub seed dataset offline`
+- `offline pwa knowledge publisher python`
+- `curated ontology concept catalog json`
+- `wikistub-seed dev-bricks`
+- `zero-dependency knowledge base cli python`
+- `cross-domain terminology dataset de en es zh ja ru`
+- `structured markdown export for obsidian knowledge vault`
+
+German (DE):
+- `Mehrsprachige JSON Wissensbasis Python`
+- `Lokale Wissensdatenbank fuer RAG und LLMs`
+- `Strukturierte Konzept-Stubs 12 Domaenen`
+- `Offline PWA Wissens-Publisher Python`
+- `Zero-Egress Wissensverwaltung Python Standardbibliothek`
+- `Kuratierte Ontologie Wissenssammlung JSON`
+- `WikiStub-Seed dev-bricks`
+- `Markdown Export fuer Obsidian Wissensgraphen`
+- `Lokaler Editiermodus Web Publisher 127.0.0.1`
+- `Mehrsprachiges Begriffslexikon KI Forschung`
+
+================================================================================
+4. COMPETITIVE DIFFERENTIATION MATRIX
+================================================================================
+| Feature / Dimension | WikiStub-Seed | Full Wikipedia Dumps / Kiwix | MediaWiki / DokuWiki | Raw Text Corpora (Common Crawl) | Static Site Docs (Docusaurus) |
+|:---|:---|:---|:---|:---|:---|
+| Dependency Footprint | Zero (Python stdlib) | Dedicated Reader / ZIM files | PHP / MySQL / Web server | Huge TB storage / Big Data | Node.js / npm ecosystem |
+| Schema Predictability | 100% Deterministic JSON | Unstructured Wikitext / HTML | Ad-hoc Wiki Syntax | Unstructured raw text | Markdown / MDX |
+| Multilingual Alignment | 6 Languages Normalized | Separate DB per language | Manual interlanguage links | Mixed / unaligned | Manual i18n config |
+| LLM & RAG Readiness | Instant JSON/Markdown feed | Complex parsing pipeline | Requires scraping/export | Requires heavy extraction | Requires manual indexing |
+| Privacy & Egress | 100% Local-First / Zero Egress | Local ZIM / zero telemetry | Depends on server host | Online scraping required | Local build / Web deploy |
+| Built-in Local GUI | Localhost HTTP Edit Server | Read-only ZIM viewer | Full server CMS | None | Development server |
+| Offline PWA Reader | Included (PWA ServiceWorker) | Kiwix app required | Needs browser & server | None | Needs custom service worker |
+| Governance Invariants | 10 Codified (INV-LOCAL-01..10)| Open data guidelines | Community conventions | None | Open source license |
+
+================================================================================
+5. STRATEGIC ACTION ITEMS & DISCOVERABILITY ROADMAP
+================================================================================
+- [x] Standardize bilingual README navigation with 15-point bidirectional parity.
+- [x] Codify 10 Governance & Runtime Invariants (INV-LOCAL-01 to INV-SLA-10) in READMEs and docs.
+- [x] Create comprehensive THIRD_PARTY_LICENSES.md audit verifying 100% permissive stack.
+- [x] Configure PEP 621 URLs for Third-Party Licenses, Marketing Log, and LLM Ready in pyproject.toml.
+- [x] Synchronize llms.txt discovery index with updated test baseline and invariant contracts.
+- [ ] Register WikiStub-Seed on Hugging Face Datasets as a curated multilingual concept seed.
+- [ ] Publish an export plugin for direct Obsidian vault and Logseq graph generation.
+- [ ] Create a short CLI demo screencast demonstrating `check`, `export`, and `edit_server.py`.

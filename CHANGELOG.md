@@ -3,14 +3,23 @@
 Alle wesentlichen Änderungen an diesem Projekt werden hier dokumentiert.
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
-## [Unreleased]
+## [1.1.10] - 2026-09-11
 
-### Repository-Hygiene & CI-Matrix-Härtung (Pfad A, 2026-09-10)
-- **PEP 621 Standard-Metadaten in `pyproject.toml`**: Umfassende Betriebssystem-Classifiers (`Operating System :: Microsoft :: Windows`, `Operating System :: POSIX :: Linux`, `Operating System :: MacOS`), standardisierte URLs (`Issues`, `Changelog`, `Security`, `Parent Organization`, `Umbrella Ecosystem`), optionale Entwicklung- und Test-Dependencies (`[project.optional-dependencies]` dev/test) sowie `[tool.pytest.ini_options]` mit `addopts = "-ra -v"` ergänzt.
+### Hinzugefügt / Added
+- **15-Punkte Schnellnavigation mit 100%iger wechselseitiger Ankerparität**: `README.md` (`### Quick Navigation`) und `README_de.md` (`### Schnellnavigation`) auf den 15-Punkte-Standard erweitert mit vollständiger wechselseitiger Ankerparität für Drittanbieter-Lizenzen (`#13-third-party-licenses--transparency` / `#13-drittanbieter-lizenzen--transparenz`), Marketing & Zielgruppen (`#14-marketing--target-personas` / `#14-marketing--zielgruppen`) sowie Sprachversionen.
+- **Kanonische Governance- & Laufzeitinvarianten-Kennungen**: Tabelle der 10 Invarianten in `README.md` und `README_de.md` mit den normierten Kennungen (`INV-LOCAL-01` bis `INV-SLA-10`) versehen.
+- **Dritte-Partei-Lizenzinventar (`THIRD_PARTY_LICENSES.md`)**: Vollständiges Lizenz- und Transparenzinventar für Laufzeit-, Standardbibliothek- und Entwicklungs-/QA-Abhängigkeiten (100% permissive Lizenzen: MIT, PSFL-2.0, Apache-2.0; Null restriktives Copyleft/AGPL) und Governance-Garantien implementiert.
+- **Erweitertes Marketing- & Entdeckbarkeits-Log (`MARKETING-LOG.txt`)**: 5-teiliges Standardregister mit Repository-Baseline, 4 detaillierten Ziel-Personas (KI/LLM-Entwickler, Wissensforscher & Ontologen, Local-First/Zero-Egress-Entwickler, Bildungs- und Dokumentationsteams), zweisprachigen High-Intent-Suchbegriffen, Wettbewerbsmatrix (vs. Kiwix, MediaWiki, Common Crawl, Docusaurus) und strategischer Roadmap.
+- **PEP 621 Ökosystem-URLs in `pyproject.toml`**: Standardisierte URLs für `"Third-Party Licenses"`, `"Marketing Log"` und `"LLM Ready"` ergänzt.
+- **Shields.io Badges**: Badges für Version 1.1.10, Third-Party Licenses (audited 100% permissive) und Marketing Log (active) in `README.md` und `README_de.md` integriert.
+- **Automatisierte Vertragstestsuite (`tests/test_metadata.py`)**: Um umfassende Prüfungen für 15-Punkte-Navigation, Ankerparität, Invarianten-Kennungen, `THIRD_PARTY_LICENSES.md`, erweitertes Marketing-Log und PEP 621 URLs erweitert.
+
+### Repository-Hygiene & CI-Matrix-Härtung (Pfad A)
+- **PEP 621 Standard-Metadaten in `pyproject.toml`**: Umfassende Betriebssystem-Classifiers (`Operating System :: Microsoft :: Windows`, `Operating System :: POSIX :: Linux`, `Operating System :: MacOS`), standardisierte URLs (`Issues`, `Changelog`, `Security`, `Parent Organization`, `Umbrella Ecosystem`), optionale Entwicklung- und Test-Dependencies (`[project.optional-dependencies]` dev/test) sowie `[tool.pytest.ini_options]` mit `addopts = "-ra -v"` konfiguriert.
 - **CI-Matrix-Härtung**: Concurrency-Cancellation (`cancel-in-progress: true`) in `.github/workflows/tests.yml` und `.github/workflows/source-platform-smoke.yml` integriert; Python-Testmatrix auf 3.10, 3.11, 3.12 und 3.13 erweitert.
 - **Git-Hygiene in `.gitignore`**: Schutzmuster gegen Multi-Host-Synchronisationskonflikte (`*-conflict-*`, `*.sync-conflict-*`, `*-ASUS-GEI.*`, `*-WORKSTATION-LG.*`), Multi-Agent-Locks (`LOCK`, `LOCK.*`, `*.lock`, `LOCK*.txt`, `LOCK.permissions.json`) sowie Packaging- und Test-Caches (`wheelhouse/`, `.wheel-smoke/`, `coverage/`) gehärtet.
 - **Zweisprachige Sicherheitsrichtlinie (`SECURITY.md`)**: Vollständig nach Standard ausgebaut mit verbindlicher 48h Response-SLA, 5-Werktage-Triage-Zusage, offiziellen Kontakten (`security@open-bricks.org`, `security@dev-bricks.org`, `security@ellmos.ai`, `support@lukasgeiger.com`, `lukas@open-bricks.org`, `@lukisch`), Tabelle unterstützter Versionen (1.1.x) und Local-First / Zero-Egress Invarianten.
-- **Dokumentation & Badges**: Shields.io Badges in `README.md` und `README_de.md` um die 48h-Sicherheits-SLA ergänzt; `llms.txt` auf den Verifikationsstand 2026-09-10 synchronisiert.
+- **Dokumentation & Badges**: Shields.io Badges in `README.md` und `README_de.md` um die 48h-Sicherheits-SLA ergänzt; `llms.txt` auf den Verifikationsstand synchronisiert.
 - **Test-Resilienz (`tests/test_edit_server.py`)**: Request-Retry-Schleife gegen flüchtige Windows-Loopback-Socket-Resets (`[WinError 10053]`).
 - **Vertragstestsuite (`tests/test_metadata.py`)**: Automatisierte Tests für PEP 621 URLs, OS-Classifiers, Git-Hygiene-Regeln, CI-Concurrency und Sicherheits-SLA erweitert.
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wikistub-seed"
-version = "1.1.9"
+version = "1.1.10"
 description = "Local-first multilingual JSON knowledge-stub framework with 630+ stubs for AI research, documentation, RAG and LLM workflows."
 readme = "README.md"
 authors = [
@@ -65,6 +65,9 @@ Changelog = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CHANGELOG.m
 Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"
 "Parent Organization" = "https://github.com/dev-bricks"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
+"Third-Party Licenses" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.md"
+"Marketing Log" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/MARKETING-LOG.txt"
+"LLM Ready" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/llms.txt"
 
 [tool.pytest.ini_options]
 pythonpath = "."
