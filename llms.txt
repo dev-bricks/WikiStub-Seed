@@ -1,13 +1,13 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-09-11
+## Last-checked: 2026-09-13
 
-Verification: 165 Python tests (including source-platform smoke tests, local edit server tests, and metadata
-contract tests) and 45 Node.js PWA tests (total 210 tests) passed locally on 2026-09-11 (Pfad B Discoverability,
-Licensing & Governance Audit). Full Python compileall, CLI stats/check, pipeline validation, duplicate checking,
+Verification: 167 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/dedup tests, and metadata
+contract tests) and 45 Node.js PWA tests (total 212 tests) passed locally on 2026-09-13 (Pfad A Repository Hygiene,
+CI Hardening & Contract Test Audit). Full Python compileall, CLI stats/check, pipeline validation, duplicate checking,
 and the deterministic PWA rebuild passed without tracked data diff. Audited THIRD_PARTY_LICENSES.md (100%
 permissive open-source stack), enriched MARKETING-LOG.txt (4 target personas, search queries, competitive matrix),
-PEP 621 ecosystem URLs, OS classifiers, CI concurrency cancellation, gitignore hardening, test resilience,
+PEP 621 ecosystem URLs, OS classifiers, CI concurrency cancellation, CI job timeouts (15m/10m/5m), gitignore hardening,
 15-point bilingual quick navigation with 100% anchor parity, and 10 canonical Governance & Runtime Invariants
 (INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented cross-domain duplicate titles are allowed;
 no incomplete or invalid entries were reported.
@@ -40,7 +40,7 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 
 - `README.md`: public overview, usage and project positioning
 - `README_de.md`: German documentation and guide
-- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (161 Python tests)
+- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (167 Python tests)
 - `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks
 - `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline

@@ -122,5 +122,14 @@ LOCK.permissions.json
 # ---- Test-, Coverage- & Packaging-Caches ----
 coverage/
 .coverage.*
+.nyc_output/
+.hypothesis/
 wheelhouse/
 .wheel-smoke/
+
+# ---- Node & Web Packages ----
+node_modules/
+
+# ---- Merge- & Patch-Artefakte ----
+*.orig
+*.rej

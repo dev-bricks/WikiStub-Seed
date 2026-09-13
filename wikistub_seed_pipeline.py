@@ -51,6 +51,21 @@ from safe_io import (
 )
 from data_policy import duplicate_locations_are_allowed
 
+
+def configure_console_output() -> None:
+    """Prevent status glyphs from crashing redirected legacy Windows consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            try:
+                reconfigure(errors="replace")
+            except Exception:
+                pass
+
+
+configure_console_output()
+
+
 # ==================== KONFIGURATION ====================
 
 BASE_PATH = Path(__file__).parent.resolve()
@@ -1367,14 +1382,6 @@ def cmd_clean(args):
 
 
 # ==================== MAIN ====================
-
-def configure_console_output() -> None:
-    """Prevent status glyphs from crashing redirected legacy Windows consoles."""
-    for stream in (sys.stdout, sys.stderr):
-        reconfigure = getattr(stream, "reconfigure", None)
-        if callable(reconfigure):
-            reconfigure(errors="replace")
-
 
 def main(argv=None):
     parser = argparse.ArgumentParser(

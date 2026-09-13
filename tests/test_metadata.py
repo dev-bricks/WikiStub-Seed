@@ -200,7 +200,7 @@ def test_readme_bilingual_badges_and_mermaid():
         content = path.read_text(encoding="utf-8")
 
         assert "shields.io" in content
-        assert "version-1.1.10" in content
+        assert "version-1.1.11" in content
         assert "dev--bricks" in content
         assert "open--bricks" in content
         assert "third--party%20licenses" in content
@@ -335,6 +335,11 @@ def test_gitignore_conflict_and_lock_patterns():
     assert "wheelhouse/" in content
     assert ".wheel-smoke/" in content
     assert "coverage/" in content
+    assert ".nyc_output/" in content
+    assert ".hypothesis/" in content
+    assert "node_modules/" in content
+    assert "*.orig" in content
+    assert "*.rej" in content
 
 
 def test_ci_concurrency_configured():
@@ -345,6 +350,32 @@ def test_ci_concurrency_configured():
         content = wf_path.read_text(encoding="utf-8")
         assert "concurrency:" in content, f"concurrency missing in {wfname}"
         assert "cancel-in-progress: true" in content, f"cancel-in-progress missing in {wfname}"
+
+
+def test_ci_no_duplicate_concurrency():
+    """Verify CI workflows do not contain duplicate top-level concurrency blocks."""
+    for wfname in ["tests.yml", "source-platform-smoke.yml"]:
+        wf_path = PROJECT_ROOT / ".github" / "workflows" / wfname
+        assert wf_path.is_file(), f"{wfname} missing"
+        content = wf_path.read_text(encoding="utf-8")
+        concurrency_count = len(re.findall(r'(?m)^concurrency:\s*$', content))
+        assert concurrency_count == 1, f"Expected exactly 1 concurrency block in {wfname}, found {concurrency_count}"
+
+
+def test_ci_job_timeouts_configured():
+    """Verify that CI workflows define explicit job timeout-minutes to guard against hung runners."""
+    expected_timeouts = {
+        "tests.yml": ["timeout-minutes: 15", "timeout-minutes: 10"],
+        "source-platform-smoke.yml": ["timeout-minutes: 10"],
+        "stale.yml": ["timeout-minutes: 5"],
+        "welcome.yml": ["timeout-minutes: 5"],
+    }
+    for wfname, timeouts in expected_timeouts.items():
+        wf_path = PROJECT_ROOT / ".github" / "workflows" / wfname
+        assert wf_path.is_file(), f"{wfname} missing"
+        content = wf_path.read_text(encoding="utf-8")
+        for expected in timeouts:
+            assert expected in content, f"Expected '{expected}' in {wfname}"
 
 
 def test_local_marketing_log_exists():

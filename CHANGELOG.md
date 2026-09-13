@@ -3,6 +3,22 @@
 Alle wesentlichen Änderungen an diesem Projekt werden hier dokumentiert.
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
+## [1.1.11] - 2026-09-13
+
+### Repository-Hygiene & CI-Härtung (Pfad A)
+- **CI-Workflow-Härtung & Timeout-Guardrails**:
+  - Redundante, doppelte `concurrency:`-Deklarationen in `.github/workflows/tests.yml` und `.github/workflows/source-platform-smoke.yml` bereinigt.
+  - Explizite `timeout-minutes`-Schutzleitplanken für alle CI-Jobs hinterlegt (`tests.yml`: `timeout-minutes: 15` für Python-Tests, `timeout-minutes: 10` für PWA-Tests; `source-platform-smoke.yml`: `timeout-minutes: 10`; `stale.yml`: `timeout-minutes: 5`; `welcome.yml`: `timeout-minutes: 5`), um hängende GitHub-Actions-Runner und verwaiste Ressourcen zuverlässig zu terminieren.
+- **Gitignore-Härtung (`.gitignore`)**:
+  - Schutzfilter um Property-Testing-, Node- und Merge-/Patch-Artefakte erweitert (`.hypothesis/`, `.nyc_output/`, `node_modules/`, `*.orig`, `*.rej`).
+- **Windows-Konsolen- & CLI-Resilienz (`wikistub_seed_cli.py`, `wikistub_seed_pipeline.py`)**:
+  - `configure_console_output()` auf Modul-Importebene aktiviert (`sys.stdout`/`sys.stderr` mit `errors="replace"`), sodass Terminal-Ausgaben mit Status-Glyphen (`✗`, `✓`) und Emojis (`🌐`) auch in Standard-Windows-Konsolen (`cp1252`) ohne explizite `PYTHONIOENCODING=utf-8`-Umgebungsvariable absolut absturzfrei laufen.
+- **Versions- & Dokumentationssynchronisation**:
+  - Versionssprung auf `1.1.11` in `pyproject.toml`, Versions- und Test-Badges (212 passed: 167 Python + 45 Node) in `README.md` und `README_de.md` aktualisiert sowie `llms.txt` auf den aktuellen Prüfstand gebracht.
+- **Automatisierte Vertragstests (`tests/test_metadata.py`)**:
+  - Neue Tests `test_ci_no_duplicate_concurrency` und `test_ci_job_timeouts_configured` hinzugefügt, um Workflow-Integrität und Timeout-Garantien dauerhaft regressionssicher zu prüfen.
+  - Testsuite wächst auf 212 Tests (167 Python-Tests + 45 Node.js PWA-Tests), 100% bestanden.
+
 ## [1.1.10] - 2026-09-11
 
 ### Hinzugefügt / Added

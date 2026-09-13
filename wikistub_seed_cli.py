@@ -42,6 +42,21 @@ from safe_io import (
     safe_path_component,
 )
 
+
+def configure_console_output() -> None:
+    """Prevent status glyphs from crashing redirected legacy Windows consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            try:
+                reconfigure(errors="replace")
+            except Exception:
+                pass
+
+
+configure_console_output()
+
+
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
 BACKUP_PATH = BASE_PATH / "backups"
