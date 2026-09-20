@@ -1,16 +1,16 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-09-13
+## Last-checked: 2026-09-20
 
-Verification: 167 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/dedup tests, and metadata
-contract tests) and 45 Node.js PWA tests (total 212 tests) passed locally on 2026-09-13 (Pfad A Repository Hygiene,
-CI Hardening & Contract Test Audit). Full Python compileall, CLI stats/check, pipeline validation, duplicate checking,
-and the deterministic PWA rebuild passed without tracked data diff. Audited THIRD_PARTY_LICENSES.md (100%
-permissive open-source stack), enriched MARKETING-LOG.txt (4 target personas, search queries, competitive matrix),
-PEP 621 ecosystem URLs, OS classifiers, CI concurrency cancellation, CI job timeouts (15m/10m/5m), gitignore hardening,
-15-point bilingual quick navigation with 100% anchor parity, and 10 canonical Governance & Runtime Invariants
-(INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented cross-domain duplicate titles are allowed;
-no incomplete or invalid entries were reported.
+Verification: 172 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/dedup tests, and metadata
+contract tests) and 45 Node.js PWA tests (total 217 tests) passed locally on 2026-09-20 (Pfad B Repository Marketing,
+Discoverability & Level 1 SBOM Audit). Full Python compileall, CLI stats/check, pipeline validation, duplicate checking,
+and the deterministic PWA rebuild passed without tracked data diff. Audited Level 1 SBOM THIRD_PARTY_LICENSES.md (100%
+permissive open-source stack, invariant cross-reference matrix, zero-copyleft guarantee), formal NOTICE file, enriched
+MARKETING-LOG.txt (4 target personas [PERSONA-01]..[PERSONA-04], bilingual search queries, 10-dimension competitive matrix),
+PEP 621 ecosystem URLs and license-files, 18-point bilingual quick navigation with 100% dual HTML anchor parity, statutory notice
+(§ 521 BGB), and 10 canonical Governance & Runtime Invariants (INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented
+cross-domain duplicate titles are allowed; no incomplete or invalid entries were reported.
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 
@@ -38,9 +38,10 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 
 ## Main Files
 
-- `README.md`: public overview, usage and project positioning
-- `README_de.md`: German documentation and guide
-- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (167 Python tests)
+- `README.md`: public overview, usage and project positioning (18-point quick navigation)
+- `README_de.md`: German documentation and guide (18-point bilingual parity)
+- `NOTICE`: formal attribution and upstream ecosystem notice
+- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (172 Python tests)
 - `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks
 - `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline
@@ -49,8 +50,8 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 - `web_publisher/`: static six-language PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (45 Node.js tests)
 - `web_publisher/README.md`: Web/PWA publisher documentation
 - `CHANGELOG.md`: project changes and release logs
-- `THIRD_PARTY_LICENSES.md`: comprehensive third-party license audit, 100% permissive dependency inventory and runtime invariant guarantees
-- `MARKETING-LOG.txt`: discoverability audit, 4 target personas, bilingual search queries, competitive matrix and strategic roadmap
+- `THIRD_PARTY_LICENSES.md`: Level 1 SBOM, 100% permissive dependency inventory, invariant cross-reference matrix and zero-copyleft guarantee
+- `MARKETING-LOG.txt`: discoverability audit, 4 target personas, bilingual search queries, 10-dimension competitive matrix and strategic roadmap
 - `SECURITY.md`: bilingual security policy with 48h response SLA, triage guarantees and multi-channel contacts
 
 ## Data Model

@@ -1,13 +1,14 @@
 # MARKETING-LOG: WikiStub-Seed
-Date: 2026-09-11
+Date: 2026-09-20
 Operator: Antigravity / Gemini (via GITHUBBOT Pfad B)
 Target Repo: dev-bricks/WikiStub-Seed
 Canonical Path: C:\_Local_DEV\repos\WikiStub-Seed
-Version: 1.1.10
+Version: 1.1.12
 
 # Audit & Action Tracking:
 # [2026-09-09 05:50:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 14-Point Quick Navigation in README.md & README_de.md with strict bilingual anchor parity, 10 Governance & Runtime Invariants Table, Modern Badges (v1.1.9, 48h Security SLA, Ruff, Tests), CI Concurrency (cancel-in-progress), .gitignore cloud-sync conflict and lock hardening, PEP 621 ecosystem URLs (Changelog, Security, Parent Org, Umbrella Ecosystem) & OS classifiers, bilingual SECURITY.md with 48h SLA and multi-channel contacts, and expanded test_metadata.py contract tests (206/206 total passed).
 # [2026-09-11 12:45:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 15-Point Quick Navigation standard with 100% bidirectional anchor parity (#13-third-party-licenses--transparency / #13-drittanbieter-lizenzen--transparenz, #14-marketing--target-personas / #14-marketing--zielgruppen), canonical invariant identifiers (INV-LOCAL-01 to INV-SLA-10), audited THIRD_PARTY_LICENSES.md (100% permissive open source stack), enriched MARKETING-LOG.txt with 4 personas & competitive matrix, PEP 621 project URLs in pyproject.toml ("Third-Party Licenses", "Marketing Log", "LLM Ready"), version bump to 1.1.10, llms.txt synchronization, and automated contract testsuite extension.
+# [2026-09-20 05:55:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 18-Point Quick Navigation standard with 100% bidirectional dual HTML anchor parity, embedded [PERSONA-01]..[PERSONA-04] and bilingual high-intent queries, 10-dimension comparative matrix vs. 4 alternatives, Level 1 SBOM Third-Party Licenses (THIRD_PARTY_LICENSES.md) with Invariant Cross-Reference Matrix and Zero-Copyleft Isolation Guarantee, formal root attribution NOTICE file, statutory liability disclaimer (§ 521 BGB), PEP 621 license-files specification (LICENSE, NOTICE, THIRD_PARTY_LICENSES.md), llms.txt index synchronization, version bump to 1.1.12, and comprehensive contract testsuite extension.
 
 ================================================================================
 1. REPOSITORY AUDIT & DISCOVERABILITY BASELINE

@@ -3,6 +3,32 @@
 Alle wesentlichen Änderungen an diesem Projekt werden hier dokumentiert.
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
+## [1.1.12] - 2026-09-20
+
+### Marketing, Discoverability & Level 1 SBOM Upgrade (Pfad B)
+- **18-Punkte-Schnellnavigation mit 100%iger wechselseitiger dualer HTML-Ankerparität**:
+  - `README.md` (`### Quick Navigation`) und `README_de.md` (`### Schnellnavigation`) vollständig auf den 18-Punkte-Standard erweitert.
+  - Alle Abschnitte mit dualen, rückwärtskompatiblen HTML-Ankern (`<a id="..."></a>`) ausgestattet, sodass historische Links (#13-third-party-licenses--transparency, #14-marketing--target-personas etc.) und nummerierte 18-Punkte-Anker nahtlos ohne Linkbrüche funktionieren.
+- **Zielgruppen & Discoverability-Suchanfragen (`[PERSONA-01]` bis `[PERSONA-04]`)**:
+  - Vier detaillierte Zielgruppenprofile mit Zielen, Schmerzpunkten und technischen Lösungen direkt in Abschnitt 4 beider READMEs eingebettet: KI- & LLM-Entwickler, Wissensforscher & Ontologen, Local-First- & Zero-Egress-Entwickler, Bildungs- und Dokumentationsteams.
+  - Zweisprachige High-Intent-Suchbegriffstabelle für zielgerichtete Auffindbarkeit in Entwicklungs- und RAG-Kontexten.
+- **10-Dimensionen-Vergleichsmatrix gegenüber 4 Alternativen**:
+  - Umfassende Vergleichsmatrix in Abschnitt 5 über 10 technische Dimensionen und Invarianten (Runtime-Footprint, Schema-Determinismus, Sprachausrichtung, RAG-Eignung, Zero-Egress, RunAsInvoker, Edit-Server, PWA-Publisher, Lizenzierung, SLA) gegen Kiwix/Wikipedia-Dumps, MediaWiki/DokuWiki, Common Crawl Web-Scrapes und statische Doku-Generatoren (Docusaurus/MkDocs).
+- **Level 1 SBOM & Dritte-Partei-Lizenzinventar (`THIRD_PARTY_LICENSES.md`)**:
+  - Auf Level 1 SBOM (Stand 2026-09-20) gehärtet mit formeller Invarianten-Kreuzreferenztabelle (`INV-LOCAL-01` bis `INV-SLA-10`), Zertifizierung unprivilegierter Ausführung (`RunAsInvoker`) und Zero-Copyleft-Isolationsgarantie (100% permissiv: MIT, PSFL-2.0, Apache-2.0; null GPL/AGPL).
+- **Formelle Namensnennung & Root-Attribution (`NOTICE`)**:
+  - Kanonische `NOTICE`-Datei im Projekt-Root für `open-bricks` / `dev-bricks` Ökosystem-Attribution und Lizenztransparenz angelegt.
+- **Gesetzlicher Hinweis & Haftungsbeschränkung (§ 521 BGB)**:
+  - Gesetzliche Schenkungs- und Gefälligkeitsrechts-Klausel nach § 521 BGB in Abschnitt 18 von `README.md` und `README_de.md` verankert.
+- **PEP 621 Standard-Metadaten & Versionssprung**:
+  - Version in `pyproject.toml` auf `1.1.12` angehoben.
+  - `license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]` konfiguriert.
+- **Shields.io Badges & Synchronisation**:
+  - Badges für Version `1.1.12`, Attribution Notice (`NOTICE`), Level 1 SBOM und Testanzahl (217 passed: 172 Python + 45 Node) in beiden READMEs synchronisiert.
+  - `llms.txt` und `MARKETING-LOG.txt` auf den Stand 2026-09-20 aktualisiert.
+- **Automatisierte Vertragstests (`tests/test_metadata.py`)**:
+  - Neue Vertragstests für 18-Punkte-Navigation, duale HTML-Anker, Personas [PERSONA-01]..[PERSONA-04], Vergleichsmatrix, Level 1 SBOM, NOTICE-Datei und § 521 BGB Disclaimer hinzugefügt (172 Python-Tests + 45 Node.js-Tests = 217 Gesamtprüfungen).
+
 ## [1.1.11] - 2026-09-13
 
 ### Repository-Hygiene & CI-Härtung (Pfad A)

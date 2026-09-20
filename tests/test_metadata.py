@@ -50,6 +50,7 @@ def test_core_documentation_files_exist():
         "llms.txt",
         "CHANGELOG.md",
         "LICENSE",
+        "NOTICE",
         "SECURITY.md",
         "CONTRIBUTING.md",
         "CODE_OF_CONDUCT.md",
@@ -125,7 +126,7 @@ def test_pyproject_classifiers_and_urls():
     assert '"Operating System :: POSIX :: Linux"' in content
     assert '"Operating System :: MacOS"' in content
     assert re.search(r'(?m)^license\s*=\s*"MIT"\s*$', content)
-    assert re.search(r'(?m)^license-files\s*=\s*\[\s*"LICENSE"\s*\]\s*$', content)
+    assert re.search(r'(?m)^license-files\s*=\s*\[\s*"LICENSE",\s*"NOTICE",\s*"THIRD_PARTY_LICENSES\.md"\s*\]\s*$', content)
     assert '"License :: OSI Approved :: MIT License"' not in content
 
     assert 'Homepage = "https://github.com/dev-bricks/WikiStub-Seed"' in content
@@ -200,10 +201,11 @@ def test_readme_bilingual_badges_and_mermaid():
         content = path.read_text(encoding="utf-8")
 
         assert "shields.io" in content
-        assert "version-1.1.11" in content
+        assert "version-1.1.12" in content
         assert "dev--bricks" in content
         assert "open--bricks" in content
         assert "third--party%20licenses" in content
+        assert "attribution-NOTICE" in content
         assert "marketing%20log" in content
         assert "flowchart TD" in content
         assert "sequenceDiagram" in content
@@ -211,7 +213,7 @@ def test_readme_bilingual_badges_and_mermaid():
 
 
 def test_quick_navigation_anchors_and_parity():
-    """Verify 15-point quick navigation exists with bidirectional anchor parity across README.md and README_de.md."""
+    """Verify 18-point quick navigation exists with bidirectional dual anchor parity across README.md and README_de.md."""
     readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
 
@@ -219,50 +221,62 @@ def test_quick_navigation_anchors_and_parity():
     assert "### Schnellnavigation" in readme_de
 
     en_points = [
-        "1. Executive Summary",
-        "2. System Architecture & Data Flow",
-        "3. Zero-Egress Lifecycle & Query Flow",
-        "4. Safety Model & Governance Invariants",
-        "5. Installation & Quick Start",
-        "6. Local Edit Mode & HTTP Server",
-        "7. Core Commands & CLI Operations",
-        "8. Repository Map & Key Files",
-        "9. Data Shape & Knowledge Schema",
-        "10. Sibling Tools & Ecosystem Matrix",
-        "11. Discovery & Search Keywords",
-        "12. Security & Vulnerability Reporting",
-        "13. Third-Party Licenses & Transparency",
-        "14. Marketing & Target Personas",
-        "15. German Documentation / Deutsche Version",
+        "1. Executive Summary & Core Identity",
+        "2. Visual Architecture & System Topology",
+        "3. Zero-Egress Lifecycle & Query Sequence Flow",
+        "4. Target Personas & Discoverability Queries",
+        "5. Comparative Matrix vs. Alternatives",
+        "6. Governance & Runtime Invariants Matrix",
+        "7. Installation & Quick Start",
+        "8. Local Edit Mode & HTTP Server (127.0.0.1)",
+        "9. Core Commands & CLI Operations",
+        "10. Repository Map & Key Assets",
+        "11. Data Shape & Knowledge Schema",
+        "12. Sibling Tools & Ecosystem Matrix",
+        "13. Third-Party Licenses & Level 1 SBOM",
+        "14. Security Policy & Operational Limits (48h SLA)",
+        "15. Static PWA & Web Publisher Architecture",
+        "16. Testing, Verification & CI Matrix",
+        "17. Discovery Keywords & AI Agent Index",
+        "18. Statutory Notice, Liability Limitation & License (§ 521 BGB)",
     ]
     for pt in en_points:
         assert pt in readme_en, f"Missing English quick navigation point: {pt}"
 
     de_points = [
         "1. Übersicht & Management Summary",
-        "2. Systemarchitektur & Datenfluss",
-        "3. Zero-Egress Lebenszyklus & Abfragefluss",
-        "4. Sicherheitsmodell & Governance-Invarianten",
-        "5. Installation & Schnellstart",
-        "6. Lokaler Editiermodus & HTTP-Server",
-        "7. Kernbefehle & CLI-Betrieb",
-        "8. Repository-Struktur & Hauptdateien",
-        "9. Datenstruktur & Wissensschema",
-        "10. Geschwisterwerkzeuge & Ökosystem-Matrix",
-        "11. Auffindbarkeit & Suchbegriffe",
-        "12. Sicherheitsrichtlinie & Meldewege",
-        "13. Drittanbieter-Lizenzen & Transparenz",
-        "14. Marketing & Zielgruppen",
-        "15. Englische Dokumentation / English Version",
+        "2. Visuelle Architektur & Systemtopologie",
+        "3. Zero-Egress Lebenszyklus & Abfrage-Sequenzfluss",
+        "4. Zielgruppen & Discoverability-Suchanfragen",
+        "5. Vergleichsmatrix gegenüber Alternativen",
+        "6. Governance- & Laufzeit-Invarianten-Matrix",
+        "7. Installation & Schnellstart",
+        "8. Lokaler Editiermodus & HTTP-Server (127.0.0.1)",
+        "9. Kernbefehle & CLI-Betrieb",
+        "10. Repository-Struktur & Hauptdateien",
+        "11. Datenstruktur & Wissensschema",
+        "12. Geschwisterwerkzeuge & Ökosystem-Matrix",
+        "13. Drittanbieter-Lizenzen & Level 1 SBOM",
+        "14. Sicherheitsrichtlinie & Betriebsgrenzen (48h SLA)",
+        "15. Statische PWA & Web-Publisher-Architektur",
+        "16. Test-Matrix, Verifikation & CI",
+        "17. Auffindbarkeit & KI-Agenten-Index",
+        "18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)",
     ]
     for pt in de_points:
         assert pt in readme_de, f"Missing German quick navigation point: {pt}"
 
-    # Verify bidirectional anchor parity
-    assert "(#13-third-party-licenses--transparency)" in readme_en
-    assert "(#14-marketing--target-personas)" in readme_en
-    assert "(#13-drittanbieter-lizenzen--transparenz)" in readme_de
-    assert "(#14-marketing--zielgruppen)" in readme_de
+    # Verify bidirectional navigation links
+    assert "(#13-third-party-licenses--level-1-sbom)" in readme_en
+    assert "(#13-drittanbieter-lizenzen--level-1-sbom)" in readme_de
+    assert "(#4-target-personas--discoverability-queries)" in readme_en
+    assert "(#4-zielgruppen--discoverability-suchanfragen)" in readme_de
+
+    # Verify backwards-compatibility dual HTML anchors
+    assert '<a id="13-third-party-licenses--transparency"></a>' in readme_en
+    assert '<a id="14-marketing--target-personas"></a>' in readme_en
+    assert '<a id="13-drittanbieter-lizenzen--transparenz"></a>' in readme_de
+    assert '<a id="14-marketing--zielgruppen"></a>' in readme_de
 
 
 def test_governance_invariants_table():
@@ -270,8 +284,10 @@ def test_governance_invariants_table():
     readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
 
-    assert "## 4. Safety Model & Governance Invariants" in readme_en
-    assert "## 4. Sicherheitsmodell & Governance-Invarianten" in readme_de
+    assert "## 6. Governance & Runtime Invariants Matrix" in readme_en
+    assert "## 6. Governance- & Laufzeit-Invarianten-Matrix" in readme_de
+    assert '<a id="4-safety-model--governance-invariants"></a>' in readme_en
+    assert '<a id="4-sicherheitsmodell--governance-invarianten"></a>' in readme_de
 
     invariants = [
         "100% Local-First & Zero-Egress",
@@ -290,7 +306,7 @@ def test_governance_invariants_table():
 
     de_invariants = [
         "100% Local-First & Zero-Egress",
-        "Non-Elevation (RunAsInvoker",
+        "Nicht-Eskalation (RunAsInvoker",
         "Deterministisches Wissensschema",
         "Reine Offline-Speicherung & Null Telemetrie",
         "Localhost-gebundener Editierserver (127.0.0.1",
@@ -464,3 +480,69 @@ def test_marketing_log_full_pfad_b_structure():
     assert "AI & LLM Engineers" in content
     assert "Kiwix" in content
 
+
+def test_notice_attribution_file():
+    """Verify NOTICE file exists and references project, organization, umbrella and third-party licenses."""
+    notice_path = PROJECT_ROOT / "NOTICE"
+    assert notice_path.is_file(), "NOTICE file missing"
+    content = notice_path.read_text(encoding="utf-8")
+
+    assert "WikiStub-Seed" in content
+    assert "dev-bricks" in content
+    assert "open-bricks" in content
+    assert "MIT License" in content
+    assert "THIRD_PARTY_LICENSES.md" in content
+
+
+def test_target_personas_present():
+    """Verify target personas [PERSONA-01] to [PERSONA-04] are embedded in README.md and README_de.md."""
+    for fname in ["README.md", "README_de.md"]:
+        content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
+        assert "[PERSONA-01]" in content
+        assert "[PERSONA-02]" in content
+        assert "[PERSONA-03]" in content
+        assert "[PERSONA-04]" in content
+        assert "High-Intent" in content or "Relevante Suchanfragen" in content
+
+
+def test_comparative_matrix_vs_alternatives():
+    """Verify 10-dimension comparative matrix vs 4 alternatives exists in both READMEs."""
+    for fname in ["README.md", "README_de.md"]:
+        content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
+        assert "Kiwix" in content
+        assert "MediaWiki" in content
+        assert "Common Crawl" in content
+        assert "Docusaurus" in content
+        assert "INV-CORE-08" in content
+        assert "INV-SCHEMA-03" in content
+        assert "INV-LOCAL-01" in content
+        assert "INV-SEC-02" in content
+        assert "INV-SRV-05" in content
+        assert "INV-SLA-10" in content
+
+
+def test_level1_sbom_invariants_matrix():
+    """Verify THIRD_PARTY_LICENSES.md contains Level 1 SBOM, Invariant Matrix and Zero-Copyleft guarantee."""
+    lic_path = PROJECT_ROOT / "THIRD_PARTY_LICENSES.md"
+    assert lic_path.is_file(), "THIRD_PARTY_LICENSES.md missing"
+    content = lic_path.read_text(encoding="utf-8")
+
+    assert "Level 1 SBOM" in content
+    assert "2026-09-20" in content
+    assert "[NOTICE](NOTICE)" in content
+    assert "Invariant Cross-Reference Matrix" in content
+    assert "Zero-Copyleft Isolation Guarantee & RunAsInvoker Certification" in content
+
+
+def test_statutory_bgb_disclaimer():
+    """Verify statutory notice (§ 521 BGB) and liability limitation in Section 18 of both READMEs."""
+    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "§ 521 BGB" in readme_en
+    assert "Gefälligkeit" in readme_en
+    assert "18. Statutory Notice, Liability Limitation & License (§ 521 BGB)" in readme_en
+
+    assert "§ 521 BGB" in readme_de
+    assert "Schenkungs- / Gefälligkeitsrecht" in readme_de
+    assert "18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)" in readme_de

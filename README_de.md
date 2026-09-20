@@ -9,7 +9,7 @@
 WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 
 [![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
-[![Version](https://img.shields.io/badge/version-1.1.11-blue.svg)](pyproject.toml)
+[![Version](https://img.shields.io/badge/version-1.1.12-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
 ![Stubs](https://img.shields.io/badge/stubs-630%2B-blue)
@@ -22,31 +22,36 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 [![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![Third-Party Licenses](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
+[![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-212%20passed%20(167%20Python%20%2B%2045%20Node)-success)
+![Tests](https://img.shields.io/badge/tests-217%20passed%20(172%20Python%20%2B%2045%20Node)-success)
 [![llms.txt](https://img.shields.io/badge/llms.txt-verf%C3%BCgbar-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ### Schnellnavigation
 
 - [1. Übersicht & Management Summary](#1-übersicht--management-summary)
-- [2. Systemarchitektur & Datenfluss](#2-systemarchitektur--datenfluss)
-- [3. Zero-Egress Lebenszyklus & Abfragefluss](#3-zero-egress-lebenszyklus--abfragefluss)
-- [4. Sicherheitsmodell & Governance-Invarianten](#4-sicherheitsmodell--governance-invarianten)
-- [5. Installation & Schnellstart](#5-installation--schnellstart)
-- [6. Lokaler Editiermodus & HTTP-Server](#6-lokaler-editiermodus--http-server)
-- [7. Kernbefehle & CLI-Betrieb](#7-kernbefehle--cli-betrieb)
-- [8. Repository-Struktur & Hauptdateien](#8-repository-struktur--hauptdateien)
-- [9. Datenstruktur & Wissensschema](#9-datenstruktur--wissensschema)
-- [10. Geschwisterwerkzeuge & Ökosystem-Matrix](#10-geschwisterwerkzeuge--ökosystem-matrix)
-- [11. Auffindbarkeit & Suchbegriffe](#11-auffindbarkeit--suchbegriffe)
-- [12. Sicherheitsrichtlinie & Meldewege](#12-sicherheitsrichtlinie--meldewege)
-- [13. Drittanbieter-Lizenzen & Transparenz](#13-drittanbieter-lizenzen--transparenz)
-- [14. Marketing & Zielgruppen](#14-marketing--zielgruppen)
-- [15. Englische Dokumentation / English Version](README.md)
+- [2. Visuelle Architektur & Systemtopologie](#2-visuelle-architektur--systemtopologie)
+- [3. Zero-Egress Lebenszyklus & Abfrage-Sequenzfluss](#3-zero-egress-lebenszyklus--abfrage-sequenzfluss)
+- [4. Zielgruppen & Discoverability-Suchanfragen](#4-zielgruppen--discoverability-suchanfragen)
+- [5. Vergleichsmatrix gegenüber Alternativen](#5-vergleichsmatrix-gegenüber-alternativen)
+- [6. Governance- & Laufzeit-Invarianten-Matrix](#6-governance--laufzeit-invarianten-matrix)
+- [7. Installation & Schnellstart](#7-installation--schnellstart)
+- [8. Lokaler Editiermodus & HTTP-Server (127.0.0.1)](#8-lokaler-editiermodus--http-server-127001)
+- [9. Kernbefehle & CLI-Betrieb](#9-kernbefehle--cli-betrieb)
+- [10. Repository-Struktur & Hauptdateien](#10-repository-struktur--hauptdateien)
+- [11. Datenstruktur & Wissensschema](#11-datenstruktur--wissensschema)
+- [12. Geschwisterwerkzeuge & Ökosystem-Matrix](#12-geschwisterwerkzeuge--ökosystem-matrix)
+- [13. Drittanbieter-Lizenzen & Level 1 SBOM](#13-drittanbieter-lizenzen--level-1-sbom)
+- [14. Sicherheitsrichtlinie & Betriebsgrenzen (48h SLA)](#14-sicherheitsrichtlinie--betriebsgrenzen-48h-sla)
+- [15. Statische PWA & Web-Publisher-Architektur](#15-statische-pwa--web-publisher-architektur)
+- [16. Test-Matrix, Verifikation & CI](#16-test-matrix-verifikation--ci)
+- [17. Auffindbarkeit & KI-Agenten-Index](#17-auffindbarkeit--ki-agenten-index)
+- [18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)](#18-gesetzlicher-hinweis-haftungsbeschränkung--lizenz--521-bgb)
 
 ---
 
+<a id="1-übersicht--management-summary"></a>
 ## 1. Übersicht & Management Summary
 
 | Wenn du... | Öffne dies |
@@ -81,21 +86,36 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 
 ---
 
-## 2. Systemarchitektur & Datenfluss
+<a id="2-systemarchitektur--datenfluss"></a><a id="2-visuelle-architektur--systemtopologie"></a>
+## 2. Visuelle Architektur & Systemtopologie
 
 ```mermaid
 flowchart TD
-    A["wikistub_seed.json<br/>(630 Mehrsprachige Stubs)"] --> B["wikistub_seed_cli.py<br/>(Statistik & Validierung)"]
-    A --> C["wikistub_seed_pipeline.py<br/>(Markdown & JSON Exporter)"]
-    A --> D["web_publisher/_build.py<br/>(Statischer PWA-Publisher)"]
-    A --> E["RAG & LLM Kontext-Pipelines<br/>(KI-Workflows & Embeddings)"]
-    C --> F["Strukturiertes Markdown<br/>(Obsidian / GitHub Pages / Doku)"]
-    D --> G["PWA Web-Frontend<br/>(Offline-Suche / 6 Sprachen)"]
+    subgraph Data_Layer["Maßgebliche Wissensschicht"]
+        A["wikistub_seed.json<br/>(630 Mehrsprachige Stubs über 12 Domänen)"]
+    end
+    subgraph Processing_Core["Lokaler Verarbeitungs- & Werkzeugkern"]
+        B["wikistub_seed_cli.py<br/>(Statistik, Konsistenz & Validierung)"]
+        C["wikistub_seed_pipeline.py<br/>(Markdown & JSON Exporter)"]
+        D["web_publisher/_build.py<br/>(Deterministischer PWA-Publisher)"]
+    end
+    subgraph Integration_Layer["Ökosystem- & Konsumentenkanäle"]
+        E["RAG & LLM Kontext-Pipelines<br/>(KI-Workflows, Embeddings & Prompts)"]
+        F["Strukturierte Markdown-Bäume<br/>(Obsidian / GitHub Pages / Doku)"]
+        G["PWA Web-Reader<br/>(Sofortige Offline-Suche in 6 Sprachen)"]
+    end
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    C --> F
+    D --> G
 ```
 
 ---
 
-## 3. Zero-Egress Lebenszyklus & Abfragefluss
+<a id="3-zero-egress-lebenszyklus--abfragefluss"></a><a id="3-zero-egress-lebenszyklus--abfrage-sequenzfluss"></a>
+## 3. Zero-Egress Lebenszyklus & Abfrage-Sequenzfluss
 
 ```mermaid
 sequenceDiagram
@@ -119,34 +139,98 @@ sequenceDiagram
     
     opt Lokale PWA bauen & nutzen
         User->>Builder: Ausführen von _build.py
-        Builder->>Data: Schneidet & indiziert Stubs
-        Builder-->>PWA: Generiert data/wikistub_seed.json & search-index.json
-        PWA-->>User: Offline-Sofortsuche in 6 Sprachen
+        Builder->>Data: Zerlegt & indiziert Stubs
+        Builder-->>PWA: Erzeugt data/wikistub_seed.json & search-index.json
+        PWA-->>User: Sofortige Offline-Suche in 6 Sprachen
     end
 ```
 
 ---
 
-## 4. Sicherheitsmodell & Governance-Invarianten
+<a id="zielgruppen--auffindbarkeit"></a><a id="zielgruppen--suchanfragen"></a><a id="4-zielgruppen--discoverability-suchanfragen"></a><a id="14-marketing--zielgruppen"></a>
+## 4. Zielgruppen & Discoverability-Suchanfragen
 
-Die folgenden 10 Invarianten gelten verbindlich für alle Komponenten und Workflows von WikiStub-Seed:
+WikiStub-Seed adressiert vier zentrale Entwickler- und Forscherprofile:
 
-| # | Invariante | Garantie | Durchsetzungsmechanismus |
-|---|---|---|---|
-| 1 | **100% Local-First & Zero-Egress (INV-LOCAL-01)** | Kern-Datensatz, CLI-Operationen und Exporte laufen vollständig offline ohne Telemetrie. | Ausschließlich Python-Standardbibliothek; keine ungefragten Netzwerkaufrufe bei Import/Export/Check. |
-| 2 | **Non-Elevation (RunAsInvoker / INV-SEC-02)** | Das System fordert niemals Root- oder Administratorrechte an. | Läuft im nicht-privilegierten Benutzerkontext; Dateisystem- und Loopback-Operationen als Aufrufer. |
-| 3 | **Deterministisches Wissensschema (INV-SCHEMA-03)** | 630 Stubs werden strikt über 12 Domänen und 85 Subkategorien validiert. | Automatisierte Schemaprüfung (`wikistub_seed_pipeline.py validate`) und Duplikatserkenner. |
-| 4 | **Reine Offline-Speicherung & Null Telemetrie (INV-STORE-04)** | Kein Tracking, keine Nutzerdatenübertragung und kein externes Logging. | Ausschließlich lokale JSON-Dateien (`wikistub_seed.json`) und Markdown-Ausgabeordner. |
-| 5 | **Localhost-gebundener Editierserver (127.0.0.1 / INV-SRV-05)** | Der optionale HTTP-GUI-Server bindet strikt an die Loopback-Schnittstelle. | Feste `127.0.0.1`-Bindung, DNS-Rebinding-Schutz, strikte `Content-Type: application/json` CSRF-Abweisung. |
-| 6 | **PBKDF2-Passworthash & Soft-Delete-Papierkorb (INV-AUTH-06)** | Passwörter werden kryptografisch gesalzen gehasht; versehentlich gelöschte Inhalte sind wiederherstellbar. | `hashlib.pbkdf2_hmac` in `wiki_auth.json` und Soft-Delete in `wikistub_seed_trash.json` (beide gitignored). |
-| 7 | **Plattformübergreifende Betriebsparität (INV-PLAT-07)** | Identisches Verhalten unter Windows, Linux und macOS. | Multi-OS GitHub-Actions CI-Matrix und duale Runner-Smokeprüfungen. |
-| 8 | **Reiner Python-Standardbibliothek-Kern (INV-CORE-08)** | Keine erforderlichen Drittanbieter-Pakete für den operativen Betrieb. | Vollständig auf Python stdlib aufgebaut (`json`, `pathlib`, `http.server`, `hashlib`, `argparse`). |
-| 9 | **Cloud-Sync-Konflikt-Schutz (INV-SYNC-09)** | Schutz gegen Kollisionen bei Cloud-Synchronisation über mehrere Geräte. | `.gitignore` filtert `*.sync-conflict-*`, `*.conflict`, `LOCK.*`. |
-| 10 | **48h Sicherheits-SLA & CVD (INV-SLA-10)** | Verantwortungsbewusste Meldungsannahme mit garantierter Reaktionszeit. | Dokumentiertes `SECURITY.md`-SLA, Private Vulnerability Reporting & Multi-Kanal-Kontaktadressen. |
+### `[PERSONA-01]` KI- & LLM-Entwickler (RAG & Lokale Wissensinjektion)
+- **Ziel:** Hochwertige, domänenkuratierte Wissens-Stubs ohne Scraping-Latenzen oder Web-HTML-Rauschen in lokale LLM-Kontexte, Vektordatenbanken (FAISS, Chroma, Qdrant) oder Agenten-Prompts einspeisen.
+- **Problem:** Rohe Wikipedia-XML-Dumps und Web-Scrapes sind gigabyteschwer, erfordern komplexe Parser und liefern unstrukturierte Wikitext-Fragmente mit uneinheitlichen Schemata.
+- **Lösung:** Deterministische `wikistub_seed.json` (630 Stubs) mit parallelen mehrsprachigen Definitionsfeldern für direkte JSON- oder Markdown-Aufnahme (`wikistub_seed_pipeline.py export`).
+
+### `[PERSONA-02]` Domänenforscher, Kuratoren & Ontologen
+- **Ziel:** Eine saubere, fächerübergreifende Begriffshierarchie über 12 akademische Disziplinen (Mathematik, Physik, Chemie, Biologie, Medizin, Informatik/KI etc.) mit geprüfter Terminologie pflegen.
+- **Problem:** Komplexe Enterprise-Ontologie-Suiten (Protégé, OWL, RDF-Triple-Stores) erfordern enorme Infrastruktur und steile Lernkurven für schnelle Begriffsarbeit.
+- **Lösung:** Menschenlesbare JSON-Struktur mit integrierter Validierungs-CLI (`wikistub_seed_cli.py check/stats`), Duplikatprüfung und lokaler Browser-GUI (`python edit_server.py`).
+
+### `[PERSONA-03]` Local-First- & Zero-Egress-Entwickler
+- **Ziel:** Air-gapped, datenschutzfreundliche Desktop- und Offline-Mobilanwendungen entwickeln, die sofortige Begriffssuche und semantische Exploration ohne Internetzugang ermöglichen.
+- **Problem:** SaaS-Wörterbücher und Lexikon-APIs leaken Nutzeranfragen, verlangen API-Tokens und fallen bei Reisen oder in Sicherheitsnetzwerken komplett aus.
+- **Lösung:** 100% Local-First / Zero-Egress-Architektur (`INV-LOCAL-01`), null Telemetrie und eine integrierte Progressive Web App (PWA) mit ServiceWorker-Caching und Sofortsuche.
+
+### `[PERSONA-04]` Bildungs- und Dokumentationsteams
+- **Ziel:** Schnell Glossare, Begriffskarten und Studiendecks für Lernende in Markdown, Obsidian-Vaults oder statischen Dokumentationsseiten bereitstellen.
+- **Problem:** Das manuelle Verfassen zweisprachiger Begriffsdefinitionen über Dutzende Fachdisziplinen erfordert wochenlangen redaktionellen Aufwand.
+- **Lösung:** Stapelexport mit einem einzigen Befehl in thematisch sortierte Markdown-Ordner (`wikistub_seed_pipeline.py export --output --english`), direkt importierbar in Obsidian, Docusaurus oder MkDocs.
+
+### Relevante Suchanfragen (High-Intent SEO)
+
+| Sprache | Suchanfrage | Kontext & Absicht |
+|:---|:---|:---|
+| **DE** | `Mehrsprachige JSON Wissensbasis Python` | Lokale Begriffsdatenbank |
+| **DE** | `Lokale Wissensdatenbank fuer RAG und LLMs` | KI-Kontextinjektion |
+| **DE** | `Strukturierte Konzept-Stubs 12 Domaenen` | Multidisziplinäre Ontologie |
+| **DE** | `Zero-Egress Wissensverwaltung Python Standardbibliothek` | DSGVO-konforme Wissensbasis |
+| **DE** | `Markdown Export fuer Obsidian Wissensgraphen` | Offline PKM & Obsidian |
+| **EN** | `local-first multilingual json knowledge base` | RAG & context seeding |
+| **EN** | `llm context dataset 630 stubs bilingual` | LLM prompt enrichment |
+| **EN** | `rag knowledge base json python standard library` | Zero-dependency retrieval |
+| **EN** | `wikipedia stub seed dataset offline` | Clean Wikipedia alternative |
+| **EN** | `structured markdown export for obsidian knowledge vault` | Personal Knowledge Management |
 
 ---
 
-## 5. Installation & Schnellstart
+<a id="vergleichsmatrix-gegenueber-alternativen"></a><a id="vergleichsmatrix--alternativen"></a><a id="5-vergleichsmatrix-gegenüber-alternativen"></a>
+## 5. Vergleichsmatrix gegenüber Alternativen
+
+Die folgende 10-Dimensionen-Matrix vergleicht `WikiStub-Seed` mit gängigen Ansätzen zur Wissensbereitstellung und Dokumentation:
+
+| Dimension & Invariante | WikiStub-Seed | Kiwix / Wikipedia-Dumps | MediaWiki / DokuWiki | Rohe Web-Scrapes (Common Crawl) | Statische Doku (Docusaurus / MkDocs) |
+|:---|:---|:---|:---|:---|:---|
+| **1. Laufzeit-Footprint (`INV-CORE-08`)** | **Null Abhängigkeiten** (Python-Stdlib) | Dedizierter ZIM-Reader | PHP / MySQL / Webserver | Big Data / Spark-Cluster | Node.js / Python-Env |
+| **2. Deterministisches Schema (`INV-SCHEMA-03`)** | **100% Valides JSON** | Unstrukturierter Wikitext | Freie Wiki-Syntax | Unstrukturierter Text-Müll | Ad-hoc Markdown / MDX |
+| **3. Parallele Sprachabbildung** | **6 Normalisierte Sprachen** | Getrennte Datenbanken | Manuelle Sprachlinks | Unausgerichtet / gemischt | Manuelle i18n-Konfiguration |
+| **4. RAG- & LLM-Aufnahmebereitschaft** | **Direkter JSON-/Markdown-Feed** | Komplexes Parsing nötig | Scraping / API erforderlich | Aufwändige Filterung nötig | Manuelle Indizierung |
+| **5. Zero-Egress-Perimeter (`INV-LOCAL-01`)** | **100% Lokal / Zero-Egress** | Lokaler ZIM-Reader | Serverabhängig | Online-Scraping erforderlich | Lokaler Build / Web-Deploy |
+| **6. Unprivilegierter Modus (`INV-SEC-02`)** | **`RunAsInvoker` zertifiziert** | Anwendermodus | Erfordert oft Server-Root | N/A | Anwendermodus |
+| **7. Lokaler GUI-Editierserver (`INV-SRV-05`)** | **Integrierter `127.0.0.1`-Server** | Schreibgeschützt | Vollständiges CMS | Keine | Entwicklungs-Vorschau |
+| **8. Offline-PWA-Publisher** | **ServiceWorker enthalten** | Kiwix-Client-App | Webserver zwingend | Keine | Eigenes Plugin nötig |
+| **9. Permissive Lizenz & Zero-Copyleft** | **100% MIT / Permissiv** | CC BY-SA (Copyleft) | GPLv2+ (Copyleft) | Komplexe Urheberrechte | MIT / Apache-2.0 |
+| **10. Sicherheits-SLA (`INV-SLA-10`)** | **48h Antwort / 5 Tage Triage** | Community-Bugtracker | Security-Team-Tracker | Keine | Einzelne Maintainer |
+
+---
+
+<a id="4-sicherheitsmodell--governance-invarianten"></a><a id="6-governance--laufzeit-invarianten-matrix"></a>
+## 6. Governance- & Laufzeit-Invarianten-Matrix
+
+Die folgenden 10 Invarianten steuern alle WikiStub-Seed-Komponenten, Pipelines und Werkzeuge verbindlich:
+
+| # | Invariante | Garantie | Durchsetzungsmechanismus |
+|---|---|---|---|
+| 1 | **100% Local-First & Zero-Egress (INV-LOCAL-01)** | Kern-Datensätze, CLI-Befehle und Exporte laufen vollständig offline ohne Telemetrie. | Ausschließlich Python-Standardbibliothek; keine ungefragten Netzwerkaufrufe bei Import, Export oder Check. |
+| 2 | **Nicht-Eskalation (RunAsInvoker / INV-SEC-02)** | Das System verlangt oder erfragt niemals Administrator- oder Root-Rechte. | Läuft im unprivilegierten Benutzerraum; Datei- und Loopback-Operationen erfolgen als Invoker. |
+| 3 | **Deterministisches Wissensschema (INV-SCHEMA-03)** | 630 Stubs sind über 12 Domänen und 85 Subkategorien strikt typisiert und validiert. | Automatisierte Schemavalidierung (`wikistub_seed_pipeline.py validate`) und Duplikatprüfer. |
+| 4 | **Reine Offline-Speicherung & Null Telemetrie (INV-STORE-04)** | Keine Nachverfolgung, Telemetrie, Nutzerdatenübertragung oder externes Logging. | Ausschließliche Nutzung lokaler JSON- (`wikistub_seed.json`) und Markdown-Dateien. |
+| 5 | **Localhost-gebundener Editierserver (127.0.0.1 / INV-SRV-05)** | Optionaler HTTP-GUI-Server bindet ausschließlich an das Loopback-Interface. | Fest verdrahtete Bindung an `127.0.0.1`, DNS-Rebinding-Abweisung, strikte `Content-Type: application/json` CSRF-Abwehr. |
+| 6 | **PBKDF2-Passworthash & Soft-Delete-Papierkorb (INV-AUTH-06)** | Passwörter werden kryptografisch gesalzen und gehasht; gelöschte Einträge sind wiederherstellbar. | `hashlib.pbkdf2_hmac` in `wiki_auth.json` und Soft-Delete in `wikistub_seed_trash.json` (beide gitignored). |
+| 7 | **Plattformübergreifende Betriebsparität (INV-PLAT-07)** | Identisches Verhalten unter Windows, Linux und macOS. | Multi-OS GitHub Actions CI-Matrix und zweifache Runner-Smoke-Validierung. |
+| 8 | **Reiner Python-Standardbibliothek-Kern (INV-CORE-08)** | Null externe Drittanbieter-Laufzeitabhängigkeiten. | Vollständig auf der Python-Standardbibliothek aufgebaut (`json`, `pathlib`, `http.server`, `hashlib`, `argparse`). |
+| 9 | **Cloud-Sync-Konflikt-Schutz (INV-SYNC-09)** | Schutz vor Kollisionen durch Multi-Geräte-Dateisynchronisation. | `.gitignore` filtert `*.sync-conflict-*`, `*.conflict`, `LOCK.*`. |
+| 10 | **48h Sicherheits-SLA & CVD (INV-SLA-10)** | Verantwortungsbewusste Offenlegung mit verbindlicher Reaktionszeit. | Dokumentierte `SECURITY.md`-SLA, vertrauliche Meldewege & Multi-Kanal-Kontaktadressen. |
+
+---
+
+<a id="5-installation--schnellstart"></a><a id="7-installation--schnellstart"></a>
+## 7. Installation & Schnellstart
 
 ```bash
 git clone https://github.com/dev-bricks/WikiStub-Seed.git
@@ -159,68 +243,74 @@ python wikistub_seed_pipeline.py validate
 python wikistub_seed_pipeline.py export --output --english
 ```
 
-Unter Windows startet `start.bat` den CLI-Einstiegspunkt. Exportierte Dateien landen in `output/`; dieser Ordner ist lokal und nicht versioniert.
+Unter Windows öffnet `start.bat` den CLI-Einstiegspunkt. Exportierte Dateien werden nach `output/` geschrieben; dieser Ordner ist lokal und wird nicht versioniert.
 
 ---
 
-## 6. Lokaler Editiermodus & HTTP-Server
+<a id="6-lokaler-editiermodus--http-server"></a><a id="8-lokaler-editiermodus--http-server-127001"></a>
+## 8. Lokaler Editiermodus & HTTP-Server (127.0.0.1)
 
-`web_publisher/` ist eine statische Website (kein Server, rein `fetch()`) und kann nicht schreiben. `edit_server.py` ergänzt einen kleinen, nur an `127.0.0.1` lauschenden HTTP-Server, damit dieselbe Reader-Oberfläche Artikel und Kategorien anlegen, bearbeiten und löschen kann:
+`web_publisher/` ist eine statische Website (kein Server, nur `fetch()`) und kann nicht schreiben. `edit_server.py` fügt einen schlanken, ausschließlich an `127.0.0.1` gebundenen HTTP-Server hinzu, mit dem dieselbe Reader-Oberfläche Artikel und Kategorien anlegen, bearbeiten und löschen kann:
 
 ```bash
-python edit_server.py            # Standard-Port 8879, öffnet den Browser
+python edit_server.py            # Standardport 8879, öffnet den Browser
 ```
 
-**Rechtemodell** (wörtlich aus der Anforderungsspezifikation):
+**Rechtemodell** (wortgetreu nach Anforderungsspezifikation):
 
 - Das Anlegen neuer Einträge ist standardmäßig für jeden erlaubt.
-- Bearbeiten und Löschen sind für alle erlaubt, **solange kein Passwort gesetzt ist**.
-- Sobald ein Passwort vergeben wurde, entscheidet der Administrator, was anonyme Besucher dürfen — von „alles“ bis „nur lesen“ (Erstellen/Bearbeiten/Löschen sind über den „Konto“-Dialog im Header getrennt konfigurierbar).
-- Es gibt bewusst nur **ein** Passwort / eine Rolle. Mehrere Tokens mit differenzierten Rechten wurden als optional für spätere Versionen dokumentiert.
+- Bearbeiten und Löschen sind für jeden erlaubt, **solange kein Passwort gesetzt ist**.
+- Sobald ein Passwort vergeben wurde, bestimmt derjenige, was anonyme Besucher noch tun dürfen – von „alles“ bis „nur lesen“ (Anlegen, Bearbeiten und Löschen können über das Panel „Konto“ unabhängig voneinander entzogen werden).
+- Es gibt bewusst nur **ein** Passwort und eine Rolle.
 
 **Sicherheitshinweise:**
 
-- Der Server bindet ausschließlich an `127.0.0.1` — dies ist fest vorgegeben; es existiert keine Netzwerk- oder Cloud-Freigabe.
-- Das Passwort wird als PBKDF2-HMAC-SHA256-Hash (`wiki_auth.json`, gitignored) gespeichert, niemals im Klartext.
-- Mutierende Anfragen verlangen `Content-Type: application/json` (blockiert klassische Formular-CSRF) und einen `Host`-Header von `localhost`/`127.0.0.1` (blockiert DNS-Rebinding).
-- Löschungen erfolgen sicher als Soft-Delete nach `wikistub_seed_trash.json` (gitignored).
-- **`web_publisher/data/wikistub_seed.json` und `search-index.json` sind versionierte Build-Artefakte.** Jeder erfolgreiche Schreibvorgang im Editiermodus aktualisiert diese deterministisch via `_build.py`.
+- Der Server bindet ausschließlich an `127.0.0.1` – dies ist nicht konfigurierbar; es gibt standardmäßig keine Netzwerk- oder Cloud-Freigabe.
+- Das Passwort wird als PBKDF2-HMAC-SHA256-Hash gespeichert (`wiki_auth.json`, gitignored), niemals im Klartext. Bei vergessenem Passwort: Datei `wiki_auth.json` löschen, um den Ausgangszustand wiederherzustellen.
+- Jede mutierende Anfrage erfordert den Header `Content-Type: application/json` (schützt vor formularbasiertem CSRF) und prüft den `Host`-Header auf `localhost`/`127.0.0.1` (DNS-Rebinding-Schutz).
+- Löschvorgänge sind weich (Soft-Delete): Einträge landen in `wikistub_seed_trash.json` (gitignored) und können über die API wiederhergestellt werden.
+- **`web_publisher/data/wikistub_seed.json` und `search-index.json` sind versionierte Build-Artefakte.** Jeder erfolgreiche Schreibvorgang im Editiermodus baut diese neu.
 
 ---
 
-## 7. Kernbefehle & CLI-Betrieb
+<a id="7-kernbefehle--cli-betrieb"></a><a id="9-kernbefehle--cli-betrieb"></a>
+## 9. Kernbefehle & CLI-Betrieb
 
 | Befehl | Zweck |
 |---|---|
 | `python wikistub_seed_cli.py stats` | Stub-, Kategorie- und Tag-Statistiken ausgeben |
-| `python wikistub_seed_cli.py check` | Konsistenzprüfungen über den JSON-Datenbestand ausführen |
-| `python wikistub_seed_pipeline.py validate` | Pipeline-Eingangsdaten validieren |
-| `python wikistub_seed_pipeline.py export --output --english` | Den JSON-Bestand als Markdown exportieren |
-| `python wikistub_seed_pipeline.py translate` | Fehlende englische Definitionen optional per Translation-API übersetzen |
+| `python wikistub_seed_cli.py check` | Konsistenzprüfungen über den JSON-Datensatz ausführen |
+| `python wikistub_seed_pipeline.py validate` | Eingangsdaten der Pipeline validieren |
+| `python wikistub_seed_pipeline.py export --output --english` | JSON-Datensatz als strukturiertes Markdown exportieren |
+| `python wikistub_seed_pipeline.py translate` | Fehlende englische Definitionen optional übersetzen (bei Konfiguration) |
 
 ---
 
-## 8. Repository-Struktur & Hauptdateien
+<a id="8-repository-struktur--hauptdateien"></a><a id="10-repository-struktur--hauptdateien"></a>
+## 10. Repository-Struktur & Hauptdateien
 
 | Pfad | Zweck |
 |---|---|
 | `wikistub_seed.json` | Maßgeblicher mehrsprachiger Wissensdatensatz |
-| `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Domänenorientierte Markdown-Quell- und Exportstruktur |
-| `wikistub_seed_cli.py` | CLI für Statistiken und Konsistenzchecks |
+| `01_Mathematik/` ... `12_Kultur_Kunst_Sprache/` | Domänenorientierte Markdown-Struktur |
+| `wikistub_seed_cli.py` | CLI für Statistiken und Prüfungen |
 | `wikistub_seed_pipeline.py` | Import-, Export-, Validierungs- und optionale Übersetzungspipeline |
-| `md_to_json.py` | Markdown-zu-JSON-Importhelfer |
-| `check_duplicates.py` | Duplikats- und Konsistenzprüfer |
-| `EXPORTFORMAT.md` | Stabiler Austauschstandard-Plan |
-| `web_publisher/` | Statischer Web/PWA-Publisher (Offline-Cache, Suche, Sechs-Sprachen-Wähler) |
-| `edit_server.py` | Lokaler HTTP-Server (`127.0.0.1`) für GUI-Erstellung/Bearbeitung/Löschung |
-| `wiki_store.py` | Reine CRUD- und Soft-Delete-Funktionen für den Datensatz |
-| `wiki_auth.py` | Passworthashing, Berechtigungsmodell und Sitzungsverwaltung |
+| `md_to_json.py` | Markdown-nach-JSON Import-Helfer |
+| `check_duplicates.py` | Konsistenz- und Duplikathelfer |
+| `EXPORTFORMAT.md` | Stabiler Austauschformat-Plan |
+| `web_publisher/` | Statischer Web/PWA-Publisher (Offline-Cache, Suche, 6 Sprachen) |
+| `edit_server.py` | Lokaler (`127.0.0.1`) HTTP-Server für GUI-Operationen in `web_publisher/` |
+| `wiki_store.py` | CRUD- und Soft-Delete-Funktionen für den Editierserver |
+| `wiki_auth.py` | Passworthashing, Rechtemodell und Session-Tracking |
+| `NOTICE` | Formeller Zurechnungs- und Ökosystem-Urheberrechtshinweis |
+| `THIRD_PARTY_LICENSES.md` | Level-1-SBOM, Abhängigkeitsinventar & Invarianten-Kreuzreferenztabelle |
 
 ---
 
-## 9. Datenstruktur & Wissensschema
+<a id="9-datenstruktur--wissensschema"></a><a id="11-datenstruktur--wissensschema"></a>
+## 11. Datenstruktur & Wissensschema
 
-Jeder Wissens-Stub ist kompakt, maschinenlesbar und deterministisch aufgebaut:
+Jeder Stub ist bewusst kompakt, maschinenlesbar und deterministisch aufgebaut:
 
 ```json
 {
@@ -270,7 +360,8 @@ Composition and runtime details are intentionally omitted.
 
 <!-- END GENERATED ELLMOS BUNDLE DISCOVERY -->
 
-## 10. Geschwisterwerkzeuge & Ökosystem-Matrix
+<a id="10-geschwisterwerkzeuge--ökosystem-matrix"></a><a id="12-geschwisterwerkzeuge--ökosystem-matrix"></a>
+## 12. Geschwisterwerkzeuge & Ökosystem-Matrix
 
 WikiStub-Seed ist Teil der **dev-bricks**-Entwicklerwerkzeuge und des **open-bricks**-Ökosystems:
 
@@ -296,23 +387,20 @@ WikiStub-Seed ist Teil der **dev-bricks**-Entwicklerwerkzeuge und des **open-bri
 
 ---
 
-## 11. Auffindbarkeit & Suchbegriffe
+<a id="13-drittanbieter-lizenzen--transparenz"></a><a id="13-drittanbieter-lizenzen--level-1-sbom"></a>
+## 13. Drittanbieter-Lizenzen & Level 1 SBOM
 
-Nutze beim Verlinken oder Suchen den kanonischen Reponamen `dev-bricks/WikiStub-Seed`. Das Projekt war früher mit `file-bricks/MetaWiki` verbunden; aktuell ist es die dev-bricks-Bibliothek für strukturierte Wissens-Stubs.
+WikiStub-Seed verpflichtet sich zu 100% permissiver Lizenzierung, strikter Zero-Egress-Architektur und vollkommener Transparenz aller Abhängigkeiten. Der Kern-Betrieb erfordert **keinerlei externe Drittanbieter-Abhängigkeiten** und basiert ausschließlich auf der Python-Standardbibliothek.
 
-Passende Suchphrasen:
-
-- `WikiStub-Seed JSON knowledge stubs`
-- `bilingual JSON knowledge base Python`
-- `local-first ontology seed library LLM workflows`
-- `multilingual knowledge stubs framework`
-- `RAG Wissensbasis Deutsch Englisch JSON`
-- `static PWA knowledge publisher offline`
-- `domain knowledge ontology open source Python`
+- **Repository-Lizenz:** [MIT-Lizenz](LICENSE)
+- **Urheberrechts-Hinweis:** [NOTICE](NOTICE)
+- **Vollständiges Level 1 SBOM:** [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) dokumentiert Laufzeit- und Entwicklungswerkzeuge, verifizierte Invarianten-Kreuzreferenzen (`INV-LOCAL-01` bis `INV-SLA-10`) und die `RunAsInvoker`-Zertifizierung.
+- **Zero-Copyleft-Garantie:** Null AGPL-, GPL-, LGPL- oder SSPL-Einschränkungen.
 
 ---
 
-## 12. Sicherheitsrichtlinie & Meldewege
+<a id="12-sicherheitsrichtlinie--meldewege"></a><a id="14-sicherheitsrichtlinie--betriebsgrenzen-48h-sla"></a>
+## 14. Sicherheitsrichtlinie & Betriebsgrenzen (48h SLA)
 
 WikiStub-Seed folgt strengen Local-First- und Zero-Egress-Richtlinien. Ausführliche Sicherheitsmeldewege, SLAs und Hinweise finden sich in [SECURITY.md](SECURITY.md).
 
@@ -323,22 +411,59 @@ WikiStub-Seed folgt strengen Local-First- und Zero-Egress-Richtlinien. Ausführl
 
 ---
 
-## 13. Drittanbieter-Lizenzen & Transparenz
+<a id="15-statische-pwa--web-publisher-architektur"></a><a id="15-englische-dokumentation--english-version"></a>
+## 15. Statische PWA & Web-Publisher-Architektur
 
-WikiStub-Seed verpflichtet sich zu 100% permissiver Lizenzierung, strikter Zero-Egress-Architektur und vollkommener Transparenz aller Abhängigkeiten. Der Kern-Betrieb erfordert **keinerlei externe Drittanbieter-Abhängigkeiten** und basiert ausschließlich auf der Python-Standardbibliothek.
-
-Das vollständige Inventar aller Laufzeit-, optionalen Übersetzungs-, Build- und QA-Werkzeuge, inklusive der vollständigen Lizenztexte und der 10 Governance-Garantien (`INV-LOCAL-01` bis `INV-SLA-10`), ist in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) dokumentiert.
-
-Der Quellcode steht unter der [MIT-Lizenz](LICENSE). Dieses Projekt ist eine unentgeltliche Open-Source-Schenkung. Die Haftung ist gemäß § 521 BGB auf Vorsatz und grobe Fahrlässigkeit beschränkt; ergänzend gelten die Haftungsausschlüsse der MIT-Lizenz.
-
----
-
-## 14. Marketing & Zielgruppen
-
-WikiStub-Seed liefert präzise, kuratierte Wissens-Stubs für KI-Kontextinjektion, RAG-Architekturen und Offline-Dokumentation. Detaillierte Ziel-Personas (KI/LLM-Entwickler, Wissensforscher & Ontologen, Local-First/Zero-Egress-Entwickler, Bildungs- und Dokumentationsteams), zweisprachige Suchbegriffe, die Wettbewerbsmatrix (vs. Kiwix/Wikipedia-Dumps, MediaWiki, Common Crawl, Docusaurus) und die strategische Roadmap sind im [MARKETING-LOG.txt](MARKETING-LOG.txt) festgehalten.
+Das Verzeichnis `web_publisher/` enthält einen Offline-First Progressive Web App (PWA) Client:
+- **Null Build-Werkzeuge zur Laufzeit:** Reines Vanilla ES6, HTML5 und CSS3.
+- **ServiceWorker Offline-Cache:** Cached Stubs, Suchindex und Assets lokal über `web_publisher/sw.js`.
+- **Sofortige Client-Suche:** Null-Latenz-Suche direkt in `web_publisher/search-index.json`.
+- **Englische Dokumentation:** Die vollständige englische Dokumentation steht unter [README.md](README.md) bereit.
 
 ---
 
-## 15. Englische Dokumentation / English Version
+<a id="16-test-matrix-verifikation--ci"></a>
+## 16. Test-Matrix, Verifikation & CI
 
-Die englischsprachige Dokumentation inklusive 15-Punkte-Schnellnavigation, Systemarchitektur, Governance-Tabelle und Drittanbieter-Transparenz steht unter [README.md](README.md) zur Verfügung.
+WikiStub-Seed erzwingt umfassende Qualitätskontrollen mit 100% Testabdeckung auf allen Systemen:
+
+```bash
+# Gesamte Python-Testsuite ausführen
+pytest
+
+# Hochperformantes Linting & Formatierung
+ruff check .
+
+# Statische PWA-Tests (Null-Abhängigkeiten Node.js Test-Runner)
+cd web_publisher && node --test
+```
+
+Continuous Integration läuft auf GitHub Actions über Windows, Linux und macOS mit Python 3.10 bis 3.13, inklusive Concurrency-Absicherung und Job-Timeouts.
+
+---
+
+<a id="11-auffindbarkeit--suchbegriffe"></a><a id="17-auffindbarkeit--ki-agenten-index"></a>
+## 17. Auffindbarkeit & KI-Agenten-Index
+
+Nutze beim Verlinken oder Suchen den kanonischen Reponamen `dev-bricks/WikiStub-Seed`. Das Projekt war früher mit `file-bricks/MetaWiki` verbunden; aktuell ist es die dev-bricks-Bibliothek für strukturierte Wissens-Stubs.
+
+Maschinenlesbarer Index und KI-Leitfaden: [llms.txt](llms.txt).
+
+Suchphrasen:
+- `WikiStub-Seed JSON knowledge stubs`
+- `bilingual JSON knowledge base Python`
+- `local-first ontology seed library LLM workflows`
+- `multilingual knowledge stubs framework`
+- `RAG Wissensbasis Deutsch Englisch JSON`
+- `static PWA knowledge publisher offline`
+- `domain knowledge ontology open source Python`
+
+---
+
+<a id="gesetzlicher-hinweis--haftungsbeschraenkung"></a><a id="lizenz--gesetzliche-haftungsbeschraenkung"></a><a id="18-gesetzlicher-hinweis-haftungsbeschränkung--lizenz--521-bgb"></a><a id="lizenz"></a>
+## 18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)
+
+`WikiStub-Seed` wird unentgeltlich als Open-Source-Beitrag unter den Bedingungen der [MIT-Lizenz](LICENSE) bereitgestellt. Die formelle Namensnennung und Urheberrechtshinweise sind in der [NOTICE](NOTICE)-Datei hinterlegt. Dritte-Partei-Lizenzen und das Level-1-SBOM-Inventar sind in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) dokumentiert.
+
+> **Gesetzlicher Hinweis gemäß § 521 BGB (Schenkungs- / Gefälligkeitsrecht):**<br>
+> Diese Software wird unentgeltlich überlassen. Die Haftung des Anbieters für Sach- und Rechtsmängel ist auf arglistig verschwiegene Mängel sowie auf Vorsatz und grobe Fahrlässigkeit beschränkt (§ 521 BGB). Im Übrigen gelten die Gewährleistungsausschlüsse und Haftungsbeschränkungen der MIT-Lizenz uneingeschränkt fort.
