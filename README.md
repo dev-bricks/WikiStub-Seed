@@ -4,7 +4,7 @@
 
 **EN** | [DE](README_de.md) | [ES](README_es.md) | [JA](README_ja.md) | [RU](README_ru.md) | [ZH](README_zh-Hans.md)
 
-**WikiStub-Seed is a multilingual JSON knowledge framework for AI-assisted research, documentation, learning systems and LLM workflows.** It ships 630 compact knowledge stubs across 12 scientific and cultural domains. Definitions are populated in DE/EN/ES/ZH/JA/RU; relevance notes are populated in DE/ES/ZH/JA/RU and use the documented German fallback for the currently empty English relevance slots.
+**WikiStub-Seed is a general-purpose, multilingual JSON knowledge-stub framework: a starter scaffold for any topic, not limited to AI workflows.** It ships 630 compact knowledge stubs across 12 scientific and cultural domains, ready for research, documentation, learning systems, wikis, or AI/LLM workflows alike. Definitions are populated in DE/EN/ES/ZH/JA/RU; relevance notes are populated in DE/ES/ZH/JA/RU and use the documented German fallback for the currently empty English relevance slots.
 
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
