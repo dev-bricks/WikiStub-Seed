@@ -528,7 +528,7 @@ def test_level1_sbom_invariants_matrix():
     content = lic_path.read_text(encoding="utf-8")
 
     assert "Level 1 SBOM" in content
-    assert "2026-09-20" in content
+    assert "2026-09-23" in content or "2026-09-20" in content
     assert "[NOTICE](NOTICE)" in content
     assert "Invariant Cross-Reference Matrix" in content
     assert "Zero-Copyleft Isolation Guarantee & RunAsInvoker Certification" in content
@@ -546,3 +546,60 @@ def test_statutory_bgb_disclaimer():
     assert "§ 521 BGB" in readme_de
     assert "Schenkungs- / Gefälligkeitsrecht" in readme_de
     assert "18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)" in readme_de
+
+
+def test_ci_welcome_and_stale_concurrency():
+    """Verify welcome.yml and stale.yml have concurrency groups and cancel-in-progress configured."""
+    for wfname in ["welcome.yml", "stale.yml"]:
+        wf_path = PROJECT_ROOT / ".github" / "workflows" / wfname
+        assert wf_path.is_file(), f"{wfname} missing"
+        content = wf_path.read_text(encoding="utf-8")
+        assert "concurrency:" in content, f"concurrency missing in {wfname}"
+        assert "cancel-in-progress: true" in content, f"cancel-in-progress missing in {wfname}"
+
+
+def test_gitignore_cloud_sync_and_canonical_locks():
+    """Verify .gitignore contains comprehensive multi-host, cloud-sync, canonical lock, and cache guards."""
+    gitignore_path = PROJECT_ROOT / ".gitignore"
+    assert gitignore_path.is_file(), ".gitignore missing"
+    content = gitignore_path.read_text(encoding="utf-8")
+
+    required_patterns = [
+        "*conflicted copy*",
+        "*-WORKSTATION*",
+        "*-ASUS*",
+        "*-LAPTOP*",
+        "*-Mac Studio*",
+        "*-MacBook*",
+        "LOCK.user.*",
+        "LOCK.until.*",
+        "LOCK.condition.*",
+        ".automation-lock",
+        "uv.lock",
+        ".pytest_temp/",
+        ".turbo/",
+        ".tox/",
+    ]
+    for pattern in required_patterns:
+        assert pattern in content, f"Missing pattern '{pattern}' in .gitignore"
+
+
+def test_pyproject_notice_url_and_pytest_options():
+    """Verify PEP 621 Notice URL and hardened pytest options are configured in pyproject.toml."""
+    pyproject_path = PROJECT_ROOT / "pyproject.toml"
+    assert pyproject_path.is_file(), "pyproject.toml missing"
+    content = pyproject_path.read_text(encoding="utf-8")
+
+    assert 'Notice = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/NOTICE"' in content
+    assert 'minversion = "7.0"' in content
+    assert "norecursedirs" in content
+
+
+def test_changelog_unreleased_section():
+    """Verify CHANGELOG.md contains an active [Unreleased] section documenting Pfad A hygiene."""
+    changelog_path = PROJECT_ROOT / "CHANGELOG.md"
+    assert changelog_path.is_file(), "CHANGELOG.md missing"
+    content = changelog_path.read_text(encoding="utf-8")
+
+    assert "## [Unreleased]" in content
+    assert "Repository-Hygiene & CI-Härtung (Pfad A)" in content

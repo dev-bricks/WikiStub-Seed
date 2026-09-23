@@ -31,18 +31,26 @@ classifiers = [
     "Topic :: Text Processing :: Markup :: Markdown"
 ]
 keywords = [
-    "knowledge-base",
-    "rag",
-    "llm-context",
-    "multilingual",
-    "local-first",
-    "zero-egress",
-    "offline-first",
+    "bilingual",
+    "documentation",
     "json",
+    "knowledge-base",
+    "knowledge-graph",
+    "knowledge-management",
+    "llm",
     "ontology",
+    "python",
+    "ai-knowledge-base",
+    "education",
+    "local-first",
+    "markdown-export",
+    "offline-first",
+    "rag",
+    "research-tools",
+    "structured-data",
+    "llm-context",
+    "knowledge-stubs",
     "wikistub",
-    "dev-bricks",
-    "open-bricks"
 ]
 requires-python = ">=3.10"
 
@@ -65,14 +73,17 @@ Changelog = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CHANGELOG.m
 Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"
 "Parent Organization" = "https://github.com/dev-bricks"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
+Notice = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/NOTICE"
 "Third-Party Licenses" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.md"
 "Marketing Log" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/MARKETING-LOG.txt"
 "LLM Ready" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/llms.txt"
 
 [tool.pytest.ini_options]
+minversion = "7.0"
 pythonpath = "."
 testpaths = ["tests"]
 addopts = "-ra -v"
+norecursedirs = [".git", ".pytest_cache", "__pycache__", "build", "dist", ".venv"]
 
 [tool.ruff]
 target-version = "py310"

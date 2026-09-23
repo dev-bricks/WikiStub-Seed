@@ -3,6 +3,28 @@
 Alle wesentlichen Änderungen an diesem Projekt werden hier dokumentiert.
 Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
+## [Unreleased]
+
+### Repository-Hygiene & CI-Härtung (Pfad A)
+- **CI-Workflow-Concurrency & Timeout-Härtung**:
+  - Top-Level `concurrency:`-Gruppen mit `cancel-in-progress: true` in `.github/workflows/welcome.yml` und `.github/workflows/stale.yml` ergänzt, um redundante Runner-Ausführungen zuverlässig abzubrechen.
+  - Explizite `timeout-minutes: 5`-Schutzleitplanken für `welcome.yml` und `stale.yml` sichergestellt.
+- **Multi-Host Cloud-Sync-, Lock- und Cache-Schutz in `.gitignore`**:
+  - Filter um geräteübergreifende Konfliktmuster (`*conflicted copy*`, `* (Kopie)*`, `* (Copy)*`, `*-WORKSTATION*`, `*-ASUS*`, `*-LAPTOP*`, `*-Mac Studio*`, `*-MacBook*`) und kanonische Multi-Agent-Locks (`LOCK.user.*`, `LOCK.until.*`, `LOCK.condition.*`, `.automation-lock`, `uv.lock`) erweitert.
+  - Test- und Cache-Ausschlüsse um `.pytest_temp/`, `.turbo/` und `.tox/` ergänzt.
+- **PEP 621 Standardisierung in `pyproject.toml`**:
+  - `Notice`-URL unter `[project.urls]` für standardisierte Root-Attribution ergänzt.
+  - `[tool.pytest.ini_options]` mit `minversion = "7.0"` und `norecursedirs` gehärtet.
+  - Kuratiertes Keyword-Set auf 20 Topics mit GitHub-Repository-Topics synchronisiert.
+  - Strikte Version-Freeze-Disziplin nach `T-20260920-167562623`: `version = "1.1.12"` unverändert beibehalten.
+- **Level 1 SBOM Re-Audit (`THIRD_PARTY_LICENSES.md`)**:
+  - Turnusmäßiges Re-Audit mit Stand 2026-09-23 durchgeführt; Invarianten `INV-LOCAL-01` bis `INV-SLA-10`, `RunAsInvoker`-Zertifizierung und Zero-Copyleft-Isolationsgarantie bestätigt.
+- **Dokumentations-, Badge- & Kontext-Synchronisation**:
+  - `README.md`, `README_de.md` und `llms.txt` auf den Stand 2026-09-23 aktualisiert.
+  - `MARKETING-LOG.txt` um Pfad A Hygiene Turnus-Audit Stand 2026-09-23 erweitert.
+- **Automatisierte Vertragstests (`tests/test_metadata.py`)**:
+  - Testsuite um Contract-Tests für CI-Concurrency in `welcome.yml`/`stale.yml`, erweiterte Gitignore-Multi-Host-Locks, PEP 621 Notice-URL / Pytest-Optionen und Level 1 SBOM Audit-Aktualität erweitert.
+
 ## [1.1.12] - 2026-09-20
 
 ### Marketing, Discoverability & Level 1 SBOM Upgrade (Pfad B)

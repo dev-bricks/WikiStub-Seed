@@ -103,20 +103,35 @@ wiki_auth.json
 wikistub_seed_trash.json
 
 # ---- Multi-Host-Synchronisationskonflikte ----
+*conflicted copy*
+* (Kopie)*
+* (Copy)*
+* (kopie)*
+* (copy)*
 *-conflict-*
 *.sync-conflict-*
-*.conflict
+*.conflict*
 *-CONFLIT-*
 *.sync-temp-*
-*-ASUS-GEI.*
-*-WORKSTATION-LG.*
+*-ASUS-GEI*
+*-ASUS*
+*-WORKSTATION-LG*
+*-WORKSTATION*
+*-LAPTOP*
+*-Mac Studio*
+*-MacBook*
 
-# ---- Multi-Agent Locks ----
+# ---- Multi-Agent & Canonical Lock-System ----
 LOCK
 LOCK.*
 *.lock
 LOCK*.txt
+LOCK.user.*
+LOCK.until.*
+LOCK.condition.*
 LOCK.permissions.json
+.automation-lock
+uv.lock
 !package-lock.json
 
 # ---- Test-, Coverage- & Packaging-Caches ----
@@ -124,6 +139,9 @@ coverage/
 .coverage.*
 .nyc_output/
 .hypothesis/
+.turbo/
+.pytest_temp/
+.tox/
 wheelhouse/
 .wheel-smoke/
 
