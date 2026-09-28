@@ -59,6 +59,7 @@ def test_core_documentation_files_exist():
         "ellmos-module.v2.json",
         "MARKETING-LOG.txt",
         "THIRD_PARTY_LICENSES.md",
+        "THIRD_PARTY_LICENSES.txt",
     ]
 
     for fname in required_files:
@@ -126,7 +127,7 @@ def test_pyproject_classifiers_and_urls():
     assert '"Operating System :: POSIX :: Linux"' in content
     assert '"Operating System :: MacOS"' in content
     assert re.search(r'(?m)^license\s*=\s*"MIT"\s*$', content)
-    assert re.search(r'(?m)^license-files\s*=\s*\[\s*"LICENSE",\s*"NOTICE",\s*"THIRD_PARTY_LICENSES\.md"\s*\]\s*$', content)
+    assert re.search(r'(?m)^license-files\s*=\s*\[\s*"LICENSE",\s*"NOTICE",\s*"THIRD_PARTY_LICENSES\.md",\s*"THIRD_PARTY_LICENSES\.txt"\s*\]\s*$', content)
     assert '"License :: OSI Approved :: MIT License"' not in content
 
     assert 'Homepage = "https://github.com/dev-bricks/WikiStub-Seed"' in content
@@ -138,6 +139,7 @@ def test_pyproject_classifiers_and_urls():
     assert 'Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"' in content
     assert '"Parent Organization" = "https://github.com/dev-bricks"' in content
     assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in content
+    assert '"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
     assert "[project.optional-dependencies]" in content
     assert 'addopts = "-ra -v"' in content
 
@@ -528,8 +530,9 @@ def test_level1_sbom_invariants_matrix():
     content = lic_path.read_text(encoding="utf-8")
 
     assert "Level 1 SBOM" in content
-    assert "2026-09-23" in content or "2026-09-20" in content
+    assert "2026-09-28" in content
     assert "[NOTICE](NOTICE)" in content
+    assert "THIRD_PARTY_LICENSES.txt" in content
     assert "Invariant Cross-Reference Matrix" in content
     assert "Zero-Copyleft Isolation Guarantee & RunAsInvoker Certification" in content
 
@@ -596,10 +599,62 @@ def test_pyproject_notice_url_and_pytest_options():
 
 
 def test_changelog_unreleased_section():
-    """Verify CHANGELOG.md contains an active [Unreleased] section documenting Pfad A hygiene."""
+    """Verify CHANGELOG.md contains an active [Unreleased] section documenting Pfad A and Pfad B."""
     changelog_path = PROJECT_ROOT / "CHANGELOG.md"
     assert changelog_path.is_file(), "CHANGELOG.md missing"
     content = changelog_path.read_text(encoding="utf-8")
 
     assert "## [Unreleased]" in content
     assert "Repository-Hygiene & CI-Härtung (Pfad A)" in content
+    assert "Marketing, Discoverability & Level 1 SBOM Text Companion (Pfad B)" in content
+
+
+def test_sec_dual_html_anchors_parity():
+    """Verify canonical <a id="sec-01"></a> through <a id="sec-18"></a> exist in both READMEs."""
+    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    for i in range(1, 19):
+        anchor = f'<a id="sec-{i:02d}"></a>'
+        assert anchor in readme_en, f"Missing anchor {anchor} in README.md"
+        assert anchor in readme_de, f"Missing anchor {anchor} in README_de.md"
+
+
+def test_third_party_licenses_text_companion():
+    """Verify THIRD_PARTY_LICENSES.txt exists, is substantial, and contains all 10 invariants."""
+    txt_path = PROJECT_ROOT / "THIRD_PARTY_LICENSES.txt"
+    assert txt_path.is_file(), "THIRD_PARTY_LICENSES.txt missing"
+    assert txt_path.stat().st_size > 1000, "THIRD_PARTY_LICENSES.txt is unexpectedly small"
+    content = txt_path.read_text(encoding="utf-8")
+
+    assert "LEVEL 1 SBOM NOTICE" in content
+    assert "RunAsInvoker" in content
+    assert "Zero-Copyleft" in content
+    assert "2026-09-28" in content
+
+    canonical_ids = [
+        "INV-LOCAL-01",
+        "INV-SEC-02",
+        "INV-SCHEMA-03",
+        "INV-STORE-04",
+        "INV-SRV-05",
+        "INV-AUTH-06",
+        "INV-PLAT-07",
+        "INV-CORE-08",
+        "INV-SYNC-09",
+        "INV-SLA-10",
+    ]
+    for code in canonical_ids:
+        assert code in content, f"Missing {code} in THIRD_PARTY_LICENSES.txt"
+
+
+def test_umlaut_purity_in_markdown():
+    """Verify discovery search query tables in READMEs and MARKETING-LOG do not use ASCII substitutions."""
+    for fname in ["README.md", "README_de.md"]:
+        content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
+        assert "fuer" not in content, f"Found ASCII escape 'fuer' in {fname}"
+        assert "Domaenen" not in content, f"Found ASCII escape 'Domaenen' in {fname}"
+
+    mlog_content = (PROJECT_ROOT / "MARKETING-LOG.txt").read_text(encoding="utf-8")
+    assert "fuer" not in mlog_content, "Found ASCII escape 'fuer' in MARKETING-LOG.txt"
+    assert "Domaenen" not in mlog_content, "Found ASCII escape 'Domaenen' in MARKETING-LOG.txt"

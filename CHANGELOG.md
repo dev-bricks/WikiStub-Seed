@@ -5,6 +5,27 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Marketing, Discoverability & Level 1 SBOM Text Companion (Pfad B)
+- **18-Punkte-Dual-HTML-Ankerparität (`sec-01` bis `sec-18`)**:
+  - `README.md` und `README_de.md` mit standardisierten kanonischen Ankern `<a id="sec-01"></a>` bis `<a id="sec-18"></a>` ausgestattet.
+  - Vollständige wechselseitige Parität über alle 18 Abschnitte unter Beibehaltung aller bestehenden Anker zur Vermeidung von Linkbrüchen.
+- **Level 1 SBOM Plain-Text Companion (`THIRD_PARTY_LICENSES.txt`)**:
+  - Kanonischer textbasierter SBOM-Begleiter im Projekt-Root angelegt zur reinen Offline- und Terminal-Validierung.
+  - Vollständige Abdeckung aller 10 Governance-Invarianten (`INV-LOCAL-01` bis `INV-SLA-10`), formelle `RunAsInvoker`-Zertifizierung und Zero-Copyleft-Isolationsgarantie (100% permissiv: MIT, PSFL-2.0, Apache-2.0).
+- **PEP 621 Standardisierung in `pyproject.toml`**:
+  - `THIRD_PARTY_LICENSES.txt` in `license-files` aufgenommen.
+  - Neuer kanonischer Link `"Level 1 SBOM"` unter `[project.urls]` registriert.
+  - Strikte Version-Freeze-Disziplin nach `T-20260920-167562623`: `version = "1.1.12"` unverändert beibehalten.
+- **Badges, Kontext & Dokumentations-Aktualisierung**:
+  - Verifikations-Badge auf Stand 2026-09-28 (`Verified` in EN, `Geprüft` in DE) aktualisiert.
+  - Testsuite-Zähler-Badge auf 224 Tests (179 Python + 45 Node) synchronisiert.
+  - Level 1 SBOM Text-Companion-Badge in beiden READMEs integriert.
+  - `llms.txt` Stand auf 2026-09-28 und Testsuite-Baseline aktualisiert.
+- **Umlaut-Bereinigung & Sprachreinheit**:
+  - ASCII-Ersatzformen (`fuer`, `Domaenen`) in den Suchanfragetabellen von `README.md`, `README_de.md` und `MARKETING-LOG.txt` auf echte deutsche Umlaute (`für`, `Domänen`) gehärtet.
+- **Automatisierte Vertragstests (`tests/test_metadata.py`)**:
+  - Testsuite um Contract-Tests für HTML-Anker-Parität (`sec-01` bis `sec-18`), Level 1 SBOM Text-Companion und Umlaut-Reinheit erweitert.
+
 ### Repository-Hygiene & CI-Härtung (Pfad A)
 - **CI-Workflow-Concurrency & Timeout-Härtung**:
   - Top-Level `concurrency:`-Gruppen mit `cancel-in-progress: true` in `.github/workflows/welcome.yml` und `.github/workflows/stale.yml` ergänzt, um redundante Runner-Ausführungen zuverlässig abzubrechen.

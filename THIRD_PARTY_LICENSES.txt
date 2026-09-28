@@ -1,0 +1,116 @@
+THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE
+Project: dev-bricks/WikiStub-Seed
+Audited: 2026-09-28
+Repository License: MIT License (see LICENSE)
+Repository Attribution Notice: NOTICE (see NOTICE)
+Architecture & Privacy: 100% Local-First, Zero-Egress by default, Unprivileged User-Mode (RunAsInvoker), Pure Python Standard Library Core
+
+================================================================================
+1. EXECUTIVE SUMMARY & COMPLIANCE ASSURANCE
+================================================================================
+
+WikiStub-Seed is engineered under strict architectural and governance invariants:
+100% Local-First, Zero-Egress by default, unprivileged user-mode execution (RunAsInvoker),
+and pure offline operation. The core import, export, validation, CLI, local edit
+server (127.0.0.1), and web publisher operate entirely within local process and filesystem
+boundaries without unsolicited network communication or telemetry.
+
+All direct, runtime, optional, and development dependencies utilized across WikiStub-Seed
+are distributed under strictly permissive and free open-source licenses (MIT, Apache-2.0, PSFL).
+There are ZERO AGPL or restrictive copyleft constraints, ensuring maximum portability for
+local knowledge management, RAG pipelines, educational systems, and enterprise documentation
+workflows.
+
+================================================================================
+2. INVARIANT CROSS-REFERENCE MATRIX
+================================================================================
+
+Invariant ID  | Operational Mandate                | Technical Enforcement                | License Scope
+--------------+------------------------------------+--------------------------------------+-------------------
+INV-LOCAL-01  | 100% Local-First & Zero Egress     | Core dataset & CLI operate offline   | PSFL-2.0 / MIT
+INV-SEC-02    | Non-Elevation (RunAsInvoker)       | Unprivileged user mode, zero root    | MIT
+INV-SCHEMA-03 | Deterministic Knowledge Schema     | 630 stubs across 12 domains validated| MIT
+INV-STORE-04  | Pure Offline Storage & Zero Telemetry | Zero tracking, JSON/Markdown local | PSFL-2.0
+INV-SRV-05    | Localhost-Bound Edit Server        | Binds strictly 127.0.0.1 loopback    | PSFL-2.0
+INV-AUTH-06   | PBKDF2 Password Hashing & Trash    | PBKDF2-HMAC-SHA256, soft-delete      | PSFL-2.0
+INV-PLAT-07   | Cross-Platform Operating Parity    | Windows, Linux, macOS full parity    | MIT
+INV-CORE-08   | Pure Python Standard Library Core  | Zero external runtime dependencies   | PSFL-2.0
+INV-SYNC-09   | Cloud-Sync Conflict Defense        | .gitignore multi-host & lock defense | MIT
+INV-SLA-10    | Dual Security Response & Triage SLA| 48h response, 5-day triage commitment| SECURITY.md
+
+================================================================================
+3. ZERO-COPYLEFT ISOLATION GUARANTEE & RUNASINVOKER CERTIFICATION
+================================================================================
+
+1. Zero-Copyleft Guarantee: No component of WikiStub-Seed links against, vendors,
+   or invokes any code under GPLv1, GPLv2, GPLv3, AGPLv3, LGPL, SSPL, or CC-BY-SA
+   copyleft licenses. All dependencies and tools are strictly permissive (MIT, Apache-2.0, PSFL-2.0).
+2. Unprivileged Execution (RunAsInvoker): WikiStub-Seed requires no administrative
+   privileges, no daemon services, and no root credentials. It operates entirely
+   in unprivileged user space.
+3. Zero-Egress Perimeter: By default, no network traffic is emitted by WikiStub-Seed.
+   When optional translation commands are executed (wikistub_seed_pipeline.py translate),
+   network interaction is governed strictly by explicit environment configuration (ANTHROPIC_API_KEY).
+
+================================================================================
+4. RUNTIME DEPENDENCY MATRIX
+================================================================================
+
+The core runtime of WikiStub-Seed has ZERO external runtime dependencies.
+
+Package                  Role / Functional Scope                                License   Upstream
+-----------------------+------------------------------------------------------+---------+---------------------
+Python Standard Library  Core CLI, file I/O, JSON processing, HTTP server, etc. PSFL-2.0  python/cpython
+Native Web Standards     Vanilla ES6, HTML5, CSS3, ServiceWorker API, Manifest  W3C/WHATWG Web Standards
+
+================================================================================
+5. OPTIONAL RUNTIME DEPENDENCIES
+================================================================================
+
+Package                  Usage & Purpose                                        License   Source / Upstream
+-----------------------+------------------------------------------------------+---------+---------------------
+anthropic (>=0.40.0)     Optional automated AI translation pipeline             MIT       anthropics/anthropic-sdk-python
+
+================================================================================
+6. DEVELOPMENT & QUALITY ASSURANCE TOOLING
+================================================================================
+
+Package                  Usage & Purpose                                        License   Source / Upstream
+-----------------------+------------------------------------------------------+---------+---------------------
+pytest (>=8.0.0)         Automated test runner, contract verification suites    MIT       pytest-dev/pytest
+ruff (>=0.5.0)           High-performance Python linter and code formatter      MIT/Apache astral-sh/ruff
+setuptools (>=77.0.3)    Standard package build backend (PEP 517 / PEP 621)     MIT       pypa/setuptools
+Node.js Test Runner      Built-in zero-dependency runner for static PWA tests   MIT       nodejs/node
+
+================================================================================
+7. FULL LICENSE TEXTS (EXCERPTS)
+================================================================================
+
+--- PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2 (PSFL-2.0) ---
+Python standard library modules are used under the PSF License Agreement.
+Copyright (c) 2001-2026 Python Software Foundation. All rights reserved.
+
+--- MIT LICENSE (MIT) ---
+Used by WikiStub-Seed, anthropic, pytest, setuptools, and Node.js.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--- APACHE LICENSE VERSION 2.0 (Apache-2.0) ---
+Dual-license option used by ruff.
+Licensed under the Apache License, Version 2.0. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0.

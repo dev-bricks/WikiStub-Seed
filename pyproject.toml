@@ -11,7 +11,7 @@ authors = [
     { name = "dev-bricks" }
 ]
 license = "MIT"
-license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md"]
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_LICENSES.md", "THIRD_PARTY_LICENSES.txt"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -75,6 +75,7 @@ Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"
 "Umbrella Ecosystem" = "https://github.com/open-bricks"
 Notice = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/NOTICE"
 "Third-Party Licenses" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.md"
+"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"
 "Marketing Log" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/MARKETING-LOG.txt"
 "LLM Ready" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/llms.txt"
 

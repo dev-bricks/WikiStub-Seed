@@ -1,9 +1,10 @@
 # Third-Party Licenses & Transparency Notice (Level 1 SBOM)
 
 > **Project:** `dev-bricks/WikiStub-Seed`<br>
-> **Audited:** 2026-09-23<br>
+> **Audited:** 2026-09-28<br>
 > **Repository License:** [MIT License](LICENSE)<br>
 > **Repository Attribution Notice:** [NOTICE](NOTICE)<br>
+> **Plain-Text Companion:** [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt)<br>
 > **Architecture & Privacy:** 100% Local-First, Zero-Egress by default, Unprivileged User-Mode (`RunAsInvoker`), Pure Python Standard Library Core
 
 ---
