@@ -75,7 +75,7 @@ def test_llms_txt_structure_and_freshness():
 
     content = llms_path.read_text(encoding="utf-8")
 
-    assert re.search(r"## Last-checked: 2026-09-\d{2}", content), "Last-checked timestamp missing in llms.txt"
+    assert re.search(r"## Last-checked: 2026-(?:09|10)-\d{2}", content), "Last-checked timestamp missing in llms.txt"
     assert "https://github.com/dev-bricks/WikiStub-Seed" in content, "Canonical repo link missing in llms.txt"
     assert "wikistub_seed.json" in content, "Authoritative dataset not mentioned in llms.txt"
     assert "630" in content, "Stub count missing in llms.txt"
@@ -141,7 +141,7 @@ def test_pyproject_classifiers_and_urls():
     assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in content
     assert '"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
     assert "[project.optional-dependencies]" in content
-    assert 'addopts = "-ra -v"' in content
+    assert 'addopts = "-ra -v --basetemp=.pytest_temp"' in content
 
 
 def test_security_policy_invariants():
@@ -530,7 +530,7 @@ def test_level1_sbom_invariants_matrix():
     content = lic_path.read_text(encoding="utf-8")
 
     assert "Level 1 SBOM" in content
-    assert "2026-09-28" in content
+    assert any(d in content for d in ["2026-09-28", "2026-10-01"])
     assert "[NOTICE](NOTICE)" in content
     assert "THIRD_PARTY_LICENSES.txt" in content
     assert "Invariant Cross-Reference Matrix" in content
@@ -630,7 +630,9 @@ def test_third_party_licenses_text_companion():
     assert "LEVEL 1 SBOM NOTICE" in content
     assert "RunAsInvoker" in content
     assert "Zero-Copyleft" in content
-    assert "2026-09-28" in content
+    assert any(d in content for d in ["2026-09-28", "2026-10-01"])
+    assert "§ 521 BGB" in content
+    assert "SLA" in content
 
     canonical_ids = [
         "INV-LOCAL-01",
@@ -658,3 +660,88 @@ def test_umlaut_purity_in_markdown():
     mlog_content = (PROJECT_ROOT / "MARKETING-LOG.txt").read_text(encoding="utf-8")
     assert "fuer" not in mlog_content, "Found ASCII escape 'fuer' in MARKETING-LOG.txt"
     assert "Domaenen" not in mlog_content, "Found ASCII escape 'Domaenen' in MARKETING-LOG.txt"
+
+
+def test_ci_lifecycle_auto_assign_and_label_sync():
+    """Verify auto-assign.yml, label-sync.yml and labels.yml exist with correct permissions and timeouts."""
+    auto_assign = PROJECT_ROOT / ".github" / "workflows" / "auto-assign.yml"
+    assert auto_assign.is_file(), "auto-assign.yml missing"
+    aa_content = auto_assign.read_text(encoding="utf-8")
+    assert "pull-requests: write" in aa_content
+    assert "issues: write" in aa_content
+    assert "timeout-minutes: 5" in aa_content
+    assert "cancel-in-progress: true" in aa_content
+
+    label_sync = PROJECT_ROOT / ".github" / "workflows" / "label-sync.yml"
+    assert label_sync.is_file(), "label-sync.yml missing"
+    ls_content = label_sync.read_text(encoding="utf-8")
+    assert "issues: write" in ls_content
+    assert "timeout-minutes: 5" in ls_content
+    assert "cancel-in-progress: true" in ls_content
+
+    labels_yml = PROJECT_ROOT / ".github" / "labels.yml"
+    assert labels_yml.is_file(), "labels.yml missing"
+    labels_content = labels_yml.read_text(encoding="utf-8")
+    for expected_label in ["bug", "enhancement", "good first issue", "help wanted", "documentation", "duplicate", "wontfix", "priority: high", "priority: low", "needs-triage", "stale"]:
+        assert f"name: {expected_label}" in labels_content or f"name: '{expected_label}'" in labels_content
+
+
+def test_gitignore_multi_host_and_agent_locks():
+    """Verify .gitignore includes IDEAPAD, WORKSTATION wildcards, Desktop.ini, and agent lock patterns."""
+    gitignore_path = PROJECT_ROOT / ".gitignore"
+    assert gitignore_path.is_file()
+    content = gitignore_path.read_text(encoding="utf-8")
+
+    patterns = [
+        "*-IDEAPAD*",
+        "*-IDEAPAD-GEI*",
+        "*_WORKSTATION*",
+        "*_WORKSTATION-LG*",
+        "Desktop.ini",
+        "TASKPLAN_*.md",
+        "LOCK.dev.*",
+        "LOCK.antigravity.*",
+        "LOCK.bugsearch.*",
+        ".pytest_tmp*/",
+    ]
+    for p in patterns:
+        assert p in content, f"Pattern {p} missing in .gitignore"
+
+
+def test_pep621_extended_project_urls():
+    """Verify pyproject.toml defines Contributing, Plain-Text License, and Level 1 SBOM text URLs."""
+    pyproject_path = PROJECT_ROOT / "pyproject.toml"
+    assert pyproject_path.is_file()
+    content = pyproject_path.read_text(encoding="utf-8")
+
+    assert 'Contributing = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CONTRIBUTING.md"' in content
+    assert '"Plain-Text License" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/LICENSE"' in content
+    assert '"Third-Party Licenses (Text)" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
+    assert '"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
+    assert '--basetemp=.pytest_temp' in content
+
+
+def test_contributing_guide_quality_gates():
+    """Verify CONTRIBUTING.md documents Plan D architecture, quality gates, and version freeze."""
+    contrib_path = PROJECT_ROOT / "CONTRIBUTING.md"
+    assert contrib_path.is_file()
+    content = contrib_path.read_text(encoding="utf-8")
+
+    assert "Quality Gates" in content
+    assert "pytest -v" in content
+    assert "ruff check ." in content
+    assert "Plan D" in content
+    assert "1.1.12" in content
+    assert "T-20260920-167562623" in content
+    assert "INV-LOCAL-01" in content
+
+
+def test_marketing_log_pfad_a_20261001():
+    """Verify MARKETING-LOG.txt contains the 2026-10-01 Pfad A action tracking entry."""
+    mlog_path = PROJECT_ROOT / "MARKETING-LOG.txt"
+    assert mlog_path.is_file()
+    content = mlog_path.read_text(encoding="utf-8")
+
+    assert "2026-10-01" in content
+    assert "[GITHUBBOT_ONE_REPO_CLEANER]" in content
+    assert "PFAD_A_HYGIENE" in content

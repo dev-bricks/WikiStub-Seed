@@ -67,12 +67,14 @@ releases/
 
 # ---- Betriebssystem ----
 desktop.ini
+Desktop.ini
 Thumbs.db
 .DS_Store
 ehthumbs.db
 
 # ---- Planung & Interne Doku ----
 PLAN.txt
+TASKPLAN_*.md
 
 # ---- Private / Archive ----
 _archive/
@@ -115,8 +117,14 @@ wikistub_seed_trash.json
 *.sync-temp-*
 *-ASUS-GEI*
 *-ASUS*
+*-IDEAPAD*
+*-IDEAPAD-GEI*
 *-WORKSTATION-LG*
 *-WORKSTATION*
+*_WORKSTATION*
+*_WORKSTATION-LG*
+*-WORKSTATION.*
+*-WORKSTATION-LG.*
 *-LAPTOP*
 *-Mac Studio*
 *-MacBook*
@@ -129,6 +137,9 @@ LOCK*.txt
 LOCK.user.*
 LOCK.until.*
 LOCK.condition.*
+LOCK.dev.*
+LOCK.antigravity.*
+LOCK.bugsearch.*
 LOCK.permissions.json
 .automation-lock
 uv.lock
@@ -141,6 +152,7 @@ coverage/
 .hypothesis/
 .turbo/
 .pytest_temp/
+.pytest_tmp*/
 .tox/
 wheelhouse/
 .wheel-smoke/

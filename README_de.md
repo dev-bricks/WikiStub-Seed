@@ -25,8 +25,8 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
 [![Level 1 SBOM](https://img.shields.io/badge/Level--1%20SBOM-Klartext%20verf%C3%BCgbar-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-224%20passed%20(179%20Python%20%2B%2045%20Node)-success)
-[![Geprüft](https://img.shields.io/badge/gepr%C3%BCft-2026--09--28-blue.svg)](pyproject.toml)
+![Tests](https://img.shields.io/badge/tests-229%20passed%20(184%20Python%20%2B%2045%20Node)-success)
+[![Geprüft](https://img.shields.io/badge/gepr%C3%BCft-2026--10--01-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-verf%C3%BCgbar-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 

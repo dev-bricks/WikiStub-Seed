@@ -5,6 +5,28 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Repository-Hygiene, CI-Lifecycle-Workflows & Level 1 SBOM Text Companion (Pfad A) - 2026-10-01
+- **CI-Lifecycle-Workflows & Governance**:
+  - Automatisierter PR-Zuweisungsworkflow `.github/workflows/auto-assign.yml` mit `actions/github-script@v7`, Least-Privilege-Permissions (`pull-requests: write`, `issues: write`), `timeout-minutes: 5` und `cancel-in-progress: true` neu angelegt.
+  - Label-Synchronisationsworkflow `.github/workflows/label-sync.yml` mit `EndBug/label-sync@v2`, `timeout-minutes: 5` und Least-Privilege-Permissions (`issues: write`) neu angelegt.
+  - Kanonische `.github/labels.yml` mit 11 Standard-Labels gemäß GOVERNANCE.md §4.2 provisioniert.
+- **Multi-Host Cloud-Sync- & Lock-Defense in `.gitignore`**:
+  - Härtung um `*-IDEAPAD*`, `*-IDEAPAD-GEI*`, `*_WORKSTATION*`, `*_WORKSTATION-LG*`, `*-WORKSTATION.*`, `*-WORKSTATION-LG.*`, `Desktop.ini`, `TASKPLAN_*.md`, `LOCK.dev.*`, `LOCK.antigravity.*`, `LOCK.bugsearch.*` und `.pytest_tmp*/`.
+- **PEP 621 Standardisierung & Pytest-Härtung in `pyproject.toml`**:
+  - Neue Links für `Contributing`, `Plain-Text License` und `Third-Party Licenses (Text)` unter `[project.urls]` registriert.
+  - Pytest `addopts` um `--basetemp=.pytest_temp` erweitert und `norecursedirs` um `.pytest_temp`, `.pytest_tmp*`, `.ruff_cache`, `.hypothesis` und `.turbo` gehärtet.
+  - Strikte Version-Freeze-Disziplin nach `T-20260920-167562623`: `version = "1.1.12"` unverändert beibehalten.
+- **Level 1 SBOM Text-Companion & Statutory Notice (§ 521 BGB)**:
+  - `THIRD_PARTY_LICENSES.txt` auditiert auf Stand 2026-10-01; Abschnitt 8 für gesetzlichen Haftungsausschluss (§ 521 BGB Gefälligkeitsrecht) und verbindliche 48h Security Response SLA ergänzt.
+  - `THIRD_PARTY_LICENSES.md` Re-Audit auf Stand 2026-10-01 synchronisiert.
+  - `NOTICE` um wechselseitige Referenz auf `THIRD_PARTY_LICENSES.txt` ergänzt.
+- **Beitragsrichtlinie (`CONTRIBUTING.md`)**:
+  - Erweitert um Plan D Local Development Architecture, automatisierte Quality Gates (179 Python + 45 Node Tests), Invarianten und Version-Freeze-Disziplin.
+- **Badges & Kontext-Dokumentation**:
+  - `README.md` (`Verified: 2026-10-01`), `README_de.md` (`Geprüft: 2026-10-01`) und `llms.txt` (`Last-checked: 2026-10-01`) auf aktuellen Stand synchronisiert.
+- **Automatisierte Vertragstests (`tests/test_metadata.py`)**:
+  - Neue Contract-Tests für CI-Workflows (`auto-assign.yml`, `label-sync.yml`, `labels.yml`), erweiterte PEP 621 URLs, CONTRIBUTING Quality Gates und Marketing-Log-Recency implementiert.
+
 ### Marketing, Discoverability & Level 1 SBOM Text Companion (Pfad B)
 - **18-Punkte-Dual-HTML-Ankerparität (`sec-01` bis `sec-18`)**:
   - `README.md` und `README_de.md` mit standardisierten kanonischen Ankern `<a id="sec-01"></a>` bis `<a id="sec-18"></a>` ausgestattet.

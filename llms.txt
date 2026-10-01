@@ -1,16 +1,17 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-09-28
+## Last-checked: 2026-10-01
 
-Verification: 179 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/concurrency tests, and metadata
-contract tests) and 45 Node.js PWA tests (total 224 tests) passed locally on 2026-09-28 (Pfad B Discoverability, Bilateral 18-Point
-Quick Navigation with Dual Anchors, Level 1 SBOM Audit & Text Companion). Full Python compileall, CLI stats/check, pipeline validation, duplicate checking,
-and the deterministic PWA rebuild passed without tracked data diff. Audited Level 1 SBOM THIRD_PARTY_LICENSES.md and plain-text companion
-THIRD_PARTY_LICENSES.txt (100% permissive open-source stack, invariant cross-reference matrix INV-LOCAL-01..INV-SLA-10, zero-copyleft guarantee,
-RunAsInvoker unprivileged mode), formal NOTICE file, enriched MARKETING-LOG.txt (4 target personas [PERSONA-01]..[PERSONA-04], bilingual search queries,
-10-dimension competitive matrix), PEP 621 ecosystem URLs and license-files, 18-point bilingual quick navigation with 100% dual HTML anchor parity
-(#sec-01..#sec-18), statutory notice (§ 521 BGB), and 10 canonical Governance & Runtime Invariants (INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented
-cross-domain duplicate titles are allowed; no incomplete or invalid entries were reported.
+Verification: 184 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/concurrency tests, and metadata
+contract tests) and 45 Node.js PWA tests (total 229 tests) passed locally on 2026-10-01 (Pfad A Repository-Hygiene, CI Lifecycle Workflows
+[auto-assign.yml, label-sync.yml, labels.yml], Multi-Host Defense in .gitignore, Hardened pytest configuration & Level 1 SBOM Text Companion).
+Full Python compileall, CLI stats/check, pipeline validation, duplicate checking, and the deterministic PWA rebuild passed without tracked data diff.
+Audited Level 1 SBOM THIRD_PARTY_LICENSES.md and plain-text companion THIRD_PARTY_LICENSES.txt (100% permissive open-source stack, invariant
+cross-reference matrix INV-LOCAL-01..INV-SLA-10, zero-copyleft guarantee, RunAsInvoker unprivileged mode), formal NOTICE file, enriched MARKETING-LOG.txt
+(4 target personas [PERSONA-01]..[PERSONA-04], bilingual search queries, 10-dimension competitive matrix), PEP 621 ecosystem URLs and license-files,
+18-point bilingual quick navigation with 100% dual HTML anchor parity (#sec-01..#sec-18), statutory notice (§ 521 BGB), and 10 canonical Governance &
+Runtime Invariants (INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented cross-domain duplicate titles are allowed; no incomplete or
+invalid entries were reported.
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 

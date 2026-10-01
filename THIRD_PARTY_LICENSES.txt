@@ -1,6 +1,6 @@
 THIRD-PARTY LICENSES & LEVEL 1 SBOM NOTICE
 Project: dev-bricks/WikiStub-Seed
-Audited: 2026-09-28
+Audited: 2026-10-01
 Repository License: MIT License (see LICENSE)
 Repository Attribution Notice: NOTICE (see NOTICE)
 Architecture & Privacy: 100% Local-First, Zero-Egress by default, Unprivileged User-Mode (RunAsInvoker), Pure Python Standard Library Core
@@ -114,3 +114,18 @@ SOFTWARE.
 Dual-license option used by ruff.
 Licensed under the Apache License, Version 2.0. You may obtain a copy of the
 License at http://www.apache.org/licenses/LICENSE-2.0.
+
+================================================================================
+8. STATUTORY NOTICE, LIABILITY LIMITATION & SECURITY SLA (§ 521 BGB)
+================================================================================
+
+WikiStub-Seed is provided free of charge under the MIT License as open-source
+software without commercial consideration (Gefälligkeitsverhältnis gemäß § 521 BGB).
+Liability is limited strictly to intent (Vorsatz) and gross negligence (grobe
+Fahrlässigkeit). No warranty or liability is assumed for fitness for a particular
+purpose or consequential damages arising from the use of this software.
+
+Binding Security Response SLA:
+- Initial response within 48 hours
+- Triage and remediation within 5 business days
+- Canonical disclosure channels: security@open-bricks.org, security@dev-bricks.org
