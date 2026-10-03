@@ -1,10 +1,10 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-10-01
+## Last-checked: 2026-10-03
 
 Verification: 184 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/concurrency tests, and metadata
-contract tests) and 45 Node.js PWA tests (total 229 tests) passed locally on 2026-10-01 (Pfad A Repository-Hygiene, CI Lifecycle Workflows
-[auto-assign.yml, label-sync.yml, labels.yml], Multi-Host Defense in .gitignore, Hardened pytest configuration & Level 1 SBOM Text Companion).
+contract tests) and 45 Node.js PWA tests (total 229 tests) passed locally on 2026-10-03 (Pfad B Discoverability, International README Badge
+Parity across all 6 language editions, Enriched High-Intent RAG Queries, and Level 1 SBOM Re-Audit Stand 2026-10-03).
 Full Python compileall, CLI stats/check, pipeline validation, duplicate checking, and the deterministic PWA rebuild passed without tracked data diff.
 Audited Level 1 SBOM THIRD_PARTY_LICENSES.md and plain-text companion THIRD_PARTY_LICENSES.txt (100% permissive open-source stack, invariant
 cross-reference matrix INV-LOCAL-01..INV-SLA-10, zero-copyleft guarantee, RunAsInvoker unprivileged mode), formal NOTICE file, enriched MARKETING-LOG.txt

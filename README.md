@@ -25,8 +25,8 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
 [![Level 1 SBOM](https://img.shields.io/badge/level--1%20SBOM-plain%20text%20available-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-229%20passed%20(184%20Python%20%2B%2045%20Node)-success)
-[![Verified](https://img.shields.io/badge/verified-2026--10--01-blue.svg)](pyproject.toml)
+![Tests](https://img.shields.io/badge/tests-231%20passed%20(186%20Python%20%2B%2045%20Node)-success)
+[![Verified](https://img.shields.io/badge/verified-2026--10--03-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -183,11 +183,15 @@ WikiStub-Seed is engineered to address four primary developer and researcher arc
 | **EN** | `rag knowledge base json python standard library` | Zero-dependency retrieval |
 | **EN** | `wikipedia stub seed dataset offline` | Clean Wikipedia alternative |
 | **EN** | `structured markdown export for obsidian knowledge vault` | Personal Knowledge Management |
+| **EN** | `local rag json starter dataset python` | Offline RAG knowledge scaffold |
+| **EN** | `multilingual offline concept stubs 12 domains` | Multi-domain taxonomy seeding |
 | **DE** | `Mehrsprachige JSON Wissensbasis Python` | Lokale Begriffsdatenbank |
 | **DE** | `Lokale Wissensdatenbank für RAG und LLMs` | KI-Kontextinjektion |
 | **DE** | `Strukturierte Konzept-Stubs 12 Domänen` | Multidisziplinäre Ontologie |
 | **DE** | `Zero-Egress Wissensverwaltung Python Standardbibliothek` | DSGVO-konforme Wissensbasis |
 | **DE** | `Markdown Export für Obsidian Wissensgraphen` | Offline PKM & Obsidian |
+| **DE** | `Lokales RAG JSON Starter-Dataset Python` | Offline RAG Wissens-Scaffold |
+| **DE** | `Mehrsprachige Offline Konzept-Stubs 12 Domänen` | Domänen-Taxonomie-Seeding |
 
 ---
 

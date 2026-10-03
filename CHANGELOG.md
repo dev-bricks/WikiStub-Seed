@@ -5,6 +5,17 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Marketing, Discoverability & International Badge Parity (Pfad B) - 2026-10-03
+- **International README Badge Parity**:
+  - Badge-Header in `README_es.md`, `README_ja.md`, `README_ru.md` und `README_zh-Hans.md` vollständig modernisiert und auf den einheitlichen Standard gehärtet (Version v1.1.12, dev-bricks Ökosystem, open-bricks Umbrella, 229 Tests passed, 48h Security SLA, Level 1 SBOM, Verified 2026-10-03).
+- **Verifikations- und Metadaten-Aktualisierung**:
+  - `README.md` (`Verified: 2026-10-03`), `README_de.md` (`Geprüft: 2026-10-03`) und `llms.txt` (`Last-checked: 2026-10-03`) synchronisiert.
+  - Level 1 SBOM Re-Audit Stand 2026-10-03 in `THIRD_PARTY_LICENSES.md` und `THIRD_PARTY_LICENSES.txt` synchronisiert.
+- **Discoverability & High-Intent Search Queries**:
+  - Suchanfragen und Intent-Schlüsselwörter für RAG- und Wissensgraphen-Seeding in `README.md`, `README_de.md` und `MARKETING-LOG.txt` angereichert.
+- **Automatisierte Vertragstests (`tests/test_metadata.py`)**:
+  - Testsuite um Contract-Tests für internationale README-Badge-Parität und Verifikationsstand 2026-10-03 erweitert.
+
 ### Repository-Hygiene, CI-Lifecycle-Workflows & Level 1 SBOM Text Companion (Pfad A) - 2026-10-01
 - **CI-Lifecycle-Workflows & Governance**:
   - Automatisierter PR-Zuweisungsworkflow `.github/workflows/auto-assign.yml` mit `actions/github-script@v7`, Least-Privilege-Permissions (`pull-requests: write`, `issues: write`), `timeout-minutes: 5` und `cancel-in-progress: true` neu angelegt.

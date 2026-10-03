@@ -530,7 +530,7 @@ def test_level1_sbom_invariants_matrix():
     content = lic_path.read_text(encoding="utf-8")
 
     assert "Level 1 SBOM" in content
-    assert any(d in content for d in ["2026-09-28", "2026-10-01"])
+    assert any(d in content for d in ["2026-09-28", "2026-10-01", "2026-10-03"])
     assert "[NOTICE](NOTICE)" in content
     assert "THIRD_PARTY_LICENSES.txt" in content
     assert "Invariant Cross-Reference Matrix" in content
@@ -630,7 +630,7 @@ def test_third_party_licenses_text_companion():
     assert "LEVEL 1 SBOM NOTICE" in content
     assert "RunAsInvoker" in content
     assert "Zero-Copyleft" in content
-    assert any(d in content for d in ["2026-09-28", "2026-10-01"])
+    assert any(d in content for d in ["2026-09-28", "2026-10-01", "2026-10-03"])
     assert "§ 521 BGB" in content
     assert "SLA" in content
 
@@ -745,3 +745,35 @@ def test_marketing_log_pfad_a_20261001():
     assert "2026-10-01" in content
     assert "[GITHUBBOT_ONE_REPO_CLEANER]" in content
     assert "PFAD_A_HYGIENE" in content
+
+
+def test_marketing_log_pfad_b_20261003():
+    """Verify MARKETING-LOG.txt contains the 2026-10-03 Pfad B action tracking entry."""
+    mlog_path = PROJECT_ROOT / "MARKETING-LOG.txt"
+    assert mlog_path.is_file()
+    content = mlog_path.read_text(encoding="utf-8")
+
+    assert "2026-10-03" in content
+    assert "[GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN]" in content
+    assert "PFAD_B_UPGRADE" in content
+
+
+def test_all_readme_international_badge_parity():
+    """Verify modern badge parity across all six language editions (EN, DE, ES, JA, RU, ZH)."""
+    readme_files = [
+        "README.md",
+        "README_de.md",
+        "README_es.md",
+        "README_ja.md",
+        "README_ru.md",
+        "README_zh-Hans.md",
+    ]
+    for rname in readme_files:
+        rpath = PROJECT_ROOT / rname
+        assert rpath.is_file(), f"{rname} is missing"
+        content = rpath.read_text(encoding="utf-8")
+        assert "version-1.1.12" in content, f"version badge missing in {rname}"
+        assert "dev--bricks" in content, f"dev-bricks ecosystem badge missing in {rname}"
+        assert "open--bricks" in content, f"open-bricks umbrella badge missing in {rname}"
+        assert "231%20passed" in content, f"test badge missing in {rname}"
+        assert "2026--10--03" in content, f"verified badge date 2026-10-03 missing in {rname}"

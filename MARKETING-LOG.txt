@@ -1,6 +1,6 @@
 # MARKETING-LOG: WikiStub-Seed
-Date: 2026-10-01
-Operator: Antigravity / Gemini (via GITHUBBOT Pfad A)
+Date: 2026-10-03
+Operator: Antigravity / Gemini (via GITHUBBOT Pfad B)
 Target Repo: dev-bricks/WikiStub-Seed
 Canonical Path: C:\_Local_DEV\repos\WikiStub-Seed
 Version: 1.1.12
@@ -12,6 +12,7 @@ Version: 1.1.12
 # [2026-09-23 21:20:00 CEST] [GITHUBBOT_ONE_REPO_CLEANER] ACTION: PFAD_A_HYGIENE | REPO: dev-bricks/WikiStub-Seed | SCOPE: CI workflow concurrency & timeout hardening (welcome.yml, stale.yml), multi-host cloud-sync and canonical lock defense in .gitignore, PEP 621 standardization in pyproject.toml (Notice URL, pytest minversion=7.0 & norecursedirs, 20 curated keywords, version 1.1.12 frozen per T-20260920-167562623), Level 1 SBOM Third-Party Licenses re-audit (THIRD_PARTY_LICENSES.md Stand 2026-09-23), CHANGELOG.md [Unreleased] section, llms.txt & README badges synchronization, and automated contract testsuite extension.
 # [2026-09-28 12:00:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: 18-Point Quick Navigation bilateral dual HTML anchor parity (#sec-01..#sec-18) across README.md & README_de.md, Level 1 SBOM text companion (THIRD_PARTY_LICENSES.txt) and re-audit Stand 2026-09-28 (100% permissive stack, INV-LOCAL-01..INV-SLA-10, Zero-Copyleft, RunAsInvoker), PEP 621 license-files expansion and Level 1 SBOM URL in pyproject.toml, German SEO umlaut purification (für, Domänen), Verified-2026--09--28 & Geprüft-2026--09--28 badges, test badge updated to 224 passed (179 Python + 45 Node), llms.txt synchronization, and expanded automated contract tests in tests/test_metadata.py.
 # [2026-10-01 06:45:00 CEST] [GITHUBBOT_ONE_REPO_CLEANER] ACTION: PFAD_A_HYGIENE | REPO: dev-bricks/WikiStub-Seed | SCOPE: CI lifecycle workflows (.github/workflows/auto-assign.yml, label-sync.yml, .github/labels.yml), multi-host cloud-sync and lock defense in .gitignore (*-IDEAPAD*, *_WORKSTATION*, Desktop.ini, TASKPLAN_*.md, LOCK.dev.*, .pytest_tmp*/), PEP 621 metadata alignment in pyproject.toml (Contributing, Plain-Text License, Third-Party Licenses Text URLs, pytest addopts --basetemp=.pytest_temp and hardened norecursedirs; version 1.1.12 frozen per T-20260920-167562623), Level 1 SBOM text companion THIRD_PARTY_LICENSES.txt Stand 2026-10-01 with § 521 BGB disclaimer and 48h Security Response SLA, THIRD_PARTY_LICENSES.md re-audit Stand 2026-10-01, NOTICE cross-reference update, CONTRIBUTING.md enriched with Quality Gates and Plan D architecture, Verified-2026--10--01 / Geprüft-2026--10--01 badges, llms.txt Last-checked 2026-10-01, CHANGELOG.md [Unreleased], and automated contract tests in tests/test_metadata.py (all 184 Python + 45 Node PWA tests passing, 229 tests total).
+# [2026-10-03 14:15:00 CEST] [GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN] ACTION: PFAD_B_UPGRADE | REPO: dev-bricks/WikiStub-Seed | SCOPE: Full international README badge parity across all 6 language editions (EN, DE, ES, JA, RU, ZH), updated test counts (229 passed: 184 Python + 45 Node), refreshed verification badges (Verified 2026-10-03 / Geprüft 2026-10-03), enriched high-intent search queries for RAG context seeding, Level 1 SBOM re-audit Stand 2026-10-03 in THIRD_PARTY_LICENSES.md & THIRD_PARTY_LICENSES.txt, llms.txt synchronization, and expanded automated contract tests in tests/test_metadata.py.
 
 
 ================================================================================
@@ -61,6 +62,8 @@ English (EN):
 - `zero-dependency knowledge base cli python`
 - `cross-domain terminology dataset de en es zh ja ru`
 - `structured markdown export for obsidian knowledge vault`
+- `local rag json starter dataset python`
+- `multilingual offline concept stubs 12 domains`
 
 German (DE):
 - `Mehrsprachige JSON Wissensbasis Python`
@@ -71,6 +74,8 @@ German (DE):
 - `Kuratierte Ontologie Wissenssammlung JSON`
 - `WikiStub-Seed dev-bricks`
 - `Markdown Export für Obsidian Wissensgraphen`
+- `Lokales RAG JSON Starter-Dataset Python`
+- `Mehrsprachige Offline Konzept-Stubs 12 Domänen`
 - `Lokaler Editiermodus Web Publisher 127.0.0.1`
 - `Mehrsprachiges Begriffslexikon KI Forschung`
 
@@ -96,6 +101,7 @@ German (DE):
 - [x] Create comprehensive THIRD_PARTY_LICENSES.md audit verifying 100% permissive stack.
 - [x] Configure PEP 621 URLs for Third-Party Licenses, Marketing Log, and LLM Ready in pyproject.toml.
 - [x] Synchronize llms.txt discovery index with updated test baseline and invariant contracts.
+- [x] Ensure full international badge parity across all 6 language editions (EN, DE, ES, JA, RU, ZH).
 - [ ] Register WikiStub-Seed on Hugging Face Datasets as a curated multilingual concept seed.
 - [ ] Publish an export plugin for direct Obsidian vault and Logseq graph generation.
 - [ ] Create a short CLI demo screencast demonstrating `check`, `export`, and `edit_server.py`.
