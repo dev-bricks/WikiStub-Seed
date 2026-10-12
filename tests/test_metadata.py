@@ -5,6 +5,9 @@ import re
 from pathlib import Path
 
 from language_model import iter_metawiki_entries
+from packaging.requirements import Requirement
+from packaging.utils import canonicalize_name
+from packaging.version import Version
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +43,72 @@ def test_version_parity():
     assert f"[{pyproject_version}]" in changelog_content, (
         f"Version {pyproject_version} not documented in CHANGELOG.md"
     )
+
+
+def test_dev_test_pytest_floor_excludes_cve_2025_71176_range():
+    """Keep each test installer above pytest's affected pre-9.0.3 range."""
+    pyproject = (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    extras_match = re.search(
+        r"(?ms)^\[project\.optional-dependencies\]\s*(.*?)(?=^\[|\Z)",
+        pyproject,
+    )
+    assert extras_match is not None, "Project optional dependencies are missing"
+
+    def extra_requirements(extra: str) -> list[Requirement]:
+        match = re.search(
+            rf"(?ms)^\s*{re.escape(extra)}\s*=\s*\[(.*?)^\s*\]",
+            extras_match.group(1),
+        )
+        assert match is not None, f"The {extra!r} extra is missing"
+        values = re.findall(r'(?m)^\s*"([^"\n]+)"\s*,?\s*$', match.group(1))
+        return [Requirement(value) for value in values]
+
+    requirements_file = (PROJECT_ROOT / "requirements-dev.txt").read_text(
+        encoding="utf-8"
+    )
+    file_requirements = [
+        Requirement(line.split("#", 1)[0].strip())
+        for line in requirements_file.splitlines()
+        if line.split("#", 1)[0].strip()
+    ]
+
+    pytest_requirements = [
+        requirement
+        for group in (extra_requirements("dev"), extra_requirements("test"), file_requirements)
+        for requirement in group
+        if canonicalize_name(requirement.name) == "pytest"
+    ]
+    assert len(pytest_requirements) == 3, (
+        "Expected pytest declarations in the dev and test extras and the CI requirements file"
+    )
+
+    affected_versions = tuple(
+        Version(version)
+        for version in ("8.0.0", "8.4.0", "9.0.0", "9.0.2", "9.0.3rc1")
+    )
+    patched_floor = Version("9.0.3")
+    acceptable_releases = tuple(
+        Version(version) for version in ("9.0.3", "9.0.4", "9.1.0", "10.0.0")
+    )
+    for requirement in pytest_requirements:
+        assert requirement.specifier, f"pytest requirement {requirement!s} has no version constraint"
+        lower_bounds = [
+            specifier
+            for specifier in requirement.specifier
+            if specifier.operator in {">=", ">", "==", "~="}
+            and not specifier.version.endswith(".*")
+            and Version(specifier.version) >= patched_floor
+        ]
+        assert lower_bounds, (
+            f"pytest requirement {requirement!s} has no semantic lower bound at or above {patched_floor}"
+        )
+        assert any(requirement.specifier.contains(release) for release in acceptable_releases), (
+            f"pytest requirement {requirement!s} admits no supported patched release"
+        )
+        for affected in affected_versions:
+            assert not requirement.specifier.contains(affected, prereleases=True), (
+                f"pytest requirement {requirement!s} permits affected version {affected}"
+            )
 
 
 def test_core_documentation_files_exist():
