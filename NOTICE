@@ -1,6 +1,6 @@
 WikiStub-Seed
 Copyright (c) 2026 Lukas Geiger
 
-This product is developed as part of the dev-bricks organization under the open-bricks open-source umbrella.
-Licensed under the MIT License. See the LICENSE file in this repository for full license details.
-Third-party dependency licenses, Level 1 SBOM invariants, and transparency inventory are documented in THIRD_PARTY_LICENSES.md and THIRD_PARTY_LICENSES.txt.
+This project is developed in the dev-bricks organization within the open-bricks ecosystem.
+It is licensed under the MIT License; see LICENSE for the license text.
+THIRD_PARTY_LICENSES.md and THIRD_PARTY_LICENSES.txt provide a limited snapshot of direct project dependency declarations and upstream references. They are not a complete SBOM or a license-compliance assessment.

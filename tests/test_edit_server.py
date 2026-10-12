@@ -143,6 +143,54 @@ class PermissionsEndpointTests(EditServerTestCase):
             "create": True, "edit": True, "delete": True,
         })
 
+    def test_malformed_auth_file_returns_controlled_error_and_blocks_mutations(self):
+        self.auth_path.write_text("{broken synthetic json", encoding="utf-8")
+        auth_before = self.auth_path.read_bytes()
+        data_before = self.json_path.read_bytes()
+
+        status, payload, _ = self.request("GET", "/api/permissions")
+        self.assertEqual(status, 500)
+        self.assertEqual(
+            payload,
+            {"error": "Die lokale Authentifizierungsdatei ist ungültig. Zugriff bleibt gesperrt."},
+        )
+        self.assertNotIn(str(self.auth_path), str(payload))
+        self.assertEqual(self.auth_path.read_bytes(), auth_before)
+
+        status, payload, _ = self.request(
+            "POST", "/api/auth/set-password", body={"new_password": "replacement"}
+        )
+        self.assertEqual(status, 500)
+        self.assertNotIn(str(self.auth_path), str(payload))
+
+        status, payload, _ = self.request(
+            "POST",
+            "/api/entries",
+            body={
+                "category": "07_Informatik_KI",
+                "subcategory": "Software_Engineering",
+                "entry": {"title": "Should not be saved", "definition_de": "Nein.", "definition_en": "No."},
+            },
+        )
+        self.assertEqual(status, 500)
+        self.assertNotIn(str(self.auth_path), str(payload))
+        self.assertEqual(self.auth_path.read_bytes(), auth_before)
+        self.assertEqual(self.json_path.read_bytes(), data_before)
+
+    def test_invalid_permission_request_returns_400_without_changing_auth_file(self):
+        self.request("POST", "/api/auth/set-password", body={"new_password": "hunter2"})
+        token = self.login("hunter2")
+        auth_before = self.auth_path.read_bytes()
+
+        for body in ({"create": "false"}, ["create"]):
+            with self.subTest(body=body):
+                status, payload, _ = self.request(
+                    "POST", "/api/auth/permissions", body=body, cookie=token
+                )
+                self.assertEqual(status, 400, payload)
+                self.assertNotIn(str(self.auth_path), str(payload))
+                self.assertEqual(self.auth_path.read_bytes(), auth_before)
+
 
 class HostHeaderGuardTests(EditServerTestCase):
     def test_evil_host_header_is_rejected(self):

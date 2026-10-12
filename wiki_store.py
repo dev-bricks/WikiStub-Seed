@@ -38,11 +38,44 @@ JSON_PATH = BASE_PATH / "wikistub_seed.json"
 BACKUP_PATH = BASE_PATH / "backups"
 TRASH_PATH = BASE_PATH / "wikistub_seed_trash.json"
 
+
+def _source_checkout_root() -> Path | None:
+    """Return the source root only when its project and seed files are present.
+
+    A wheel deliberately contains neither the mutable seed dataset nor a
+    project marker. This keeps default paths from pointing into site-packages.
+    """
+    if (BASE_PATH / "pyproject.toml").is_file() and (BASE_PATH / "wikistub_seed.json").is_file():
+        return BASE_PATH
+    return None
+
+
+def _resolve_storage_path(path: Path | str | None, *, default_name: str, purpose: str) -> Path:
+    source_root = _source_checkout_root()
+    if path is None:
+        if source_root is None:
+            raise StoragePathRequiredError(
+                f"An explicit external {purpose} path is required when using the installed wheel."
+            )
+        return source_root / default_name
+
+    resolved = Path(path).expanduser().resolve()
+    if source_root is None and resolved.is_relative_to(BASE_PATH):
+        raise StoragePathRequiredError(
+            f"{purpose.capitalize()} paths inside the installed module directory are not data locations; "
+            "provide a path outside site-packages."
+        )
+    return resolved
+
 ENTRY_FIELDS = ("title", "definition_de", "definition_en", "relevance", "tags")
 
 
 class WikiStoreError(Exception):
     """Base class for all store-level rejections (caught by edit_server.py)."""
+
+
+class StoragePathRequiredError(WikiStoreError):
+    """Raised before I/O when an installed wheel has no explicit data path."""
 
 
 class NotFoundError(WikiStoreError):
@@ -80,8 +113,9 @@ def _validate_component_name(value: object, *, label: str) -> str:
     return text
 
 
-def load(json_path: Path = JSON_PATH) -> dict[str, Any]:
+def load(json_path: Path | str | None = None) -> dict[str, Any]:
     """Load and structurally validate the dataset (mirrors wikistub_seed_cli.load_json)."""
+    json_path = _resolve_storage_path(json_path, default_name="wikistub_seed.json", purpose="dataset")
     data = read_json_object(json_path)
     root = data.get("MetaWiki")
     if not isinstance(root, dict):
@@ -98,19 +132,30 @@ def load(json_path: Path = JSON_PATH) -> dict[str, Any]:
     return data
 
 
-def save(data: dict[str, Any], json_path: Path = JSON_PATH, backup_dir: Path = BACKUP_PATH) -> Path | None:
+def save(
+    data: dict[str, Any],
+    json_path: Path | str | None = None,
+    backup_dir: Path | str | None = None,
+) -> Path | None:
     """Backup the current on-disk file (if any), then atomically write *data*.
     Returns the backup path (or None if there was nothing to back up yet),
     which callers use to roll back if a post-write rebuild fails."""
+    json_path = _resolve_storage_path(json_path, default_name="wikistub_seed.json", purpose="dataset")
+    if backup_dir is None:
+        backup_dir = json_path.parent / "backups"
+    else:
+        backup_dir = _resolve_storage_path(backup_dir, default_name="backups", purpose="backup")
     backup_path = backup_file(json_path, backup_dir, prefix="wikistub_seed", keep=10) if json_path.exists() else None
     atomic_write_json(json_path, data)
     return backup_path
 
 
-def restore_from_backup(backup_path: Path, json_path: Path = JSON_PATH) -> None:
+def restore_from_backup(backup_path: Path | str, json_path: Path | str | None = None) -> None:
     """Inverse of save(): copy a previously-taken backup back over json_path.
     Used by edit_server.py when a post-write rebuild fails, so a bad write
     never lingers as the live dataset."""
+    backup_path = _resolve_storage_path(backup_path, default_name="backup.json", purpose="backup")
+    json_path = _resolve_storage_path(json_path, default_name="wikistub_seed.json", purpose="dataset")
     shutil.copy2(backup_path, json_path)
 
 
@@ -278,13 +323,19 @@ def _load_trash_raw(trash_path: Path) -> list[dict[str, Any]]:
     return payload if isinstance(payload, list) else []
 
 
-def list_trash(trash_path: Path = TRASH_PATH) -> list[dict[str, Any]]:
+def list_trash(trash_path: Path | str | None = None) -> list[dict[str, Any]]:
+    trash_path = _resolve_storage_path(trash_path, default_name="wikistub_seed_trash.json", purpose="trash")
     return _load_trash_raw(trash_path)
 
 
 def delete_entry(
-    data: dict[str, Any], category: str, subcategory: str, title: str, trash_path: Path = TRASH_PATH
+    data: dict[str, Any],
+    category: str,
+    subcategory: str,
+    title: str,
+    trash_path: Path | str | None = None,
 ) -> None:
+    trash_path = _resolve_storage_path(trash_path, default_name="wikistub_seed_trash.json", purpose="trash")
     located = find_entry(data, category, subcategory, title)
     if located is None:
         raise NotFoundError(f"'{title}' nicht gefunden in {category}/{subcategory}.")
@@ -300,8 +351,9 @@ def delete_entry(
 
 
 def delete_subcategory(
-    data: dict[str, Any], category: str, subcategory: str, trash_path: Path = TRASH_PATH
+    data: dict[str, Any], category: str, subcategory: str, trash_path: Path | str | None = None
 ) -> None:
+    trash_path = _resolve_storage_path(trash_path, default_name="wikistub_seed_trash.json", purpose="trash")
     cat_key = find_category(data, category)
     sub_key = find_subcategory(data, cat_key, subcategory) if cat_key else None
     if cat_key is None or sub_key is None:
@@ -316,7 +368,10 @@ def delete_subcategory(
     del data["MetaWiki"][cat_key][sub_key]
 
 
-def delete_category(data: dict[str, Any], category: str, trash_path: Path = TRASH_PATH) -> None:
+def delete_category(
+    data: dict[str, Any], category: str, trash_path: Path | str | None = None
+) -> None:
+    trash_path = _resolve_storage_path(trash_path, default_name="wikistub_seed_trash.json", purpose="trash")
     cat_key = find_category(data, category)
     if cat_key is None:
         raise NotFoundError(f"Kategorie '{category}' nicht gefunden.")
@@ -340,6 +395,7 @@ def restore_entry_from_trash(
     same-titled entry that already exists there (DuplicateError) rather
     than clobbering newer content -- the caller decides what to do next
     (e.g. rename, or delete the conflicting entry first)."""
+    trash_path = _resolve_storage_path(trash_path, default_name="wikistub_seed_trash.json", purpose="trash")
     records = _load_trash_raw(trash_path)
     if trash_index < 0 or trash_index >= len(records):
         raise NotFoundError(f"Papierkorb-Eintrag {trash_index} existiert nicht.")

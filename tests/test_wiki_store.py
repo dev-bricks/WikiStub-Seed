@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import wiki_store
 
@@ -357,6 +358,31 @@ class SaveAndRollbackTests(unittest.TestCase):
             wiki_store.restore_from_backup(backup_path, json_path)
 
             self.assertEqual(json.loads(json_path.read_text(encoding="utf-8")), {"MetaWiki": {"good": {}}})
+
+
+class SourceCheckoutDefaultPathTests(unittest.TestCase):
+    def test_defaults_use_dataset_and_trash_in_a_marked_source_checkout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='synthetic'\n", encoding="utf-8")
+            (root / "wikistub_seed.json").write_text(
+                json.dumps({"MetaWiki": {"Cat": {"Sub": []}}}), encoding="utf-8"
+            )
+            with mock.patch.object(wiki_store, "BASE_PATH", root):
+                data = wiki_store.load()
+                wiki_store.create_entry(
+                    data,
+                    "Cat",
+                    "Sub",
+                    {"title": "Synthetic", "definition_de": "Beispiel", "definition_en": "Example"},
+                )
+                wiki_store.save(data)
+                wiki_store.delete_entry(data, "Cat", "Sub", "Synthetic")
+                wiki_store.save(data)
+
+                self.assertEqual(wiki_store.load()["MetaWiki"]["Cat"]["Sub"], [])
+                self.assertEqual(len(wiki_store.list_trash()), 1)
+                self.assertTrue((root / "wikistub_seed_trash.json").is_file())
 
 
 if __name__ == "__main__":

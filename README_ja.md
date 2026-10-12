@@ -17,16 +17,9 @@ WikiStub-Seedはナレッジスタブのシードライブラリであり、Wiki
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
-![プライバシー](https://img.shields.io/badge/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC-100%25%20Offline%20%7C%20Zero--Egress-success)
-![セキュリティ](https://img.shields.io/badge/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3-Local--First%20%7C%20Deterministic-blue)
-[![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![Third-Party Licenses](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
-[![Level 1 SBOM](https://img.shields.io/badge/level--1%20SBOM-plain%20text%20available-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-231%20passed%20(186%20Python%20%2B%2045%20Node)-success)
-[![検証済み](https://img.shields.io/badge/%E6%A4%9C%E8%A8%BC%E6%88%88%E3%81%BF-2026--10--03-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD-blueviolet)](llms.txt)
 ![ライセンス](https://img.shields.io/badge/%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9-MIT-green)
 
@@ -54,7 +47,7 @@ flowchart TD
     A --> D["web_publisher/ _build.py<br/>(静的PWAパブリッシャー)"]
     A --> E["RAG・LLMコンテキストパイプライン<br/>(AIワークフローと埋め込み)"]
     C --> F["構造化Markdown<br/>(Obsidian / GitHub Pages / ドキュメント)"]
-    D --> G["PWA Webフロントエンド<br/>(オフライン検索 / 6言語)"]
+    D --> G["PWA Webフロントエンド<br/>(データ検索 / 6つのコンテンツ言語)"]
 ```
 
 ## 検出コンテキスト
@@ -77,7 +70,7 @@ flowchart TD
 - レガシーフィールド `definition_de`、`definition_en`、`relevance` を維持しつつ、正規の `definitions.{lang}` および `relevance_i18n.{lang}` マップを提供
 - 統計・バリデーション・整合性チェック・Markdownエクスポートのための Python CLI ツール
 - 将来の静的 Web/PWA 利用に向けた文書化済み `wikistub-seed-data-v1` エクスポート方向
-- コアのインポート・エクスポート・バリデーション・CLI 利用に外部依存関係は不要
+- ソースチェックアウトの主なデータ確認・統計・エクスポートには Python 標準ライブラリを使用します。オプションの翻訳、検索連携、開発用チェックには別途依存関係があります。
 
 ## ユースケース
 
@@ -132,6 +125,8 @@ python wikistub_seed_pipeline.py validate
 python wikistub_seed_pipeline.py export --output --english
 ```
 
+CLI、データセット、PWA を含む完全な利用方法はソースチェックアウトです。wheel には再利用可能な 6 つの API モジュールが含まれますが、CLI と PWA は含まれません。インストール済み API からデータを変更するには、外部のデータパスと認証パスを明示的に指定します。site-packages をユーザーデータの保存先にはしません。
+
 Windows では、`start.bat` が CLI エントリポイントを開きます。エクスポートされたファイルは `output/` に書き込まれます。このフォルダはローカルでバージョン管理されません。
 
 ## コアコマンド
@@ -142,7 +137,7 @@ Windows では、`start.bat` が CLI エントリポイントを開きます。�
 | `python wikistub_seed_cli.py check` | JSON データセットの整合性チェックを実行 |
 | `python wikistub_seed_pipeline.py validate` | パイプライン入力データをバリデート |
 | `python wikistub_seed_pipeline.py export --output --english` | JSON データセットを Markdown にエクスポート |
-| `python wikistub_seed_pipeline.py translate` | 設定済みの場合、不足している英語定義をオプションで翻訳 |
+| `python wikistub_seed_pipeline.py translate --confirm-api-cost --max-budget-usd AMOUNT` | 費用を確認し上限を指定して、不足する英語定義を翻訳 |
 
 ## リポジトリマップ
 
@@ -155,13 +150,13 @@ Windows では、`start.bat` が CLI エントリポイントを開きます。�
 | `md_to_json.py` | Markdown から JSON へのインポートヘルパー |
 | `check_duplicates.py` | 重複/整合性ヘルパー |
 | `EXPORTFORMAT.md` | 安定した交換フォーマット計画 |
-| `web_publisher/` | オフラインキャッシュ・検索・6言語選択を備えた静的 Web/PWA |
+| `web_publisher/` | 静的 PWA。読み込み後にサイトのリソースとデータをキャッシュでき、選択欄はコンテンツ言語を切り替えます |
 
 ## プライバシー
 
-WikiStub-Seed はローカルファースト設計です。コア使用はローカルの JSON/Markdown ファイルの読み書きのみです。テレメトリーや自動ネットワーク通信はありません。
-
-オプションの翻訳コマンドは、`ANTHROPIC_API_KEY` が設定され、オプションパッケージ `anthropic` がインストールされている場合にのみ外部 API を呼び出す可能性があります。
+CLI の検証とエクスポートはローカルファイルを扱います。静的 PWA は同一オリジンからデータとリソースを取得し、正常に読み込んだ後は service worker がそれらをキャッシュできます。初回アクセスと更新にはサイトへの接続が必要です。
+PWA の言語選択はデータの言語を切り替えるもので、画面全体を翻訳するものではありません。定義は 6 言語、英語の関連性欄が空の場合の fallback はドイツ語です。
+オプションの翻訳は Anthropic API にリクエストを送信します。CLI には `ANTHROPIC_API_KEY`、オプションの `anthropic` パッケージ、`--confirm-api-cost`、正の `--max-budget-usd` が必要です。モジュール API の `translate_text` と `translate_batch` は `max_budget_usd` を明示的に受け取ります。ローカル見積もりは実際の請求額を保証しません。
 
 ## ロードマップ
 
@@ -171,7 +166,7 @@ WikiStub-Seed はローカルファースト設計です。コア使用はロー
 - 単一の JSON マスターファイルに630件のバイリンガルスタブ
 - Markdown エクスポートと JSON 同期ツール
 - GitHub Actions での CLI スモークテスト、および `wikistub_seed_cli.py check` と `wikistub_seed_pipeline.py validate` 向けの macOS/Linux ソーススモーク
-- 検索とオフラインキャッシュを備えた静的 Web/PWA パブリッシャー（`web_publisher/`）
+- 静的 PWA は検索を提供し、読み込み後にサイトのリソースとデータをキャッシュできます（`web_publisher/`）。
 - DE/EN/ES/ZH/JA/RU 言語マップを持つ `wikistub-seed-data-v1` スキーマラッパー
 
 計画中：
@@ -184,7 +179,7 @@ WikiStub-Seed はローカルファースト設計です。コア使用はロー
 
 **WikiStub-Seed ist ein mehrsprachiges JSON-Wissensgerüst.** Definitionen sind in DE/EN/ES/ZH/JA/RU gefüllt; Relevanztexte in DE/ES/ZH/JA/RU, mit deutschem Fallback für Englisch.
 
-WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
+WikiStub-Seed arbeitet mit den lokal angegebenen JSON-/Markdown-Dateien. Die statische PWA lädt Daten und Ressourcen vom selben Ursprung und kann sie nach dem Laden im Service Worker zwischenspeichern; Erstaufruf und Aktualisierungen benötigen den Zugriff auf die Website. Die Sprachauswahl wechselt die Inhaltssprache, nicht die gesamte Oberfläche. Die optionale Übersetzung sendet Anfragen an Anthropic und erfordert `ANTHROPIC_API_KEY` sowie das optionale Paket `anthropic`. Die CLI verlangt zusätzlich `--confirm-api-cost` und ein positives `--max-budget-usd`; die Modul-APIs `translate_text` und `translate_batch` verlangen ein explizites `max_budget_usd`. Die lokale Schätzung garantiert nicht den abgerechneten Betrag.
 
 Wichtige Einstiegspunkte:
 
@@ -192,7 +187,7 @@ Wichtige Einstiegspunkte:
 - `python wikistub_seed_cli.py check` prüft den Datenbestand.
 - `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
+- `web_publisher/` enthält eine statische PWA mit Suche und einem Sprachwähler für die Inhalte; geladene Website-Ressourcen und Daten können im Service Worker zwischengespeichert werden.
 
 <!-- BEGIN ELLMOS BUNDLE DISCOVERY JA -->
 
@@ -223,5 +218,3 @@ Composition と Runtime の詳細は意図的に省略しています。
 ## ライセンス
 
 MIT ライセンス。`LICENSE` を参照してください。
-
-このプロジェクトは無償のオープンソース寄贈です。責任はドイツ民法典第521条に基づく故意および重大な過失に限定され、MIT ライセンスの免責事項も適用されます。自己責任でご使用ください。

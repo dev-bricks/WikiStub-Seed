@@ -8,9 +8,9 @@ Dieser Ordner enthält den statischen, serverlosen Web-/PWA-Reader für den maß
 
 - Kategoriebaum, Volltextsuche und Stub-Detailansicht für 630 Einträge.
 - Sprachauswahl für Deutsch, Englisch, Spanisch, Chinesisch, Japanisch und Russisch.
-- Offline-Cache über einen Service Worker; veränderliche Datendateien werden online zuerst aktualisiert und offline aus dem Cache gelesen.
+- Der Service Worker lädt veränderliche Datendateien zuerst aus dem Netzwerk und kann erfolgreiche Antworten für einen Offline-Fallback zwischenspeichern. Erstaufruf und Aktualisierungen benötigen Zugriff auf den Host; Cache-Verfügbarkeit hängt von Browser und Host ab.
 - Stabile, inhaltsbezogene Deep-Link-IDs statt positionsabhängiger Nummern.
-- Keine Konten, Telemetrie, Serverpflicht oder automatische externe API-Kommunikation.
+- Kein Backend, Konto oder Telemetriedienst ist Teil der statischen PWA. Der ausgewählte statische Host liefert App, Ressourcen und Datensatz; die PWA ruft keine externe API auf.
 
 Definitionen sind im Masterdatensatz in allen sechs Sprachen gefüllt. Relevanztexte sind in DE/ES/ZH/JA/RU gefüllt; für die leeren englischen Relevanzslots verwendet der Reader die gemeinsame Fallback-Kette.
 

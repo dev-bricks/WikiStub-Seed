@@ -58,9 +58,13 @@ requires-python = ">=3.10"
 dev = [
     "ruff>=0.5.0",
     "pytest>=8.0.0",
+    "build>=1.2.0",
+    "setuptools>=77.0.3",
 ]
 test = [
     "pytest>=8.0.0",
+    "build>=1.2.0",
+    "setuptools>=77.0.3",
 ]
 
 [project.urls]
@@ -78,7 +82,7 @@ Notice = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/NOTICE"
 "Plain-Text License" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/LICENSE"
 "Third-Party Licenses" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.md"
 "Third-Party Licenses (Text)" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"
-"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"
+"Dependency and License References" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"
 "Marketing Log" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/MARKETING-LOG.txt"
 "LLM Ready" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/llms.txt"
 
@@ -96,4 +100,15 @@ line-length = 120
 [tool.ruff.lint]
 select = ["E", "F", "W"]
 ignore = ["E501", "E402", "E722", "E741", "F841"]
+
+[tool.setuptools]
+py-modules = [
+    "data_policy",
+    "language_model",
+    "safe_io",
+    "translate",
+    "wiki_auth",
+    "wiki_store",
+]
+include-package-data = false
 

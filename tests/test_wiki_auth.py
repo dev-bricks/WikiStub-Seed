@@ -1,9 +1,23 @@
+import json
 import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import wiki_auth
+
+
+def _valid_auth_record(permissions=None):
+    record = {
+        "algorithm": wiki_auth.ALGORITHM,
+        "salt": "00",
+        "iterations": 1,
+        "password_hash": "00" * 32,
+    }
+    if permissions is not None:
+        record["anonymous_permissions"] = permissions
+    return record
 
 
 class HashingTests(unittest.TestCase):
@@ -34,12 +48,91 @@ class HashingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             wiki_auth.hash_password("")
 
+    def test_hash_rejects_out_of_range_parameters_before_running_pbkdf2(self):
+        for iterations in (0, -1, wiki_auth.MAX_ITERATIONS + 1, True):
+            with self.subTest(iterations=iterations), self.assertRaises(ValueError):
+                wiki_auth.hash_password("password", iterations=iterations)
+        with self.assertRaises(ValueError):
+            wiki_auth.hash_password("password", salt=b"x" * (wiki_auth._MAX_SALT_BYTES + 1))
+
+    def test_empty_salt_and_one_iteration_remain_compatible_with_the_public_api(self):
+        record = wiki_auth.hash_password("legacy-compatible", salt=b"", iterations=1)
+
+        self.assertEqual(record["salt"], "")
+        self.assertTrue(wiki_auth.verify_password("legacy-compatible", record))
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wiki_auth.json"
+            wiki_auth.save_auth(record, path)
+            self.assertEqual(wiki_auth.load_auth(path), record)
+
 
 class LoadSaveTests(unittest.TestCase):
     def test_load_auth_returns_none_when_file_absent(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "wiki_auth.json"
             self.assertIsNone(wiki_auth.load_auth(path))
+
+    def test_existing_malformed_json_fails_closed_instead_of_becoming_no_password(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wiki_auth.json"
+            path.write_text("{broken synthetic json", encoding="utf-8")
+            before = path.read_bytes()
+
+            with self.assertRaises(wiki_auth.AuthDataError):
+                wiki_auth.load_auth(path)
+
+            self.assertEqual(path.read_bytes(), before)
+
+    def test_legacy_valid_record_without_permissions_keeps_default_policy(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wiki_auth.json"
+            record = _valid_auth_record()
+            path.write_text(json.dumps(record), encoding="utf-8")
+
+            loaded = wiki_auth.load_auth(path)
+
+            self.assertEqual(loaded, record)
+            self.assertEqual(
+                wiki_auth.compute_permissions(loaded, authenticated=False),
+                wiki_auth.default_anonymous_permissions(),
+            )
+
+    def test_existing_incomplete_or_invalid_hash_record_fails_closed(self):
+        invalid_records = [
+            {},
+            {"algorithm": wiki_auth.ALGORITHM, "iterations": 1, "password_hash": "00" * 32},
+            {"algorithm": wiki_auth.ALGORITHM, "salt": None, "iterations": 1, "password_hash": "00" * 32},
+            {"algorithm": wiki_auth.ALGORITHM, "salt": "00", "iterations": 1},
+            {"algorithm": wiki_auth.ALGORITHM, "salt": "00", "iterations": 1, "password_hash": None},
+            {"algorithm": "unknown", "salt": "00", "iterations": 1, "password_hash": "00" * 32},
+            {"algorithm": wiki_auth.ALGORITHM, "salt": "zz", "iterations": 1, "password_hash": "00" * 32},
+            {"algorithm": wiki_auth.ALGORITHM, "salt": "00", "iterations": True, "password_hash": "00" * 32},
+            {"algorithm": wiki_auth.ALGORITHM, "salt": "00", "iterations": 1, "password_hash": "00"},
+            {
+                "algorithm": wiki_auth.ALGORITHM,
+                "salt": "00",
+                "iterations": 1,
+                "password_hash": "00" * 32,
+                "anonymous_permissions": {"create": "false"},
+            },
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wiki_auth.json"
+            for record in invalid_records:
+                path.write_text(json.dumps(record), encoding="utf-8")
+                with self.subTest(record=record), self.assertRaises(wiki_auth.AuthDataError):
+                    wiki_auth.load_auth(path)
+
+    def test_setting_password_does_not_replace_malformed_existing_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wiki_auth.json"
+            path.write_text("{broken synthetic json", encoding="utf-8")
+            before = path.read_bytes()
+
+            with self.assertRaises(wiki_auth.AuthDataError):
+                wiki_auth.set_password("replacement", path=path)
+
+            self.assertEqual(path.read_bytes(), before)
 
     def test_set_password_then_load_roundtrips(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -80,6 +173,19 @@ class LoadSaveTests(unittest.TestCase):
             path = Path(tmp) / "wiki_auth.json"
             wiki_auth.remove_auth(path)  # must not raise
 
+    def test_default_path_is_used_only_for_a_marked_source_checkout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "pyproject.toml").write_text("[project]\nname='synthetic'\n", encoding="utf-8")
+            (root / "wikistub_seed.json").write_text('{"MetaWiki": {}}', encoding="utf-8")
+            with mock.patch.object(wiki_auth, "BASE_PATH", root):
+                self.assertIsNone(wiki_auth.load_auth())
+                record = wiki_auth.set_password("synthetic password")
+                self.assertTrue(wiki_auth.verify_password("synthetic password", wiki_auth.load_auth()))
+                updated = wiki_auth.set_anonymous_permissions({"edit": False}, existing=record)
+                self.assertFalse(wiki_auth.load_auth()["anonymous_permissions"]["edit"])
+                self.assertEqual(updated["anonymous_permissions"]["edit"], False)
+
 
 class SetAnonymousPermissionsTests(unittest.TestCase):
     def test_only_known_keys_are_stored(self):
@@ -101,6 +207,18 @@ class SetAnonymousPermissionsTests(unittest.TestCase):
             existing = wiki_auth.set_anonymous_permissions({"delete": False}, path=path, existing=existing)
             updated = wiki_auth.set_anonymous_permissions({"edit": False}, path=path, existing=existing)
             self.assertEqual(updated["anonymous_permissions"], {"create": True, "edit": False, "delete": False})
+
+    def test_non_boolean_permission_values_are_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "wiki_auth.json"
+            existing = wiki_auth.hash_password("password")
+            for value in ("false", 0, 1, None):
+                with self.subTest(value=value), self.assertRaises(wiki_auth.PermissionInputError):
+                    wiki_auth.set_anonymous_permissions({"create": value}, path=path, existing=existing)
+            for permissions in (None, ["create"], "create"):
+                with self.subTest(permissions=permissions), self.assertRaises(wiki_auth.PermissionInputError):
+                    wiki_auth.set_anonymous_permissions(permissions, path=path, existing=existing)
+            self.assertFalse(path.exists())
 
 
 class ComputePermissionsMatrixTests(unittest.TestCase):
@@ -137,7 +255,6 @@ class ComputePermissionsMatrixTests(unittest.TestCase):
         )
 
     def test_all_eight_anonymous_permission_combinations(self):
-        record_template = {"anonymous_permissions": None}
         combos = [
             (c, e, d)
             for c in (True, False)
@@ -146,8 +263,7 @@ class ComputePermissionsMatrixTests(unittest.TestCase):
         ]
         self.assertEqual(len(combos), 8)
         for create, edit, delete in combos:
-            record = dict(record_template)
-            record["anonymous_permissions"] = {"create": create, "edit": edit, "delete": delete}
+            record = {"anonymous_permissions": {"create": create, "edit": edit, "delete": delete}}
             result = wiki_auth.compute_permissions(record, authenticated=False)
             self.assertEqual(result, {"create": create, "edit": edit, "delete": delete})
 
@@ -168,12 +284,10 @@ class ComputePermissionsMatrixTests(unittest.TestCase):
             wiki_auth.default_anonymous_permissions(),
         )
 
-    def test_malformed_anonymous_permissions_value_defaults_to_full(self):
+    def test_malformed_anonymous_permissions_value_is_rejected(self):
         record = {"anonymous_permissions": "not-a-dict"}
-        self.assertEqual(
-            wiki_auth.compute_permissions(record, authenticated=False),
-            wiki_auth.default_anonymous_permissions(),
-        )
+        with self.assertRaises(wiki_auth.AuthDataError):
+            wiki_auth.compute_permissions(record, authenticated=False)
 
 
 class SessionStoreTests(unittest.TestCase):

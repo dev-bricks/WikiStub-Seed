@@ -1,10 +1,12 @@
 # Release Gate: WikiStub-Seed
 
+> Historical snapshot: this file records the public-visibility gate run on 2026-07-15. Its PASS values, local test counts, and UNLOCKED decision are not current CI results, a current security/privacy review, or approval for a new release. Rerun the relevant checks before any future release decision.
+
 ## Status
 
 ```
 +------------------------------------------+
-|          STATUS: UNLOCKED                |
+|  HISTORICAL: UNLOCKED ON 2026-07-15      |
 +------------------------------------------+
 ```
 

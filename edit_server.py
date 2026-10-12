@@ -187,10 +187,10 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self) -> None:
         if not self._host_is_allowed():
-            self.send_error(400, "Ungueltiger Host-Header.")
+            self.send_error(400, "Ungültiger Host-Header.")
             return
         if self.path.split("?", 1)[0] == "/api/permissions":
-            self._send_json(200, self._permissions_payload())
+            self._handle_guarded(self._api_permissions)
             return
         if self.path.split("?", 1)[0] == "/api/trash":
             self._handle_guarded(self._api_list_trash)
@@ -222,7 +222,7 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
 
     def _dispatch_mutating(self) -> None:
         if not self._host_is_allowed():
-            self.send_error(400, "Ungueltiger Host-Header.")
+            self.send_error(400, "Ungültiger Host-Header.")
             return
         path = self.path.split("?", 1)[0]
         method_name = self._ROUTES.get((self.command, path))
@@ -236,6 +236,11 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
             handler()
         except ApiError as exc:
             self._send_json(exc.status, {"error": exc.message})
+        except wiki_auth.AuthDataError:
+            self._send_json(
+                500,
+                {"error": "Die lokale Authentifizierungsdatei ist ungültig. Zugriff bleibt gesperrt."},
+            )
         except wiki_store.NotFoundError as exc:
             self._send_json(404, {"error": str(exc)})
         except wiki_store.DuplicateError as exc:
@@ -246,6 +251,9 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
             self._send_json(500, {"error": str(exc)})
 
     # ---- payload helpers --------------------------------------------
+
+    def _api_permissions(self) -> None:
+        self._send_json(200, self._permissions_payload())
 
     def _permissions_payload(self) -> dict[str, Any]:
         auth_record = wiki_auth.load_auth(self.server.auth_path)  # type: ignore[attr-defined]
@@ -383,7 +391,12 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
         existing = wiki_auth.load_auth(self.server.auth_path)  # type: ignore[attr-defined]
         if existing is None:
             raise ApiError(400, "Es ist kein Passwort hinterlegt.")
-        updated = wiki_auth.set_anonymous_permissions(body, path=self.server.auth_path, existing=existing)  # type: ignore[attr-defined]
+        try:
+            updated = wiki_auth.set_anonymous_permissions(
+                body, path=self.server.auth_path, existing=existing  # type: ignore[attr-defined]
+            )
+        except wiki_auth.PermissionInputError as exc:
+            raise ApiError(400, str(exc)) from None
         self._send_json(200, {"anonymous_permissions": updated["anonymous_permissions"]})
 
     # ---- static serving: no-store for /data/ -------------------------

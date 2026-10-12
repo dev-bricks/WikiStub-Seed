@@ -17,16 +17,9 @@ WikiStub-Seed 是一个知识存根种子库，而非 Wiki。
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
-![隐私](https://img.shields.io/badge/%E9%9A%90%E7%A7%81-100%25%20Offline%20%7C%20Zero--Egress-success)
-![安全](https://img.shields.io/badge/%E5%AE%89%E5%85%A8-Local--First%20%7C%20Deterministic-blue)
-[![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![Third-Party Licenses](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
-[![Level 1 SBOM](https://img.shields.io/badge/level--1%20SBOM-plain%20text%20available-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-231%20passed%20(186%20Python%20%2B%2045%20Node)-success)
-[![已验证](https://img.shields.io/badge/%E5%B7%B2%E9%AA%8C%E8%AF%81-2026--10--03-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-%E5%8F%AF%E7%94%A8-blueviolet)](llms.txt)
 ![许可证](https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-MIT-green)
 
@@ -54,7 +47,7 @@ flowchart TD
     A --> D["web_publisher/ _build.py<br/>(静态 PWA 发布器)"]
     A --> E["RAG 与 LLM 上下文管道<br/>(AI 工作流与嵌入)"]
     C --> F["结构化 Markdown<br/>(Obsidian / GitHub Pages / 文档)"]
-    D --> G["PWA Web 前端<br/>(离线搜索 / 6 种语言)"]
+    D --> G["PWA Web 前端<br/>(数据搜索 / 6 种内容语言)"]
 ```
 
 ## 发现上下文
@@ -77,7 +70,7 @@ flowchart TD
 - 规范的 `definitions.{lang}` 和 `relevance_i18n.{lang}` 映射，同时保留旧字段 `definition_de`、`definition_en` 和 `relevance`
 - 用于统计、验证、一致性检查和 Markdown 导出的 Python CLI 工具
 - 面向未来静态 Web/PWA 使用的已文档化 `wikistub-seed-data-v1` 导出方向
-- 核心导入、导出、验证或 CLI 使用无需任何外部依赖
+- 源代码 checkout 中的主要数据检查、统计和导出使用 Python 标准库；可选翻译、搜索集成和开发检查另有依赖项。
 
 ## 使用场景
 
@@ -134,6 +127,8 @@ python wikistub_seed_pipeline.py export --output --english
 
 在 Windows 上，`start.bat` 会打开 CLI 入口点。导出的文件写入 `output/`；该文件夹为本地文件夹，不受版本控制。
 
+完整的 CLI、数据集和 PWA 工作流程需使用源代码 checkout。Wheel 提供六个可复用的 API 模块，但不包含 CLI 或 PWA。通过已安装的 API 修改数据时，必须明确指定外部数据路径和认证路径；`site-packages` 不用作用户数据存储。
+
 ## 核心命令
 
 | 命令 | 用途 |
@@ -142,7 +137,7 @@ python wikistub_seed_pipeline.py export --output --english
 | `python wikistub_seed_cli.py check` | 对 JSON 数据集运行一致性检查 |
 | `python wikistub_seed_pipeline.py validate` | 验证管道输入数据 |
 | `python wikistub_seed_pipeline.py export --output --english` | 将 JSON 数据集导出为 Markdown |
-| `python wikistub_seed_pipeline.py translate` | 在配置后可选翻译缺失的英文定义 |
+| `python wikistub_seed_pipeline.py translate --confirm-api-cost --max-budget-usd AMOUNT` | 确认费用并设定正数上限后，翻译缺失的英文定义 |
 
 ## 仓库结构
 
@@ -155,13 +150,13 @@ python wikistub_seed_pipeline.py export --output --english
 | `md_to_json.py` | Markdown 到 JSON 的导入辅助工具 |
 | `check_duplicates.py` | 重复/一致性辅助工具 |
 | `EXPORTFORMAT.md` | 稳定交换格式计划 |
-| `web_publisher/` | 具有离线缓存、搜索和六语选择的静态 Web/PWA |
+| `web_publisher/` | 静态 PWA：成功加载后可缓存网站资源和数据；语言选择器切换内容语言 |
 
 ## 隐私
 
-WikiStub-Seed 以本地优先为原则。核心使用仅读写本地 JSON/Markdown 文件。没有遥测，也没有自动网络通信。
+CLI 的核心检查与导出操作读取和写入所选本地文件。静态 PWA 从同一来源加载数据和资源；成功加载后，service worker 可以缓存这些内容。首次访问和更新需要访问网站。PWA 语言选择器切换数据语言，不会翻译整个界面。
 
-仅当设置了 `ANTHROPIC_API_KEY` 且安装了可选包 `anthropic` 时，可选翻译命令才会调用外部 API。
+可选翻译会向 Anthropic API 发送请求，需要 `ANTHROPIC_API_KEY` 和可选的 `anthropic` 包。CLI 还要求 `--confirm-api-cost` 和正数 `--max-budget-usd`；模块 API `translate_text` 与 `translate_batch` 要求显式传入 `max_budget_usd`。本地估算不保证最终账单金额。
 
 ## 路线图
 
@@ -171,7 +166,7 @@ WikiStub-Seed 以本地优先为原则。核心使用仅读写本地 JSON/Markdo
 - 630 条双语存根存储在单个 JSON 主文件中
 - Markdown 导出和 JSON 同步工具
 - GitHub Actions 中的 CLI 冒烟测试，以及 `wikistub_seed_cli.py check` 和 `wikistub_seed_pipeline.py validate` 专用的 macOS/Linux 源冒烟测试
-- 带有搜索和离线缓存功能的静态 Web/PWA 发布器（`web_publisher/`）
+- 静态 PWA 提供搜索，并可缓存已加载的网站资源和数据（`web_publisher/`）
 - 带有 DE/EN/ES/ZH/JA/RU 语言映射的 `wikistub-seed-data-v1` 模式包装器
 
 计划中：
@@ -184,7 +179,7 @@ WikiStub-Seed 以本地优先为原则。核心使用仅读写本地 JSON/Markdo
 
 **WikiStub-Seed ist ein mehrsprachiges JSON-Wissensgerüst.** Definitionen sind in DE/EN/ES/ZH/JA/RU gefüllt; Relevanztexte in DE/ES/ZH/JA/RU, mit deutschem Fallback für Englisch.
 
-WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
+WikiStub-Seed arbeitet mit den lokal angegebenen JSON-/Markdown-Dateien. Die statische PWA lädt Daten und Ressourcen vom selben Ursprung und kann sie nach dem Laden im Service Worker zwischenspeichern; Erstaufruf und Aktualisierungen benötigen den Zugriff auf die Website. Die Sprachauswahl wechselt die Inhaltssprache, nicht die gesamte Oberfläche. Die optionale Übersetzung sendet Anfragen an Anthropic und erfordert `ANTHROPIC_API_KEY` sowie das optionale Paket `anthropic`. Die CLI verlangt zusätzlich `--confirm-api-cost` und ein positives `--max-budget-usd`; die Modul-APIs `translate_text` und `translate_batch` verlangen ein explizites `max_budget_usd`. Die lokale Schätzung garantiert nicht den abgerechneten Betrag.
 
 Wichtige Einstiegspunkte:
 
@@ -192,7 +187,7 @@ Wichtige Einstiegspunkte:
 - `python wikistub_seed_cli.py check` prüft den Datenbestand.
 - `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
+- `web_publisher/` enthält eine statische PWA mit Suche und einem Sprachwähler für die Inhalte; geladene Website-Ressourcen und Daten können im Service Worker zwischengespeichert werden.
 
 <!-- BEGIN ELLMOS BUNDLE DISCOVERY ZH-HANS -->
 
@@ -222,5 +217,3 @@ Wichtige Einstiegspunkte:
 ## 许可证
 
 MIT 许可证。参见 `LICENSE`。
-
-本项目是一项无偿的开源捐赠。根据德国民法典第 521 条，责任限于故意和重大过失，同时适用 MIT 许可证的免责声明。使用风险自负。
