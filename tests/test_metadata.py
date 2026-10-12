@@ -68,17 +68,20 @@ def test_core_documentation_files_exist():
         assert fpath.stat().st_size > 50, f"File {fname} is unexpectedly small or empty"
 
 
-def test_llms_txt_structure_and_freshness():
-    """Verify llms.txt contains necessary metadata, links and recent timestamp."""
+def test_llms_txt_structure_and_scope():
+    """Verify the project index links to the canonical repo and primary data/docs."""
     llms_path = PROJECT_ROOT / "llms.txt"
     assert llms_path.is_file(), "llms.txt missing"
 
     content = llms_path.read_text(encoding="utf-8")
 
-    assert re.search(r"## Last-checked: 2026-(?:09|10)-\d{2}", content), "Last-checked timestamp missing in llms.txt"
     assert "https://github.com/dev-bricks/WikiStub-Seed" in content, "Canonical repo link missing in llms.txt"
     assert "wikistub_seed.json" in content, "Authoritative dataset not mentioned in llms.txt"
     assert "630" in content, "Stub count missing in llms.txt"
+    assert "README.md" in content and "README_de.md" in content
+    assert "THIRD_PARTY_LICENSES.md" in content and "SECURITY.md" in content
+    for filename in ("README.md", "README_de.md", "THIRD_PARTY_LICENSES.md", "SECURITY.md", "wikistub_seed.json"):
+        assert (PROJECT_ROOT / filename).is_file(), f"Indexed target {filename} is missing"
 
 
 def test_ellmos_module_schema():
@@ -91,6 +94,7 @@ def test_ellmos_module_schema():
     assert data.get("id") == "WikiStub-Seed"
     assert data.get("visibility") == "public"
     assert "provides" in data and len(data["provides"]) >= 1
+    assert data.get("boundaries", {}).get("network") == "optional"
 
 
 def test_dataset_integrity():
@@ -139,32 +143,29 @@ def test_pyproject_classifiers_and_urls():
     assert 'Security = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SECURITY.md"' in content
     assert '"Parent Organization" = "https://github.com/dev-bricks"' in content
     assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in content
-    assert '"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
+    assert '"Dependency and License References" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
     assert "[project.optional-dependencies]" in content
     assert 'addopts = "-ra -v --basetemp=.pytest_temp"' in content
 
 
 def test_security_policy_invariants():
-    """Verify SECURITY.md contains bilingual sections, zero-egress invariants, SLA and contacts."""
+    """Verify bilingual security navigation and published reporting routes."""
     sec_path = PROJECT_ROOT / "SECURITY.md"
     assert sec_path.is_file(), "SECURITY.md missing"
     content = sec_path.read_text(encoding="utf-8")
 
     assert "## Deutsch" in content
     assert "## English" in content
-    assert "Unterstützte Versionen" in content
-    assert "Supported Versions" in content
-    assert "Zero-Egress" in content or "zero-egress" in content.lower()
-    assert "Local-First" in content or "local-first" in content.lower()
-    assert "48 Stunden" in content or "48 hours" in content
+    assert "[English](#english)" in content
+    assert "[Deutsch](#deutsch)" in content
+    version = _pyproject_version(PROJECT_ROOT / "pyproject.toml")
+    assert version and f"`{version}`" in content
     assert "security@open-bricks.org" in content
     assert "security@dev-bricks.org" in content
     assert "security@ellmos.ai" in content
     assert "support@lukasgeiger.com" in content
     assert "lukas@open-bricks.org" in content
-    assert "Private Vulnerability Reporting" in content
-    assert "48" in content  # 48h SLA
-    assert "security/advisories" in content
+    assert "https://github.com/dev-bricks/WikiStub-Seed/security/advisories/new" in content
 
 
 def test_ci_workflow_integrity():
@@ -206,7 +207,6 @@ def test_readme_bilingual_badges_and_mermaid():
         assert "version-1.1.12" in content
         assert "dev--bricks" in content
         assert "open--bricks" in content
-        assert "third--party%20licenses" in content
         assert "attribution-NOTICE" in content
         assert "marketing%20log" in content
         assert "flowchart TD" in content
@@ -215,127 +215,37 @@ def test_readme_bilingual_badges_and_mermaid():
 
 
 def test_quick_navigation_anchors_and_parity():
-    """Verify 18-point quick navigation exists with bidirectional dual anchor parity across README.md and README_de.md."""
+    """Verify each bilingual navigation link resolves to a retained explicit section anchor."""
     readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
 
-    assert "### Quick Navigation" in readme_en
-    assert "### Schnellnavigation" in readme_de
+    for filename, content in (("README.md", readme_en), ("README_de.md", readme_de)):
+        navigation = content.split('<a id="sec-01"></a>', 1)[0]
+        targets = re.findall(r"^- \[[^\]]+\]\(#([^)]+)\)", navigation, flags=re.MULTILINE)
+        anchors = set(re.findall(r'<a id="([^"]+)"></a>', content))
+        assert len(targets) == 18, f"Expected 18 navigation links in {filename}, found {len(targets)}"
+        assert all(target in anchors for target in targets), f"Broken navigation fragment in {filename}"
+        for index in range(1, 19):
+            assert f"sec-{index:02d}" in anchors, f"Missing stable section anchor sec-{index:02d} in {filename}"
 
-    en_points = [
-        "1. Executive Summary & Core Identity",
-        "2. Visual Architecture & System Topology",
-        "3. Zero-Egress Lifecycle & Query Sequence Flow",
-        "4. Target Personas & Discoverability Queries",
-        "5. Comparative Matrix vs. Alternatives",
-        "6. Governance & Runtime Invariants Matrix",
-        "7. Installation & Quick Start",
-        "8. Local Edit Mode & HTTP Server (127.0.0.1)",
-        "9. Core Commands & CLI Operations",
-        "10. Repository Map & Key Assets",
-        "11. Data Shape & Knowledge Schema",
-        "12. Sibling Tools & Ecosystem Matrix",
-        "13. Third-Party Licenses & Level 1 SBOM",
-        "14. Security Policy & Operational Limits (48h SLA)",
-        "15. Static PWA & Web Publisher Architecture",
-        "16. Testing, Verification & CI Matrix",
-        "17. Discovery Keywords & AI Agent Index",
-        "18. Statutory Notice, Liability Limitation & License (§ 521 BGB)",
-    ]
-    for pt in en_points:
-        assert pt in readme_en, f"Missing English quick navigation point: {pt}"
-
-    de_points = [
-        "1. Übersicht & Management Summary",
-        "2. Visuelle Architektur & Systemtopologie",
-        "3. Zero-Egress Lebenszyklus & Abfrage-Sequenzfluss",
-        "4. Zielgruppen & Discoverability-Suchanfragen",
-        "5. Vergleichsmatrix gegenüber Alternativen",
-        "6. Governance- & Laufzeit-Invarianten-Matrix",
-        "7. Installation & Schnellstart",
-        "8. Lokaler Editiermodus & HTTP-Server (127.0.0.1)",
-        "9. Kernbefehle & CLI-Betrieb",
-        "10. Repository-Struktur & Hauptdateien",
-        "11. Datenstruktur & Wissensschema",
-        "12. Geschwisterwerkzeuge & Ökosystem-Matrix",
-        "13. Drittanbieter-Lizenzen & Level 1 SBOM",
-        "14. Sicherheitsrichtlinie & Betriebsgrenzen (48h SLA)",
-        "15. Statische PWA & Web-Publisher-Architektur",
-        "16. Test-Matrix, Verifikation & CI",
-        "17. Auffindbarkeit & KI-Agenten-Index",
-        "18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)",
-    ]
-    for pt in de_points:
-        assert pt in readme_de, f"Missing German quick navigation point: {pt}"
-
-    # Verify bidirectional navigation links
-    assert "(#13-third-party-licenses--level-1-sbom)" in readme_en
-    assert "(#13-drittanbieter-lizenzen--level-1-sbom)" in readme_de
-    assert "(#4-target-personas--discoverability-queries)" in readme_en
-    assert "(#4-zielgruppen--discoverability-suchanfragen)" in readme_de
-
-    # Verify backwards-compatibility dual HTML anchors
+    # Verify backwards-compatibility anchors for historical links.
     assert '<a id="13-third-party-licenses--transparency"></a>' in readme_en
     assert '<a id="14-marketing--target-personas"></a>' in readme_en
     assert '<a id="13-drittanbieter-lizenzen--transparenz"></a>' in readme_de
     assert '<a id="14-marketing--zielgruppen"></a>' in readme_de
 
 
-def test_governance_invariants_table():
-    """Verify 10-point Governance Invariants table and canonical IDs in README.md and README_de.md."""
-    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
-    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
-
-    assert "## 6. Governance & Runtime Invariants Matrix" in readme_en
-    assert "## 6. Governance- & Laufzeit-Invarianten-Matrix" in readme_de
-    assert '<a id="4-safety-model--governance-invariants"></a>' in readme_en
-    assert '<a id="4-sicherheitsmodell--governance-invarianten"></a>' in readme_de
-
-    invariants = [
-        "100% Local-First & Zero-Egress",
-        "Non-Elevation (RunAsInvoker",
-        "Deterministic Knowledge Schema",
-        "Pure Offline Storage & Zero Telemetry",
-        "Localhost-Bound Edit Server (127.0.0.1",
-        "PBKDF2 Password Hashing & Soft-Delete Trash",
-        "Cross-Platform Operating Parity",
-        "Pure Python Standard Library Core",
-        "Cloud-Sync Conflict Defense",
-        "48h Security SLA & Coordinated Disclosure",
-    ]
-    for inv in invariants:
-        assert inv in readme_en, f"Missing invariant in README.md: {inv}"
-
-    de_invariants = [
-        "100% Local-First & Zero-Egress",
-        "Nicht-Eskalation (RunAsInvoker",
-        "Deterministisches Wissensschema",
-        "Reine Offline-Speicherung & Null Telemetrie",
-        "Localhost-gebundener Editierserver (127.0.0.1",
-        "PBKDF2-Passworthash & Soft-Delete-Papierkorb",
-        "Plattformübergreifende Betriebsparität",
-        "Reiner Python-Standardbibliothek-Kern",
-        "Cloud-Sync-Konflikt-Schutz",
-        "48h Sicherheits-SLA & CVD",
-    ]
-    for inv in de_invariants:
-        assert inv in readme_de, f"Missing invariant in README_de.md: {inv}"
-
-    canonical_ids = [
-        "INV-LOCAL-01",
-        "INV-SEC-02",
-        "INV-SCHEMA-03",
-        "INV-STORE-04",
-        "INV-SRV-05",
-        "INV-AUTH-06",
-        "INV-PLAT-07",
-        "INV-CORE-08",
-        "INV-SYNC-09",
-        "INV-SLA-10",
-    ]
-    for inv_id in canonical_ids:
-        assert inv_id in readme_en, f"Missing {inv_id} in README.md"
-        assert inv_id in readme_de, f"Missing {inv_id} in README_de.md"
+def test_readme_local_links_resolve():
+    """Verify repository-relative documentation links point to files that ship in the source tree."""
+    for filename in ("README.md", "README_de.md"):
+        content = (PROJECT_ROOT / filename).read_text(encoding="utf-8")
+        targets = re.findall(r"\[[^\]]*\]\(([^)]+)\)", content)
+        for target in targets:
+            if target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            relative = target.split("#", 1)[0].split("?", 1)[0]
+            if relative:
+                assert (PROJECT_ROOT / relative).exists(), f"Broken local link {target!r} in {filename}"
 
 
 def test_gitignore_conflict_and_lock_patterns():
@@ -397,61 +307,26 @@ def test_ci_job_timeouts_configured():
 
 
 def test_local_marketing_log_exists():
-    """Verify local MARKETING-LOG.txt exists and logs recent Pfad B improvements."""
+    """Verify the marketing log exists and is non-empty."""
     mlog_path = PROJECT_ROOT / "MARKETING-LOG.txt"
     assert mlog_path.is_file(), "MARKETING-LOG.txt missing"
-    content = mlog_path.read_text(encoding="utf-8")
-    assert "[GITHUBBOT_ONE_REPO_MARKETING_AND_DESIGN]" in content
-    assert "PFAD_B_UPGRADE" in content
-    assert "WikiStub-Seed" in content
+    assert mlog_path.stat().st_size > 0, "MARKETING-LOG.txt is empty"
 
 
-def test_readme_security_sla_badges():
-    """Verify both README.md and README_de.md contain Security SLA badges."""
-    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
-    assert "security%20SLA-48h%20response-blue.svg" in readme_en or "security--SLA-48h" in readme_en
-    assert "SECURITY.md" in readme_en
-
-    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
-    assert "security%20SLA-48h%20response-blue.svg" in readme_de or "Sicherheits--SLA-48h" in readme_de
-    assert "SECURITY.md" in readme_de
-
-
-def test_third_party_licenses_audit():
-    """Verify THIRD_PARTY_LICENSES.md contains 100% permissive inventory and all 10 governance invariants."""
-    lic_path = PROJECT_ROOT / "THIRD_PARTY_LICENSES.md"
-    assert lic_path.is_file(), "THIRD_PARTY_LICENSES.md missing"
-    content = lic_path.read_text(encoding="utf-8")
-
-    assert "PSFL-2.0" in content
-    assert "MIT License" in content or "MIT" in content
-    assert "Apache-2.0" in content or "Apache" in content
-    assert "Zero-Egress" in content
-    assert "RunAsInvoker" in content
-
-    # Verify all 10 governance invariant IDs
-    for i in range(1, 11):
-        if i == 1:
-            code = "INV-LOCAL-01"
-        elif i == 2:
-            code = "INV-SEC-02"
-        elif i == 3:
-            code = "INV-SCHEMA-03"
-        elif i == 4:
-            code = "INV-STORE-04"
-        elif i == 5:
-            code = "INV-SRV-05"
-        elif i == 6:
-            code = "INV-AUTH-06"
-        elif i == 7:
-            code = "INV-PLAT-07"
-        elif i == 8:
-            code = "INV-CORE-08"
-        elif i == 9:
-            code = "INV-SYNC-09"
-        else:
-            code = "INV-SLA-10"
-        assert code in content, f"Missing {code} in THIRD_PARTY_LICENSES.md"
+def test_dependency_reference_files_and_links():
+    """Verify dependency notes link to their real local source and attribution files."""
+    for filename in ("THIRD_PARTY_LICENSES.md", "THIRD_PARTY_LICENSES.txt"):
+        path = PROJECT_ROOT / filename
+        assert path.is_file(), f"{filename} missing"
+        content = path.read_text(encoding="utf-8")
+        for source in ("pyproject.toml", "requirements.txt", "requirements-dev.txt"):
+            assert source in content, f"{filename} does not identify {source}"
+        for target in re.findall(r"\[[^\]]*\]\(([^)]+)\)", content):
+            if target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            relative = target.split("#", 1)[0].split("?", 1)[0]
+            if relative:
+                assert (PROJECT_ROOT / relative).exists(), f"Broken local link {target!r} in {filename}"
 
 
 def test_pyproject_extended_urls():
@@ -468,21 +343,6 @@ def test_pyproject_extended_urls():
     assert "llms.txt" in content
 
 
-def test_marketing_log_full_pfad_b_structure():
-    """Verify MARKETING-LOG.txt follows standard Pfad B structure with personas and competitive matrix."""
-    mlog_path = PROJECT_ROOT / "MARKETING-LOG.txt"
-    assert mlog_path.is_file(), "MARKETING-LOG.txt missing"
-    content = mlog_path.read_text(encoding="utf-8")
-
-    assert "1. REPOSITORY AUDIT & DISCOVERABILITY BASELINE" in content
-    assert "2. TARGET PERSONAS & USER JOURNEYS" in content
-    assert "3. HIGH-INTENT SEARCH QUERIES (BILINGUAL EN & DE)" in content
-    assert "4. COMPETITIVE DIFFERENTIATION MATRIX" in content
-    assert "5. STRATEGIC ACTION ITEMS & DISCOVERABILITY ROADMAP" in content
-    assert "AI & LLM Engineers" in content
-    assert "Kiwix" in content
-
-
 def test_notice_attribution_file():
     """Verify NOTICE file exists and references project, organization, umbrella and third-party licenses."""
     notice_path = PROJECT_ROOT / "NOTICE"
@@ -494,61 +354,6 @@ def test_notice_attribution_file():
     assert "open-bricks" in content
     assert "MIT License" in content
     assert "THIRD_PARTY_LICENSES.md" in content
-
-
-def test_target_personas_present():
-    """Verify target personas [PERSONA-01] to [PERSONA-04] are embedded in README.md and README_de.md."""
-    for fname in ["README.md", "README_de.md"]:
-        content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
-        assert "[PERSONA-01]" in content
-        assert "[PERSONA-02]" in content
-        assert "[PERSONA-03]" in content
-        assert "[PERSONA-04]" in content
-        assert "High-Intent" in content or "Relevante Suchanfragen" in content
-
-
-def test_comparative_matrix_vs_alternatives():
-    """Verify 10-dimension comparative matrix vs 4 alternatives exists in both READMEs."""
-    for fname in ["README.md", "README_de.md"]:
-        content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
-        assert "Kiwix" in content
-        assert "MediaWiki" in content
-        assert "Common Crawl" in content
-        assert "Docusaurus" in content
-        assert "INV-CORE-08" in content
-        assert "INV-SCHEMA-03" in content
-        assert "INV-LOCAL-01" in content
-        assert "INV-SEC-02" in content
-        assert "INV-SRV-05" in content
-        assert "INV-SLA-10" in content
-
-
-def test_level1_sbom_invariants_matrix():
-    """Verify THIRD_PARTY_LICENSES.md contains Level 1 SBOM, Invariant Matrix and Zero-Copyleft guarantee."""
-    lic_path = PROJECT_ROOT / "THIRD_PARTY_LICENSES.md"
-    assert lic_path.is_file(), "THIRD_PARTY_LICENSES.md missing"
-    content = lic_path.read_text(encoding="utf-8")
-
-    assert "Level 1 SBOM" in content
-    assert any(d in content for d in ["2026-09-28", "2026-10-01", "2026-10-03"])
-    assert "[NOTICE](NOTICE)" in content
-    assert "THIRD_PARTY_LICENSES.txt" in content
-    assert "Invariant Cross-Reference Matrix" in content
-    assert "Zero-Copyleft Isolation Guarantee & RunAsInvoker Certification" in content
-
-
-def test_statutory_bgb_disclaimer():
-    """Verify statutory notice (§ 521 BGB) and liability limitation in Section 18 of both READMEs."""
-    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
-    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
-
-    assert "§ 521 BGB" in readme_en
-    assert "Gefälligkeit" in readme_en
-    assert "18. Statutory Notice, Liability Limitation & License (§ 521 BGB)" in readme_en
-
-    assert "§ 521 BGB" in readme_de
-    assert "Schenkungs- / Gefälligkeitsrecht" in readme_de
-    assert "18. Gesetzlicher Hinweis, Haftungsbeschränkung & Lizenz (§ 521 BGB)" in readme_de
 
 
 def test_ci_welcome_and_stale_concurrency():
@@ -599,14 +404,11 @@ def test_pyproject_notice_url_and_pytest_options():
 
 
 def test_changelog_unreleased_section():
-    """Verify CHANGELOG.md contains an active [Unreleased] section documenting Pfad A and Pfad B."""
+    """Verify CHANGELOG.md keeps the conventional unreleased section at its head."""
     changelog_path = PROJECT_ROOT / "CHANGELOG.md"
     assert changelog_path.is_file(), "CHANGELOG.md missing"
-    content = changelog_path.read_text(encoding="utf-8")
-
-    assert "## [Unreleased]" in content
-    assert "Repository-Hygiene & CI-Härtung (Pfad A)" in content
-    assert "Marketing, Discoverability & Level 1 SBOM Text Companion (Pfad B)" in content
+    headings = [line for line in changelog_path.read_text(encoding="utf-8").splitlines() if line.startswith("## ")]
+    assert headings and headings[0] == "## [Unreleased]"
 
 
 def test_sec_dual_html_anchors_parity():
@@ -620,39 +422,9 @@ def test_sec_dual_html_anchors_parity():
         assert anchor in readme_de, f"Missing anchor {anchor} in README_de.md"
 
 
-def test_third_party_licenses_text_companion():
-    """Verify THIRD_PARTY_LICENSES.txt exists, is substantial, and contains all 10 invariants."""
-    txt_path = PROJECT_ROOT / "THIRD_PARTY_LICENSES.txt"
-    assert txt_path.is_file(), "THIRD_PARTY_LICENSES.txt missing"
-    assert txt_path.stat().st_size > 1000, "THIRD_PARTY_LICENSES.txt is unexpectedly small"
-    content = txt_path.read_text(encoding="utf-8")
-
-    assert "LEVEL 1 SBOM NOTICE" in content
-    assert "RunAsInvoker" in content
-    assert "Zero-Copyleft" in content
-    assert any(d in content for d in ["2026-09-28", "2026-10-01", "2026-10-03"])
-    assert "§ 521 BGB" in content
-    assert "SLA" in content
-
-    canonical_ids = [
-        "INV-LOCAL-01",
-        "INV-SEC-02",
-        "INV-SCHEMA-03",
-        "INV-STORE-04",
-        "INV-SRV-05",
-        "INV-AUTH-06",
-        "INV-PLAT-07",
-        "INV-CORE-08",
-        "INV-SYNC-09",
-        "INV-SLA-10",
-    ]
-    for code in canonical_ids:
-        assert code in content, f"Missing {code} in THIRD_PARTY_LICENSES.txt"
-
-
 def test_umlaut_purity_in_markdown():
-    """Verify discovery search query tables in READMEs and MARKETING-LOG do not use ASCII substitutions."""
-    for fname in ["README.md", "README_de.md"]:
+    """Verify German end-user passages across the multilingual READMEs use real umlauts."""
+    for fname in ["README.md", "README_de.md", "README_es.md", "README_ja.md", "README_ru.md", "README_zh-Hans.md"]:
         content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
         assert "fuer" not in content, f"Found ASCII escape 'fuer' in {fname}"
         assert "Domaenen" not in content, f"Found ASCII escape 'Domaenen' in {fname}"
@@ -709,7 +481,7 @@ def test_gitignore_multi_host_and_agent_locks():
 
 
 def test_pep621_extended_project_urls():
-    """Verify pyproject.toml defines Contributing, Plain-Text License, and Level 1 SBOM text URLs."""
+    """Verify pyproject.toml defines contributing and bounded dependency/license reference URLs."""
     pyproject_path = PROJECT_ROOT / "pyproject.toml"
     assert pyproject_path.is_file()
     content = pyproject_path.read_text(encoding="utf-8")
@@ -717,23 +489,21 @@ def test_pep621_extended_project_urls():
     assert 'Contributing = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/CONTRIBUTING.md"' in content
     assert '"Plain-Text License" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/LICENSE"' in content
     assert '"Third-Party Licenses (Text)" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
-    assert '"Level 1 SBOM" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
+    assert '"Dependency and License References" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
     assert '--basetemp=.pytest_temp' in content
 
 
 def test_contributing_guide_quality_gates():
-    """Verify CONTRIBUTING.md documents Plan D architecture, quality gates, and version freeze."""
+    """Verify the contributor guide names runnable checks and matches the frozen package version."""
     contrib_path = PROJECT_ROOT / "CONTRIBUTING.md"
     assert contrib_path.is_file()
     content = contrib_path.read_text(encoding="utf-8")
 
-    assert "Quality Gates" in content
-    assert "pytest -v" in content
+    assert "python -m pytest" in content
     assert "ruff check ." in content
-    assert "Plan D" in content
-    assert "1.1.12" in content
-    assert "T-20260920-167562623" in content
-    assert "INV-LOCAL-01" in content
+    assert "python wikistub_seed_cli.py check" in content
+    version = _pyproject_version(PROJECT_ROOT / "pyproject.toml")
+    assert version and f"`{version}`" in content
 
 
 def test_marketing_log_pfad_a_20261001():
@@ -775,5 +545,3 @@ def test_all_readme_international_badge_parity():
         assert "version-1.1.12" in content, f"version badge missing in {rname}"
         assert "dev--bricks" in content, f"dev-bricks ecosystem badge missing in {rname}"
         assert "open--bricks" in content, f"open-bricks umbrella badge missing in {rname}"
-        assert "231%20passed" in content, f"test badge missing in {rname}"
-        assert "2026--10--03" in content, f"verified badge date 2026-10-03 missing in {rname}"

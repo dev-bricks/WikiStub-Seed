@@ -17,16 +17,9 @@ WikiStub-Seed es una biblioteca semilla de stubs de conocimiento, no un wiki.
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
-![Privacidad](https://img.shields.io/badge/privacidad-100%25%20Offline%20%7C%20Zero--Egress-success)
-![Seguridad](https://img.shields.io/badge/seguridad-Local--First%20%7C%20Determinista-blue)
-[![SLA de seguridad](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![Licencias de terceros](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Aviso de atribución](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
-[![Level 1 SBOM](https://img.shields.io/badge/level--1%20SBOM-plain%20text%20available-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-231%20passed%20(186%20Python%20%2B%2045%20Node)-success)
-[![Verificado](https://img.shields.io/badge/verificado-2026--10--03-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-disponible-blueviolet)](llms.txt)
 ![Licencia](https://img.shields.io/badge/licencia-MIT-green)
 
@@ -54,7 +47,7 @@ flowchart TD
     A --> D["web_publisher/ _build.py<br/>(Publicador PWA estático)"]
     A --> E["Pipelines de contexto RAG y LLM<br/>(Flujos de trabajo de IA y embeddings)"]
     C --> F["Markdown estructurado<br/>(Obsidian / GitHub Pages / Documentación)"]
-    D --> G["Frontend web PWA<br/>(Búsqueda offline / 6 idiomas)"]
+    D --> G["Publicador web PWA<br/>(Búsqueda de datos / 6 idiomas de contenido)"]
 ```
 
 ## Contexto de descubrimiento
@@ -77,7 +70,7 @@ Frases de búsqueda que describen bien este proyecto:
 - Mapas canónicos `definitions.{lang}` y `relevance_i18n.{lang}` conservando los campos heredados `definition_de`, `definition_en` y `relevance`
 - Herramientas CLI en Python para estadísticas, validación, comprobaciones de consistencia y exportación a Markdown
 - Una dirección de exportación documentada `wikistub-seed-data-v1` para uso futuro en sitios Web/PWA estáticos
-- Sin dependencias externas requeridas para la importación, exportación, validación o uso de CLI básico
+- Las comprobaciones, estadísticas y exportaciones principales del checkout usan la biblioteca estándar de Python; la traducción opcional, las integraciones de búsqueda y las comprobaciones de desarrollo tienen dependencias adicionales.
 
 ## Casos de uso
 
@@ -132,6 +125,8 @@ python wikistub_seed_pipeline.py validate
 python wikistub_seed_pipeline.py export --output --english
 ```
 
+El flujo completo de CLI, el conjunto de datos y la PWA se usa desde el checkout del código fuente. El wheel contiene seis módulos API reutilizables, no el CLI ni el publicador. Las mutaciones desde una instalación requieren rutas externas de datos y autenticación elegidas expresamente; `site-packages` no se usa como almacén de datos del usuario.
+
 En Windows, `start.bat` abre el punto de entrada de la CLI. Los archivos exportados se escriben en `output/`; esa carpeta es local y no está versionada.
 
 ## Comandos principales
@@ -142,7 +137,7 @@ En Windows, `start.bat` abre el punto de entrada de la CLI. Los archivos exporta
 | `python wikistub_seed_cli.py check` | Ejecutar comprobaciones de consistencia sobre el conjunto de datos JSON |
 | `python wikistub_seed_pipeline.py validate` | Validar los datos de entrada de la pipeline |
 | `python wikistub_seed_pipeline.py export --output --english` | Exportar el conjunto de datos JSON a Markdown |
-| `python wikistub_seed_pipeline.py translate` | Traducir opcionalmente definiciones en inglés faltantes cuando esté configurado |
+| `python wikistub_seed_pipeline.py translate --confirm-api-cost --max-budget-usd AMOUNT` | Traducir definiciones inglesas faltantes tras confirmar el coste y fijar un límite |
 
 ## Mapa del repositorio
 
@@ -155,13 +150,13 @@ En Windows, `start.bat` abre el punto de entrada de la CLI. Los archivos exporta
 | `md_to_json.py` | Herramienta auxiliar de importación Markdown a JSON |
 | `check_duplicates.py` | Herramienta auxiliar de duplicados/consistencia |
 | `EXPORTFORMAT.md` | Plan de formato de intercambio estable |
-| `web_publisher/` | Editor web estático/PWA (caché sin conexión, búsqueda, selector de seis idiomas) |
+| `web_publisher/` | Publicador PWA estático; el service worker puede guardar recursos y datos del sitio tras una carga correcta, y el selector cambia el idioma del contenido |
 
 ## Privacidad
 
-WikiStub-Seed es local-first. El uso básico lee y escribe únicamente archivos JSON/Markdown locales. No hay telemetría ni comunicación de red automática.
-
-El comando de traducción opcional puede llamar a una API externa únicamente cuando `ANTHROPIC_API_KEY` está configurado y el paquete opcional `anthropic` está instalado.
+Las comprobaciones y exportaciones de CLI trabajan con archivos locales. La PWA estática solicita el conjunto de datos y el índice al mismo origen; después de una carga correcta, el service worker puede conservar en caché el contenido y los recursos del sitio. La primera visita y las actualizaciones necesitan acceso al sitio.
+El selector de la PWA cambia el idioma de los datos, no traduce toda la interfaz. Las definiciones están disponibles en seis idiomas; las notas de relevancia tienen fallback alemán para los slots ingleses vacíos.
+La traducción opcional envía solicitudes al servicio API de Anthropic y requiere `ANTHROPIC_API_KEY` y el paquete opcional `anthropic`. La CLI exige además `--confirm-api-cost` y un `--max-budget-usd` positivo. `translate_text` y `translate_batch` reciben el presupuesto como argumento `max_budget_usd`; la estimación local no garantiza el importe facturado.
 
 ## Hoja de ruta
 
@@ -171,7 +166,7 @@ Completado:
 - 630 stubs multilingües en un único archivo maestro JSON
 - Herramientas de exportación a Markdown y sincronización JSON
 - Pruebas de humo CLI en GitHub Actions, más pruebas de humo de fuente dedicadas para macOS/Linux de `wikistub_seed_cli.py check` y `wikistub_seed_pipeline.py validate`
-- Editor web estático/PWA con búsqueda y caché sin conexión (`web_publisher/`)
+- Publicador PWA estático con búsqueda; tras una carga correcta pueden quedar en caché los recursos y datos del sitio (`web_publisher/`).
 - Envolvente de esquema `wikistub-seed-data-v1` con mapas DE/EN/ES/ZH/JA/RU
 
 Planificado:
@@ -184,7 +179,7 @@ Planificado:
 
 **WikiStub-Seed ist ein mehrsprachiges JSON-Wissensgerüst.** Definitionen sind in DE/EN/ES/ZH/JA/RU gefüllt; Relevanztexte in DE/ES/ZH/JA/RU, mit deutschem Fallback für Englisch.
 
-WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
+WikiStub-Seed arbeitet mit den lokal angegebenen JSON-/Markdown-Dateien. Die statische PWA lädt Daten und Ressourcen vom selben Ursprung und kann sie nach dem Laden im Service Worker zwischenspeichern; Erstaufruf und Aktualisierungen benötigen den Zugriff auf die Website. Die Sprachauswahl wechselt die Inhaltssprache, nicht die gesamte Oberfläche. Die optionale Übersetzung sendet Anfragen an Anthropic und erfordert `ANTHROPIC_API_KEY` sowie das optionale Paket `anthropic`. Die CLI verlangt zusätzlich `--confirm-api-cost` und ein positives `--max-budget-usd`; die Modul-APIs `translate_text` und `translate_batch` verlangen ein explizites `max_budget_usd`. Die lokale Schätzung garantiert nicht den abgerechneten Betrag.
 
 Wichtige Einstiegspunkte:
 
@@ -192,7 +187,7 @@ Wichtige Einstiegspunkte:
 - `python wikistub_seed_cli.py check` prüft den Datenbestand.
 - `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
+- `web_publisher/` enthält eine statische PWA mit Suche und einem Sprachwähler für die Inhalte; geladene Website-Ressourcen und Daten können im Service Worker zwischengespeichert werden.
 
 <!-- BEGIN ELLMOS BUNDLE DISCOVERY ES -->
 
@@ -223,5 +218,3 @@ Los detalles de composición y runtime se omiten intencionadamente.
 ## Licencia
 
 Licencia MIT. Véase `LICENSE`.
-
-Este proyecto es una donación de código abierto no remunerada. La responsabilidad se limita a la intención y negligencia grave según el artículo 521 del Código Civil alemán, aplicándose también los descargos de responsabilidad de la licencia MIT. Uso bajo su propio riesgo.

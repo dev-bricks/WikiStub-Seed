@@ -23,7 +23,7 @@
     "location": "project"
   },
   "boundaries": {
-    "network": "none",
+    "network": "optional",
     "data": "public",
     "platforms": [
       "windows",

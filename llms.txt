@@ -1,25 +1,16 @@
 # WikiStub-Seed
 
-## Last-checked: 2026-10-03
+## Scope note
 
-Verification: 184 Python tests (including source-platform smoke tests, local edit server tests, CI timeout/concurrency tests, and metadata
-contract tests) and 45 Node.js PWA tests (total 229 tests) passed locally on 2026-10-03 (Pfad B Discoverability, International README Badge
-Parity across all 6 language editions, Enriched High-Intent RAG Queries, and Level 1 SBOM Re-Audit Stand 2026-10-03).
-Full Python compileall, CLI stats/check, pipeline validation, duplicate checking, and the deterministic PWA rebuild passed without tracked data diff.
-Audited Level 1 SBOM THIRD_PARTY_LICENSES.md and plain-text companion THIRD_PARTY_LICENSES.txt (100% permissive open-source stack, invariant
-cross-reference matrix INV-LOCAL-01..INV-SLA-10, zero-copyleft guarantee, RunAsInvoker unprivileged mode), formal NOTICE file, enriched MARKETING-LOG.txt
-(4 target personas [PERSONA-01]..[PERSONA-04], bilingual search queries, 10-dimension competitive matrix), PEP 621 ecosystem URLs and license-files,
-18-point bilingual quick navigation with 100% dual HTML anchor parity (#sec-01..#sec-18), statutory notice (§ 521 BGB), and 10 canonical Governance &
-Runtime Invariants (INV-LOCAL-01 to INV-SLA-10) are strictly verified. The two documented cross-domain duplicate titles are allowed; no incomplete or
-invalid entries were reported.
+This file is a maintained project index, not a certification or a repo-wide audit report. It does not assert current test totals, complete dependency or license coverage, zero egress, platform parity, or guaranteed security-response times. See the linked source and policy files for their stated scope and limits. Optional translation makes an external Anthropic API request; ordinary CLI checks and exports operate on selected local files.
 
 Canonical repository: https://github.com/dev-bricks/WikiStub-Seed
 
-WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-assisted research, documentation, education, ontology-style concept catalogs and LLM workflows. Definitions are populated in six languages; relevance notes are populated in five, with a documented German fallback for empty English relevance slots. WikiStub-Seed is a knowledge-stub seed library, not a wiki.
+WikiStub-Seed is a multilingual JSON knowledge-stub library for AI-assisted research, documentation, education, concept catalogs and LLM workflows. Definitions are populated in six languages; relevance notes are populated in five, with a documented German fallback for empty English relevance slots. It is a knowledge-stub seed library, not a wiki. Source-checkout commands use local files; the optional translation workflow sends selected text and instructions to Anthropic.
 
 ## Audience
 
-- **AI and LLM developers**: feeding 630 multilingual domain stubs into RAG pipelines, embeddings or LLM context windows without external dependencies
+- **AI and LLM developers**: feeding 630 multilingual domain stubs into RAG pipelines, embeddings or LLM context windows
 - **Knowledge workers and researchers**: building structured concept catalogs or glossaries from curated multilingual domain stubs
 - **Python developers**: extending, validating or exporting the multilingual JSON dataset via CLI tools, pipeline scripts and the wikistub-seed-data-v1 exchange format
 - **Documentation and education teams**: exporting structured Markdown or JSON to static sites, GitHub Pages, Obsidian vaults or learning systems
@@ -31,7 +22,7 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 - Dataset size: 630 compact knowledge stubs
 - Languages: German, English, Spanish, Chinese, Japanese and Russian
 - Domains: 12 top-level scientific and cultural areas, 85 subcategories
-- Core runtime: Python 3.10+ standard library
+- Source-checkout CLI core: Python 3.10+ standard library; optional features have additional dependencies
 - License: MIT
 - Canonical GitHub owner: `dev-bricks`
 - Ecosystem: `dev-bricks` / Umbrella: `open-bricks`
@@ -39,22 +30,22 @@ WikiStub-Seed is a local-first, multilingual JSON knowledge framework for AI-ass
 
 ## Main Files
 
-- `README.md`: public overview, usage and project positioning (18-point quick navigation with dual HTML anchors sec-01..sec-18)
-- `README_de.md`: German documentation and guide (18-point bilingual parity with dual HTML anchors sec-01..sec-18)
+- `README.md`: public overview, source-checkout and installed-wheel scope, usage and project positioning
+- `README_de.md`: German documentation and guide, with navigation anchors retained
 - `NOTICE`: formal attribution and upstream ecosystem notice
-- `pyproject.toml`: build, pytest and ruff configuration with `pythonpath = "."` (179 Python tests)
+- `pyproject.toml`: build metadata and pytest/ruff configuration
 - `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks
 - `wikistub_seed_pipeline.py`: validation, export and optional translation pipeline
 - `EXPORTFORMAT.md`: planned stable `wikistub-seed-data-v1` exchange format
 - `EMBEDDING_SEARCH_API.md`: optional local embedding & search API contract
-- `web_publisher/`: static six-language PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, `tests/publisher.test.mjs` (45 Node.js tests)
+- `web_publisher/`: static PWA publisher — `index.html`, `app.js`, `sw.js`, `manifest.webmanifest`, `_build.py`, and its Node.js tests
 - `web_publisher/README.md`: Web/PWA publisher documentation
 - `CHANGELOG.md`: project changes and release logs
-- `THIRD_PARTY_LICENSES.md`: Level 1 SBOM, 100% permissive dependency inventory, invariant cross-reference matrix and zero-copyleft guarantee
-- `THIRD_PARTY_LICENSES.txt`: Level 1 SBOM plain-text companion for terminal and packaging inspection
-- `MARKETING-LOG.txt`: discoverability audit, 4 target personas, bilingual search queries, 10-dimension competitive matrix and strategic roadmap
-- `SECURITY.md`: bilingual security policy with 48h response SLA, triage guarantees and multi-channel contacts
+- `THIRD_PARTY_LICENSES.md`: bounded dependency and license notes for the documented project scope
+- `THIRD_PARTY_LICENSES.txt`: plain-text companion to the bounded dependency and license notes
+- `MARKETING-LOG.txt`: historical discoverability notes and dated scope corrections
+- `SECURITY.md`: bilingual security policy, reporting contacts, and response targets that are not guaranteed service levels
 
 ## Data Model
 
@@ -66,9 +57,16 @@ Typical stub fields:
 - `definition_de`, `definition_en`, `relevance`: legacy compatibility fields kept in sync with the canonical maps
 - `tags`: topic tags for filtering and export
 
-## Privacy, Security and Governance Invariants
+## Runtime, network and security notes
 
-Core WikiStub-Seed usage is 100% local-first and has zero telemetry (INV-LOCAL-01, INV-STORE-04). It operates strictly in unprivileged user space (RunAsInvoker / INV-SEC-02), requires zero third-party packages for core operations (INV-CORE-08), and binds the optional GUI edit server strictly to loopback (127.0.0.1 / INV-SRV-05) with PBKDF2 hashing and soft-delete trash recovery (INV-AUTH-06). Multi-host sync conflicts are defended via gitignore (INV-SYNC-09), cross-platform parity is maintained across Windows, Linux, and macOS (INV-PLAT-07), and a 48-hour security response SLA is guaranteed (INV-SLA-10). The optional translation command may call an external API only when `ANTHROPIC_API_KEY` is configured and the optional `anthropic` package is installed.
+- Use a source checkout for the CLI, editor, dataset and PWA. The Python wheel contains six reusable API modules, not those source-checkout interfaces. Installed API writes require explicitly selected external data and authentication paths; package files are not user-data storage.
+- CLI checks and exports operate on selected local files. Optional translation sends selected text and instructions to Anthropic when configured and invoked.
+- The static PWA fetches same-origin resources and dataset files. Its service worker may cache successfully fetched resources; first access and updates require access to the site. The language selector chooses dataset content language, not the language of every interface element.
+- The optional edit server is configured for loopback. See `edit_server.py` for its request handling; this is not a claim about remotely hosted deployments.
+- Commands run with the permissions of the starting process. No formal RunAsInvoker certification or complete cross-platform behavioral parity is claimed.
+- `SECURITY.md` lists maintainer response targets, not guaranteed service levels.
+- Translation through the CLI requires `ANTHROPIC_API_KEY`, the optional `anthropic` package, `--confirm-api-cost`, and a positive `--max-budget-usd`. Module APIs `translate_text` and `translate_batch` instead require an explicit `max_budget_usd`; local estimates do not guarantee provider billing.
+- The Python CI runs CLI checks separately from pytest. The packaging regression builds and inspects a wheel and source archive, including the wheel icon and installed API modules; it does not package the source CLI or PWA in the wheel.
 
 ## Search Phrases
 
@@ -97,4 +95,4 @@ AI research documentation ontology seed library
 
 ## Suggested LLM Interpretation
 
-Describe WikiStub-Seed as a reusable structured knowledge seed library. It is unrelated to Wikimedia Meta-Wiki or any other wiki platform. The primary data artifact is `wikistub_seed.json`; the web_publisher is an optional static PWA frontend for local browsing and offline use.
+Describe WikiStub-Seed as a reusable structured knowledge seed library. It is unrelated to Wikimedia Meta-Wiki or any other wiki platform. The primary data artifact is `wikistub_seed.json`; the web publisher is a static PWA whose service worker can reuse successfully fetched resources and data.

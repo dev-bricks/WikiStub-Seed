@@ -12,7 +12,9 @@ Voraussetzungen:
 
 Nutzung als Modul:
     from translate import translate_text
-    english = translate_text("Kurzdefinition auf Deutsch")
+    english = translate_text(
+        "Kurzdefinition auf Deutsch", max_budget_usd=0.01
+    )
 
 Ohne API-Key oder ohne installiertes Paket wird "" zurückgegeben (kein Fehler).
 """
@@ -60,9 +62,10 @@ def _translation_prompt(text: str, target_lang: str) -> str:
 def estimate_max_request_cost_usd(text: str, target_lang: str = "en") -> float:
     """Return a conservative preflight ceiling for one standard API request.
 
-    Pricing is pinned to Claude Haiku 4.5 standard API rates verified on
-    2026-07-15. UTF-8 byte length plus protocol overhead bounds input tokens;
-    output is bounded by ``MAX_OUTPUT_TOKENS``.
+    Pricing is pinned to Claude Haiku 4.5 standard API rates checked on
+    2026-10-12. UTF-8 byte length plus protocol overhead bounds input tokens;
+    output is bounded by ``MAX_OUTPUT_TOKENS``. This is a local estimate, not
+    a provider-enforced spending limit or a guarantee of the billed amount.
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
@@ -78,7 +81,35 @@ def estimate_batch_max_cost_usd(texts: list[str], target_lang: str = "en") -> fl
     return sum(estimate_max_request_cost_usd(text, target_lang) for text in texts)
 
 
-def translate_text(text: str, target_lang: str = "en") -> str:
+def validate_max_budget_usd(max_budget_usd: float | None) -> float:
+    """Return a valid explicit positive ceiling or reject it before an API call."""
+    if not isinstance(max_budget_usd, (int, float)) or isinstance(max_budget_usd, bool):
+        raise ValueError("max_budget_usd must be a finite positive explicit cost ceiling")
+    try:
+        budget = float(max_budget_usd)
+    except (OverflowError, ValueError):
+        raise ValueError(
+            "max_budget_usd must be a finite positive explicit cost ceiling"
+        ) from None
+    if not math.isfinite(budget) or budget <= 0:
+        raise ValueError("max_budget_usd must be a finite positive explicit cost ceiling")
+    return budget
+
+
+def _validate_estimate_within_budget(projected_cost: float, max_budget_usd: float) -> None:
+    if projected_cost > max_budget_usd:
+        raise ValueError(
+            f"projected maximum cost ${projected_cost:.6f} exceeds "
+            f"budget ${max_budget_usd:.6f}"
+        )
+
+
+def translate_text(
+    text: str,
+    target_lang: str = "en",
+    *,
+    max_budget_usd: float | None = None,
+) -> str:
     """
     Übersetzt Text via Claude API.
 
@@ -105,10 +136,13 @@ def translate_text(text: str, target_lang: str = "en") -> str:
     if not api_key:
         return ""
 
+    budget = validate_max_budget_usd(max_budget_usd)
+    projected_cost = estimate_max_request_cost_usd(text, target_lang)
+    _validate_estimate_within_budget(projected_cost, budget)
     prompt = _translation_prompt(text, target_lang)
 
     try:
-        client = anthropic.Anthropic(api_key=api_key)
+        client = anthropic.Anthropic(api_key=api_key, max_retries=0)
         message = client.messages.create(
             model=MODEL_ID,
             max_tokens=MAX_OUTPUT_TOKENS,
@@ -143,19 +177,14 @@ def translate_batch(
         texts:       Liste von Texten
         target_lang: Zielsprache als ISO-Code
         delay:       Wartezeit in Sekunden zwischen API-Anfragen (Rate-Limit)
+        max_budget_usd: ausdrückliches Budget für die lokale Schätzung
 
     Returns:
         Liste von übersetzten Texten (gleiche Länge wie Input)
     """
+    budget = validate_max_budget_usd(max_budget_usd)
     projected_cost = estimate_batch_max_cost_usd(texts, target_lang)
-    if (
-        max_budget_usd is None
-        or not isinstance(max_budget_usd, (int, float))
-        or isinstance(max_budget_usd, bool)
-        or not math.isfinite(max_budget_usd)
-        or max_budget_usd <= 0
-    ):
-        raise ValueError("max_budget_usd must be a positive explicit cost ceiling")
+    _validate_estimate_within_budget(projected_cost, budget)
     if (
         not isinstance(delay, (int, float))
         or isinstance(delay, bool)
@@ -163,23 +192,17 @@ def translate_batch(
         or delay < 0
     ):
         raise ValueError("delay must be a finite non-negative number")
-    if projected_cost > max_budget_usd:
-        raise ValueError(
-            f"projected maximum cost ${projected_cost:.6f} exceeds "
-            f"budget ${max_budget_usd:.6f}"
-        )
 
     results = []
     for i, text in enumerate(texts):
-        result = translate_text(text, target_lang)
+        result = translate_text(text, target_lang, max_budget_usd=budget)
         results.append(result)
         if result and delay > 0 and i < len(texts) - 1:
             time.sleep(delay)
     return results
 
 
-if __name__ == "__main__":
-    import sys
+def main(argv: list[str] | None = None) -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="WikiStub-Seed: Text-Übersetzung")
@@ -191,9 +214,17 @@ if __name__ == "__main__":
         help="Zielsprache (default: en)",
     )
     parser.add_argument("--check", action="store_true", help="API-Verfügbarkeit prüfen")
-    parser.add_argument("--max-budget-usd", type=float, help="Explizite Kostenobergrenze in USD")
-    parser.add_argument("--confirm-api-cost", action="store_true", help="Mögliche API-Kosten bestätigen")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--max-budget-usd",
+        type=float,
+        help="Freigegebenes lokales Schätzbudget in USD",
+    )
+    parser.add_argument(
+        "--confirm-api-cost",
+        action="store_true",
+        help="Mögliche API-Kosten bestätigen",
+    )
+    args = parser.parse_args(argv)
 
     if args.check:
         if is_available():
@@ -201,35 +232,39 @@ if __name__ == "__main__":
         else:
             print("  Übersetzung nicht verfügbar.")
             print("  Bitte setze ANTHROPIC_API_KEY und installiere: pip install anthropic")
-        sys.exit(0)
+        return 0
 
     if not args.text:
         parser.print_help()
-        sys.exit(1)
+        return 1
 
     projected_cost = estimate_max_request_cost_usd(args.text, args.lang)
-    if (
-        not args.confirm_api_cost
-        or args.max_budget_usd is None
-        or not math.isfinite(args.max_budget_usd)
-        or args.max_budget_usd <= 0
-    ):
-        print("FEHLER: --confirm-api-cost und --max-budget-usd > 0 sind erforderlich.")
-        sys.exit(1)
-    if projected_cost > args.max_budget_usd:
-        print(
-            f"FEHLER: Maximale Anfragekosten ${projected_cost:.6f} "
-            f"überschreiten Budget ${args.max_budget_usd:.6f}."
-        )
-        sys.exit(1)
+    if not args.confirm_api_cost:
+        print("FEHLER: --confirm-api-cost muss gesetzt sein.")
+        return 1
+    try:
+        budget = validate_max_budget_usd(args.max_budget_usd)
+        _validate_estimate_within_budget(projected_cost, budget)
+    except ValueError as exc:
+        print(f"FEHLER: {exc}")
+        return 1
 
     if not is_available():
         print("FEHLER: ANTHROPIC_API_KEY nicht gesetzt oder 'anthropic' nicht installiert.")
-        sys.exit(1)
+        return 1
 
-    result = translate_text(args.text, args.lang)
+    print(
+        f"Lokale Kostenabschätzung: ${projected_cost:.6f}; "
+        "dies ist kein providerseitiges Ausgabenlimit."
+    )
+    result = translate_text(args.text, args.lang, max_budget_usd=budget)
     if result:
         print(result)
-    else:
-        print("FEHLER: Übersetzung fehlgeschlagen.")
-        sys.exit(1)
+        return 0
+
+    print("FEHLER: Übersetzung fehlgeschlagen.")
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

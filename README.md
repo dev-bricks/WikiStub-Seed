@@ -17,16 +17,9 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
-![Privacy](https://img.shields.io/badge/privacy-100%25%20Offline%20%7C%20Zero--Egress-success)
-![Security](https://img.shields.io/badge/security-Local--First%20%7C%20Deterministic-blue)
-[![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![Third-Party Licenses](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
-[![Level 1 SBOM](https://img.shields.io/badge/level--1%20SBOM-plain%20text%20available-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-231%20passed%20(186%20Python%20%2B%2045%20Node)-success)
-[![Verified](https://img.shields.io/badge/verified-2026--10--03-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-available-blueviolet)](llms.txt)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -34,22 +27,22 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
 - [1. Executive Summary & Core Identity](#1-executive-summary--core-identity)
 - [2. Visual Architecture & System Topology](#2-visual-architecture--system-topology)
-- [3. Zero-Egress Lifecycle & Query Sequence Flow](#3-zero-egress-lifecycle--query-sequence-flow)
+- [3. Local Workflow & Query Sequence Flow](#3-zero-egress-lifecycle--query-sequence-flow)
 - [4. Target Personas & Discoverability Queries](#4-target-personas--discoverability-queries)
 - [5. Comparative Matrix vs. Alternatives](#5-comparative-matrix-vs-alternatives)
-- [6. Governance & Runtime Invariants Matrix](#6-governance--runtime-invariants-matrix)
+- [6. Runtime Behavior and Evidence Notes](#6-governance--runtime-invariants-matrix)
 - [7. Installation & Quick Start](#7-installation--quick-start)
 - [8. Local Edit Mode & HTTP Server (127.0.0.1)](#8-local-edit-mode--http-server-127001)
 - [9. Core Commands & CLI Operations](#9-core-commands--cli-operations)
 - [10. Repository Map & Key Assets](#10-repository-map--key-assets)
 - [11. Data Shape & Knowledge Schema](#11-data-shape--knowledge-schema)
 - [12. Sibling Tools & Ecosystem Matrix](#12-sibling-tools--ecosystem-matrix)
-- [13. Third-Party Licenses & Level 1 SBOM](#13-third-party-licenses--level-1-sbom)
-- [14. Security Policy & Operational Limits (48h SLA)](#14-security-policy--operational-limits-48h-sla)
+- [13. Third-Party License References & Scope](#13-third-party-licenses--level-1-sbom)
+- [14. Security Policy & Response Targets](#14-security-policy--operational-limits-48h-sla)
 - [15. Static PWA & Web Publisher Architecture](#15-static-pwa--web-publisher-architecture)
 - [16. Testing, Verification & CI Matrix](#16-testing-verification--ci-matrix)
 - [17. Discovery Keywords & AI Agent Index](#17-discovery-keywords--ai-agent-index)
-- [18. Statutory Notice, Liability Limitation & License (§ 521 BGB)](#18-statutory-notice-liability-limitation--license--521-bgb)
+- [18. License and Attribution](#license)
 
 ---
 
@@ -75,8 +68,8 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 - **630 Knowledge Stubs**: Curated in `wikistub_seed.json` with definitions across 6 languages (DE, EN, ES, ZH, JA, RU) and relevance notes across 5 languages.
 - **12 Top-Level Domains**: Mathematics, physics, chemistry, biology, medicine, psychology, AI/CS, engineering, society, economics, history, and culture.
 - **85 Structured Subcategories**: Short, neutral definitions and practical relevance notes.
-- **Zero Third-Party Runtime Dependencies**: Core import, export, validation, CLI, and edit server run on the standard Python 3.10+ library.
-- **Dual Consumption Models**: Batch CLI export to structured Markdown or static PWA reader with offline ServiceWorker search.
+- **Source-Checkout Core**: Dataset checks, statistics, and exports use the Python standard library; optional translation, search integrations, and development checks have separate dependencies.
+- **Dual Consumption Models**: Batch CLI export to structured Markdown or a static PWA reader that can cache fetched resources and dataset files.
 
 ### Use Cases
 
@@ -104,7 +97,7 @@ flowchart TD
     subgraph Integration_Layer["Ecosystem & Consumer Channels"]
         E["RAG & LLM Context Pipelines<br/>(AI Workflows, Embeddings & Prompts)"]
         F["Structured Markdown Trees<br/>(Obsidian / GitHub Pages / Docs)"]
-        G["PWA Web Reader<br/>(Offline Instant Search in 6 Languages)"]
+        G["PWA Web Reader<br/>(Search over 6 Dataset Languages; Cached After Fetch)"]
     end
     A --> B
     A --> C
@@ -117,7 +110,7 @@ flowchart TD
 ---
 
 <a id="sec-03"></a><a id="3-zero-egress-lifecycle--query-flow"></a><a id="3-zero-egress-lifecycle--query-sequence-flow"></a>
-## 3. Zero-Egress Lifecycle & Query Sequence Flow
+## 3. Local Workflow & Query Sequence Flow
 
 ```mermaid
 sequenceDiagram
@@ -130,7 +123,7 @@ sequenceDiagram
     
     User->>CLI: Run check / stats / validate
     CLI->>Data: Validate 12 Domains, 85 Subcategories & Maps
-    Data-->>CLI: 630 Stubs Validated (Zero Egress / 100% Local)
+    Data-->>CLI: 630 stubs validated from local files
     CLI-->>User: Console Report & Consistency Proof
     
     opt Export Markdown / RAG Context
@@ -143,7 +136,7 @@ sequenceDiagram
         User->>Builder: Run _build.py
         Builder->>Data: Slices & indexes stubs
         Builder-->>PWA: Generates data/wikistub_seed.json & search-index.json
-        PWA-->>User: Offline instant search in 6 languages
+        PWA-->>User: Search cached data using the selected dataset language
     end
 ```
 
@@ -164,10 +157,10 @@ WikiStub-Seed is engineered to address four primary developer and researcher arc
 - **Pain Point:** Enterprise ontology suites (Protégé, OWL, RDF triple stores) impose heavy infrastructure hurdles and steep learning curves for rapid knowledge curation.
 - **Solution:** Human-readable JSON structure with built-in validation CLI (`wikistub_seed_cli.py check/stats`), duplicate verification, and local browser GUI (`python edit_server.py`).
 
-### `[PERSONA-03]` Local-First & Zero-Egress Tool Builders
-- **Goal:** Build air-gapped, privacy-preserving desktop and offline mobile applications that provide instant concept lookup and semantic exploration without internet connectivity.
-- **Pain Point:** SaaS dictionary and encyclopedia APIs leak user queries, demand external API tokens, and fail completely during travel or in secure network environments.
-- **Solution:** 100% Local-First / Zero-Egress architecture (`INV-LOCAL-01`), zero telemetry, and a built-in Progressive Web App (PWA) with ServiceWorker caching and instant search.
+### `[PERSONA-03]` Local-First Knowledge Tool Builders
+- **Goal:** Build knowledge tools that work with selected local files and can reuse previously fetched web resources when available.
+- **Pain Point:** Hosted dictionary and encyclopedia services may transmit queries and require service access or credentials.
+- **Solution:** Local JSON workflows, a loopback edit server and a static PWA that can reuse resources after they are cached. Optional translation sends selected text and instructions to Anthropic.
 
 ### `[PERSONA-04]` Educators & Technical Documentation Specialists
 - **Goal:** Rapidly generate course glossaries, foundational concept notes, and study decks for students in Markdown, Obsidian vaults, or static documentation sites.
@@ -178,7 +171,7 @@ WikiStub-Seed is engineered to address four primary developer and researcher arc
 
 | Language | Query String | Intent & Context |
 |:---|:---|:---|
-| **EN** | `local-first multilingual json knowledge base` | RAG & context seeding |
+| **EN** | `multilingual json knowledge base` | RAG & context seeding |
 | **EN** | `llm context dataset 630 stubs bilingual` | LLM prompt enrichment |
 | **EN** | `rag knowledge base json python standard library` | Zero-dependency retrieval |
 | **EN** | `wikipedia stub seed dataset offline` | Clean Wikipedia alternative |
@@ -188,7 +181,7 @@ WikiStub-Seed is engineered to address four primary developer and researcher arc
 | **DE** | `Mehrsprachige JSON Wissensbasis Python` | Lokale Begriffsdatenbank |
 | **DE** | `Lokale Wissensdatenbank für RAG und LLMs` | KI-Kontextinjektion |
 | **DE** | `Strukturierte Konzept-Stubs 12 Domänen` | Multidisziplinäre Ontologie |
-| **DE** | `Zero-Egress Wissensverwaltung Python Standardbibliothek` | DSGVO-konforme Wissensbasis |
+| **DE** | `Lokale JSON Wissensverwaltung Python` | Mehrsprachige Wissens-Stubs mit optionaler externer Übersetzung |
 | **DE** | `Markdown Export für Obsidian Wissensgraphen` | Offline PKM & Obsidian |
 | **DE** | `Lokales RAG JSON Starter-Dataset Python` | Offline RAG Wissens-Scaffold |
 | **DE** | `Mehrsprachige Offline Konzept-Stubs 12 Domänen` | Domänen-Taxonomie-Seeding |
@@ -200,43 +193,44 @@ WikiStub-Seed is engineered to address four primary developer and researcher arc
 
 The following 10-dimension matrix compares `WikiStub-Seed` against common approaches for knowledge seeding and documentation:
 
-| Dimension & Invariant | WikiStub-Seed | Kiwix / Wikipedia Dumps | MediaWiki / DokuWiki | Raw Web Scrapes (Common Crawl) | Static Docs (Docusaurus / MkDocs) |
+| Dimension | WikiStub-Seed | Kiwix / Wikipedia Dumps | MediaWiki / DokuWiki | Raw Web Scrapes (Common Crawl) | Static Docs (Docusaurus / MkDocs) |
 |:---|:---|:---|:---|:---|:---|
-| **1. Runtime Footprint (`INV-CORE-08`)** | **Zero dependencies** (Python stdlib) | Dedicated ZIM reader | PHP / MySQL / Web server | Big Data / Spark cluster | Node.js / Python env |
-| **2. Deterministic Schema (`INV-SCHEMA-03`)** | **100% Validated JSON** | Unstructured wikitext | Ad-hoc wiki formatting | Unstructured text noise | Ad-hoc Markdown / MDX |
+| **1. Runtime Footprint** | Source-checkout core commands use the Python standard library; API dependencies are listed separately | Dedicated ZIM reader | PHP / MySQL / Web server | Big Data / Spark cluster | Node.js / Python env |
+| **2. Deterministic Schema (`INV-SCHEMA-03`)** | Schema-validated JSON dataset | Unstructured wikitext | Ad-hoc wiki formatting | Unstructured text noise | Ad-hoc Markdown / MDX |
 | **3. Parallel Multilingual Mapping** | **6 Normalized Languages** | Separate databases | Manual interlanguage links | Unaligned / mixed | Manual i18n configuration |
 | **4. RAG & LLM Ingestion Readiness** | **Direct JSON / Markdown feed** | Complex parsing required | Scraping / API required | Heavy tokenization needed | Manual indexing required |
-| **5. Zero-Egress Perimeter (`INV-LOCAL-01`)** | **100% Local / Zero Egress** | Offline ZIM reader | Depends on hosting | Online scraping required | Local build / Web deploy |
-| **6. Unprivileged Mode (`INV-SEC-02`)** | **`RunAsInvoker` certified** | User mode | Often requires server root | N/A | User mode |
+| **5. Local processing and optional network use** | Local file operations; optional translation calls Anthropic | Offline ZIM reader | Depends on hosting | Online scraping required | Local build / Web deploy |
+| **6. Unprivileged Mode (`INV-SEC-02`)** | Runs with the current process permissions | User mode | Often requires server root | N/A | User mode |
 | **7. Localhost GUI Edit Server (`INV-SRV-05`)** | **Built-in `127.0.0.1` server** | Read-only | Full server CMS | None | Dev preview server |
-| **8. Offline PWA Publisher** | **Included ServiceWorker** | Kiwix client app | Server required | None | Custom plugin needed |
-| **9. Permissive Licensing & Zero Copyleft** | **100% MIT / Permissive** | CC BY-SA (Copyleft) | GPLv2+ (Copyleft) | Complex copyright status | MIT / Apache-2.0 |
-| **10. Coordinated Security SLA (`INV-SLA-10`)** | **48h response / 5-day triage** | Community bug tracker | Security team tracker | None | Individual maintainers |
+| **8. Offline PWA Publisher** | Static PWA with a Service Worker cache after fetch | Kiwix client app | Server required | None | Custom plugin needed |
+| **9. Project and dependency licenses** | MIT project license; dependency terms are listed separately | CC BY-SA (Copyleft) | GPLv2+ (Copyleft) | Complex copyright status | MIT / Apache-2.0 |
+| **10. Security response** | Maintainer response targets documented in SECURITY.md | Community bug tracker | Security team tracker | None | Individual maintainers |
 
 ---
 
 <a id="sec-06"></a><a id="4-safety-model--governance-invariants"></a><a id="6-governance--runtime-invariants-matrix"></a>
-## 6. Governance & Runtime Invariants Matrix
+## 6. Runtime Behavior and Evidence Notes
 
-The following 10 invariants govern all WikiStub-Seed components, pipelines, and tools:
+These notes describe implemented behavior and its limits; they are not certifications or guarantees.
 
-| # | Invariant | Guarantee | Enforcement Mechanism |
-|---|---|---|---|
-| 1 | **100% Local-First & Zero-Egress (INV-LOCAL-01)** | Core datasets, CLI operations, and exports execute completely offline with zero telemetry. | Python standard library only; no unsolicited network calls during import, export, or check. |
-| 2 | **Non-Elevation (RunAsInvoker / INV-SEC-02)** | System never requires or requests root or administrator privileges. | Operates in unprivileged user space; file and loopback operations run as invoker. |
-| 3 | **Deterministic Knowledge Schema (INV-SCHEMA-03)** | 630 stubs strictly validated across 12 domains and 85 subcategories. | Automated schema validation (`wikistub_seed_pipeline.py validate`) and duplicate checkers. |
-| 4 | **Pure Offline Storage & Zero Telemetry (INV-STORE-04)** | No tracking, telemetry, user data transmission, or external logging. | Local JSON (`wikistub_seed.json`) and Markdown output files only. |
-| 5 | **Localhost-Bound Edit Server (127.0.0.1 / INV-SRV-05)** | Optional HTTP GUI server binds strictly to the loopback interface. | Hardcoded `127.0.0.1` binding, DNS rebinding rejection, strict `Content-Type: application/json` CSRF defense. |
-| 6 | **PBKDF2 Password Hashing & Soft-Delete Trash (INV-AUTH-06)** | Passwords stored with cryptographic salt/hash; accidental deletes recoverable. | `hashlib.pbkdf2_hmac` in `wiki_auth.json` and soft-delete in `wikistub_seed_trash.json` (both gitignored). |
-| 7 | **Cross-Platform Operating Parity (INV-PLAT-07)** | Identical behavior across Windows, Linux and macOS environments. | Multi-OS GitHub Actions CI matrix and dual runner smoke validation. |
-| 8 | **Pure Python Standard Library Core (INV-CORE-08)** | Zero required third-party dependencies for runtime operations. | Built entirely on Python stdlib (`json`, `pathlib`, `http.server`, `hashlib`, `argparse`). |
-| 9 | **Cloud-Sync Conflict Defense (INV-SYNC-09)** | Protection against multi-device synchronization collisions. | `.gitignore` filters `*.sync-conflict-*`, `*.conflict`, `LOCK.*`. |
-| 10 | **48h Security SLA & Coordinated Disclosure (INV-SLA-10)** | Responsible reporting with guaranteed acknowledgment SLA. | Documented `SECURITY.md` SLA, private vulnerability reporting & multi-channel contact emails. |
-
+| Topic | Observed behavior | Evidence and limits |
+|---|---|---|
+| Local processing | CLI checks, exports and local editing use selected local files. Optional translation sends selected text and instructions to Anthropic when invoked with the CLI controls. | See translate.py and the command options below; no general zero-egress claim is made. |
+| Process permissions | Commands run with the permissions of the process that starts them. | The project does not claim a formal RunAsInvoker certification. |
+| Dataset validation | The CLI validates the dataset structure and reports consistency issues. | See wikistub_seed_cli.py check and wikistub_seed_pipeline.py validate. |
+| Storage and network | Dataset and export files are local inputs and outputs; optional translation is an external request. | Network behavior depends on the selected command and optional integrations. |
+| Local edit server | The optional edit server binds to loopback. | See edit_server.py; this does not describe a remotely hosted service. |
+| Authentication and trash | The editor stores authentication data locally and supports soft-delete trash and restore APIs. | See wiki_auth.py, wiki_store.py, and the editor tests. |
+| CI coverage | GitHub Actions tests selected Python, operating-system, source-smoke, PWA and package paths. | The configured matrix is not a claim of identical behavior across all platforms. |
+| Dependency scope | Core CLI operations use the Python standard library; optional features and development checks have additional dependencies. | See pyproject.toml and the bounded notes in THIRD_PARTY_LICENSES.md. |
+| Sync files | .gitignore excludes common conflict and lock-file patterns. | Ignore rules do not prevent a sync client from operating. |
+| Security response | Maintainers aim for the response targets in SECURITY.md. | Targets are not guaranteed service levels. |
 ---
 
 <a id="sec-07"></a><a id="5-installation--quick-start"></a><a id="7-installation--quick-start"></a>
 ## 7. Installation & Quick Start
+
+Use a source checkout for the full CLI, editor, dataset, and PWA. The wheel exposes six reusable API modules. Installed API calls require explicitly selected external data and authentication paths; package files are not user-data storage. Module translation APIs require an explicit max_budget_usd; the CLI additionally requires --confirm-api-cost.
 
 ```bash
 git clone https://github.com/dev-bricks/WikiStub-Seed.git
@@ -271,7 +265,7 @@ python edit_server.py            # default port 8879, opens the browser
 
 **Security notes:**
 
-- The server only ever binds to `127.0.0.1` — this is not configurable; there is no network/cloud exposure by design.
+- The edit server is configured to bind to `127.0.0.1`. This limits direct access to the local host; it does not replace host security controls.
 - The password is stored as a PBKDF2-HMAC-SHA256 hash (`wiki_auth.json`, gitignored), never in plaintext. This hash defends against a casual read of the file revealing a reused password — it does **not** defend against local filesystem access; anyone who can already read/write files on the machine can replace `wiki_auth.json` outright. Forgotten password? Delete `wiki_auth.json` to return to the default (no password, full rights for everyone).
 - Every mutating request must carry `Content-Type: application/json` (rejects classic `<form>`-based CSRF, which cannot send that content type without a CORS preflight this server does not answer) and a `Host` header of `localhost`/`127.0.0.1` (rejects DNS rebinding).
 - Deletions are soft: articles and categories move to `wikistub_seed_trash.json` (gitignored) instead of being removed outright, and can be restored via the API.
@@ -288,7 +282,7 @@ python edit_server.py            # default port 8879, opens the browser
 | `python wikistub_seed_cli.py check` | Run consistency checks over the JSON dataset |
 | `python wikistub_seed_pipeline.py validate` | Validate the pipeline input data |
 | `python wikistub_seed_pipeline.py export --output --english` | Export the JSON dataset to Markdown |
-| `python wikistub_seed_pipeline.py translate` | Optionally translate missing English definitions when configured |
+| `python wikistub_seed_pipeline.py translate` | Optional external translation; the CLI requires `--confirm-api-cost` and a positive `--max-budget-usd` ceiling |
 
 ---
 
@@ -304,13 +298,13 @@ python edit_server.py            # default port 8879, opens the browser
 | `md_to_json.py` | Markdown-to-JSON import helper |
 | `check_duplicates.py` | Duplicate/consistency helper |
 | `EXPORTFORMAT.md` | Stable exchange-format plan |
-| `web_publisher/` | Static Web/PWA publisher (offline cache, search, six-language selector) |
+| `web_publisher/` | Static PWA with search and a dataset-language selector; its service worker can cache successfully fetched resources and data |
 | `edit_server.py` | Local-only (`127.0.0.1`) HTTP server adding GUI create/edit/delete to `web_publisher/` |
 | `wiki_store.py` | Pure CRUD + soft-delete/trash functions the edit server uses |
 | `wiki_auth.py` | Password hashing, permission model and session tracking for the edit server |
 | `NOTICE` | Formal attribution and upstream ecosystem notice |
-| `THIRD_PARTY_LICENSES.md` | Level 1 SBOM, dependency inventory & invariant cross-reference matrix |
-| `THIRD_PARTY_LICENSES.txt` | Level 1 SBOM plain-text companion for terminal and packaging inspection |
+| `THIRD_PARTY_LICENSES.md` | Bounded dependency and license notes for the documented project scope |
+| `THIRD_PARTY_LICENSES.txt` | Plain-text companion to the bounded dependency and license notes |
 
 ---
 
@@ -372,82 +366,71 @@ Composition and runtime details are intentionally omitted.
 
 WikiStub-Seed is part of the **dev-bricks** developer suite and the wider **open-bricks** ecosystem:
 
-| Tool | Organization | Purpose | Status |
-|---|---|---|---|
-| [`dev-bricks/DevCenter`](https://github.com/dev-bricks/DevCenter) | dev-bricks | Unified developer dashboard, repo health overview & project launcher | Production |
-| [`dev-bricks/CodeBox`](https://github.com/dev-bricks/CodeBox) | dev-bricks | Lightweight PySide6 desktop IDE with syntax highlighting & terminal | Beta |
-| [`dev-bricks/MethodenAnalyser`](https://github.com/dev-bricks/MethodenAnalyser) | dev-bricks | AST-based Python code analysis, import optimizer & dead-code detection | Production |
-| [`dev-bricks/CareCenter-for-Codex`](https://github.com/dev-bricks/CareCenter-for-Codex) | dev-bricks | Workspace health check, diagnostics & test orchestration | Production |
-| [`dev-bricks/safe-start-for-codex`](https://github.com/dev-bricks/safe-start-for-codex) | dev-bricks | Safe initialization and verification for development workspaces | Production |
-| [`dev-bricks/automation-master`](https://github.com/dev-bricks/automation-master) | dev-bricks | Automated release management and workflow orchestration | Production |
-| [`dev-bricks/automizer-for-claude-desktop`](https://github.com/dev-bricks/automizer-for-claude-desktop) | dev-bricks | Claude Desktop scheduled task and workflow automation utility | Production |
-| [`ellmos-ai/project-docs-template`](https://github.com/ellmos-ai/project-docs-template) | ellmos-ai | Standardized documentation generator and compliance framework | Production |
-| [`ellmos-ai/policy-registry`](https://github.com/ellmos-ai/policy-registry) | ellmos-ai | Declarative governance and machine-readable policy enforcement engine | Production |
-| [`ellmos-ai/sqlite-transit-sync`](https://github.com/ellmos-ai/sqlite-transit-sync) | ellmos-ai | Zero-egress local SQLite synchronization and replication engine | Production |
-| [`doc-bricks/PDFtoPDFocr`](https://github.com/doc-bricks/PDFtoPDFocr) | doc-bricks | Offline OCR PDF processor with zero external telemetry | Production |
-| [`doc-bricks/MediaBrain`](https://github.com/doc-bricks/MediaBrain) | doc-bricks | Local multimedia indexer, transcriber & offline metadata vault | Production |
-| [`doc-bricks/DokuReader`](https://github.com/doc-bricks/DokuReader) | doc-bricks | Document reader and semantic exploration desktop environment | Production |
-| [`doc-bricks/CleanMarkdown`](https://github.com/doc-bricks/CleanMarkdown) | doc-bricks | Markdown formatting, linting and structure standardization tool | Production |
-| [`file-bricks/WinStorePackager`](https://github.com/file-bricks/WinStorePackager) | file-bricks | Automated MSIX packager for Python & PySide6 desktop apps | Production |
-| [`file-bricks/NoteSpaceLLM`](https://github.com/file-bricks/NoteSpaceLLM) | file-bricks | Note management and semantic retrieval system for desktop | Production |
-| [`open-bricks/open-bricks`](https://github.com/open-bricks/open-bricks) | open-bricks | Umbrella repository for all open-source bricks components | Production |
+| Tool | Organization | Purpose |
+| --- | --- | --- |
+| [`dev-bricks/DevCenter`](https://github.com/dev-bricks/DevCenter) | dev-bricks | Unified developer dashboard, repo health overview & project launcher |
+| [`dev-bricks/CodeBox`](https://github.com/dev-bricks/CodeBox) | dev-bricks | Lightweight PySide6 desktop IDE with syntax highlighting & terminal |
+| [`dev-bricks/MethodenAnalyser`](https://github.com/dev-bricks/MethodenAnalyser) | dev-bricks | AST-based Python code analysis, import optimizer & dead-code detection |
+| [`dev-bricks/CareCenter-for-Codex`](https://github.com/dev-bricks/CareCenter-for-Codex) | dev-bricks | Workspace health check, diagnostics & test orchestration |
+| [`dev-bricks/safe-start-for-codex`](https://github.com/dev-bricks/safe-start-for-codex) | dev-bricks | Safe initialization and verification for development workspaces |
+| [`dev-bricks/automation-master`](https://github.com/dev-bricks/automation-master) | dev-bricks | Automated release management and workflow orchestration |
+| [`dev-bricks/automizer-for-claude-desktop`](https://github.com/dev-bricks/automizer-for-claude-desktop) | dev-bricks | Claude Desktop scheduled task and workflow automation utility |
+| [`ellmos-ai/project-docs-template`](https://github.com/ellmos-ai/project-docs-template) | ellmos-ai | Documentation template and generator |
+| [`ellmos-ai/policy-registry`](https://github.com/ellmos-ai/policy-registry) | ellmos-ai | Declarative governance and machine-readable policy enforcement engine |
+| [`ellmos-ai/sqlite-transit-sync`](https://github.com/ellmos-ai/sqlite-transit-sync) | ellmos-ai | Local SQLite synchronization and replication project |
+| [`doc-bricks/PDFtoPDFocr`](https://github.com/doc-bricks/PDFtoPDFocr) | doc-bricks | OCR tool for PDF files |
+| [`doc-bricks/MediaBrain`](https://github.com/doc-bricks/MediaBrain) | doc-bricks | Multimedia indexing and transcription tools |
+| [`doc-bricks/DokuReader`](https://github.com/doc-bricks/DokuReader) | doc-bricks | Document reader and semantic exploration desktop environment |
+| [`doc-bricks/CleanMarkdown`](https://github.com/doc-bricks/CleanMarkdown) | doc-bricks | Markdown formatting, linting and structure standardization tool |
+| [`file-bricks/WinStorePackager`](https://github.com/file-bricks/WinStorePackager) | file-bricks | Automated MSIX packager for Python & PySide6 desktop apps |
+| [`file-bricks/NoteSpaceLLM`](https://github.com/file-bricks/NoteSpaceLLM) | file-bricks | Note management and semantic retrieval system for desktop |
+| [`open-bricks/open-bricks`](https://github.com/open-bricks/open-bricks) | open-bricks | Umbrella repository for all open-source bricks components |
 
 ---
 
 <a id="sec-13"></a><a id="13-third-party-licenses--transparency"></a><a id="13-third-party-licenses--level-1-sbom"></a>
-## 13. Third-Party Licenses & Level 1 SBOM
+## 13. Third-Party License References & Scope
 
-WikiStub-Seed is committed to 100% permissive licensing, zero-egress architecture, and complete dependency transparency. The core runtime requires **zero external dependencies** and operates purely on the Python standard library.
+The repository is licensed under MIT. The files below provide attribution and a bounded set of dependency and license references; they are not a complete software bill of materials or a comprehensive license audit.
 
-- **Repository License:** [MIT License](LICENSE)
-- **Attribution Notice:** [NOTICE](NOTICE)
-- **Comprehensive Level 1 SBOM:** [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) documents runtime and tooling dependencies, verified invariant cross-references (`INV-LOCAL-01` to `INV-SLA-10`), and non-elevation (`RunAsInvoker`) certification.
-- **Plain-Text Companion:** [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt) provides raw plain-text SBOM verification for terminal inspection and automated licensing tools.
-- **Zero-Copyleft Guarantee:** Zero AGPL, GPL, LGPL, or SSPL constraints.
-
+- Repository License: [LICENSE](LICENSE)
+- Attribution Notice: [NOTICE](NOTICE)
+- Dependency and license notes: [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) describes declared project dependencies and the limits of the checked snapshot.
+- Plain-text companion: [THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt) contains the corresponding bounded notes.
 ---
 
 <a id="sec-14"></a><a id="12-security--vulnerability-reporting"></a><a id="14-security-policy--operational-limits-48h-sla"></a>
-## 14. Security Policy & Operational Limits (48h SLA)
+## 14. Security Policy & Response Targets
 
-WikiStub-Seed adheres to strict local-first and zero-egress invariants. For detailed vulnerability reporting guidelines, SLAs, and PGP keys, consult [SECURITY.md](SECURITY.md).
+Use [SECURITY.md](SECURITY.md) for supported-version information and private reporting options. Maintainers aim to acknowledge reports within 48 hours and perform an initial triage within five business days; these are response targets, not guaranteed service levels.
 
-- **Initial Response SLA**: 48 hours
-- **Triage SLA**: 5 business days
-- **Private Reporting**: [GitHub Security Advisories](https://github.com/dev-bricks/WikiStub-Seed/security/advisories)
-- **Direct Contacts**: `security@open-bricks.org`, `security@ellmos.ai`, `support@lukasgeiger.com`, `lukas@open-bricks.org`
-
+- Private Reporting: [GitHub Security Advisories](https://github.com/dev-bricks/WikiStub-Seed/security/advisories)
+- Direct Contacts: security@open-bricks.org, security@ellmos.ai, support@lukasgeiger.com, lukas@open-bricks.org ([SECURITY.md](SECURITY.md))
 ---
 
 <a id="sec-15"></a><a id="15-static-pwa--web-publisher-architecture"></a><a id="15-german-documentation--deutsche-version"></a>
 ## 15. Static PWA & Web Publisher Architecture
 
-The `web_publisher/` directory contains an offline-first Progressive Web App (PWA) client:
-- **Zero Build Tools at Runtime:** Pure vanilla ES6, HTML5, and CSS3.
-- **ServiceWorker Offline Cache:** Caches stubs, search index, and assets locally via `web_publisher/sw.js`.
-- **Instant Client-Side Search:** Zero-latency client search in `web_publisher/search-index.json`.
-- **German Documentation:** Eine vollständige deutsche Dokumentation inklusive 18-Punkte-Schnellnavigation, Systemarchitektur, Governance-Tabelle und Drittanbieter-Transparenz steht unter [README_de.md](README_de.md) zur Verfügung.
-
+The web_publisher/ directory contains a static Progressive Web App:
+- Runtime: Vanilla ES6, HTML5, and CSS3; the generated files need no build step when served.
+- Service Worker cache: Previously fetched app resources and data may be available offline. The first visit and updates require access to the host.
+- Dataset language: The selector chooses the displayed dataset language; it does not mean every part of the interface is translated into six languages.
+- Search: Client-side search uses the generated search index.
+- German documentation: See README_de.md.
 ---
 
 <a id="sec-16"></a><a id="16-testing-verification--ci-matrix"></a>
 ## 16. Testing, Verification & CI Matrix
 
-WikiStub-Seed enforces comprehensive quality gates with 100% test pass rates across all platforms:
+Run the checks appropriate to the change:
 
 ```bash
-# Run entire Python test suite
-pytest
-
-# High-performance linting & code formatting
+python -m pytest
 ruff check .
-
-# Static PWA test runner (zero-dependency Node.js tests)
-cd web_publisher && node --test
+node --test web_publisher/tests/publisher.test.mjs
 ```
 
-Continuous integration runs on GitHub Actions across Windows, Linux, and macOS with Python 3.10 through 3.13, verifying concurrency safeguards, timeout bounds, and contract parity.
-
+GitHub Actions runs the Python matrix on Ubuntu and Windows with Python 3.10 through 3.13. A separate Python 3.11 source smoke runs on Ubuntu and macOS, PWA tests run on Ubuntu, and package/artifact checks run in their configured jobs. These jobs cover selected paths; they do not establish identical behavior on every platform.
 ---
 
 <a id="sec-17"></a><a id="11-discovery--search-keywords"></a><a id="17-discovery-keywords--ai-agent-index"></a>
@@ -469,9 +452,6 @@ Search phrases:
 ---
 
 <a id="sec-18"></a><a id="statutory-notice--liability-limitation"></a><a id="license--statutory-liability-limitation"></a><a id="18-statutory-notice-liability-limitation--license--521-bgb"></a><a id="license"></a>
-## 18. Statutory Notice, Liability Limitation & License (§ 521 BGB)
+## 18. License and Attribution
 
-`WikiStub-Seed` is provided free of charge as an open-source contribution under the terms of the [MIT License](LICENSE). Formal repository attribution and copyright notices are maintained in [NOTICE](NOTICE). Third-party dependency licenses and level-1 SBOM guarantees are documented in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
-
-> **Statutory Notice pursuant to § 521 BGB (German Civil Code):**<br>
-> This software is provided gratuitously (as a donation / *Gefälligkeit*). To the fullest extent permitted by applicable law, liability for defects in quality and title is strictly limited to cases of fraudulently concealed defects or fraudulent intent. The provider's liability is limited to intent (*Vorsatz*) and gross negligence (*grobe Fahrlässigkeit*). In all other respects, the disclaimer of warranties and limitation of liability set forth in the MIT License apply without limitation.
+WikiStub-Seed is distributed under the [MIT License](LICENSE). Repository attribution is recorded in [NOTICE](NOTICE). The dependency and license notes in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) are limited to their stated scope.

@@ -1,0 +1,42 @@
+include pyproject.toml
+include .gitignore
+include README.md README_de.md README_es.md README_ja.md README_ru.md README_zh-Hans.md
+include LICENSE NOTICE CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md SECURITY.md
+include THIRD_PARTY_LICENSES.md THIRD_PARTY_LICENSES.txt RELEASE_GATE.md TODO.md
+include EXPORTFORMAT.md EMBEDDING_SEARCH_API.md MARKETING-LOG.txt llms.txt
+include requirements.txt requirements-dev.txt wikistub_seed.json wikistub_seed.ico start.bat
+include ellmos-module.v2.json
+include *.py
+include assets/*.png assets/*.svg
+include locales/*.json
+recursive-include 01_Mathematik *.md
+recursive-include 02_Physik_Astronomie *.md
+recursive-include 03_Chemie *.md
+recursive-include 04_Biologie_Lebenswissenschaften *.md
+recursive-include 05_Medizin_Gesundheit *.md
+recursive-include 06_Psychologie_Kognition *.md
+recursive-include 07_Informatik_KI *.md
+recursive-include 08_Technik_Ingenieurwesen *.md
+recursive-include 09_Gesellschaft_Politik *.md
+recursive-include 10_Wirtschaft_Recht *.md
+recursive-include 11_Geschichte_Archaeologie *.md
+recursive-include 12_Kultur_Kunst_Sprache *.md
+recursive-include web_publisher *.py *.js *.mjs *.html *.css *.webmanifest *.json *.svg *.png
+recursive-include tests *.py
+recursive-include .github/workflows *.yml
+recursive-include .github/ISSUE_TEMPLATE *.md
+include .github/labels.yml
+
+# Local runtime files, private agent artifacts, and host lock/guard metadata
+# must never be part of a public source archive.
+prune .GITHUBBOT
+prune .SYNC
+prune _aftercare
+prune _archive
+prune _private
+prune _USER
+prune keyring
+global-exclude __pycache__ *.py[cod] .DS_Store
+global-exclude LOCK LOCK.* LOCK*.txt *.team-lock* *.lock GATES.md .automation-lock
+global-exclude wiki_auth.json wikistub_seed_trash.json credentials.json client_secret*.json
+global-exclude token.json secrets.* *.pem *.key .env .env.*

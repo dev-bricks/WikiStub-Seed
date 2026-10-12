@@ -5,6 +5,14 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Dokumentationskorrekturen – Geltungsbereich und Nachweise (2026-10-13)
+- Aussagen zu Zero-Egress, vollständiger Offline-Nutzung, formalen RunAsInvoker-/SBOM-/Lizenzprüfungen, garantierten Reaktionszeiten und historischen Testzahlen wurden als aktuelle Produktgarantien entfernt oder eingegrenzt. Frühere Changelog-Einträge dokumentieren die damalige Kommunikation und sind kein aktueller Prüfbeleg.
+- README-Fassungen und `llms.txt` beschreiben jetzt getrennt den Source-Checkout, die sechs API-Module des Wheels, die optionalen externen Übersetzungsaufrufe und die tatsächliche Service-Worker-Caching-Grenze der PWA.
+- Übersetzungsdokumentation unterscheidet CLI-Bestätigungsflags von den Modul-APIs mit explizitem `max_budget_usd`; lokale Kostenschätzungen werden nicht als Abrechnungsgarantie dargestellt.
+- Paket-/Sicherheits- und Lizenzhinweise nennen den begrenzten dokumentierten Umfang; diese Änderungen stellen keine vollständige Compliance- oder Rechtsprüfung dar.
+- Die Laufzeit prüft ein ausdrückliches Budget vor der SDK-Erzeugung; der Übersetzungsclient verwendet für diesen Pfad keine SDK-Wiederholungsversuche. Beschädigte gespeicherte Authentifizierungsdaten bleiben unverändert und schalten keine anonymen Schreibrechte frei; ungültige Berechtigungswerte in Anfragen werden als Eingabefehler behandelt.
+- Das Wheel enthält sechs wiederverwendbare API-Module und verlangt für installierte Schreibzugriffe ausdrücklich gewählte externe Daten- und Authentifizierungspfade. Die Paketprüfungen bauen Wheel und sdist und prüfen die jeweiligen Modul-, Dokumentations- und Asset-Inhalte; Quellcode-Checkout und installierte API-Nutzung bleiben getrennte Bereitstellungswege.
+
 ### Marketing, Discoverability & International Badge Parity (Pfad B) - 2026-10-03
 - **International README Badge Parity**:
   - Badge-Header in `README_es.md`, `README_ja.md`, `README_ru.md` und `README_zh-Hans.md` vollständig modernisiert und auf den einheitlichen Standard gehärtet (Version v1.1.12, dev-bricks Ökosystem, open-bricks Umbrella, 229 Tests passed, 48h Security SLA, Level 1 SBOM, Verified 2026-10-03).

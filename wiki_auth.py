@@ -46,9 +46,96 @@ AUTH_PATH = BASE_PATH / "wiki_auth.json"
 
 ALGORITHM = "pbkdf2_sha256"
 DEFAULT_ITERATIONS = 260_000
+# Explicit workload/input-size ceilings bound PBKDF2 work and salt parsing
+# from a local auth file. They are not a minimum-strength policy: the public
+# API still accepts every positive count up to the ceiling and an empty salt.
+# This is a resource bound, not a claim that any accepted hash is secure.
+MIN_ITERATIONS = 1
+MAX_ITERATIONS = 10_000_000
 _SALT_BYTES = 16
-
+_MAX_SALT_BYTES = 1024
 PERMISSION_KEYS = ("create", "edit", "delete")
+
+
+class AuthDataError(JsonDataError):
+    """Raised when an existing authentication file is malformed or unsafe."""
+
+
+class PermissionInputError(ValueError):
+    """Raised when a permission update request contains invalid values."""
+
+
+def _source_checkout_root() -> Path | None:
+    """Return the source root only when its project and seed files are present."""
+    if (BASE_PATH / "pyproject.toml").is_file() and (BASE_PATH / "wikistub_seed.json").is_file():
+        return BASE_PATH
+    return None
+
+
+def _resolve_auth_path(path: Path | str | None) -> Path:
+    source_root = _source_checkout_root()
+    if path is None:
+        if source_root is None:
+            raise RuntimeError(
+                "An explicit external auth path is required when using the installed wheel."
+            )
+        return source_root / "wiki_auth.json"
+
+    resolved = Path(path).expanduser().resolve()
+    if source_root is None and resolved.is_relative_to(BASE_PATH):
+        raise RuntimeError(
+            "Auth paths inside the installed module directory are not data locations; "
+            "provide a path outside site-packages."
+        )
+    return resolved
+
+
+def _validate_permission_fields(record: object) -> dict[str, Any]:
+    """Validate the permission-only shape without requiring password fields."""
+    if not isinstance(record, dict):
+        raise AuthDataError("The local authentication record has an invalid structure.")
+
+    missing = object()
+    permissions = record.get("anonymous_permissions", missing)
+    if permissions is missing:
+        return record
+    if not isinstance(permissions, dict) or any(
+        key in permissions and not isinstance(permissions[key], bool) for key in PERMISSION_KEYS
+    ):
+        raise AuthDataError("The local authentication record has invalid permission fields.")
+    return record
+
+
+def _validate_auth_record(record: object) -> dict[str, Any]:
+    """Validate persisted hash and permission fields before they affect access."""
+    if not isinstance(record, dict) or record.get("algorithm") != ALGORITHM:
+        raise AuthDataError("The local authentication file has an invalid structure.")
+
+    salt_hex = record.get("salt")
+    digest_hex = record.get("password_hash")
+    iterations = record.get("iterations")
+    if not isinstance(salt_hex, str) or not isinstance(digest_hex, str):
+        raise AuthDataError("The local authentication file has invalid hash fields.")
+    if (
+        len(salt_hex) % 2
+        or any(char not in "0123456789abcdefABCDEF" for char in salt_hex)
+        or len(digest_hex) != 64
+        or any(char not in "0123456789abcdefABCDEF" for char in digest_hex)
+    ):
+        raise AuthDataError("The local authentication file has invalid hash fields.")
+    salt = bytes.fromhex(salt_hex)
+    digest = bytes.fromhex(digest_hex)
+
+    if len(salt) > _MAX_SALT_BYTES or len(digest) != 32:
+        raise AuthDataError("The local authentication file has invalid hash fields.")
+    if (
+        not isinstance(iterations, int)
+        or isinstance(iterations, bool)
+        or not MIN_ITERATIONS <= iterations <= MAX_ITERATIONS
+    ):
+        raise AuthDataError("The local authentication file has unsupported hash parameters.")
+
+    return _validate_permission_fields(record)
 
 
 def default_anonymous_permissions() -> dict[str, bool]:
@@ -61,6 +148,14 @@ def hash_password(password: str, *, salt: bytes | None = None, iterations: int =
     if not isinstance(password, str) or not password:
         raise ValueError("password darf nicht leer sein.")
     salt = salt if salt is not None else secrets.token_bytes(_SALT_BYTES)
+    if not isinstance(salt, bytes) or len(salt) > _MAX_SALT_BYTES:
+        raise ValueError("salt must be bytes no longer than 1024 bytes")
+    if (
+        not isinstance(iterations, int)
+        or isinstance(iterations, bool)
+        or not MIN_ITERATIONS <= iterations <= MAX_ITERATIONS
+    ):
+        raise ValueError(f"iterations must be between {MIN_ITERATIONS} and {MAX_ITERATIONS}")
     digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
     return {
         "algorithm": ALGORITHM,
@@ -78,43 +173,58 @@ def verify_password(password: str, record: dict[str, Any]) -> bool:
     if not isinstance(password, str) or not password:
         return False
     try:
+        _validate_auth_record(record)
         salt = bytes.fromhex(record["salt"])
-        iterations = int(record["iterations"])
+        iterations = record["iterations"]
         expected = record["password_hash"]
-    except (KeyError, TypeError, ValueError):
+    except (AuthDataError, KeyError, TypeError, ValueError):
         return False
     digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
     return hmac.compare_digest(digest.hex(), expected)
 
 
-def load_auth(path: Path = AUTH_PATH) -> dict[str, Any] | None:
+def load_auth(path: Path | str | None = None) -> dict[str, Any] | None:
     """Returns None when no password has been set (file absent) -- that is
     a normal, expected state, not an error."""
+    path = _resolve_auth_path(path)
     if not path.exists():
         return None
     try:
-        return read_json_object(path)
+        record = read_json_object(path)
     except JsonDataError:
-        return None
+        raise AuthDataError("The local authentication file is unreadable or invalid.") from None
+    try:
+        return _validate_auth_record(record)
+    except AuthDataError:
+        raise AuthDataError("The local authentication file is unreadable or invalid.") from None
 
 
-def save_auth(record: dict[str, Any], path: Path = AUTH_PATH) -> None:
+def save_auth(record: dict[str, Any], path: Path | str | None = None) -> None:
+    path = _resolve_auth_path(path)
+    _validate_auth_record(record)
     atomic_write_json(path, record)
 
 
-def remove_auth(path: Path = AUTH_PATH) -> None:
+def remove_auth(path: Path | str | None = None) -> None:
     """Authenticated-session convenience for "remove the password again".
     The filesystem-delete-the-file path documented above stays the recovery
     route for a FORGOTTEN password (this function requires already being
     authenticated, so it cannot help there)."""
-    path.unlink(missing_ok=True)
+    _resolve_auth_path(path).unlink(missing_ok=True)
 
 
-def set_password(password: str, *, path: Path = AUTH_PATH, existing: dict[str, Any] | None = None) -> dict[str, Any]:
+def set_password(
+    password: str, *, path: Path | str | None = None, existing: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Create or replace the password. Preserves anonymous_permissions
     across a password CHANGE (changing your password should not silently
     reset who is allowed to do what); a brand-new password (existing=None)
     starts at full anonymous rights, per default_anonymous_permissions()."""
+    path = _resolve_auth_path(path)
+    if existing is None and path.exists():
+        existing = load_auth(path)
+    if existing is not None:
+        _validate_auth_record(existing)
     record = hash_password(password)
     record["anonymous_permissions"] = dict(
         existing.get("anonymous_permissions", default_anonymous_permissions())
@@ -125,15 +235,25 @@ def set_password(password: str, *, path: Path = AUTH_PATH, existing: dict[str, A
     return record
 
 
-def set_anonymous_permissions(permissions: dict[str, Any], *, path: Path = AUTH_PATH, existing: dict[str, Any]) -> dict[str, Any]:
+def set_anonymous_permissions(
+    permissions: dict[str, Any], *, path: Path | str | None = None, existing: dict[str, Any]
+) -> dict[str, Any]:
     """Authenticated-only: the password holder decides what an anonymous
     visitor may still do. Only accepts the three known keys; anything else
     in *permissions* is ignored rather than stored verbatim."""
+    path = _resolve_auth_path(path)
+    _validate_auth_record(existing)
+    if not isinstance(permissions, dict):
+        raise PermissionInputError("Permissions must be provided as an object.")
+    if any(
+        key in permissions and not isinstance(permissions[key], bool) for key in PERMISSION_KEYS
+    ):
+        raise PermissionInputError("Permission values must be JSON booleans.")
     updated = dict(existing)
     current = dict(existing.get("anonymous_permissions", default_anonymous_permissions()))
     for key in PERMISSION_KEYS:
         if key in permissions:
-            current[key] = bool(permissions[key])
+            current[key] = permissions[key]
     updated["anonymous_permissions"] = current
     save_auth(updated, path)
     return updated
@@ -151,12 +271,13 @@ def compute_permissions(auth_record: dict[str, Any] | None, *, authenticated: bo
       currently says (defaults to full until explicitly restricted)."""
     if auth_record is None:
         return default_anonymous_permissions()
+    _validate_permission_fields(auth_record)
     if authenticated:
         return {"create": True, "edit": True, "delete": True}
     stored = auth_record.get("anonymous_permissions")
-    if not isinstance(stored, dict):
+    if stored is None:
         return default_anonymous_permissions()
-    return {key: bool(stored.get(key, True)) for key in PERMISSION_KEYS}
+    return {key: stored.get(key, True) for key in PERMISSION_KEYS}
 
 
 class SessionStore:

@@ -17,16 +17,9 @@ WikiStub-Seed — это начальная библиотека заглуше�
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
-![Конфиденциальность](https://img.shields.io/badge/%D0%BF%D1%80%D0%B8%D0%B2%D0%B0%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C-100%25%20Offline%20%7C%20Zero--Egress-success)
-![Безопасность](https://img.shields.io/badge/%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C-Local--First%20%7C%20Deterministic-blue)
-[![Security SLA](https://img.shields.io/badge/security%20SLA-48h%20response-blue.svg)](SECURITY.md)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![Third-Party Licenses](https://img.shields.io/badge/third--party%20licenses-audited%20100%25%20permissive-success.svg)](THIRD_PARTY_LICENSES.md)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
-[![Level 1 SBOM](https://img.shields.io/badge/level--1%20SBOM-plain%20text%20available-success.svg)](THIRD_PARTY_LICENSES.txt)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
-![Tests](https://img.shields.io/badge/tests-231%20passed%20(186%20Python%20%2B%2045%20Node)-success)
-[![Проверено](https://img.shields.io/badge/%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BE-2026--10--03-blue.svg)](pyproject.toml)
 [![llms.txt](https://img.shields.io/badge/llms.txt-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B5%D0%BD-blueviolet)](llms.txt)
 ![Лицензия](https://img.shields.io/badge/%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F-MIT-green)
 
@@ -54,7 +47,7 @@ flowchart TD
     A --> D["web_publisher/ _build.py<br/>(Статический издатель PWA)"]
     A --> E["Конвейеры контекста RAG и LLM<br/>(ИИ-рабочие процессы и эмбеддинги)"]
     C --> F["Структурированный Markdown<br/>(Obsidian / GitHub Pages / Документация)"]
-    D --> G["Веб-интерфейс PWA<br/>(Офлайн-поиск / 6 языков)"]
+    D --> G["Веб-интерфейс PWA<br/>(Поиск по данным / 6 языков содержимого)"]
 ```
 
 ## Контекст обнаружения
@@ -77,7 +70,7 @@ flowchart TD
 - Канонические карты `definitions.{lang}` и `relevance_i18n.{lang}` при сохранении устаревших полей `definition_de`, `definition_en` и `relevance`
 - Инструменты CLI на Python для статистики, валидации, проверок согласованности и экспорта в Markdown
 - Документированное направление экспорта `wikistub-seed-data-v1` для будущего использования на статических веб-сайтах/PWA
-- Для базового импорта, экспорта, валидации или использования CLI внешние зависимости не требуются
+- Основные проверки данных, статистика и экспорт в исходном checkout используют стандартную библиотеку Python; дополнительный перевод, интеграции поиска и проверки разработки имеют отдельные зависимости.
 
 ## Варианты использования
 
@@ -134,6 +127,8 @@ python wikistub_seed_pipeline.py export --output --english
 
 В Windows `start.bat` открывает точку входа CLI. Экспортированные файлы записываются в `output/`; эта папка является локальной и не версионируется.
 
+Полный рабочий процесс — CLI, набор данных и PWA — доступен в checkout исходного кода. Wheel предоставляет шесть повторно используемых API-модулей, но не CLI и PWA. Для изменения данных через установленный API нужно явно указать внешние пути к данным и аутентификации; `site-packages` не используется как хранилище пользовательских данных.
+
 ## Основные команды
 
 | Команда | Назначение |
@@ -142,7 +137,7 @@ python wikistub_seed_pipeline.py export --output --english
 | `python wikistub_seed_cli.py check` | Запуск проверок согласованности набора данных JSON |
 | `python wikistub_seed_pipeline.py validate` | Валидация входных данных конвейера |
 | `python wikistub_seed_pipeline.py export --output --english` | Экспорт набора данных JSON в Markdown |
-| `python wikistub_seed_pipeline.py translate` | Опциональный перевод отсутствующих английских определений при наличии настроек |
+| `python wikistub_seed_pipeline.py translate --confirm-api-cost --max-budget-usd AMOUNT` | Перевод отсутствующих английских определений с подтверждением затрат и положительным лимитом |
 
 ## Карта репозитория
 
@@ -155,13 +150,13 @@ python wikistub_seed_pipeline.py export --output --english
 | `md_to_json.py` | Вспомогательный инструмент импорта Markdown в JSON |
 | `check_duplicates.py` | Вспомогательный инструмент для дубликатов/согласованности |
 | `EXPORTFORMAT.md` | План стабильного формата обмена |
-| `web_publisher/` | Статический PWA с офлайн-кэшем, поиском и выбором шести языков |
+| `web_publisher/` | Статический PWA: после загрузки может кэшировать ресурсы и данные сайта; выбор языка меняет язык содержимого |
 
 ## Конфиденциальность
 
-WikiStub-Seed — это локальное решение прежде всего. Базовое использование читает и записывает только локальные файлы JSON/Markdown. Телеметрия и автоматическое сетевое взаимодействие отсутствуют.
+Основные команды CLI читают и записывают выбранные локальные файлы. Статический PWA загружает данные и ресурсы с того же источника; service worker может кэшировать их после успешной загрузки. Первый доступ и обновления требуют доступа к сайту. Выбор языка PWA переключает язык данных, но не переводит весь интерфейс.
 
-Опциональная команда перевода может обращаться к внешнему API только при условии, что установлен `ANTHROPIC_API_KEY` и установлен опциональный пакет `anthropic`.
+Опциональный перевод отправляет запросы в Anthropic API и требует `ANTHROPIC_API_KEY` и необязательный пакет `anthropic`. CLI дополнительно требует `--confirm-api-cost` и положительный `--max-budget-usd`; модульные API `translate_text` и `translate_batch` требуют явный аргумент `max_budget_usd`. Локальная оценка не гарантирует фактическую сумму счета.
 
 ## Дорожная карта
 
@@ -171,7 +166,7 @@ WikiStub-Seed — это локальное решение прежде всег
 - 630 двуязычных заглушек в едином главном файле JSON
 - Инструменты экспорта в Markdown и синхронизации JSON
 - Дымовые тесты CLI в GitHub Actions, а также специальные дымовые тесты источника для macOS/Linux для `wikistub_seed_cli.py check` и `wikistub_seed_pipeline.py validate`
-- Статический веб-/PWA-издатель с поиском и кэшем офлайн (`web_publisher/`)
+- Статический PWA предоставляет поиск и может кэшировать загруженные ресурсы и данные сайта (`web_publisher/`)
 - Схема-обёртка `wikistub-seed-data-v1` с языковыми картами DE/EN/ES/ZH/JA/RU
 
 Запланировано:
@@ -184,7 +179,7 @@ WikiStub-Seed — это локальное решение прежде всег
 
 **WikiStub-Seed ist ein mehrsprachiges JSON-Wissensgerüst.** Definitionen sind in DE/EN/ES/ZH/JA/RU gefüllt; Relevanztexte in DE/ES/ZH/JA/RU, mit deutschem Fallback für Englisch.
 
-WikiStub-Seed arbeitet standardmäßig lokal mit `wikistub_seed.json`. Die Kernfunktionen benötigen keine externen Pakete. Nur die optionale Übersetzungsfunktion nutzt externe API-Aufrufe, wenn ein API-Key gesetzt und das optionale Paket installiert wurde.
+WikiStub-Seed arbeitet mit den lokal angegebenen JSON-/Markdown-Dateien. Die statische PWA lädt Daten und Ressourcen vom selben Ursprung und kann sie nach dem Laden im Service Worker zwischenspeichern; Erstaufruf und Aktualisierungen benötigen den Zugriff auf die Website. Die Sprachauswahl wechselt die Inhaltssprache, nicht die gesamte Oberfläche. Die optionale Übersetzung sendet Anfragen an Anthropic und erfordert `ANTHROPIC_API_KEY` sowie das optionale Paket `anthropic`. Die CLI verlangt zusätzlich `--confirm-api-cost` und ein positives `--max-budget-usd`; die Modul-APIs `translate_text` und `translate_batch` verlangen ein explizites `max_budget_usd`. Die lokale Schätzung garantiert nicht den abgerechneten Betrag.
 
 Wichtige Einstiegspunkte:
 
@@ -192,7 +187,7 @@ Wichtige Einstiegspunkte:
 - `python wikistub_seed_cli.py check` prüft den Datenbestand.
 - `python wikistub_seed_pipeline.py export --output --english` exportiert Markdown.
 - `EXPORTFORMAT.md` beschreibt den geplanten stabilen Austauschstandard.
-- `web_publisher/` enthält den fertigen statischen Web/PWA-Publisher mit Offline-Cache und Sechs-Sprachen-Auswahl.
+- `web_publisher/` enthält eine statische PWA mit Suche und einem Sprachwähler für die Inhalte; geladene Website-Ressourcen und Daten können im Service Worker zwischengespeichert werden.
 
 <!-- BEGIN ELLMOS BUNDLE DISCOVERY RU -->
 
@@ -223,5 +218,3 @@ default-deny список разрешённых бандлов.
 ## Лицензия
 
 Лицензия MIT. См. `LICENSE`.
-
-Этот проект является безвозмездным вкладом в открытый исходный код. Ответственность ограничена умыслом и грубой небрежностью в соответствии с § 521 Гражданского кодекса Германии, а также применяются отказы от ответственности лицензии MIT. Использование на свой страх и риск.

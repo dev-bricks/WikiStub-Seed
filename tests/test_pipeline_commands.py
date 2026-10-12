@@ -495,7 +495,11 @@ class PipelineCommandTests(unittest.TestCase):
 
         translated = written["MetaWiki"]["01_Mathematik"]["Algebra"][0]
         self.assertEqual(exit_code, 0)
-        translate_text.assert_called_once()
+        translate_text.assert_called_once_with(
+            "Eine ausreichend lange algebraische Definition.",
+            "es",
+            max_budget_usd=1.0,
+        )
         self.assertEqual(
             translated["definitions"]["es"],
             "Una definición algebraica suficientemente larga.",
@@ -534,7 +538,7 @@ class PipelineCommandTests(unittest.TestCase):
                 mock.patch(
                     "translate.translate_text",
                     return_value="A sufficiently long algebraic definition.",
-                ),
+                ) as translate_text,
             ):
                 exit_code = wikistub_seed_pipeline.cmd_translate(
                     SimpleNamespace(
@@ -550,6 +554,11 @@ class PipelineCommandTests(unittest.TestCase):
 
         translated = written["MetaWiki"]["01_Mathematik"]["Algebra"][0]
         self.assertEqual(exit_code, 0)
+        translate_text.assert_called_once_with(
+            "Eine ausreichend lange algebraische Definition.",
+            "en",
+            max_budget_usd=1.0,
+        )
         self.assertEqual(
             translated["definitions"]["en"],
             "A sufficiently long algebraic definition.",

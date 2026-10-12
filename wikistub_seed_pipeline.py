@@ -1249,21 +1249,25 @@ def cmd_translate(args):
         print("  ✗ API-Kosten nicht bestätigt; nutze zusätzlich --confirm-api-cost.")
         return 1
     max_budget_usd = getattr(args, "max_budget_usd", None)
-    if (
-        not isinstance(max_budget_usd, (int, float))
-        or not math.isfinite(max_budget_usd)
-        or max_budget_usd <= 0
-    ):
-        print("  ✗ Eine positive --max-budget-usd-Kostengrenze ist erforderlich.")
-        return 1
-    target_language = args.lang
 
     try:
-        from translate import estimate_batch_max_cost_usd, translate_text, is_available
+        from translate import (
+            estimate_batch_max_cost_usd,
+            is_available,
+            translate_text,
+            validate_max_budget_usd,
+        )
     except ImportError:
         print("  ✗ translate.py nicht gefunden.")
         return 1
 
+    try:
+        max_budget_usd = validate_max_budget_usd(max_budget_usd)
+    except ValueError:
+        print("  FEHLER: Eine endliche positive --max-budget-usd-Kostengrenze ist erforderlich.")
+        return 1
+
+    target_language = args.lang
     if not is_available():
         print("  ✗ Übersetzung nicht verfügbar.")
         print("  Bitte setze ANTHROPIC_API_KEY und installiere: pip install anthropic")
@@ -1316,7 +1320,11 @@ def cmd_translate(args):
         return 1
 
     for i, stub in enumerate(to_translate):
-        result = translate_text(stub.get_definition("de"), target_language)
+        result = translate_text(
+            stub.get_definition("de"),
+            target_language,
+            max_budget_usd=max_budget_usd,
+        )
         if result:
             stub.definitions[target_language] = result
             if target_language == "en":

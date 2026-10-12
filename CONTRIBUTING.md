@@ -2,100 +2,80 @@
 
 ## Deutsch
 
-Vielen Dank für Ihr Interesse, zu diesem Projekt beizutragen!
+Danke, dass du zu WikiStub-Seed beitragen möchtest.
 
-### Wie Sie beitragen können
+### Beiträge und Pull Requests
 
-1. **Bug melden:** Erstellen Sie ein Issue mit dem Label `bug`.
-2. **Feature vorschlagen:** Erstellen Sie ein Issue mit dem Label `enhancement`.
-3. **Dokumentation verbessern:** Reichen Sie Vorschläge mit dem Label `documentation` ein.
-4. **Code beitragen:** Erstellen Sie einen Pull Request.
+1. Melde Fehler oder schlage Funktionen über GitHub Issues vor.
+2. Arbeite in einem eigenen Branch und beschreibe im Pull Request die beobachtete Änderung.
+3. Führe die passenden lokalen Prüfungen aus und nenne übersprungene optionale Abhängigkeiten oder Plattformgrenzen offen.
+4. Behalte die eingefrorene Paketversion `1.1.12` bei. Nicht veröffentlichte Änderungen gehören unter `## [Unreleased]` in `CHANGELOG.md`.
 
-### Pull Requests & Workflow
-
-1. Forken Sie das Repository auf GitHub.
-2. Erstellen Sie einen Feature-Branch: `git checkout -b feature/mein-feature`.
-3. Committen Sie Ihre Änderungen nach standardisierten Konventionen (`feat:`, `fix:`, `docs:`, `chore:`).
-4. Führen Sie alle lokalen Quality Gates aus (siehe unten).
-5. Pushen Sie den Branch: `git push origin feature/mein-feature`.
-6. Erstellen Sie einen Pull Request. Neue PRs werden via `.github/workflows/auto-assign.yml` automatisch zugewiesen.
-
-### Quality Gates (Vor dem Commit)
-
-Vor jedem Commit und Pull Request müssen folgende Verifikationsschritte 100% grün durchlaufen:
+### Prüfungen
 
 ```bash
-# 1. Python Testsuite (179 Tests)
-pytest -v
-
-# 2. Node.js PWA Testsuite (45 Tests)
+python -m pytest
 node --test web_publisher/tests/publisher.test.mjs
-
-# 3. Linter & Format-Check
 ruff check .
-
-# 4. Bytecode-Kompilierung
-python -m compileall .
-
-# 5. Dataset-Integrität & Pipeline-Validierung
+python -m compileall -q .
 python wikistub_seed_cli.py stats
+python wikistub_seed_cli.py check
 python wikistub_seed_pipeline.py validate
+python web_publisher/_build.py
+git diff --exit-code -- web_publisher/data
 ```
 
-### Entwicklungsrichtlinien & Invarianten
+Die Python-Testmatrix läuft in GitHub Actions auf Ubuntu und Windows mit Python 3.10 bis 3.13. Ein separater Python-3.11-Source-Smoke läuft auf Ubuntu und macOS; die PWA-Tests laufen auf Ubuntu mit Node.js. Das belegt keine vollständige Verhaltensparität auf allen Betriebssystemen.
 
-- **Plan D Architektur:** Entwicklungsarbeiten finden ausschließlich im lokalen Git-Klon statt (`C:\_Local_DEV\repos\WikiStub-Seed`). OneDrive-Ordner dienen rein als spiegelnde Projektion.
-- **Version Freeze Disziplin:** Die Version `1.1.12` ist gemäß Richtlinie `T-20260920-167562623` eingefroren. Änderungen und Ergänzungen werden unter `## [Unreleased]` im `CHANGELOG.md` dokumentiert.
-- **100% Local-First & Zero Egress (INV-LOCAL-01 / INV-SEC-02):** Unprivilegierte Ausführung (`RunAsInvoker`), keine Telemetrie, keine unerwünschten Netzwerkverbindungen.
-- **Encoding:** Strikte UTF-8-Codierung für alle Quell- und Datendateien.
+### Daten, Netzwerk und Paketgrenzen
+
+Die vollständige CLI-, Editor-, Dataset- und PWA-Anwendung wird aus einem Source-Checkout verwendet. Das Python-Wheel enthält nur sechs wiederverwendbare API-Module; es enthält weder CLI, Editor, Dataset noch PWA. Installierte API-Aufrufe benötigen ausdrücklich ausgewählte externe Daten- und Authentifizierungspfade und verwenden `site-packages` nicht als Nutzerdatenspeicher.
+
+Der lokale Kern bearbeitet ausgewählte Dateien. Die optionale Übersetzung über die CLI sendet den ausgewählten Text und die Übersetzungsanweisungen an Anthropic. Dafür verlangt die CLI `ANTHROPIC_API_KEY`, das optionale SDK, `--confirm-api-cost` und eine positive `--max-budget-usd`-Grenze. Die Modul-APIs `translate_text` und `translate_batch` verlangen stattdessen ein explizites `max_budget_usd`; das CLI-Bestätigungsflag gilt dort nicht. Die lokale Kostenschätzung ist keine Garantie für die Providerabrechnung. Tests dürfen keine echten Provider, Schlüssel, Nutzerprofile oder Datenbanken kontaktieren.
+
+### Arbeitsweise
+
+- Quell- und Dokumentationsdateien werden als UTF-8 gespeichert. Deutsche Texte verwenden echte Umlaute.
+- Datenpfade und Authentifizierungsdateien bleiben außerhalb installierter Paketverzeichnisse.
+- Quelländerungen werden durch passende Regressionstests belegt; Dokumentationsänderungen brauchen keine Tests, die lediglich denselben Wortlaut spiegeln.
 
 ---
 
 ## English
 
-Thank you for your interest in contributing to WikiStub-Seed!
+Thank you for contributing to WikiStub-Seed.
 
-### How to Contribute
+### Contributions and Pull Requests
 
-1. **Report bugs:** Create an issue with the `bug` label.
-2. **Suggest features:** Create an issue with the `enhancement` label.
-3. **Improve documentation:** Submit proposals with the `documentation` label.
-4. **Contribute code:** Open a Pull Request.
+1. Report bugs or propose features through GitHub Issues.
+2. Work on your own branch and describe the observed behavior in the pull request.
+3. Run the relevant checks and report optional dependency or platform limitations accurately.
+4. Keep the frozen package version at `1.1.12`. Record unreleased changes under `## [Unreleased]` in `CHANGELOG.md`.
 
-### Pull Requests & Workflow
-
-1. Fork the repository on GitHub.
-2. Create a feature branch: `git checkout -b feature/my-feature`.
-3. Commit your changes following conventional commits (`feat:`, `fix:`, `docs:`, `chore:`).
-4. Run all local quality gates (see below).
-5. Push your branch: `git push origin feature/my-feature`.
-6. Open a Pull Request. New PRs are automatically triaged via `.github/workflows/auto-assign.yml`.
-
-### Quality Gates (Pre-Commit Verification)
-
-Before committing and submitting a PR, ensure all verification gates are 100% green:
+### Checks
 
 ```bash
-# 1. Python test suite (179 tests)
-pytest -v
-
-# 2. Node.js PWA test suite (45 tests)
+python -m pytest
 node --test web_publisher/tests/publisher.test.mjs
-
-# 3. Linter & formatting checks
 ruff check .
-
-# 4. Bytecode compilation
-python -m compileall .
-
-# 5. Dataset integrity & pipeline validation
+python -m compileall -q .
 python wikistub_seed_cli.py stats
+python wikistub_seed_cli.py check
 python wikistub_seed_pipeline.py validate
+python web_publisher/_build.py
+git diff --exit-code -- web_publisher/data
 ```
 
-### Architectural & Governance Invariants
+The Python test matrix runs on Ubuntu and Windows with Python 3.10 through 3.13. A separate Python 3.11 source smoke runs on Ubuntu and macOS; PWA tests run on Ubuntu with Node.js. This does not establish full behavioral parity on every operating system.
 
-- **Plan D Architecture:** Canonical development takes place solely in the local clone (`C:\_Local_DEV\repos\WikiStub-Seed`). OneDrive paths serve only as mirrors.
-- **Version Freeze Discipline:** Version `1.1.12` is frozen per `T-20260920-167562623`. All additions must be documented under `## [Unreleased]` in `CHANGELOG.md`.
-- **100% Local-First & Zero Egress (INV-LOCAL-01 / INV-SEC-02):** Unprivileged user mode (`RunAsInvoker`), zero telemetry, zero unsolicited external egress.
-- **Encoding:** Strict UTF-8 encoding across all data and code assets.
+### Data, Network, and Packaging Boundaries
+
+Use a source checkout for the full CLI, editor, dataset, and PWA application. The Python wheel contains only six reusable API modules; it does not include the CLI, editor, dataset, or PWA. Installed API calls require explicitly selected external data and authentication paths and must not use `site-packages` as user-data storage.
+
+The local core works with selected files. Optional translation through the CLI sends the selected text and instructions to Anthropic. The CLI requires `ANTHROPIC_API_KEY`, the optional SDK, `--confirm-api-cost`, and a positive `--max-budget-usd` ceiling. The module APIs `translate_text` and `translate_batch` instead require an explicit `max_budget_usd`; the CLI confirmation flag does not apply there. The local cost estimate is not a guarantee of provider billing. Tests must not contact real providers or use real keys, user profiles, or databases.
+
+### Working Practices
+
+- Store source and documentation as UTF-8; German text uses actual umlauts.
+- Keep data paths and authentication files outside installed package directories.
+- Use regression tests for source behavior; documentation tests should not simply mirror prose.
