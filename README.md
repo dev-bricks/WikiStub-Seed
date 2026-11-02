@@ -303,6 +303,8 @@ python edit_server.py            # default port 8879, opens the browser
 | `wiki_store.py` | Pure CRUD + soft-delete/trash functions the edit server uses |
 | `wiki_auth.py` | Password hashing, permission model and session tracking for the edit server |
 | `NOTICE` | Formal attribution and upstream ecosystem notice |
+| `SKILL.md` | Standalone product skill for autonomous and pair-programming agents |
+| `llm.txt` | Compatibility pointer to canonical `llms.txt` |
 | `THIRD_PARTY_LICENSES.md` | Bounded dependency and license notes for the documented project scope |
 | `THIRD_PARTY_LICENSES.txt` | Plain-text companion to the bounded dependency and license notes |
 
@@ -430,7 +432,7 @@ ruff check .
 node --test web_publisher/tests/publisher.test.mjs
 ```
 
-GitHub Actions runs the Python matrix on Ubuntu and Windows with Python 3.10 through 3.13. A separate Python 3.11 source smoke runs on Ubuntu and macOS, PWA tests run on Ubuntu, and package/artifact checks run in their configured jobs. These jobs cover selected paths; they do not establish identical behavior on every platform.
+GitHub Actions runs the Python matrix on Ubuntu, Windows, and macOS with Python 3.10 through 3.13. A separate Python 3.11 source smoke runs on Ubuntu and macOS, PWA tests run on Ubuntu, and package/artifact checks run in their configured jobs. These jobs cover selected paths; they do not establish identical behavior on every platform.
 ---
 
 <a id="sec-17"></a><a id="11-discovery--search-keywords"></a><a id="17-discovery-keywords--ai-agent-index"></a>

@@ -303,6 +303,8 @@ python edit_server.py            # Standardport 8879, öffnet den Browser
 | `wiki_store.py` | CRUD- und Soft-Delete-Funktionen für den Editierserver |
 | `wiki_auth.py` | Passworthashing, Rechtemodell und Session-Tracking |
 | `NOTICE` | Formeller Zurechnungs- und Ökosystem-Urheberrechtshinweis |
+| `SKILL.md` | Eigenständiger Produkt-Skill für autonome Agenten und Pair-Programming |
+| `llm.txt` | Kompatibilitätsverweis auf die kanonische `llms.txt` |
 | `THIRD_PARTY_LICENSES.md` | Begrenzte Hinweise zu dokumentierten Abhängigkeiten und Lizenzen |
 | `THIRD_PARTY_LICENSES.txt` | Klartext-Begleitdatei zu den begrenzten Abhängigkeits- und Lizenzhinweisen |
 
@@ -430,7 +432,7 @@ ruff check .
 node --test web_publisher/tests/publisher.test.mjs
 ```
 
-GitHub Actions führt die Python-Matrix auf Ubuntu und Windows mit Python 3.10 bis 3.13 aus. Ein separater Python-3.11-Source-Smoke läuft auf Ubuntu und macOS, PWA-Tests laufen auf Ubuntu, Paket- und Artefaktprüfungen in den dafür konfigurierten Jobs. Diese Prüfungen decken ausgewählte Pfade ab und belegen keine identische Funktion auf allen Plattformen.
+GitHub Actions führt die Python-Matrix auf Ubuntu, Windows und macOS mit Python 3.10 bis 3.13 aus. Ein separater Python-3.11-Source-Smoke läuft auf Ubuntu und macOS, PWA-Tests laufen auf Ubuntu, Paket- und Artefaktprüfungen in den dafür konfigurierten Jobs. Diese Prüfungen decken ausgewählte Pfade ab und belegen keine identische Funktion auf allen Plattformen.
 ---
 
 <a id="sec-17"></a><a id="11-auffindbarkeit--suchbegriffe"></a><a id="17-auffindbarkeit--ki-agenten-index"></a>

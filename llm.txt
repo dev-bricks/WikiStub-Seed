@@ -1,0 +1,4 @@
+# WikiStub-Seed — LLM Guidance Pointer
+
+This repository provides canonical LLM guidance, architecture notes, and machine-readable navigation in **[llms.txt](llms.txt)**.
+For autonomous agent workflows and product operation procedures, see **[SKILL.md](SKILL.md)**.

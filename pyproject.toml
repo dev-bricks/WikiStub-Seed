@@ -85,6 +85,8 @@ Notice = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/NOTICE"
 "Dependency and License References" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"
 "Marketing Log" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/MARKETING-LOG.txt"
 "LLM Ready" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/llms.txt"
+"LLM Pointer" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/llm.txt"
+Skill = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SKILL.md"
 
 [tool.pytest.ini_options]
 minversion = "7.0"

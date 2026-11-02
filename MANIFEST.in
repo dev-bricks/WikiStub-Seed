@@ -3,7 +3,7 @@ include .gitignore
 include README.md README_de.md README_es.md README_ja.md README_ru.md README_zh-Hans.md
 include LICENSE NOTICE CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md SECURITY.md
 include THIRD_PARTY_LICENSES.md THIRD_PARTY_LICENSES.txt RELEASE_GATE.md TODO.md
-include EXPORTFORMAT.md EMBEDDING_SEARCH_API.md MARKETING-LOG.txt llms.txt
+include EXPORTFORMAT.md EMBEDDING_SEARCH_API.md MARKETING-LOG.txt llms.txt llm.txt SKILL.md
 include requirements.txt requirements-dev.txt wikistub_seed.json wikistub_seed.ico start.bat
 include ellmos-module.v2.json
 include *.py

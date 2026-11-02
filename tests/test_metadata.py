@@ -129,6 +129,8 @@ def test_core_documentation_files_exist():
         "MARKETING-LOG.txt",
         "THIRD_PARTY_LICENSES.md",
         "THIRD_PARTY_LICENSES.txt",
+        "SKILL.md",
+        "llm.txt",
     ]
 
     for fname in required_files:
@@ -248,6 +250,7 @@ def test_ci_workflow_integrity():
     assert "'3.13'" in content or '"3.13"' in content
     assert "ubuntu-latest" in content
     assert "windows-latest" in content
+    assert "macos-latest" in content
     assert "node --test" in content
     assert "cancel-in-progress: true" in content
     assert "concurrency:" in content
@@ -410,6 +413,10 @@ def test_pyproject_extended_urls():
     assert "MARKETING-LOG.txt" in content
     assert '"LLM Ready"' in content
     assert "llms.txt" in content
+    assert '"LLM Pointer"' in content
+    assert "llm.txt" in content
+    assert 'Skill = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SKILL.md"' in content
+    assert "SKILL.md" in content
 
 
 def test_notice_attribution_file():
@@ -614,3 +621,20 @@ def test_all_readme_international_badge_parity():
         assert "version-1.1.12" in content, f"version badge missing in {rname}"
         assert "dev--bricks" in content, f"dev-bricks ecosystem badge missing in {rname}"
         assert "open--bricks" in content, f"open-bricks umbrella badge missing in {rname}"
+
+
+def test_product_skill_and_llm_pointer():
+    """Verify product SKILL.md and llm.txt pointer exist, adhere to P-022, and link to project CLI/docs."""
+    skill_path = PROJECT_ROOT / "SKILL.md"
+    assert skill_path.is_file(), "SKILL.md is missing"
+    skill_content = skill_path.read_text(encoding="utf-8")
+    assert skill_content.startswith("---"), "SKILL.md must start with YAML frontmatter"
+    assert "name: wikistub-seed" in skill_content
+    assert "wikistub_seed_cli.py" in skill_content
+    assert "wikistub_seed_pipeline.py" in skill_content
+
+    llm_path = PROJECT_ROOT / "llm.txt"
+    assert llm_path.is_file(), "llm.txt is missing"
+    llm_content = llm_path.read_text(encoding="utf-8")
+    assert "llms.txt" in llm_content
+    assert "SKILL.md" in llm_content
