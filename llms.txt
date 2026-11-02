@@ -33,6 +33,8 @@ WikiStub-Seed is a multilingual JSON knowledge-stub library for AI-assisted rese
 - `README.md`: public overview, source-checkout and installed-wheel scope, usage and project positioning
 - `README_de.md`: German documentation and guide, with navigation anchors retained
 - `NOTICE`: formal attribution and upstream ecosystem notice
+- `SKILL.md`: product skill for autonomous and pair agents (CLI operations, local workflows, validation)
+- `llm.txt`: lightweight compatibility pointer to this file
 - `pyproject.toml`: build metadata and pytest/ruff configuration
 - `wikistub_seed.json`: authoritative multilingual knowledge dataset
 - `wikistub_seed_cli.py`: CLI for statistics and consistency checks

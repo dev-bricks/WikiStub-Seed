@@ -5,6 +5,19 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Repository-Hygiene, CI-Matrix-Härtung, PEP 621 Metadaten & Vertragstests (Pfad A) - 2026-11-02
+- **Mitgelieferter Produkt-Skill & LLM-Pointer (P-022 / GITHUB-POLICY)**:
+  - `SKILL.md` als softwarespezifische Nutzungsanleitung für Agenten im Repo-Root angelegt (beschreibt Aufgaben, Voraussetzungen, CLI-Aufrufe, Verifikation und Grenzen von WikiStub-Seed).
+  - `llm.txt` als standardisierter Kompatibilitätsverweis auf die kanonische `llms.txt` angelegt.
+- **CI-Matrix-Dokumentation & Workflow-Härtung**:
+  - CI-Matrix-Dokumentation in `README.md` und `README_de.md` (Abschnitt 16) an die macOS-Matrix-Erweiterung (`ubuntu-latest`, `windows-latest`, `macos-latest`) angepasst.
+  - `actions/checkout` in `.github/workflows/label-sync.yml` auf festen Commit-SHA (`3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1`) gehärtet.
+- **PEP 621 Metadaten in `pyproject.toml`**:
+  - `Skill` (`SKILL.md`) und `LLM Pointer` (`llm.txt`) unter `[project.urls]` registriert.
+  - `MANIFEST.in` um `llm.txt` und `SKILL.md` ergänzt.
+- **Vertragstests (`tests/test_metadata.py`)**:
+  - Vertragstests für `SKILL.md`, `llm.txt`, PEP 621 URLs und CI-macOS-Matrix (`macos-latest`) in `test_metadata.py` ergänzt.
+
 ### Dokumentationskorrekturen – Geltungsbereich und Nachweise (2026-10-13)
 - Aussagen zu Zero-Egress, vollständiger Offline-Nutzung, formalen RunAsInvoker-/SBOM-/Lizenzprüfungen, garantierten Reaktionszeiten und historischen Testzahlen wurden als aktuelle Produktgarantien entfernt oder eingegrenzt. Frühere Changelog-Einträge dokumentieren die damalige Kommunikation und sind kein aktueller Prüfbeleg.
 - README-Fassungen und `llms.txt` beschreiben jetzt getrennt den Source-Checkout, die sechs API-Module des Wheels, die optionalen externen Übersetzungsaufrufe und die tatsächliche Service-Worker-Caching-Grenze der PWA.
