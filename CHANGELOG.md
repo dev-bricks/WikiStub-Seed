@@ -5,6 +5,22 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Marketing, Discoverability, README-Architektur & Sequenzdiagramme (Pfad B) - 2026-11-07
+- **International README Badge Parity (EN, DE, ES, JA, RU, ZH)**:
+  - Verifizierter Testnachweis-Badge (`tests-204 passed`) auf Basis realer lokaler Messergebnisse in alle 6 Sprachversionen integriert.
+  - Zero-Core-Dependency-Badge (`core deps: zero (stdlib)`) und Local-First-Architektur-Badge (`storage: local-first`) synchron über alle Sprachausgaben ergänzt.
+- **Sequenzdiagramm-Erweiterung (README.md & README_de.md)**:
+  - Abschnitt 3 um den Lebenszyklus des lokalen GUI-Edit-Servers (`edit_server.py`) auf `127.0.0.1` erweitert (Visualisierung der Host-Header-Validierung, PBKDF2-Sitzungsprüfung, atomares Schreiben/Rollback, Soft-Delete-Papierkorb via `wikistub_seed_trash.json` und automatischer PWA-Index-Neuerstellung).
+- **PWA-Landing-Page & SEO-Metadaten (`web_publisher/index.html`)**:
+  - Vollständige Open-Graph- (`og:title`, `og:description`, `og:type`, `og:url`, `og:image`) und Twitter-Card-Metadaten (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`) für optimierte Social-Previews und Suchmaschinen-Auffindbarkeit implementiert.
+  - Strukturierte Meta-Description und Keywords zur Präzisierung des RAG- und Wissensbasis-Profils hinzugefügt.
+- **Community Health & Umlautdisziplin**:
+  - Deutsche Umlautkorrektur in `CODE_OF_CONDUCT.md` ("Geschlechtsidentität", "sexueller Identität") durchgeführt.
+- **Vertragstests & Testsuiten-Erweiterung (`tests/test_metadata.py` & `web_publisher/tests/publisher.test.mjs`)**:
+  - Neue Vertragstests `test_readme_sequence_diagram_crud_edit_server_parity()` und `test_pwa_landing_page_seo_metadata()` in `test_metadata.py` angelegt.
+  - Testsuite `test_all_readme_international_badge_parity()` um Testnachweis- und Local-First-Badges über alle 6 Sprachfassungen erweitert.
+  - Node.js-Testsuite in `publisher.test.mjs` um Überprüfung der SEO- und Open-Graph-Metadaten ergänzt (46/46 PWA-Tests grün).
+
 ### Repository-Hygiene, CI-Matrix-Härtung, PEP 621 Metadaten & Vertragstests (Pfad A) - 2026-11-02
 - **Mitgelieferter Produkt-Skill & LLM-Pointer (P-022 / GITHUB-POLICY)**:
   - `SKILL.md` als softwarespezifische Nutzungsanleitung für Agenten im Repo-Root angelegt (beschreibt Aufgaben, Voraussetzungen, CLI-Aufrufe, Verifikation und Grenzen von WikiStub-Seed).

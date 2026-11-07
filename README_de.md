@@ -9,6 +9,7 @@
 WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 
 [![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
+![Tests](https://img.shields.io/badge/tests-204%20passed-brightgreen)
 [![Version](https://img.shields.io/badge/version-1.1.12-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
@@ -17,6 +18,8 @@ WikiStub-Seed ist eine Wissens-Stub-Seed-Bibliothek, kein Wiki.
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+![Core Dependencies](https://img.shields.io/badge/core%20deps-zero%20(stdlib)-success)
+![Architecture](https://img.shields.io/badge/architecture-local--first-blue)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
@@ -117,6 +120,9 @@ sequenceDiagram
     autonumber
     actor User as Entwickler / KI-Agent
     participant CLI as wikistub_seed_cli / pipeline
+    participant Server as edit_server (127.0.0.1)
+    participant Auth as wiki_auth (PBKDF2)
+    participant Store as wiki_store (CRUD + Papierkorb)
     participant Data as wikistub_seed.json (630 Stubs)
     participant Builder as web_publisher/_build.py
     participant PWA as Statische PWA / ServiceWorker
@@ -132,11 +138,23 @@ sequenceDiagram
         CLI-->>User: Schreibe strukturiertes Markdown nach output/
     end
     
+    opt Lokaler GUI-Edit-Server & Soft-Delete Papierkorb (127.0.0.1)
+        User->>Server: HTTP POST /api/entry (JSON-Payload)
+        Server->>Auth: Host-Header & PBKDF2-Sitzungscookie prüfen
+        Auth-->>Server: Berechtigung bestätigt
+        Server->>Store: Atomares Erstellen / Aktualisieren / Soft-Delete
+        Store->>Data: Datensatz mit Backup-Rollback speichern
+        Store-->>Server: Vorgang bestätigt
+        Server->>Builder: _build.py Neuindizierung auslösen
+        Builder-->>Server: web_publisher Daten aktualisiert
+        Server-->>User: HTTP 200 / 201 Antwort
+    end
+
     opt Lokale PWA bauen & nutzen
         User->>Builder: Ausführen von _build.py
         Builder->>Data: Zerlegt & indiziert Stubs
         Builder-->>PWA: Erzeugt data/wikistub_seed.json & search-index.json
-    PWA-->>User: Suche in zwischengespeicherten Daten mit gewählter Datensatzsprache
+        PWA-->>User: Suche in zwischengespeicherten Daten mit gewählter Datensatzsprache
     end
 ```
 
