@@ -349,13 +349,14 @@ The current authoritative source is `wikistub_seed.json`. `EXPORTFORMAT.md` docu
 
 ## Bundles and partners
 
-Generated discovery projection for `module:WikiStub-Seed` from `catalog:v4-bundles` (`546290dafbaafd810df1d59ef5a3d7183738472b48cd5a8a81f1e8f2b64d852e`).
+Generated discovery projection for `module:WikiStub-Seed` from `catalog:v4-bundles` (`9ab64b71e0c9ac29442f688cdc32ee05b08e2576544841014b23074d8c27f870`).
 Target repository visibility: `public`. Bundle manifests remain the membership authority; this section does not install or activate components.
 Discovery approval: `public` module-registry record, explicit default-deny bundle allowlist.
 
 ### `ellmos-knowledge-bundle`
 
-- Bundle recipe visibility: `private`; role: `declared-component`; requirement: `recommended`.
+- Bundle recipe visibility: `private`; role: `multilingual-knowledge-stub-seed-scaffold`; requirement: `recommended`.
+- Function in this bundle: Provides a multilingual JSON knowledge-stub seed dataset and starter scaffold for structuring topic entries across domains.
 - module partners: `module:KnowledgeDigest`, `module:project-docs-template`, `module:report-forge`, `module:web-scraper`.
 - skill partners: `skill:bilingual-doc-sync`, `skill:docs-analysis`, `skill:document-chunker`.
 
