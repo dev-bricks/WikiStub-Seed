@@ -195,7 +195,7 @@ Wichtige Einstiegspunkte:
 
 Проверенная проекция обнаружения для `module:WikiStub-Seed`, созданная из
 `catalog:v4-bundles`
-(`546290dafbaafd810df1d59ef5a3d7183738472b48cd5a8a81f1e8f2b64d852e`).
+(`9ab64b71e0c9ac29442f688cdc32ee05b08e2576544841014b23074d8c27f870`).
 Целевой репозиторий имеет видимость `public`. Манифесты бандлов остаются
 авторитетным источником членства; этот раздел не устанавливает и не активирует
 компоненты. Основание допуска — публичная запись реестра модуля и явный
@@ -203,8 +203,9 @@ default-deny список разрешённых бандлов.
 
 ### `ellmos-knowledge-bundle`
 
-- Видимость рецепта бандла: `private`; роль: `declared-component`;
+- Видимость рецепта бандла: `private`; роль: `multilingual-knowledge-stub-seed-scaffold`;
   требование: `recommended`.
+- Функция в этом бандле: Предоставляет многоязычный начальный набор данных JSON-заглушек знаний и стартовый каркас для структурирования тематических записей по различным областям.
 - Партнёры-модули: `module:KnowledgeDigest`,
   `module:project-docs-template`, `module:report-forge`,
   `module:web-scraper`.

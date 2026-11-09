@@ -194,7 +194,7 @@ Wichtige Einstiegspunkte:
 ## バンドルとパートナー
 
 `catalog:v4-bundles`
-（`546290dafbaafd810df1d59ef5a3d7183738472b48cd5a8a81f1e8f2b64d852e`）
+（`9ab64b71e0c9ac29442f688cdc32ee05b08e2576544841014b23074d8c27f870`）
 から生成された、`module:WikiStub-Seed` の検証済み Discovery
 プロジェクションです。対象リポジトリの可視性は `public` です。
 メンバーシップの権威は引き続き Bundle Manifest にあり、この節は
@@ -203,8 +203,9 @@ Module Registry レコードと、default-deny の明示的な Bundle Allowlist 
 
 ### `ellmos-knowledge-bundle`
 
-- Bundle Recipe の可視性: `private`、役割: `declared-component`、
+- Bundle Recipe の可視性: `private`、役割: `multilingual-knowledge-stub-seed-scaffold`、
   要件: `recommended`。
+- このバンドルでの機能: 複数ドメインにわたるトピックエントリーを構造化するための、多言語 JSON ナレッジスタブ初期データセットとスターター足場を提供します。
 - Module パートナー: `module:KnowledgeDigest`,
   `module:project-docs-template`, `module:report-forge`,
   `module:web-scraper`。

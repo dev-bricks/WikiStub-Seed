@@ -194,7 +194,7 @@ Wichtige Einstiegspunkte:
 ## Bundle 与合作组件
 
 这是从 `catalog:v4-bundles`
-（`546290dafbaafd810df1d59ef5a3d7183738472b48cd5a8a81f1e8f2b64d852e`）
+（`9ab64b71e0c9ac29442f688cdc32ee05b08e2576544841014b23074d8c27f870`）
 生成并验证的 `module:WikiStub-Seed` Discovery 投影。目标仓库的可见性为
 `public`。Bundle Manifest 仍是成员关系的权威来源；本节不会安装或激活
 任何组件。批准依据是公开的模块注册记录，以及采用 default-deny 策略的
@@ -202,8 +202,9 @@ Wichtige Einstiegspunkte:
 
 ### `ellmos-knowledge-bundle`
 
-- Bundle Recipe 可见性：`private`；角色：`declared-component`；
+- Bundle Recipe 可见性：`private`；角色：`multilingual-knowledge-stub-seed-scaffold`；
   要求：`recommended`。
+- 本 Bundle 中的功能：提供多语言 JSON 知识存根种子数据集和初始脚手架，用于跨领域构建主题条目。
 - 模块合作组件：`module:KnowledgeDigest`,
   `module:project-docs-template`, `module:report-forge`,
   `module:web-scraper`。

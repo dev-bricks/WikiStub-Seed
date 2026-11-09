@@ -195,7 +195,7 @@ Wichtige Einstiegspunkte:
 
 Proyección de descubrimiento verificada para `module:WikiStub-Seed` procedente
 de `catalog:v4-bundles`
-(`546290dafbaafd810df1d59ef5a3d7183738472b48cd5a8a81f1e8f2b64d852e`).
+(`9ab64b71e0c9ac29442f688cdc32ee05b08e2576544841014b23074d8c27f870`).
 El repositorio de destino es `public`. Los manifiestos de los bundles siguen
 siendo la autoridad sobre la pertenencia; esta sección no instala ni activa
 componentes. La aprobación se basa en un registro público del módulo y en una
@@ -204,7 +204,8 @@ lista de bundles permitidos explícita con política default-deny.
 ### `ellmos-knowledge-bundle`
 
 - Visibilidad de la receta del bundle: `private`; rol:
-  `declared-component`; requisito: `recommended`.
+  `multilingual-knowledge-stub-seed-scaffold`; requisito: `recommended`.
+- Función en este bundle: Proporciona un conjunto de datos iniciales en JSON multilingüe y un andamiaje inicial para estructurar entradas temáticas en diversos dominios.
 - Socios de módulo: `module:KnowledgeDigest`,
   `module:project-docs-template`, `module:report-forge`,
   `module:web-scraper`.
