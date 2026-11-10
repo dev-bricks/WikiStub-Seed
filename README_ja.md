@@ -9,6 +9,7 @@
 WikiStub-Seedはナレッジスタブのシードライブラリであり、Wikiではありません。
 
 [![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
+![Tests](https://img.shields.io/badge/tests-204%20passed-brightgreen)
 [![Version](https://img.shields.io/badge/version-1.1.12-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
@@ -17,6 +18,8 @@ WikiStub-Seedはナレッジスタブのシードライブラリであり、Wiki
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+![Core Dependencies](https://img.shields.io/badge/core%20deps-zero%20(stdlib)-success)
+![Architecture](https://img.shields.io/badge/architecture-local--first-blue)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)

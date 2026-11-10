@@ -7,9 +7,9 @@
 Wir als Mitglieder, Beitragende und Leitende verpflichten uns, die Teilnahme an unserer
 Community zu einer belästigungsfreien Erfahrung für alle zu machen, unabhängig von
 Alter, Körpergröße, sichtbarer oder unsichtbarer Behinderung, ethnischer Zugehörigkeit,
-Geschlechtsmerkmalen, Geschlechtsidentitaet und -ausdruck, Erfahrungsgrad, Bildung,
+Geschlechtsmerkmalen, Geschlechtsidentität und -ausdruck, Erfahrungsgrad, Bildung,
 sozioökonomischem Status, Nationalität, persönlichem Aussehen, Herkunft, Religion
-oder sexueller Identitaet und Orientierung.
+oder sexueller Identität und Orientierung.
 
 ### Unsere Standards
 
