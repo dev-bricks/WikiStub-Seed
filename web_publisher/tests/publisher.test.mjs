@@ -151,6 +151,16 @@ describe("index.html", () => {
     }
     assert.ok(html.includes('aria-label="Sprache auswählen"'));
   });
+  it("enthält SEO-, Open-Graph- und Twitter-Card-Metadaten", () => {
+    html = html || readText("index.html");
+    assert.ok(html.includes('name="description"'), "meta description fehlt");
+    assert.ok(html.includes('name="keywords"'), "meta keywords fehlt");
+    assert.ok(html.includes('property="og:title"'), "og:title fehlt");
+    assert.ok(html.includes('property="og:description"'), "og:description fehlt");
+    assert.ok(html.includes('property="og:type"'), "og:type fehlt");
+    assert.ok(html.includes('name="twitter:card"'), "twitter:card fehlt");
+    assert.ok(html.includes('name="twitter:title"'), "twitter:title fehlt");
+  });
 });
 
 // ── 6: sw.js ist in ASSETS vollständig ───────────────────────────────────────

@@ -621,6 +621,41 @@ def test_all_readme_international_badge_parity():
         assert "version-1.1.12" in content, f"version badge missing in {rname}"
         assert "dev--bricks" in content, f"dev-bricks ecosystem badge missing in {rname}"
         assert "open--bricks" in content, f"open-bricks umbrella badge missing in {rname}"
+        assert "tests-204%20passed" in content, f"test count badge missing in {rname}"
+        assert "core%20deps-zero%20(stdlib)" in content, f"core deps badge missing in {rname}"
+        assert "architecture-local--first" in content, f"local-first architecture badge missing in {rname}"
+
+
+def test_readme_sequence_diagram_crud_edit_server_parity():
+    """Verify both English and German READMEs feature the Local GUI Edit Server sequence block."""
+    readme_en = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+    readme_de = (PROJECT_ROOT / "README_de.md").read_text(encoding="utf-8")
+
+    assert "edit_server (127.0.0.1)" in readme_en
+    assert "wiki_auth (PBKDF2)" in readme_en
+    assert "wiki_store (CRUD + Trash)" in readme_en
+    assert "opt Local GUI Edit Server & Soft-Delete Trash (127.0.0.1)" in readme_en
+
+    assert "edit_server (127.0.0.1)" in readme_de
+    assert "wiki_auth (PBKDF2)" in readme_de
+    assert "wiki_store (CRUD + Papierkorb)" in readme_de
+    assert "opt Lokaler GUI-Edit-Server & Soft-Delete Papierkorb (127.0.0.1)" in readme_de
+
+
+def test_pwa_landing_page_seo_metadata():
+    """Verify web_publisher/index.html includes complete SEO, Open Graph and Twitter Card tags."""
+    index_html = (PROJECT_ROOT / "web_publisher" / "index.html").read_text(encoding="utf-8")
+    assert '<meta name="description"' in index_html
+    assert '<meta name="keywords"' in index_html
+    assert '<meta property="og:title"' in index_html
+    assert '<meta property="og:description"' in index_html
+    assert '<meta property="og:type"' in index_html
+    assert '<meta property="og:url"' in index_html
+    assert '<meta property="og:image"' in index_html
+    assert '<meta name="twitter:card"' in index_html
+    assert '<meta name="twitter:title"' in index_html
+    assert '<meta name="twitter:description"' in index_html
+    assert '<meta name="twitter:image"' in index_html
 
 
 def test_product_skill_and_llm_pointer():
