@@ -9,6 +9,7 @@
 WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 
 [![WikiStub-Seed test gates](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml/badge.svg)](https://github.com/dev-bricks/WikiStub-Seed/actions/workflows/tests.yml)
+![Tests](https://img.shields.io/badge/tests-204%20passed-brightgreen)
 [![Version](https://img.shields.io/badge/version-1.1.12-blue.svg)](pyproject.toml)
 [![Ecosystem: dev-bricks](https://img.shields.io/badge/ecosystem-dev--bricks-blue.svg)](https://github.com/dev-bricks)
 [![Umbrella: open-bricks](https://img.shields.io/badge/umbrella-open--bricks-indigo.svg)](https://github.com/open-bricks)
@@ -17,6 +18,8 @@ WikiStub-Seed is a knowledge-stub seed library, not a wiki.
 ![Format](https://img.shields.io/badge/format-JSON-green)
 ![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+![Core Dependencies](https://img.shields.io/badge/core%20deps-zero%20(stdlib)-success)
+![Architecture](https://img.shields.io/badge/architecture-local--first-blue)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![Attribution Notice](https://img.shields.io/badge/attribution-NOTICE-informational.svg)](NOTICE)
 [![Marketing Log](https://img.shields.io/badge/marketing%20log-active-blue.svg)](MARKETING-LOG.txt)
@@ -117,6 +120,9 @@ sequenceDiagram
     autonumber
     actor User as Developer / AI Agent
     participant CLI as wikistub_seed_cli / pipeline
+    participant Server as edit_server (127.0.0.1)
+    participant Auth as wiki_auth (PBKDF2)
+    participant Store as wiki_store (CRUD + Trash)
     participant Data as wikistub_seed.json (630 Stubs)
     participant Builder as web_publisher/_build.py
     participant PWA as Static PWA / ServiceWorker
@@ -132,6 +138,18 @@ sequenceDiagram
         CLI-->>User: Write structured Markdown to output/
     end
     
+    opt Local GUI Edit Server & Soft-Delete Trash (127.0.0.1)
+        User->>Server: HTTP POST /api/entry (JSON payload)
+        Server->>Auth: Verify Host header & PBKDF2 session cookie
+        Auth-->>Server: Permission verified
+        Server->>Store: Atomic create / update / soft-delete
+        Store->>Data: Write dataset with backup rollback
+        Store-->>Server: Operation confirmed
+        Server->>Builder: Trigger _build.py re-index
+        Builder-->>Server: web_publisher data updated
+        Server-->>User: HTTP 200 / 201 Response
+    end
+
     opt Build & Serve Local PWA
         User->>Builder: Run _build.py
         Builder->>Data: Slices & indexes stubs
