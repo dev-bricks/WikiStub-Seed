@@ -97,7 +97,7 @@ class EditServerTestCase(unittest.TestCase):
                 if set_cookie and edit_server.SESSION_COOKIE_NAME in set_cookie:
                     token = set_cookie.split(f"{edit_server.SESSION_COOKIE_NAME}=")[1].split(";")[0]
                 return resp.status, payload, token
-            except (ConnectionAbortedError, ConnectionResetError):
+            except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
                 if attempt == 2:
                     raise
                 time.sleep(0.05)
@@ -112,7 +112,7 @@ class EditServerTestCase(unittest.TestCase):
                 resp = conn.getresponse()
                 resp.read()
                 return resp.status
-            except (ConnectionAbortedError, ConnectionResetError):
+            except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
                 if attempt == 2:
                     raise
                 time.sleep(0.05)
@@ -526,14 +526,17 @@ class StaticServingTests(EditServerTestCase):
 
 class RequestBodyBoundsAndJsonHardeningTests(EditServerTestCase):
     def test_oversized_content_length_returns_413(self):
-        oversized = b'{"padding":"' + (b"x" * edit_server.MAX_JSON_BODY_BYTES) + b'"}'
-        status = self.raw_request(
-            "POST",
-            "/api/categories",
-            body=oversized,
-            headers={"Content-Type": "application/json"},
-        )
-        self.assertEqual(status, 413)
+        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+        try:
+            conn.putrequest("POST", "/api/categories")
+            conn.putheader("Content-Type", "application/json")
+            conn.putheader("Content-Length", str(edit_server.MAX_JSON_BODY_BYTES + 1))
+            conn.endheaders()
+            resp = conn.getresponse()
+            resp.read()
+            self.assertEqual(resp.status, 413)
+        finally:
+            conn.close()
 
     def test_malformed_content_length_and_transfer_encoding_are_rejected(self):
         for bad_len in ("abc", "-5"):
