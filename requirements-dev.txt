@@ -1,4 +1,4 @@
-ruff==0.15.18
+ruff==0.17.6
 pytest>=9.0.3
 build>=1.2.0
 setuptools>=77.0.3
