@@ -20,7 +20,8 @@ project (used by cmd_export already).
 Soft delete only: nothing here ever drops data on the floor. delete_entry/
 delete_category/delete_subcategory move their payload into a trash file
 (wikistub_seed_trash.json, gitignored, instance-local) instead of discarding
-it, and restore_entry_from_trash is the documented inverse.
+it, and restore_entry_from_trash is the documented inverse. Existing malformed
+trash files fail closed via TrashDataError rather than being silently wiped.
 """
 from __future__ import annotations
 
@@ -31,7 +32,7 @@ from pathlib import Path
 from typing import Any
 
 from language_model import existing_mapping_key, identifier_key, merge_entry, normalize_entry
-from safe_io import atomic_write_json, backup_file, read_json_object, safe_path_component
+from safe_io import JsonDataError as JsonDataError, atomic_write_json, backup_file, read_json_object, safe_path_component
 
 BASE_PATH = Path(__file__).parent.resolve()
 JSON_PATH = BASE_PATH / "wikistub_seed.json"
@@ -67,6 +68,7 @@ def _resolve_storage_path(path: Path | str | None, *, default_name: str, purpose
         )
     return resolved
 
+
 ENTRY_FIELDS = ("title", "definition_de", "definition_en", "relevance", "tags")
 
 
@@ -76,6 +78,10 @@ class WikiStoreError(Exception):
 
 class StoragePathRequiredError(WikiStoreError):
     """Raised before I/O when an installed wheel has no explicit data path."""
+
+
+class TrashDataError(WikiStoreError):
+    """Raised when an existing trash file is unreadable or structurally invalid."""
 
 
 class NotFoundError(WikiStoreError):
@@ -101,7 +107,7 @@ def _validate_component_name(value: object, *, label: str) -> str:
     stored value; it is only used as the "would this be safe on disk?"
     check, since category/subcategory names do become path components in
     cmd_export)."""
-    text = str(value).strip() if isinstance(value, str) else ""
+    text = value.strip() if isinstance(value, str) else ""
     if not text:
         raise ValidationError(f"{label} darf nicht leer sein.")
     if safe_path_component(text) != text:
@@ -111,6 +117,23 @@ def _validate_component_name(value: object, *, label: str) -> str:
             "Namen). Bitte einen anderen Namen waehlen."
         )
     return text
+
+
+def _validate_stub_list_payload(entries: object, *, context: str) -> list[dict[str, Any]]:
+    if not isinstance(entries, list):
+        raise ValidationError(f"Ungültige Eintragsliste in {context}.")
+    seen_titles: set[str] = set()
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValidationError(f"Ungültiger Eintrag in {context}.")
+        title = entry.get("title")
+        if not isinstance(title, str) or not title.strip():
+            raise ValidationError(f"Eintrag ohne gültigen Titel in {context}.")
+        key = identifier_key(title.strip())
+        if key in seen_titles:
+            raise ValidationError(f"Doppelter Titel '{title.strip()}' in {context}.")
+        seen_titles.add(key)
+    return entries
 
 
 def load(json_path: Path | str | None = None) -> dict[str, Any]:
@@ -163,12 +186,16 @@ def find_category(data: dict[str, Any], category: str) -> str | None:
     """Diacritic/case-insensitive lookup of an existing category key
     (existing_mapping_key returns the input unchanged when nothing
     matches, so `key in root` is the correct "found it or not" test)."""
+    if not isinstance(category, str):
+        return None
     root = data.get("MetaWiki", {})
     key = existing_mapping_key(root, category)
     return key if key in root else None
 
 
 def find_subcategory(data: dict[str, Any], category: str, subcategory: str) -> str | None:
+    if not isinstance(subcategory, str):
+        return None
     cat_key = find_category(data, category)
     if cat_key is None:
         return None
@@ -186,6 +213,8 @@ def find_entry(
     diacritic/case-insensitive (existing_mapping_key), title matching is
     exact (identifier_key would treat two differently-capitalized titles as
     "the same stub", which is too aggressive for a rename target check)."""
+    if not isinstance(title, str):
+        return None
     cat_key = find_category(data, category)
     if cat_key is None:
         return None
@@ -224,6 +253,8 @@ def create_category(data: dict[str, Any], category: str) -> str:
     """Create an empty category. Returns the stored key (reuses an existing
     equivalent key instead of creating an ASCII/diacritic near-duplicate,
     same policy as create_subcategory/create_entry)."""
+    if not isinstance(category, str):
+        raise ValidationError("Kategorie muss ein String sein.")
     existing = find_category(data, category)
     if existing is not None:
         raise DuplicateError(f"Kategorie '{existing}' existiert bereits.")
@@ -239,6 +270,8 @@ def create_subcategory(data: dict[str, Any], category: str, subcategory: str) ->
     article under a brand new topic" flow); this function is for the
     explicit "add an empty subcategory" GUI action the ticket also asks
     for."""
+    if not isinstance(category, str) or not isinstance(subcategory, str):
+        raise ValidationError("Kategorie und Subkategorie müssen Strings sein.")
     cat_key = find_category(data, category)
     if cat_key is None:
         raise NotFoundError(f"Kategorie '{category}' existiert nicht.")
@@ -257,9 +290,12 @@ def create_entry(
     they do not exist yet (this is the "neue Kategorien und Unterartikel
     ERSTELLEN" path when done as one step from the GUI's "new article"
     form)."""
-    title = str(fields.get("title", "")).strip()
-    if not title:
+    if not isinstance(fields, dict):
+        raise ValidationError("entry muss ein JSON-Objekt sein.")
+    raw_title = fields.get("title", "")
+    if not isinstance(raw_title, str) or not raw_title.strip():
         raise ValidationError("title darf nicht leer sein.")
+    title = raw_title.strip()
 
     cat_key = find_category(data, category)
     if cat_key is None:
@@ -286,17 +322,22 @@ def update_entry(
     """Edit an existing stub in place (same category/subcategory -- moving
     an entry between categories is not part of this ticket's scope, only
     "AENDERN"). Uses language_model.merge_entry so any field this project
-    does not know about (e.g. the private .WIKI fork's full_text/origin/
-    source_path) survives untouched via public_entry()'s passthrough loop
-    -- proven by tests/test_wiki_store.py's
-    test_update_preserves_unknown_fields, which is this repo's half of the
-    Teil-2 full_text guarantee the ticket asks for."""
+    does not know about (e.g. full_text/origin/source_path) survives
+    untouched via public_entry()'s passthrough loop -- proven by
+    tests/test_wiki_store.py's test_update_preserves_unknown_fields."""
+    if not isinstance(updates, dict):
+        raise ValidationError("entry muss ein JSON-Objekt sein.")
+    if not isinstance(original_title, str) or not original_title:
+        raise ValidationError("original_title darf nicht leer sein.")
     located = find_entry(data, category, subcategory, original_title)
     if located is None:
         raise NotFoundError(f"'{original_title}' nicht gefunden in {category}/{subcategory}.")
     cat_key, sub_key, index, existing = located
 
-    new_title = str(updates.get("title", "")).strip() or existing.get("title", "")
+    raw_new_title = updates.get("title")
+    if raw_new_title is not None and not isinstance(raw_new_title, str):
+        raise ValidationError("title muss ein String sein.")
+    new_title = (raw_new_title.strip() if isinstance(raw_new_title, str) else "") or existing.get("title", "")
     if new_title != existing.get("title"):
         _reject_duplicate_title(data, cat_key, sub_key, new_title, ignore_index=index)
 
@@ -317,10 +358,13 @@ def _load_trash_raw(trash_path: Path) -> list[dict[str, Any]]:
     if not trash_path.exists():
         return []
     try:
-        payload = json.loads(trash_path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return []
-    return payload if isinstance(payload, list) else []
+        raw = trash_path.read_text(encoding="utf-8")
+        payload = json.loads(raw)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        raise TrashDataError("The local trash file is unreadable or invalid.") from None
+    if not isinstance(payload, list) or any(not isinstance(item, dict) for item in payload):
+        raise TrashDataError("The local trash file has an invalid structure.")
+    return payload
 
 
 def list_trash(trash_path: Path | str | None = None) -> list[dict[str, Any]]:
@@ -387,7 +431,7 @@ def delete_category(
 
 def restore_entry_from_trash(
     data: dict[str, Any], trash_path: Path, trash_index: int
-) -> dict[str, Any]:
+) -> Any:
     """Inverse of delete_entry/delete_subcategory/delete_category: pop the
     record at *trash_index*, re-insert its payload at its original location
     (recreating the category/subcategory if they were also removed since),
@@ -395,6 +439,8 @@ def restore_entry_from_trash(
     same-titled entry that already exists there (DuplicateError) rather
     than clobbering newer content -- the caller decides what to do next
     (e.g. rename, or delete the conflicting entry first)."""
+    if not isinstance(trash_index, int) or isinstance(trash_index, bool):
+        raise ValidationError("trash_index muss eine Ganzzahl sein.")
     trash_path = _resolve_storage_path(trash_path, default_name="wikistub_seed_trash.json", purpose="trash")
     records = _load_trash_raw(trash_path)
     if trash_index < 0 or trash_index >= len(records):
@@ -407,26 +453,50 @@ def restore_entry_from_trash(
     payload = record.get("payload")
 
     if kind == "category":
-        if find_category(data, category) is not None:
-            raise DuplicateError(f"Kategorie '{category}' existiert bereits, kann nicht wiederhergestellt werden.")
-        data.setdefault("MetaWiki", {})[category] = payload
+        cat_name = _validate_component_name(category, label="Kategorie")
+        if find_category(data, cat_name) is not None:
+            raise DuplicateError(f"Kategorie '{cat_name}' existiert bereits, kann nicht wiederhergestellt werden.")
+        if not isinstance(payload, dict):
+            raise ValidationError("Ungültige Kategorie-Nutzlast im Papierkorb.")
+        validated_subcats: dict[str, list[dict[str, Any]]] = {}
+        for sub_name, sub_entries in payload.items():
+            clean_sub = _validate_component_name(sub_name, label="Subkategorie")
+            validated_subcats[clean_sub] = _validate_stub_list_payload(
+                sub_entries, context=f"{cat_name}/{clean_sub}"
+            )
+        data.setdefault("MetaWiki", {})[cat_name] = validated_subcats
     elif kind == "subcategory":
-        cat_key = find_category(data, category)
+        cat_name = _validate_component_name(category, label="Kategorie")
+        sub_name = _validate_component_name(subcategory, label="Subkategorie")
+        validated_entries = _validate_stub_list_payload(payload, context=f"{cat_name}/{sub_name}")
+        cat_key = find_category(data, cat_name)
         if cat_key is None:
-            cat_key = create_category(data, category)
-        if find_subcategory(data, cat_key, subcategory) is not None:
-            raise DuplicateError(f"Subkategorie '{cat_key}/{subcategory}' existiert bereits, kann nicht wiederhergestellt werden.")
-        data["MetaWiki"][cat_key][subcategory] = payload
+            cat_key = create_category(data, cat_name)
+        if find_subcategory(data, cat_key, sub_name) is not None:
+            raise DuplicateError(
+                f"Subkategorie '{cat_key}/{sub_name}' existiert bereits, kann nicht wiederhergestellt werden."
+            )
+        data["MetaWiki"][cat_key][sub_name] = validated_entries
     elif kind == "entry":
-        cat_key = find_category(data, category)
+        cat_name = _validate_component_name(category, label="Kategorie")
+        sub_name = _validate_component_name(subcategory, label="Subkategorie")
+        if not isinstance(payload, dict):
+            raise ValidationError("Ungültige Eintrags-Nutzlast im Papierkorb.")
+        raw_title = payload.get("title")
+        if not isinstance(raw_title, str) or not raw_title.strip():
+            raise ValidationError("Papierkorb-Eintrag besitzt keinen gültigen Titel.")
+        title = raw_title.strip()
+        cat_key = find_category(data, cat_name)
         if cat_key is None:
-            cat_key = create_category(data, category)
-        sub_key = find_subcategory(data, cat_key, subcategory)
+            cat_key = create_category(data, cat_name)
+        sub_key = find_subcategory(data, cat_key, sub_name)
         if sub_key is None:
-            _, sub_key = create_subcategory(data, cat_key, subcategory)
-        title = payload.get("title", "") if isinstance(payload, dict) else ""
+            _, sub_key = create_subcategory(data, cat_key, sub_name)
         _reject_duplicate_title(data, cat_key, sub_key, title)
-        data["MetaWiki"][cat_key][sub_key].append(payload)
+        restored_entry = dict(payload)
+        restored_entry["title"] = title
+        data["MetaWiki"][cat_key][sub_key].append(restored_entry)
+        payload = restored_entry
     else:
         raise ValidationError(f"Unbekannter Papierkorb-Eintragstyp: {kind!r}")
 

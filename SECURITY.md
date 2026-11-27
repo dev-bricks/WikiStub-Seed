@@ -16,7 +16,7 @@ Der Editierserver ist für die Bindung an `127.0.0.1` konfiguriert. Das ist kein
 
 ### Meldeziele, keine garantierten Reaktionszeiten
 
-Die Maintainer bemühen sich, eine Sicherheitsmeldung innerhalb von 48 Stunden zu bestätigen und innerhalb von fünf Werktagen eine erste Triage vorzunehmen. Das sind Ziele, keine garantierten Service-Level. Patch- und Veröffentlichungszeitpunkte hängen von Befund, Kapazität und notwendiger Prüfung ab.
+Die Maintainer bemühen sich, eine Sicherheitsmeldung innerhalb von 48 Stunden zu bestätigen, innerhalb von fünf Werktagen eine erste Triage vorzunehmen und bestätigte Sicherheitslücken nach Möglichkeit innerhalb von 30 Kalendertagen zu beheben. Das sind Ziele, keine garantierten Service-Level. Patch- und Veröffentlichungszeitpunkte hängen von Befund, Kapazität und notwendiger Prüfung ab.
 
 ### Sicherheitslücke melden
 
@@ -54,7 +54,7 @@ The edit server is configured to bind to `127.0.0.1`; this is not a general netw
 
 ### Response Targets, Not Guarantees
 
-Maintainers aim to acknowledge a security report within 48 hours and perform an initial triage within five business days. These are targets, not guaranteed service levels. Fix and release timing depends on the finding, available capacity, and required review.
+Maintainers aim to acknowledge a security report within 48 hours, perform an initial triage within five business days, and address confirmed vulnerabilities within 30 calendar days where feasible. These are targets, not guaranteed service levels. Fix and release timing depends on the finding, available capacity, and required review.
 
 ### Reporting a Vulnerability
 

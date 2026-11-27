@@ -134,7 +134,7 @@ class PipelineCommandTests(unittest.TestCase):
             tags=["Informatik KI", "Kuenstliche Intelligenz"],
             category="07_Informatik_KI",
             subcategory="Kuenstliche_Intelligenz",
-            source_file=r"C:\\Users\\private\\Maschinelles_Lernen.md",
+            source_file=r"C:\\Users\\test\\Maschinelles_Lernen.md",
         )
 
         handler.add_stub(imported)

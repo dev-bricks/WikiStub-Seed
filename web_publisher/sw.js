@@ -1,7 +1,7 @@
-const CACHE_NAME = "wikistub-seed-v2";
+const CACHE_NAME = "wikistub-seed-v3";
 // Inhalts-Hash aller ASSETS-Dateien inkl. Manifest und Icons (tests/sw_asset_hash.test.mjs prueft ihn):
 // aendert sich eine davon, CACHE_NAME erhoehen, sonst behalten installierte PWAs den alten Code.
-const ASSET_HASH = 'e253472b19fe'; // eslint-disable-line no-unused-vars
+const ASSET_HASH = 'ebe743559601'; // eslint-disable-line no-unused-vars
 
 const ASSETS = [
   "./index.html",

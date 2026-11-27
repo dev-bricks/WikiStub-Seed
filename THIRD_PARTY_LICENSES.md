@@ -1,6 +1,6 @@
 # Declared Dependency and License References
 
-> Snapshot: 2026-10-12
+> Snapshot: 2026-11-27
 > Project license: [MIT](LICENSE)
 > Scope: direct Python project declarations, the optional translation integration, and the built-in Node test runner.
 > This is a limited inventory, not an SBOM or a complete resolved dependency graph. It does not assess license compatibility or certify compliance. Transitive dependencies and each release artifact's full contents require separate review.
@@ -16,9 +16,9 @@ The optional translation command imports the Anthropic SDK only when translation
 | Source | Direct declaration | Scope |
 |---|---|---|
 | `pyproject.toml` build-system | `setuptools>=77.0.3` | PEP 517 build backend |
-| `pyproject.toml` optional `dev` | `ruff>=0.5.0`, `pytest>=8.0.0`, `build>=1.2.0`, `setuptools>=77.0.3` | Development and build checks |
-| `pyproject.toml` optional `test` | `pytest>=8.0.0`, `build>=1.2.0`, `setuptools>=77.0.3` | Test and artifact checks |
-| `requirements-dev.txt` | `ruff==0.15.18`, `pytest>=8.0.0`, `build>=1.2.0`, `setuptools>=77.0.3` | CI/development environment |
+| `pyproject.toml` optional `dev` | `ruff>=0.5.0`, `pytest>=9.0.3`, `build>=1.2.0`, `setuptools>=77.0.3` | Development and build checks |
+| `pyproject.toml` optional `test` | `pytest>=9.0.3`, `build>=1.2.0`, `setuptools>=77.0.3` | Test and artifact checks |
+| `requirements-dev.txt` | `ruff==0.15.18`, `pytest>=9.0.3`, `build>=1.2.0`, `setuptools>=77.0.3` | CI/development environment |
 | `requirements.txt` | No active third-party requirement; the Anthropic example is commented out | Optional translation setup |
 | Node.js | Built-in `node --test` runner; no npm package manifest is used for PWA tests | PWA test command |
 

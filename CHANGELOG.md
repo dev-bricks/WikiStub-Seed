@@ -5,6 +5,20 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 
 ## [Unreleased]
 
+### Security- & Dependency-Audit, Edit-Server-Härtung & Pre-Push-Data-Gate - 2026-11-27
+- **HTTP-Edit-Server-, Session- & Papierkorb-Härtung (`edit_server.py`, `wiki_auth.py`, `wiki_store.py`)**:
+  - Begrenzung eingehender JSON-Request-Bodies auf `MAX_JSON_BODY_BYTES = 1_048_576` (`1 MiB`, HTTP `413`), Abweisung von `Transfer-Encoding` (`411`), kontrollierte Validierung fehlerhafter `Content-Length`-Header (`400`) sowie strikte Zurückweisung nicht-standardisierter JSON-Konstanten (`NaN`/`Infinity`).
+  - Verschärfte `Host`-Header-Prüfung ohne Multi-Colon-Bypass (`localhost` / `127.0.0.1` mit optionalem numerischem Port `1..65535`) auf `GET`, `HEAD`, `POST`, `PUT` und `DELETE`, `405` für `HEAD /api/*` sowie Port-Bereichsprüfung in `make_server()`.
+  - Serialisierung paralleler `/api/*`-Zugriffe über `server.write_lock` (`threading.Lock`) und threadsichere, kapazitätsbegrenzte `SessionStore`-Verwaltung (`max_sessions = 256`) inklusive vollständiger Sitzungsinvalidierung und Token-Rotation bei Passwortänderung bzw. Passwortentfernung.
+  - Fail-Closed-Schutz (`TrashDataError`) für beschädigte lokale Papierkorb-Dateien (`wikistub_seed_trash.json`) sowie strikte Typ- und Pfadkomponenten-Validierung gegen `bool`-als-`int`-Indizes, Nicht-`str`-Passworteingaben und ungültige Papierkorb-Einträge.
+- **Pytest-CWD-Isolation, Supply-Chain & Pre-Push-Data-Gate (`conftest.py`, `pyproject.toml`, `.gitignore`, `MANIFEST.in`, `.github/dependabot.yml`)**:
+  - Relatives `--basetemp=.pytest_temp` in `pyproject.toml` durch CWD-unabhängiges Repo-Root-`conftest.py` und `--strict-markers --strict-config` ersetzt (`version = "1.1.12"` bleibt unverändert eingefroren).
+  - `.gitignore` und `MANIFEST.in` um Laufzeitdaten-, Export-, Dump-, Entscheidungs- und Schlüssel-Ausschlüsse (`*.sqlite*`, `*.bachdb*`, `*export*.csv`, `*dump*`, `inbox_config*`, `TO-DECIDE-USER*`, `data/temp/**`, `LOCK-CACHE*`, `CONFLICT_REVIEW_LOG*`) ergänzt.
+  - Wöchentliches `pip`-Ökosystem-Monitoring in `.github/dependabot.yml` ergänzt, `pytest>=9.0.3` in `THIRD_PARTY_LICENSES.md` und `THIRD_PARTY_LICENSES.txt` synchronisiert sowie das 30-Kalendertage-Behebungsziel zweisprachig in `SECURITY.md` dokumentiert.
+- **Privacy-Hygiene, Service-Worker-Cache-Wächter & Regressionstests (`web_publisher/sw.js`, `tests/`)**:
+  - Service-Worker-Cache nach `index.html`-Änderung auf `wikistub-seed-v3` (`ASSET_HASH = 'ebe743559601'`) synchronisiert, sodass installierte PWAs keinen veralteten Cache ausliefern.
+  - Platzhalter-Bereinigung in Testfixtures und historischen Changelog-Notizen sowie neue Unit-, HTTP-, Concurrency- und Packaging-Regressionstests ergänzt.
+
 ### Marketing, Discoverability, README-Architektur & Sequenzdiagramme (Pfad B) - 2026-11-07
 - **International README Badge Parity (EN, DE, ES, JA, RU, ZH)**:
   - Verifizierter Testnachweis-Badge (`tests-204 passed`) auf Basis realer lokaler Messergebnisse in alle 6 Sprachversionen integriert.
@@ -59,7 +73,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
   - Label-Synchronisationsworkflow `.github/workflows/label-sync.yml` mit `EndBug/label-sync@v2`, `timeout-minutes: 5` und Least-Privilege-Permissions (`issues: write`) neu angelegt.
   - Kanonische `.github/labels.yml` mit 11 Standard-Labels gemäß GOVERNANCE.md §4.2 provisioniert.
 - **Multi-Host Cloud-Sync- & Lock-Defense in `.gitignore`**:
-  - Härtung um `*-IDEAPAD*`, `*-IDEAPAD-GEI*`, `*_WORKSTATION*`, `*_WORKSTATION-LG*`, `*-WORKSTATION.*`, `*-WORKSTATION-LG.*`, `Desktop.ini`, `TASKPLAN_*.md`, `LOCK.dev.*`, `LOCK.antigravity.*`, `LOCK.bugsearch.*` und `.pytest_tmp*/`.
+  - Härtung um `*-IDEAPAD*`, `*_<HOST>*`, `*-WORKSTATION*`, `*-WORKSTATION.*`, `*-<HOST>.*`, `Desktop.ini`, `TASKPLAN_*.md`, `LOCK.dev.*`, `LOCK.antigravity.*`, `LOCK.bugsearch.*` und `.pytest_tmp*/`.
 - **PEP 621 Standardisierung & Pytest-Härtung in `pyproject.toml`**:
   - Neue Links für `Contributing`, `Plain-Text License` und `Third-Party Licenses (Text)` unter `[project.urls]` registriert.
   - Pytest `addopts` um `--basetemp=.pytest_temp` erweitert und `norecursedirs` um `.pytest_temp`, `.pytest_tmp*`, `.ruff_cache`, `.hypothesis` und `.turbo` gehärtet.
@@ -172,7 +186,7 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.1.0/).
 ### Repository-Hygiene & CI-Matrix-Härtung (Pfad A)
 - **PEP 621 Standard-Metadaten in `pyproject.toml`**: Umfassende Betriebssystem-Classifiers (`Operating System :: Microsoft :: Windows`, `Operating System :: POSIX :: Linux`, `Operating System :: MacOS`), standardisierte URLs (`Issues`, `Changelog`, `Security`, `Parent Organization`, `Umbrella Ecosystem`), optionale Entwicklung- und Test-Dependencies (`[project.optional-dependencies]` dev/test) sowie `[tool.pytest.ini_options]` mit `addopts = "-ra -v"` konfiguriert.
 - **CI-Matrix-Härtung**: Concurrency-Cancellation (`cancel-in-progress: true`) in `.github/workflows/tests.yml` und `.github/workflows/source-platform-smoke.yml` integriert; Python-Testmatrix auf 3.10, 3.11, 3.12 und 3.13 erweitert.
-- **Git-Hygiene in `.gitignore`**: Schutzmuster gegen Multi-Host-Synchronisationskonflikte (`*-conflict-*`, `*.sync-conflict-*`, `*-ASUS-GEI.*`, `*-WORKSTATION-LG.*`), Multi-Agent-Locks (`LOCK`, `LOCK.*`, `*.lock`, `LOCK*.txt`, `LOCK.permissions.json`) sowie Packaging- und Test-Caches (`wheelhouse/`, `.wheel-smoke/`, `coverage/`) gehärtet.
+- **Git-Hygiene in `.gitignore`**: Schutzmuster gegen Multi-Host-Synchronisationskonflikte (`*-conflict-*`, `*.sync-conflict-*`, `*-<HOST-A>.*`, `*-<HOST-B>.*`), Multi-Agent-Locks (`LOCK`, `LOCK.*`, `*.lock`, `LOCK*.txt`, `LOCK.permissions.json`) sowie Packaging- und Test-Caches (`wheelhouse/`, `.wheel-smoke/`, `coverage/`) gehärtet.
 - **Zweisprachige Sicherheitsrichtlinie (`SECURITY.md`)**: Vollständig nach Standard ausgebaut mit verbindlicher 48h Response-SLA, 5-Werktage-Triage-Zusage, offiziellen Kontakten (`security@open-bricks.org`, `security@dev-bricks.org`, `security@ellmos.ai`, `support@lukasgeiger.com`, `lukas@open-bricks.org`, `@lukisch`), Tabelle unterstützter Versionen (1.1.x) und Local-First / Zero-Egress Invarianten.
 - **Dokumentation & Badges**: Shields.io Badges in `README.md` und `README_de.md` um die 48h-Sicherheits-SLA ergänzt; `llms.txt` auf den Verifikationsstand synchronisiert.
 - **Test-Resilienz (`tests/test_edit_server.py`)**: Request-Retry-Schleife gegen flüchtige Windows-Loopback-Socket-Resets (`[WinError 10053]`).
