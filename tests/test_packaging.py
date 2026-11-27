@@ -166,6 +166,7 @@ class DistributionSmokeTests(unittest.TestCase):
                 "README_ru.md",
                 "README_zh-Hans.md",
                 "pyproject.toml",
+                "conftest.py",
                 "wikistub_seed.json",
                 "assets/banner.svg",
                 "locales/translations.json",
@@ -174,6 +175,7 @@ class DistributionSmokeTests(unittest.TestCase):
                 "web_publisher/tests/publisher.test.mjs",
                 "tests/test_packaging.py",
                 ".github/workflows/tests.yml",
+                ".github/dependabot.yml",
                 "01_Mathematik/Statistik/Varianz.md",
             ):
                 self.assertTrue(
@@ -226,6 +228,7 @@ class DistributionSmokeTests(unittest.TestCase):
                     "wikistub_seed_cli.py",
                     "wikistub_seed_pipeline.py",
                     "edit_server.py",
+                    "conftest.py",
                 ):
                     self.assertNotIn(excluded, wheel_names)
                 self.assertFalse(any(name.startswith("web_publisher/") for name in wheel_names))

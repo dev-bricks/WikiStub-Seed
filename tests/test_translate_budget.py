@@ -27,9 +27,10 @@ class TranslationBudgetTests(unittest.TestCase):
         estimated = estimate_max_request_cost_usd("A definition")
         sdk, _ = self._fake_sdk()
         invalid_ceilings = (None, 0, -1, True, math.nan, math.inf, estimated / 2)
+        dummy_credential = "CHANGE-ME-IN-PRODUCTION"
 
         with (
-            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": "fake-key"}, clear=True),
+            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": dummy_credential}, clear=True),
             mock.patch.dict(sys.modules, {"anthropic": sdk}),
         ):
             for ceiling in invalid_ceilings:
@@ -41,21 +42,23 @@ class TranslationBudgetTests(unittest.TestCase):
     def test_direct_request_uses_explicit_ceiling(self):
         budget = estimate_max_request_cost_usd("A definition")
         sdk, client = self._fake_sdk()
+        dummy_credential = "CHANGE-ME-IN-PRODUCTION"
 
         with (
-            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": "fake-key"}, clear=True),
+            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": dummy_credential}, clear=True),
             mock.patch.dict(sys.modules, {"anthropic": sdk}),
         ):
             result = translate_text("A definition", max_budget_usd=budget)
 
         self.assertEqual(result, "translated")
-        sdk.Anthropic.assert_called_once_with(api_key="fake-key", max_retries=0)
+        sdk.Anthropic.assert_called_once_with(api_key=dummy_credential, max_retries=0)
         client.messages.create.assert_called_once()
 
     def test_empty_text_and_missing_key_keep_no_request_fallback(self):
         sdk, _ = self._fake_sdk()
+        dummy_credential = "CHANGE-ME-IN-PRODUCTION"
         with (
-            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": "fake-key"}, clear=True),
+            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": dummy_credential}, clear=True),
             mock.patch.dict(sys.modules, {"anthropic": sdk}),
         ):
             self.assertEqual(translate_text("  "), "")
@@ -70,8 +73,9 @@ class TranslationBudgetTests(unittest.TestCase):
             sdk.Anthropic.assert_not_called()
 
     def test_missing_sdk_keeps_no_request_fallback(self):
+        dummy_credential = "CHANGE-ME-IN-PRODUCTION"
         with (
-            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": "fake-key"}, clear=True),
+            mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": dummy_credential}, clear=True),
             mock.patch.dict(sys.modules, {"anthropic": None}),
         ):
             self.assertEqual(translate_text("A definition"), "")

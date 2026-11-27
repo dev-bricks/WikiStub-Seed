@@ -25,7 +25,7 @@ recursive-include web_publisher *.py *.js *.mjs *.html *.css *.webmanifest *.jso
 recursive-include tests *.py
 recursive-include .github/workflows *.yml
 recursive-include .github/ISSUE_TEMPLATE *.md
-include .github/labels.yml
+include .github/labels.yml .github/dependabot.yml
 
 # Local runtime files, private agent artifacts, and host lock/guard metadata
 # must never be part of a public source archive.
@@ -37,6 +37,8 @@ prune _private
 prune _USER
 prune keyring
 global-exclude __pycache__ *.py[cod] .DS_Store
+global-exclude *.db *.sqlite* *.bachdb* *export*.csv *dump* inbox_config* TO-DECIDE-USER* LOCK-CACHE* CONFLICT_REVIEW_LOG*
 global-exclude LOCK LOCK.* LOCK*.txt *.team-lock* *.lock GATES.md .automation-lock
 global-exclude wiki_auth.json wikistub_seed_trash.json credentials.json client_secret*.json
-global-exclude token.json secrets.* *.pem *.key .env .env.*
+global-exclude token.json tokens.json *secret*.json *token*.json secrets.* *.token *.secret
+global-exclude *.pem *.key *.p12 *.pfx *.crt *.cer *.cert *.csr id_rsa* id_ed25519* id_ecdsa* id_dsa* *_recovery_codes.txt *recovery*codes*.txt .npmrc .pypirc .env .env.*

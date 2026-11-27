@@ -2,6 +2,8 @@
 
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 from language_model import iter_metawiki_entries
@@ -216,7 +218,8 @@ def test_pyproject_classifiers_and_urls():
     assert '"Umbrella Ecosystem" = "https://github.com/open-bricks"' in content
     assert '"Dependency and License References" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
     assert "[project.optional-dependencies]" in content
-    assert 'addopts = "-ra -v --basetemp=.pytest_temp"' in content
+    assert 'addopts = "-ra -v --strict-markers --strict-config"' in content
+    assert "--basetemp" not in content
 
 
 def test_security_policy_invariants():
@@ -566,7 +569,8 @@ def test_pep621_extended_project_urls():
     assert '"Plain-Text License" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/LICENSE"' in content
     assert '"Third-Party Licenses (Text)" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
     assert '"Dependency and License References" = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/THIRD_PARTY_LICENSES.txt"' in content
-    assert '--basetemp=.pytest_temp' in content
+    assert "--basetemp" not in content
+    assert (PROJECT_ROOT / "conftest.py").is_file()
 
 
 def test_contributing_guide_quality_gates():
@@ -673,3 +677,82 @@ def test_product_skill_and_llm_pointer():
     llm_content = llm_path.read_text(encoding="utf-8")
     assert "llms.txt" in llm_content
     assert "SKILL.md" in llm_content
+
+
+def test_gitignore_pre_push_data_gate_and_secret_patterns():
+    """Verify .gitignore enforces runtime-DB, export, dump, decision, and key exclusions."""
+    content = (PROJECT_ROOT / ".gitignore").read_text(encoding="utf-8")
+    required = [
+        "*.sqlite*",
+        "*.bachdb*",
+        "*export*.csv",
+        "*dump*",
+        "inbox_config*",
+        "TO-DECIDE-USER*",
+        "data/temp/**",
+        "LOCK-CACHE*",
+        "CONFLICT_REVIEW_LOG*",
+        "id_ed25519*",
+        "*.p12",
+        "*.pfx",
+    ]
+    for pattern in required:
+        assert pattern in content, f"Missing data-gate/secret pattern '{pattern}' in .gitignore"
+
+
+def test_dependabot_monitors_github_actions_and_pip():
+    """Verify .github/dependabot.yml configures weekly updates for github-actions and pip."""
+    dep_path = PROJECT_ROOT / ".github" / "dependabot.yml"
+    assert dep_path.is_file(), ".github/dependabot.yml is missing"
+    content = dep_path.read_text(encoding="utf-8")
+    assert "github-actions" in content
+    assert "pip" in content
+    assert "weekly" in content
+
+
+def test_third_party_licenses_pytest_floor_parity():
+    """Verify both license companion files document the patched pytest>=9.0.3 floor."""
+    for fname in ("THIRD_PARTY_LICENSES.md", "THIRD_PARTY_LICENSES.txt"):
+        content = (PROJECT_ROOT / fname).read_text(encoding="utf-8")
+        assert "pytest>=9.0.3" in content, f"Expected pytest>=9.0.3 in {fname}"
+        assert "pytest>=8.0.0" not in content, f"Stale pytest>=8.0.0 still listed in {fname}"
+
+
+def test_security_policy_remediation_target_parity():
+    """Verify SECURITY.md states the 48h, 5-business-day, and 30-calendar-day targets bilingually."""
+    content = (PROJECT_ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    assert "30 Kalendertage" in content
+    assert "30 calendar days" in content
+
+
+def test_tmp_path_probe(tmp_path: Path):
+    """Minimal tmp_path consumer used to verify basetemp anchoring from external CWDs."""
+    assert tmp_path.is_dir()
+
+
+def test_conftest_anchors_basetemp_away_from_external_cwd():
+    """Running pytest from an external working directory must not create .pytest_temp there."""
+    import tempfile
+
+    with tempfile.TemporaryDirectory(prefix="wikistub-ext-cwd-") as ext_dir:
+        ext_cwd = Path(ext_dir)
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                "-m",
+                "pytest",
+                str(PROJECT_ROOT / "tests" / "test_metadata.py"),
+                "-k",
+                "test_tmp_path_probe",
+                "-p",
+                "no:cacheprovider",
+            ],
+            cwd=ext_cwd,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        assert result.returncode == 0, f"Subprocess pytest failed:\n{result.stdout}\n{result.stderr}"
+        assert not (ext_cwd / ".pytest_temp").exists(), "External CWD was polluted with .pytest_temp"
+    assert (PROJECT_ROOT / ".pytest_temp").is_dir(), "Repo-root .pytest_temp was not used as basetemp"

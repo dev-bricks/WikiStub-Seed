@@ -134,6 +134,13 @@ class MakeServerHostGuardTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             edit_server.make_server(host="", port=0)
 
+    def test_refuses_invalid_ports_and_non_string_host(self):
+        with self.assertRaises(ValueError):
+            edit_server.make_server(host=None, port=0)  # type: ignore[arg-type]
+        for bad_port in (-1, 65536, True, "8879"):
+            with self.subTest(port=bad_port), self.assertRaises(ValueError):
+                edit_server.make_server(port=bad_port)  # type: ignore[arg-type]
+
 
 class PermissionsEndpointTests(EditServerTestCase):
     def test_no_password_set_reports_full_rights(self):
@@ -194,14 +201,27 @@ class PermissionsEndpointTests(EditServerTestCase):
 
 class HostHeaderGuardTests(EditServerTestCase):
     def test_evil_host_header_is_rejected(self):
-        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
-        try:
-            conn.request("GET", "/api/permissions", headers={"Host": "evil.example"})
-            resp = conn.getresponse()
-            resp.read()
-            self.assertEqual(resp.status, 400)
-        finally:
-            conn.close()
+        for bad_host in (
+            "evil.example",
+            "127.0.0.1:evil:80",
+            "localhost:evil",
+            "127.0.0.1:0",
+            "127.0.0.1:70000",
+        ):
+            with self.subTest(host=bad_host):
+                status = self.raw_request("GET", "/api/permissions", headers={"Host": bad_host})
+                self.assertEqual(status, 400)
+
+    def test_head_enforces_host_guard_and_disallows_api_routes(self):
+        self.assertEqual(
+            self.raw_request("HEAD", "/index.html", headers={"Host": "evil.example"}),
+            400,
+        )
+        self.assertEqual(self.raw_request("HEAD", "/api/permissions"), 405)
+        self.assertEqual(
+            self.raw_request("GET", "/api/permissions", headers={"Host": f"localhost:{self.port}"}),
+            200,
+        )
 
 
 class ContentTypeGuardTests(EditServerTestCase):
@@ -450,14 +470,33 @@ class PermissionMatrixHttpTests(EditServerTestCase):
 class RebuildRollbackTests(EditServerTestCase):
     def test_rebuild_failure_rolls_back_json_and_reports_500(self):
         before = self.json_path.read_bytes()
-        with mock.patch.object(_build, "build", side_effect=ValueError("simulated duplicate ID")):
+        with mock.patch.object(_build, "build", side_effect=ValueError(f"simulated error at {self.json_path}")):
             status, payload, _ = self.request(
                 "POST", "/api/entries",
                 body={"category": "07_Informatik_KI", "subcategory": "Software_Engineering",
                       "entry": {"title": "WirdZurueckgerollt", "definition_de": "a", "definition_en": "b"}},
             )
         self.assertEqual(status, 500, payload)
+        self.assertNotIn(str(self.json_path), str(payload))
         self.assertEqual(self.json_path.read_bytes(), before)
+
+    def test_rebuild_failure_on_trash_restore_rolls_back_both_dataset_and_trash(self):
+        self.request(
+            "DELETE",
+            "/api/entries",
+            body={
+                "category": "07_Informatik_KI",
+                "subcategory": "Software_Engineering",
+                "title": "Domain-Driven Design",
+            },
+        )
+        data_before = self.json_path.read_bytes()
+        trash_before = self.trash_path.read_bytes()
+        with mock.patch.object(_build, "build", side_effect=RuntimeError("simulated build crash")):
+            status, payload, _ = self.request("POST", "/api/trash/restore", body={"index": 0})
+        self.assertEqual(status, 500, payload)
+        self.assertEqual(self.json_path.read_bytes(), data_before)
+        self.assertEqual(json.loads(self.trash_path.read_text(encoding="utf-8")), json.loads(trash_before.decode("utf-8")))
 
 
 class StaticServingTests(EditServerTestCase):
@@ -483,6 +522,217 @@ class StaticServingTests(EditServerTestCase):
             self.assertEqual(resp.getheader("Cache-Control"), "no-store")
         finally:
             conn.close()
+
+
+class RequestBodyBoundsAndJsonHardeningTests(EditServerTestCase):
+    def test_oversized_content_length_returns_413(self):
+        oversized = b'{"padding":"' + (b"x" * edit_server.MAX_JSON_BODY_BYTES) + b'"}'
+        status = self.raw_request(
+            "POST",
+            "/api/categories",
+            body=oversized,
+            headers={"Content-Type": "application/json"},
+        )
+        self.assertEqual(status, 413)
+
+    def test_malformed_content_length_and_transfer_encoding_are_rejected(self):
+        for bad_len in ("abc", "-5"):
+            with self.subTest(content_length=bad_len):
+                conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+                try:
+                    conn.putrequest("POST", "/api/categories")
+                    conn.putheader("Content-Type", "application/json")
+                    conn.putheader("Content-Length", bad_len)
+                    conn.endheaders()
+                    resp = conn.getresponse()
+                    resp.read()
+                    self.assertEqual(resp.status, 400)
+                finally:
+                    conn.close()
+
+        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+        try:
+            conn.putrequest("POST", "/api/categories")
+            conn.putheader("Content-Type", "application/json")
+            conn.putheader("Transfer-Encoding", "chunked")
+            conn.endheaders(b"2\r\n{}\r\n0\r\n\r\n")
+            resp = conn.getresponse()
+            resp.read()
+            self.assertEqual(resp.status, 411)
+        finally:
+            conn.close()
+
+    def test_non_standard_json_nan_and_non_object_body_return_400(self):
+        deep_nested = (b'{"a":' * 1200) + b"1" + (b"}" * 1200)
+        for raw_body in (b'{"index": NaN}', b'["not-an-object"]', deep_nested):
+            with self.subTest(size=len(raw_body)):
+                status = self.raw_request(
+                    "POST",
+                    "/api/trash/restore",
+                    body=raw_body,
+                    headers={"Content-Type": "application/json"},
+                )
+                self.assertEqual(status, 400)
+
+    def test_duplicate_host_or_content_length_and_malformed_request_line_do_not_crash(self):
+        import socket
+
+        with socket.create_connection(("127.0.0.1", self.port), timeout=5) as sock:
+            sock.sendall(b"BADREQUEST\r\n\r\n")
+            raw_reply = sock.recv(4096)
+        self.assertIn(b"400", raw_reply)
+
+        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+        try:
+            conn.putrequest("GET", "/api/permissions", skip_host=True)
+            conn.putheader("Host", f"127.0.0.1:{self.port}")
+            conn.putheader("Host", "evil.example")
+            conn.endheaders()
+            resp = conn.getresponse()
+            resp.read()
+            self.assertEqual(resp.status, 400)
+        finally:
+            conn.close()
+
+        conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+        try:
+            conn.putrequest("POST", "/api/categories")
+            conn.putheader("Content-Type", "application/json")
+            conn.putheader("Content-Length", "2")
+            conn.putheader("Content-Length", "2")
+            conn.endheaders(b"{}")
+            resp = conn.getresponse()
+            resp.read()
+            self.assertEqual(resp.status, 400)
+        finally:
+            conn.close()
+
+
+class StrictInputTypesAndTrashProtectionTests(EditServerTestCase):
+    def test_non_string_password_is_rejected_without_coercing_none_to_string(self):
+        for bad_password in (None, 12345, ["secret"], False):
+            with self.subTest(password=bad_password):
+                status, payload, _ = self.request(
+                    "POST", "/api/auth/set-password", body={"new_password": bad_password}
+                )
+                self.assertEqual(status, 400, payload)
+                self.assertFalse(self.auth_path.exists())
+
+    def test_boolean_trash_index_and_non_dict_entry_are_rejected(self):
+        self.request(
+            "DELETE",
+            "/api/entries",
+            body={
+                "category": "07_Informatik_KI",
+                "subcategory": "Software_Engineering",
+                "title": "Domain-Driven Design",
+            },
+        )
+        for bad_index in (False, True, "0", None):
+            with self.subTest(index=bad_index):
+                status, payload, _ = self.request(
+                    "POST", "/api/trash/restore", body={"index": bad_index}
+                )
+                self.assertEqual(status, 400, payload)
+        status, payload, _ = self.request("GET", "/api/trash")
+        self.assertEqual(status, 200)
+        self.assertEqual(len(payload["trash"]), 1)
+
+        status, payload, _ = self.request(
+            "POST",
+            "/api/entries",
+            body={
+                "category": "07_Informatik_KI",
+                "subcategory": "Software_Engineering",
+                "entry": ["not-a-dict"],
+            },
+        )
+        self.assertEqual(status, 400, payload)
+
+    def test_corrupted_trash_file_returns_500_without_path_leak_or_overwrite(self):
+        self.trash_path.write_text("{corrupt trash json", encoding="utf-8")
+        trash_before = self.trash_path.read_bytes()
+        data_before = self.json_path.read_bytes()
+
+        status, payload, _ = self.request("GET", "/api/trash")
+        self.assertEqual(status, 500, payload)
+        self.assertNotIn(str(self.trash_path), str(payload))
+
+        status, payload, _ = self.request(
+            "DELETE",
+            "/api/entries",
+            body={
+                "category": "07_Informatik_KI",
+                "subcategory": "Software_Engineering",
+                "title": "Domain-Driven Design",
+            },
+        )
+        self.assertEqual(status, 500, payload)
+        self.assertNotIn(str(self.trash_path), str(payload))
+        self.assertEqual(self.trash_path.read_bytes(), trash_before)
+        self.assertEqual(self.json_path.read_bytes(), data_before)
+
+
+class SessionRotationAndConcurrencyTests(EditServerTestCase):
+    def test_password_change_rotates_caller_cookie_and_revokes_other_sessions(self):
+        self.request("POST", "/api/auth/set-password", body={"new_password": "initial-password"})
+        token_a = self.login("initial-password")
+        token_b = self.login("initial-password")
+
+        status, payload, rotated_token = self.request(
+            "POST",
+            "/api/auth/set-password",
+            body={"new_password": "rotated-password"},
+            cookie=token_a,
+        )
+        self.assertEqual(status, 200, payload)
+        self.assertIsNotNone(rotated_token)
+        self.assertNotEqual(rotated_token, token_a)
+
+        _, perms_a, _ = self.request("GET", "/api/permissions", cookie=token_a)
+        _, perms_b, _ = self.request("GET", "/api/permissions", cookie=token_b)
+        _, perms_new, _ = self.request("GET", "/api/permissions", cookie=rotated_token)
+        self.assertFalse(perms_a["authenticated"])
+        self.assertFalse(perms_b["authenticated"])
+        self.assertTrue(perms_new["authenticated"])
+
+        token_c = self.login("rotated-password")
+        status, _, _ = self.request("POST", "/api/auth/remove-password", body={}, cookie=rotated_token)
+        self.assertEqual(status, 200)
+        self.assertFalse(self.server.session_store.validate(token_c))
+
+    def test_concurrent_entry_creations_are_serialized_without_lost_updates(self):
+        statuses: list[int] = []
+        lock = threading.Lock()
+
+        def create_one(idx: int) -> None:
+            status, _, _ = self.request(
+                "POST",
+                "/api/entries",
+                body={
+                    "category": "07_Informatik_KI",
+                    "subcategory": "Software_Engineering",
+                    "entry": {
+                        "title": f"Concurrent Entry {idx}",
+                        "definition_de": f"Definition {idx}",
+                        "definition_en": f"Definition EN {idx}",
+                    },
+                },
+            )
+            with lock:
+                statuses.append(status)
+
+        threads = [threading.Thread(target=create_one, args=(i,)) for i in range(8)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join(timeout=15)
+
+        self.assertEqual(statuses, [201] * 8)
+        saved = json.loads(self.json_path.read_text(encoding="utf-8"))
+        titles = {e["title"] for e in saved["MetaWiki"]["07_Informatik_KI"]["Software_Engineering"]}
+        for i in range(8):
+            self.assertIn(f"Concurrent Entry {i}", titles)
 
 
 if __name__ == "__main__":

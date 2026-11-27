@@ -1,5 +1,7 @@
 import json
+import math
 import tempfile
+import threading
 import time
 import unittest
 from pathlib import Path
@@ -289,6 +291,11 @@ class ComputePermissionsMatrixTests(unittest.TestCase):
         with self.assertRaises(wiki_auth.AuthDataError):
             wiki_auth.compute_permissions(record, authenticated=False)
 
+    def test_non_boolean_authenticated_flag_is_rejected(self):
+        for bad_flag in (1, 0, "true", None):
+            with self.subTest(flag=bad_flag), self.assertRaises(TypeError):
+                wiki_auth.compute_permissions(None, authenticated=bad_flag)  # type: ignore[arg-type]
+
 
 class SessionStoreTests(unittest.TestCase):
     def test_created_token_validates(self):
@@ -319,6 +326,64 @@ class SessionStoreTests(unittest.TestCase):
     def test_two_created_tokens_are_different(self):
         store = wiki_auth.SessionStore()
         self.assertNotEqual(store.create(), store.create())
+
+    def test_invalid_constructor_parameters_are_rejected(self):
+        for bad_ttl in (0, -1, math.nan, math.inf, -math.inf):
+            with self.subTest(ttl=bad_ttl), self.assertRaises(ValueError):
+                wiki_auth.SessionStore(ttl_seconds=bad_ttl)
+        for bad_ttl_type in (True, False, "10", None):
+            with self.subTest(ttl=bad_ttl_type), self.assertRaises(TypeError):
+                wiki_auth.SessionStore(ttl_seconds=bad_ttl_type)  # type: ignore[arg-type]
+        for bad_max in (0, -5):
+            with self.subTest(max_sessions=bad_max), self.assertRaises(ValueError):
+                wiki_auth.SessionStore(max_sessions=bad_max)
+        for bad_max_type in (True, False, 1.5, "10", None):
+            with self.subTest(max_sessions=bad_max_type), self.assertRaises(TypeError):
+                wiki_auth.SessionStore(max_sessions=bad_max_type)  # type: ignore[arg-type]
+
+    def test_non_string_tokens_are_rejected_and_ignored(self):
+        store = wiki_auth.SessionStore()
+        token = store.create()
+        for invalid in ("", 123, ["tok"], {"tok": 1}):
+            self.assertFalse(store.validate(invalid))  # type: ignore[arg-type]
+            store.revoke(invalid)  # type: ignore[arg-type]
+        self.assertTrue(store.validate(token))
+
+    def test_max_sessions_evicts_oldest_token(self):
+        store = wiki_auth.SessionStore(max_sessions=2)
+        t1 = store.create()
+        t2 = store.create()
+        t3 = store.create()
+        self.assertFalse(store.validate(t1))
+        self.assertTrue(store.validate(t2))
+        self.assertTrue(store.validate(t3))
+
+    def test_clear_invalidates_all_active_tokens(self):
+        store = wiki_auth.SessionStore()
+        tokens = [store.create() for _ in range(4)]
+        store.clear()
+        for tok in tokens:
+            self.assertFalse(store.validate(tok))
+
+    def test_concurrent_session_operations_are_thread_safe(self):
+        store = wiki_auth.SessionStore(ttl_seconds=0.05, max_sessions=16)
+        errors: list[BaseException] = []
+
+        def worker() -> None:
+            try:
+                for _ in range(40):
+                    tok = store.create()
+                    store.validate(tok)
+                    store.revoke(tok)
+            except BaseException as exc:
+                errors.append(exc)
+
+        threads = [threading.Thread(target=worker) for _ in range(8)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join(timeout=5)
+        self.assertEqual(errors, [])
 
 
 if __name__ == "__main__":

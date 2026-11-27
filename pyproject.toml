@@ -92,7 +92,7 @@ Skill = "https://github.com/dev-bricks/WikiStub-Seed/blob/master/SKILL.md"
 minversion = "7.0"
 pythonpath = "."
 testpaths = ["tests"]
-addopts = "-ra -v --basetemp=.pytest_temp"
+addopts = "-ra -v --strict-markers --strict-config"
 norecursedirs = [".git", ".pytest_cache", ".pytest_temp", ".pytest_tmp*", ".ruff_cache", "__pycache__", "build", "dist", ".venv", "node_modules", ".hypothesis", ".turbo"]
 
 [tool.ruff]
@@ -113,4 +113,3 @@ py-modules = [
     "wiki_store",
 ]
 include-package-data = false
-

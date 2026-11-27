@@ -34,7 +34,9 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import math
 import secrets
+import threading
 import time
 from pathlib import Path
 from typing import Any
@@ -54,6 +56,8 @@ MIN_ITERATIONS = 1
 MAX_ITERATIONS = 10_000_000
 _SALT_BYTES = 16
 _MAX_SALT_BYTES = 1024
+DEFAULT_SESSION_TTL_SECONDS = 4 * 3600
+DEFAULT_MAX_SESSIONS = 256
 PERMISSION_KEYS = ("create", "edit", "delete")
 
 
@@ -269,6 +273,8 @@ def compute_permissions(auth_record: dict[str, Any] | None, *, authenticated: bo
       not bound by their own restriction.
     - Password set, not authenticated -> whatever anonymous_permissions
       currently says (defaults to full until explicitly restricted)."""
+    if not isinstance(authenticated, bool):
+        raise TypeError("authenticated must be a bool")
     if auth_record is None:
         return default_anonymous_permissions()
     _validate_permission_fields(auth_record)
@@ -281,32 +287,66 @@ def compute_permissions(auth_record: dict[str, Any] | None, *, authenticated: bo
 
 
 class SessionStore:
-    """Minimal in-memory session tracker -- process lifetime only, never
+    """Bounded in-memory session tracker -- process lifetime only, never
     persisted to disk (a restart requires logging in again; this is a
     deliberate simplicity choice for a local single-user tool, not an
-    oversight). Tokens are opaque, unguessable (secrets.token_urlsafe) and
-    time-limited."""
+    oversight). Tokens are opaque, unguessable (secrets.token_urlsafe),
+    time-limited, and bounded in count to prevent unbounded memory growth."""
 
-    def __init__(self, ttl_seconds: float = 4 * 3600) -> None:
-        self._ttl = ttl_seconds
+    def __init__(
+        self,
+        ttl_seconds: float = DEFAULT_SESSION_TTL_SECONDS,
+        *,
+        max_sessions: int = DEFAULT_MAX_SESSIONS,
+    ) -> None:
+        if isinstance(ttl_seconds, bool) or not isinstance(ttl_seconds, (int, float)):
+            raise TypeError("ttl_seconds must be a finite positive number")
+        ttl_value = float(ttl_seconds)
+        if not math.isfinite(ttl_value) or ttl_value <= 0:
+            raise ValueError("ttl_seconds must be a finite positive number")
+        if isinstance(max_sessions, bool) or not isinstance(max_sessions, int):
+            raise TypeError("max_sessions must be a positive integer")
+        if max_sessions < 1:
+            raise ValueError("max_sessions must be a positive integer")
+        self._ttl = ttl_value
+        self._max_sessions = max_sessions
         self._tokens: dict[str, float] = {}
+        self._lock = threading.Lock()
+
+    def _prune_expired(self, now: float) -> None:
+        expired = [tok for tok, expiry in self._tokens.items() if now > expiry]
+        for tok in expired:
+            self._tokens.pop(tok, None)
 
     def create(self) -> str:
-        token = secrets.token_urlsafe(32)
-        self._tokens[token] = time.monotonic() + self._ttl
-        return token
+        with self._lock:
+            now = time.monotonic()
+            self._prune_expired(now)
+            while len(self._tokens) >= self._max_sessions:
+                oldest = next(iter(self._tokens))
+                self._tokens.pop(oldest, None)
+            token = secrets.token_urlsafe(32)
+            self._tokens[token] = now + self._ttl
+            return token
 
     def validate(self, token: str | None) -> bool:
-        if not token:
+        if not isinstance(token, str) or not token:
             return False
-        expiry = self._tokens.get(token)
-        if expiry is None:
-            return False
-        if time.monotonic() > expiry:
-            del self._tokens[token]
-            return False
-        return True
+        with self._lock:
+            expiry = self._tokens.get(token)
+            if expiry is None:
+                return False
+            if time.monotonic() > expiry:
+                self._tokens.pop(token, None)
+                return False
+            return True
 
     def revoke(self, token: str | None) -> None:
-        if token:
-            self._tokens.pop(token, None)
+        if isinstance(token, str) and token:
+            with self._lock:
+                self._tokens.pop(token, None)
+
+    def clear(self) -> None:
+        """Invalidate all active session tokens (e.g. on password rotation or removal)."""
+        with self._lock:
+            self._tokens.clear()

@@ -7,34 +7,31 @@ edit_server.py - lokaler Edit-Modus fuer WikiStub-Seed (T-20260819-782505468)
 web_publisher ist eine reine Static-Site/PWA (app.js laedt per fetch(), kein
 Server, kein Schreibzugriff). Fuer GUI-Editing (Artikel aendern, Kategorien/
 Unterartikel anlegen, Kategorien/Artikel loeschen) braucht es einen lokalen
-Server-Prozess, der (a) dieselben statischen Dateien ausliefert wie serve.py
-(Vorbild: OneDrive/.WIKI/_wikistub/serve.py, die private Instanz) UND (b)
-eine kleine JSON-API fuer die Schreiboperationen anbietet.
+Server-Prozess, der (a) die statischen Dateien von web_publisher/ ausliefert
+UND (b) eine kleine JSON-API fuer die Schreiboperationen anbietet.
 
 SICHERHEIT -- vor Aenderungen lesen:
   - Bindet AUSSCHLIESSLICH an 127.0.0.1, niemals konfigurierbar auf 0.0.0.0
     oder eine leere Adresse -- kein Cloud-/Netz-Exposure (Ticket-Vorgabe).
   - Jede schreibende Anfrage (POST/PUT/DELETE unter /api/) MUSS
-    Content-Type: application/json tragen, sonst 415 -- das verhindert
-    klassisches Cross-Site-Form-POST-CSRF (ein <form>-Tag kann keinen
-    application/json-Body senden, ohne dass der Browser einen CORS-Preflight
-    ausloest, den dieser Server nicht beantwortet). Kein CORS-Header wird je
-    gesetzt: same-origin-only ist Absicht, kein Versehen.
-  - Jede Anfrage MUSS einen Host-Header aus {localhost, 127.0.0.1} tragen,
-    sonst 400 -- schliesst DNS-Rebinding (eine fremde Domain, die auf
-    127.0.0.1 aufgeloest wird, aber im Host-Header ihren eigenen Namen
-    traegt).
-  - Session-Cookie ist HttpOnly + SameSite=Lax (kein Secure-Flag, da bewusst
-    Klartext-HTTP auf localhost -- ein TLS-Zertifikat fuer 127.0.0.1 waere
-    hier Overhead ohne echten Zusatznutzen; siehe wiki_auth.py's Threat-
-    Model-Kommentar).
+    Content-Type: application/json tragen (415 bei Abweichung), ein gueltiges
+    Content-Length <= MAX_JSON_BODY_BYTES (1 MiB, sonst 413) besitzen und
+    darf kein Transfer-Encoding verwenden (411). Das verhindert klassisches
+    Cross-Site-Form-POST-CSRF sowie unbegrenzte Speicherallokation. Kein
+    CORS-Header wird je gesetzt: same-origin-only ist Absicht.
+  - Jede Anfrage (GET/HEAD/POST/PUT/DELETE) MUSS einen strikt geprueften
+    Host-Header aus {localhost, 127.0.0.1} (optional mit numerischem Port
+    1..65535) tragen, sonst 400 -- schliesst DNS-Rebinding.
+  - Session-Cookie ist HttpOnly + SameSite=Lax; bei Passwort-Rotation oder
+    Passwort-Entfernung werden bestehende Sitzungen vollstaendig invalidiert.
+  - Alle mutierenden API-Operationen sind ueber server.write_lock serialisiert,
+    sodass parallele Anfragen auf ThreadingHTTPServer keine Schreib- oder
+    Rebuild-Races ausloesen.
   - Rechte-Entscheidungen laufen AUSSCHLIESSLICH ueber
     wiki_auth.compute_permissions() -- keine zweite, abweichende Pruef-
     logik hier.
   - /data/*-Antworten tragen Cache-Control: no-store, damit ein Reload nach
-    einem Edit nie eine veraltete Kopie zeigt (sw.js' networkFirst()-
-    Strategie fuer /data/ macht das ohnehin unwahrscheinlich, aber dieser
-    Header macht es explizit statt implizit).
+    einem Edit nie eine veraltete Kopie zeigt.
 
 SCHREIBABLAUF (jede mutierende API-Route): validieren -> wiki_store.save()
 (legt Backup an, schreibt atomar) -> web_publisher/_build.build() aufrufen.
@@ -51,6 +48,7 @@ from __future__ import annotations
 
 import json
 import sys
+import threading
 import webbrowser
 from http import cookies
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -64,6 +62,7 @@ from web_publisher import _build
 BASE_PATH = Path(__file__).parent.resolve()
 WEB_DIR = BASE_PATH / "web_publisher"
 DEFAULT_PORT = 8879
+MAX_JSON_BODY_BYTES = 1_048_576  # 1 MiB ceiling against local memory exhaustion
 SESSION_COOKIE_NAME = "wiki_session"
 ALLOWED_HOSTS = {"localhost", "127.0.0.1"}
 
@@ -73,6 +72,28 @@ class ApiError(Exception):
         super().__init__(message)
         self.status = status
         self.message = message
+
+
+def _reject_json_constant(token: str) -> Any:
+    raise ValueError(f"Non-standard JSON constant {token!r} is not allowed")
+
+
+def _require_str(body: dict[str, Any], key: str, *, allow_empty: bool = True) -> str:
+    value = body.get(key, "" if allow_empty else None)
+    if not isinstance(value, str):
+        raise ApiError(400, f"Feld '{key}' muss ein String sein.")
+    if not allow_empty and not value:
+        raise ApiError(400, f"{key} darf nicht leer sein.")
+    return value
+
+
+def _require_dict(body: dict[str, Any], key: str) -> dict[str, Any]:
+    value = body.get(key)
+    if value is None:
+        return {}
+    if not isinstance(value, dict):
+        raise ApiError(400, f"Feld '{key}' muss ein JSON-Objekt sein.")
+    return value
 
 
 def _rebuild_or_rollback(backup_path: Path | None, json_path: Path) -> None:
@@ -92,8 +113,8 @@ def _rebuild_or_rollback(backup_path: Path | None, json_path: Path) -> None:
                 pass  # best-effort: the JSON is restored even if data/ rebuild also fails
         raise ApiError(
             500,
-            "Rebuild nach dem Schreiben fehlgeschlagen -- die Aenderung wurde "
-            f"zurueckgerollt, es ist nichts verloren gegangen: {exc}",
+            "Rebuild nach dem Schreiben fehlgeschlagen -- die Änderung wurde "
+            "zurückgerollt, es ist nichts verloren gegangen.",
         ) from exc
 
 
@@ -111,6 +132,7 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
     not from anything in this class."""
 
     server_version = "WikiStubEditServer/1.0"
+    timeout = 10
 
     def __init__(self, *args: Any, directory: str | None = None, **kwargs: Any) -> None:
         super().__init__(*args, directory=directory or str(WEB_DIR), **kwargs)
@@ -121,8 +143,24 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
     # ---- shared helpers ----------------------------------------------
 
     def _host_is_allowed(self) -> bool:
-        host = (self.headers.get("Host") or "").split(":")[0].lower()
-        return host in ALLOWED_HOSTS
+        host_headers = self.headers.get_all("Host") or []
+        if len(host_headers) != 1:
+            return False
+        raw_host = host_headers[0]
+        if not raw_host or any(ord(ch) <= 0x20 or ord(ch) == 0x7F for ch in raw_host):
+            return False
+        if raw_host.count(":") > 1:
+            return False
+        if ":" in raw_host:
+            hostname, port_str = raw_host.split(":", 1)
+            if not port_str.isascii() or not port_str.isdigit():
+                return False
+            port = int(port_str)
+            if not (1 <= port <= 65535):
+                return False
+        else:
+            hostname = raw_host
+        return hostname.lower() in ALLOWED_HOSTS
 
     def _session_token(self) -> str | None:
         raw = self.headers.get("Cookie")
@@ -144,7 +182,7 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
         return wiki_auth.compute_permissions(auth_record, authenticated=self._is_authenticated())
 
     def _send_json(self, status: int, payload: Any, *, set_cookie: str | None = None, clear_cookie: bool = False) -> None:
-        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        body = json.dumps(payload, ensure_ascii=False, allow_nan=False).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
@@ -163,14 +201,29 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
         content_type = (self.headers.get("Content-Type") or "").split(";")[0].strip().lower()
         if content_type != "application/json":
             raise ApiError(415, "Content-Type muss application/json sein.")
-        length = int(self.headers.get("Content-Length") or 0)
-        if length <= 0:
+        if self.headers.get("Transfer-Encoding") is not None:
+            raise ApiError(411, "Content-Length erforderlich; Transfer-Encoding wird nicht unterstützt.")
+        length_headers = self.headers.get_all("Content-Length") or []
+        if len(length_headers) > 1:
+            raise ApiError(400, "Mehrfache Content-Length-Header sind unzulässig.")
+        raw_length = length_headers[0] if length_headers else None
+        if raw_length is None or not raw_length.strip():
             return {}
+        stripped_length = raw_length.strip()
+        if not stripped_length.isascii() or not stripped_length.isdigit():
+            raise ApiError(400, "Ungültiger Content-Length-Header.")
+        length = int(stripped_length)
+        if length == 0:
+            return {}
+        if length > MAX_JSON_BODY_BYTES:
+            raise ApiError(413, f"JSON-Body überschreitet das Limit von {MAX_JSON_BODY_BYTES} Bytes.")
         raw = self.rfile.read(length)
+        if len(raw) != length:
+            raise ApiError(400, "Unvollständiger Request-Body.")
         try:
-            payload = json.loads(raw.decode("utf-8"))
-        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise ApiError(400, f"Ungueltiges JSON: {exc}") from exc
+            payload = json.loads(raw.decode("utf-8"), parse_constant=_reject_json_constant)
+        except (UnicodeDecodeError, json.JSONDecodeError, ValueError, RecursionError) as exc:
+            raise ApiError(400, f"Ungültiges JSON: {exc}") from exc
         if not isinstance(payload, dict):
             raise ApiError(400, "JSON-Body muss ein Objekt sein.")
         return payload
@@ -185,15 +238,25 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
 
     # ---- dispatch -------------------------------------------------------
 
+    def do_HEAD(self) -> None:
+        if not self._host_is_allowed():
+            self.send_error(400, "Ungültiger Host-Header.")
+            return
+        path = self.path.split("?", 1)[0]
+        if path.startswith("/api/"):
+            self.send_error(405, "HEAD wird auf API-Routen nicht unterstützt.")
+            return
+        super().do_HEAD()
+
     def do_GET(self) -> None:
         if not self._host_is_allowed():
             self.send_error(400, "Ungültiger Host-Header.")
             return
         if self.path.split("?", 1)[0] == "/api/permissions":
-            self._handle_guarded(self._api_permissions)
+            self._handle_guarded(self._api_permissions, serialize=True)
             return
         if self.path.split("?", 1)[0] == "/api/trash":
-            self._handle_guarded(self._api_list_trash)
+            self._handle_guarded(self._api_list_trash, serialize=True)
             return
         super().do_GET()
 
@@ -229,11 +292,15 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
         if method_name is None:
             self.send_error(404, "Unbekannte Route.")
             return
-        self._handle_guarded(getattr(self, method_name))
+        self._handle_guarded(getattr(self, method_name), serialize=True)
 
-    def _handle_guarded(self, handler: Callable[[], None]) -> None:
+    def _handle_guarded(self, handler: Callable[[], None], *, serialize: bool = False) -> None:
         try:
-            handler()
+            if serialize:
+                with self.server.write_lock:  # type: ignore[attr-defined]
+                    handler()
+            else:
+                handler()
         except ApiError as exc:
             self._send_json(exc.status, {"error": exc.message})
         except wiki_auth.AuthDataError:
@@ -241,14 +308,22 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
                 500,
                 {"error": "Die lokale Authentifizierungsdatei ist ungültig. Zugriff bleibt gesperrt."},
             )
+        except wiki_store.TrashDataError:
+            self._send_json(
+                500,
+                {"error": "Die lokale Papierkorb-Datei ist ungültig. Bestehende Daten bleiben geschützt."},
+            )
         except wiki_store.NotFoundError as exc:
             self._send_json(404, {"error": str(exc)})
         except wiki_store.DuplicateError as exc:
             self._send_json(409, {"error": str(exc)})
         except wiki_store.ValidationError as exc:
             self._send_json(400, {"error": str(exc)})
-        except wiki_store.JsonDataError as exc:  # pragma: no cover - safe_io re-export
-            self._send_json(500, {"error": str(exc)})
+        except wiki_store.JsonDataError:
+            self._send_json(
+                500,
+                {"error": "Die lokale Datensatz-Datei ist ungültig oder nicht lesbar."},
+            )
 
     # ---- payload helpers --------------------------------------------
 
@@ -273,21 +348,50 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
     def _commit(self, data: dict[str, Any]) -> None:
         commit(data, self.server.json_path, self.server.backup_dir)  # type: ignore[attr-defined]
 
+    def _snapshot_trash(self) -> tuple[bool, list[dict[str, Any]]]:
+        trash_path: Path = self.server.trash_path  # type: ignore[attr-defined]
+        if not trash_path.exists():
+            return False, []
+        return True, [dict(item) for item in wiki_store.list_trash(trash_path)]
+
+    def _commit_or_restore_trash(
+        self, data: dict[str, Any], trash_state: tuple[bool, list[dict[str, Any]]]
+    ) -> None:
+        try:
+            self._commit(data)
+        except Exception:
+            trash_path: Path = self.server.trash_path  # type: ignore[attr-defined]
+            had_trash, previous_records = trash_state
+            try:
+                if not had_trash:
+                    trash_path.unlink(missing_ok=True)
+                else:
+                    wiki_store.atomic_write_json(trash_path, previous_records)
+            except OSError:
+                pass
+            raise
+
     def _api_create_entry(self) -> None:
         body = self._read_json_body()
         self._require(self._current_permissions(), "create")
+        category = _require_str(body, "category")
+        subcategory = _require_str(body, "subcategory")
+        entry_fields = _require_dict(body, "entry")
         data = self._load()
-        entry = wiki_store.create_entry(data, body.get("category", ""), body.get("subcategory", ""), body.get("entry", {}))
+        entry = wiki_store.create_entry(data, category, subcategory, entry_fields)
         self._commit(data)
         self._send_json(201, {"entry": entry})
 
     def _api_update_entry(self) -> None:
         body = self._read_json_body()
         self._require(self._current_permissions(), "edit")
+        category = _require_str(body, "category")
+        subcategory = _require_str(body, "subcategory")
+        original_title = _require_str(body, "original_title")
+        entry_updates = _require_dict(body, "entry")
         data = self._load()
         entry = wiki_store.update_entry(
-            data, body.get("category", ""), body.get("subcategory", ""),
-            body.get("original_title", ""), body.get("entry", {}),
+            data, category, subcategory, original_title, entry_updates,
         )
         self._commit(data)
         self._send_json(200, {"entry": entry})
@@ -295,9 +399,13 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
     def _api_delete_entry(self) -> None:
         body = self._read_json_body()
         self._require(self._current_permissions(), "delete")
+        category = _require_str(body, "category")
+        subcategory = _require_str(body, "subcategory")
+        title = _require_str(body, "title")
         data = self._load()
-        wiki_store.delete_entry(data, body.get("category", ""), body.get("subcategory", ""), body.get("title", ""), self.server.trash_path)  # type: ignore[attr-defined]
-        self._commit(data)
+        trash_state = self._snapshot_trash()
+        wiki_store.delete_entry(data, category, subcategory, title, self.server.trash_path)  # type: ignore[attr-defined]
+        self._commit_or_restore_trash(data, trash_state)
         self._send_json(200, {"deleted": True})
 
     # ---- category routes ------------------------------------------------
@@ -305,25 +413,34 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
     def _api_create_category(self) -> None:
         body = self._read_json_body()
         self._require(self._current_permissions(), "create")
+        category = _require_str(body, "category")
+        raw_sub = body.get("subcategory")
+        if raw_sub is not None and not isinstance(raw_sub, str):
+            raise ApiError(400, "Feld 'subcategory' muss ein String sein.")
         data = self._load()
-        if body.get("subcategory"):
-            cat, sub = wiki_store.create_subcategory(data, body.get("category", ""), body["subcategory"])
+        if raw_sub:
+            cat, sub = wiki_store.create_subcategory(data, category, raw_sub)
             self._commit(data)
             self._send_json(201, {"category": cat, "subcategory": sub})
         else:
-            cat = wiki_store.create_category(data, body.get("category", ""))
+            cat = wiki_store.create_category(data, category)
             self._commit(data)
             self._send_json(201, {"category": cat})
 
     def _api_delete_category(self) -> None:
         body = self._read_json_body()
         self._require(self._current_permissions(), "delete")
+        category = _require_str(body, "category")
+        raw_sub = body.get("subcategory")
+        if raw_sub is not None and not isinstance(raw_sub, str):
+            raise ApiError(400, "Feld 'subcategory' muss ein String sein.")
         data = self._load()
-        if body.get("subcategory"):
-            wiki_store.delete_subcategory(data, body.get("category", ""), body["subcategory"], self.server.trash_path)  # type: ignore[attr-defined]
+        trash_state = self._snapshot_trash()
+        if raw_sub:
+            wiki_store.delete_subcategory(data, category, raw_sub, self.server.trash_path)  # type: ignore[attr-defined]
         else:
-            wiki_store.delete_category(data, body.get("category", ""), self.server.trash_path)  # type: ignore[attr-defined]
-        self._commit(data)
+            wiki_store.delete_category(data, category, self.server.trash_path)  # type: ignore[attr-defined]
+        self._commit_or_restore_trash(data, trash_state)
         self._send_json(200, {"deleted": True})
 
     # ---- trash routes -----------------------------------------------
@@ -336,11 +453,12 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
         body = self._read_json_body()
         self._require(self._current_permissions(), "delete")
         index = body.get("index")
-        if not isinstance(index, int):
+        if not isinstance(index, int) or isinstance(index, bool):
             raise ApiError(400, "index (Ganzzahl) erforderlich.")
         data = self._load()
+        trash_state = self._snapshot_trash()
         restored = wiki_store.restore_entry_from_trash(data, self.server.trash_path, index)  # type: ignore[attr-defined]
-        self._commit(data)
+        self._commit_or_restore_trash(data, trash_state)
         self._send_json(200, {"restored": restored})
 
     # ---- auth routes --------------------------------------------------
@@ -350,39 +468,40 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
         auth_record = wiki_auth.load_auth(self.server.auth_path)  # type: ignore[attr-defined]
         if auth_record is None:
             raise ApiError(400, "Es ist kein Passwort hinterlegt.")
-        if not wiki_auth.verify_password(str(body.get("password", "")), auth_record):
+        password = body.get("password")
+        if not isinstance(password, str) or not wiki_auth.verify_password(password, auth_record):
             raise ApiError(401, "Falsches Passwort.")
         token = self.server.session_store.create()  # type: ignore[attr-defined]
         self._send_json(200, self._permissions_payload_with_token(token), set_cookie=token)
 
     def _permissions_payload_with_token(self, token: str) -> dict[str, Any]:
-        # Cookie is set by the caller before this executes on the real socket,
-        # but _is_authenticated() reads self.headers, not the outgoing
-        # Set-Cookie -- so we compute the post-login permissions explicitly.
         auth_record = wiki_auth.load_auth(self.server.auth_path)  # type: ignore[attr-defined]
         permissions = wiki_auth.compute_permissions(auth_record, authenticated=True)
         return {"password_set": True, "authenticated": True, **permissions}
 
     def _api_logout(self) -> None:
+        self._read_json_body()
         self.server.session_store.revoke(self._session_token())  # type: ignore[attr-defined]
         self._send_json(200, {"authenticated": False}, clear_cookie=True)
 
     def _api_set_password(self) -> None:
         body = self._read_json_body()
-        new_password = str(body.get("new_password", ""))
-        if not new_password:
-            raise ApiError(400, "new_password darf nicht leer sein.")
+        new_password = _require_str(body, "new_password", allow_empty=False)
         existing = wiki_auth.load_auth(self.server.auth_path)  # type: ignore[attr-defined]
         if existing is not None and not self._is_authenticated():
-            raise ApiError(403, "Zum Aendern des Passworts ist eine Anmeldung erforderlich.")
+            raise ApiError(403, "Zum Ändern des Passworts ist eine Anmeldung erforderlich.")
         wiki_auth.set_password(new_password, path=self.server.auth_path, existing=existing)  # type: ignore[attr-defined]
-        self._send_json(200, {"password_set": True})
+        self.server.session_store.clear()  # type: ignore[attr-defined]
+        rotated_cookie = (
+            self.server.session_store.create() if existing is not None else None  # type: ignore[attr-defined]
+        )
+        self._send_json(200, {"password_set": True}, set_cookie=rotated_cookie)
 
     def _api_remove_password(self) -> None:
         self._read_json_body()
         self._require_auth()
         wiki_auth.remove_auth(self.server.auth_path)  # type: ignore[attr-defined]
-        self.server.session_store.revoke(self._session_token())  # type: ignore[attr-defined]
+        self.server.session_store.clear()  # type: ignore[attr-defined]
         self._send_json(200, {"password_set": False}, clear_cookie=True)
 
     def _api_set_anonymous_permissions(self) -> None:
@@ -402,12 +521,7 @@ class EditRequestHandler(SimpleHTTPRequestHandler):
     # ---- static serving: no-store for /data/ -------------------------
 
     def end_headers(self) -> None:
-        # send_header() must run BEFORE end_headers() flushes the header
-        # block -- send_head() (which emits data/ responses) already calls
-        # end_headers() internally, so hooking end_headers() itself (rather
-        # than post-processing send_head()'s return value) is the only
-        # place this header reliably lands on every /data/ response.
-        if self.path.split("?", 1)[0].startswith("/data/"):
+        if getattr(self, "path", "").split("?", 1)[0].startswith("/data/"):
             self.send_header("Cache-Control", "no-store")
         super().end_headers()
 
@@ -419,10 +533,13 @@ def make_server(
 ) -> ThreadingHTTPServer:
     """Factory so tests can bind port=0 (OS-assigned free port) and inject
     temp-dir paths instead of the real instance's files."""
-    if host not in ALLOWED_HOSTS:
+    if not isinstance(host, str) or host not in ALLOWED_HOSTS:
         raise ValueError(f"edit_server darf nur an {ALLOWED_HOSTS} binden, nicht an {host!r}.")
+    if isinstance(port, bool) or not isinstance(port, int) or not (0 <= port <= 65535):
+        raise ValueError(f"port muss zwischen 0 und 65535 liegen, nicht {port!r}.")
     server = ThreadingHTTPServer((host, port), EditRequestHandler)
     server.session_store = wiki_auth.SessionStore()  # type: ignore[attr-defined]
+    server.write_lock = threading.Lock()  # type: ignore[attr-defined]
     server.auth_path = auth_path  # type: ignore[attr-defined]
     server.trash_path = trash_path  # type: ignore[attr-defined]
     server.json_path = json_path  # type: ignore[attr-defined]

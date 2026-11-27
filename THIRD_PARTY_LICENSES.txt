@@ -1,6 +1,6 @@
 DECLARED DEPENDENCY AND LICENSE REFERENCES
 Project: dev-bricks/WikiStub-Seed
-Snapshot: 2026-10-12
+Snapshot: 2026-11-27
 Repository license: MIT (see LICENSE)
 Attribution: see NOTICE
 
@@ -28,16 +28,16 @@ DIRECT PROJECT DECLARATIONS
     setuptools>=77.0.3 (PEP 517 build backend)
   pyproject.toml optional dev:
     ruff>=0.5.0
-    pytest>=8.0.0
+    pytest>=9.0.3
     build>=1.2.0
     setuptools>=77.0.3
   pyproject.toml optional test:
-    pytest>=8.0.0
+    pytest>=9.0.3
     build>=1.2.0
     setuptools>=77.0.3
   requirements-dev.txt:
     ruff==0.15.18
-    pytest>=8.0.0
+    pytest>=9.0.3
     build>=1.2.0
     setuptools>=77.0.3
   requirements.txt:

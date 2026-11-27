@@ -274,9 +274,9 @@ describe("iOS PWA-Installierbarkeit", () => {
   it("apple-touch-icon-180.png existiert physisch", () => {
     assert.ok(fileExists("icons/apple-touch-icon-180.png"), "icons/apple-touch-icon-180.png fehlt");
   });
-  it("sw.js CACHE_NAME ist wikistub-seed-v2", () => {
+  it("sw.js CACHE_NAME ist wikistub-seed-v3", () => {
     const sw = readText("sw.js");
-    assert.ok(sw.includes('"wikistub-seed-v2"'), 'CACHE_NAME muss "wikistub-seed-v2" sein');
+    assert.ok(sw.includes('"wikistub-seed-v3"'), 'CACHE_NAME muss "wikistub-seed-v3" sein');
   });
   it("sw.js enthält apple-touch-icon-180.png in ASSETS", () => {
     const sw = readText("sw.js");

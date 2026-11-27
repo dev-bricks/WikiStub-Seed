@@ -18,9 +18,20 @@ build/
 .coverage
 htmlcov/
 *.db
+*.sqlite*
+*.bachdb*
 data/
+data/temp/**
 !web_publisher/data/
 !web_publisher/data/*.json
+
+# ---- Pre-Push Data-Gate Exclusions (SEC-bach-rescue-tag-2026-11-22) ----
+*export*.csv
+*dump*
+inbox_config*
+TO-DECIDE-USER*
+LOCK-CACHE*
+CONFLICT_REVIEW_LOG*
 
 # ---- Virtuelle Umgebungen ----
 venv/
@@ -36,16 +47,38 @@ TESTERGEBNISSE.txt
 BUGREPORT.md
 DIAGNOSE_REPORT.md
 
-# ---- Persoenliche / Sensible Daten ----
+# ---- Persoenliche / Sensible Daten & Keys ----
 _USER/
 .env
+.env.local
 .env.*
+!.env.example
+!.env.sample
+.npmrc
+.pypirc
 credentials.json
 client_secret*.json
 token.json
+tokens.json
+*secret*.json
+*token*.json
 secrets.*
+*.token
+*.secret
 *.pem
 *.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.cert
+*.csr
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+*_recovery_codes.txt
+*recovery*codes*.txt
 keyring/
 
 # ---- Build-Artefakte & Releases ----

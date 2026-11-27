@@ -385,5 +385,73 @@ class SourceCheckoutDefaultPathTests(unittest.TestCase):
                 self.assertTrue((root / "wikistub_seed_trash.json").is_file())
 
 
+class TrashFailClosedAndValidationTests(unittest.TestCase):
+    def test_malformed_trash_file_fails_closed_without_overwriting_trash_or_data(self):
+        for bad_contents in ("{broken json", "{}", "[123]"):
+            with self.subTest(contents=bad_contents), tempfile.TemporaryDirectory() as tmp:
+                trash_path = Path(tmp) / "trash.json"
+                trash_path.write_text(bad_contents, encoding="utf-8")
+                before_trash = trash_path.read_bytes()
+                data = _sample_data()
+
+                with self.assertRaises(wiki_store.TrashDataError):
+                    wiki_store.list_trash(trash_path)
+                with self.assertRaises(wiki_store.TrashDataError):
+                    wiki_store.delete_entry(
+                        data, "07_Informatik_KI", "Software_Engineering", "Domain-Driven Design", trash_path
+                    )
+                with self.assertRaises(wiki_store.TrashDataError):
+                    wiki_store.restore_entry_from_trash(data, trash_path, 0)
+
+                self.assertEqual(trash_path.read_bytes(), before_trash)
+                self.assertEqual(len(data["MetaWiki"]["07_Informatik_KI"]["Software_Engineering"]), 1)
+
+    def test_restore_rejects_boolean_or_non_integer_trash_index(self):
+        data = _sample_data()
+        with tempfile.TemporaryDirectory() as tmp:
+            trash_path = Path(tmp) / "trash.json"
+            wiki_store.delete_entry(
+                data, "07_Informatik_KI", "Software_Engineering", "Domain-Driven Design", trash_path
+            )
+            for bad_index in (False, True, "0", None, 0.5):
+                with self.subTest(index=bad_index), self.assertRaises(wiki_store.ValidationError):
+                    wiki_store.restore_entry_from_trash(data, trash_path, bad_index)  # type: ignore[arg-type]
+            self.assertEqual(len(wiki_store.list_trash(trash_path)), 1)
+
+    def test_restore_rejects_poisoned_trash_records_without_popping_trash(self):
+        poisoned_records = [
+            {"type": "entry", "category": "../../etc", "subcategory": "Sub", "payload": {"title": "X"}},
+            {"type": "entry", "category": "07_Informatik_KI", "subcategory": "..\\evil", "payload": {"title": "X"}},
+            {"type": "entry", "category": "07_Informatik_KI", "subcategory": "Sub", "payload": "not-a-dict"},
+            {"type": "entry", "category": "07_Informatik_KI", "subcategory": "Sub", "payload": {"title": "  "}},
+            {"type": "subcategory", "category": "07_Informatik_KI", "subcategory": "Sub", "payload": ["bad"]},
+            {"type": "category", "category": "13_Bad", "subcategory": None, "payload": {"../x": []}},
+            {"type": "unknown", "category": "07_Informatik_KI", "subcategory": "Sub", "payload": {}},
+        ]
+        for record in poisoned_records:
+            with self.subTest(record=record), tempfile.TemporaryDirectory() as tmp:
+                trash_path = Path(tmp) / "trash.json"
+                trash_path.write_text(json.dumps([record]), encoding="utf-8")
+                before = trash_path.read_bytes()
+                data = _sample_data()
+                with self.assertRaises(wiki_store.ValidationError):
+                    wiki_store.restore_entry_from_trash(data, trash_path, 0)
+                self.assertEqual(trash_path.read_bytes(), before)
+
+    def test_non_dict_or_non_string_mutation_inputs_are_rejected(self):
+        data = _sample_data()
+        for bad_entry in (None, ["title"], "string", 123):
+            with self.subTest(entry=bad_entry), self.assertRaises(wiki_store.ValidationError):
+                wiki_store.create_entry(data, "07_Informatik_KI", "Software_Engineering", bad_entry)  # type: ignore[arg-type]
+            with self.subTest(updates=bad_entry), self.assertRaises(wiki_store.ValidationError):
+                wiki_store.update_entry(
+                    data, "07_Informatik_KI", "Software_Engineering", "Domain-Driven Design", bad_entry  # type: ignore[arg-type]
+                )
+        with self.assertRaises(wiki_store.ValidationError):
+            wiki_store.create_category(data, None)  # type: ignore[arg-type]
+        with self.assertRaises(wiki_store.ValidationError):
+            wiki_store.create_subcategory(data, "07_Informatik_KI", 123)  # type: ignore[arg-type]
+
+
 if __name__ == "__main__":
     unittest.main()
